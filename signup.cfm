@@ -58,7 +58,7 @@
       </div>
       <div class="row">
       <div class="col-md-4" id="form-border">
-        <h2>SignUp</h2>
+        <h2>SignUp Here</h2>
       <cfform name="cf_form" id="cf_form" >
 
         <div class="form-group input-field">
