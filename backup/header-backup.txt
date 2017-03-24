@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="csstyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <img class=" img-size" src="myntra_1.png">
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Men</a></li>
+      <li><a href="#">Women</a></li>
+      <li><a href="#">Electronics</a></li>
+    </ul>
+    <form class="navbar-form navbar-left">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search">
+        <div class="input-group-btn">
+          <button class="btn btn-default btn-search-color" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <ul class="nav navbar-nav">
+      <li><button class="btn btn-default"><i class="fa fa-user" aria-hidden="true"></i></button></li>
+      <li><a href="#">Women</a></li>
+      <li><a href="#">Electronics</a></li>
+    </ul>
+
+  </div>
+</nav>
+
+<div class="container">
+  <h3>Navbar Forms</h3>
+  <p>Slideshow , products and different items</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+create trigger insertToOrderDetails on Orders after insert
+as
+begin
+declare @id int;
+declare @userid int;
+declare @total decimal(18,0);
+
+select @id=orderID from inserted;
+select @userid=userID from inserted;
+
+select @total=sum(detailPrice) from OrderDetails where userID=@userid and status='progress'
+
+update orderDetails
+set orderID=@id , status='ordered'
+where userID=@userid
+and
+status='progress'
+
+update Orders
+set orderAmount=@total
+where
+orderID=@id
+
+
+end
