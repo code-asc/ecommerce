@@ -25,7 +25,7 @@ $("#formEdit , #formDelete").validate({
 })
 
 
-  $("#formOption").validate({
+  $("#formOption , #editProductAdmin").validate({
     rules:{
       productName:{
         required:true,

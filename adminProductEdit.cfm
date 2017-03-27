@@ -137,7 +137,7 @@
 
 <div class='col-sm-12 col-md-12'>
   <div class='form-group'>
-    <textarea class='form-control' form='editProductAdmin' name='productDesc' id='productDesc' rows='4' cols='40'>#retriveProduct.productDesc#</textarea>
+    <textarea class='form-control' form='editProductAdmin' name='productDesc' id='productDesc' rows='5' cols='42'>#retriveProduct.productDesc#</textarea>
   </div>
 </div>
 
@@ -157,11 +157,13 @@
 
 </form>
 
+<div class='row'>
 <cfif responseAfterSubmit EQ true>
   <div class="col-md-12 col-sm-12 col-xm-12 col-lg-12 alert alert-success" id="infoAboutEdit">
     Product Saved to database
   </div>
   </cfif>
+</div>
 
 </cfoutput>
 </div>
@@ -187,5 +189,8 @@
     <script src="./script/autoSuggestion.js"></script>
     <script src="./script/addCartAjax.js"></script>
     <script src="./script/singleBuyAjax.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+    <script src="./script/adminValidate.js"></script>
   </body>
 </html>
