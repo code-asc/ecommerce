@@ -25,7 +25,6 @@
 </cfoutput> --->
 
 <cfif StructKeyExists(session,"stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
-  <cfset responseAfterSubmit=false>
 
 <cfif structKeyExists(url,"productID")>
 <cfset session.productID=#url.productID#>
@@ -37,32 +36,16 @@
 <cfset session.currentURL=#cgi.SCRIPT_NAME#>
   <cfset session.currentURL=#replace(session.currentURL,"/project_ecommerce/","","All")#>
 
-
+<!---  <cfset responseAfterSubmit=false>
     <cfif structKeyExists(form, "submitEdit")>
     <cfinvoke component="adminData" method="editProduct" productID=#session.productID# productDesc="#form.productDesc#" unitPrice=#form.unitPrice# unitInStock=#form.stock# discount=#form.discount# thumbNailPhoto="#form.thumbNailPhoto#" largePhoto="#form.largePhoto#"/>
     <cfset responseAfterSubmit=true>
-    </cfif>
+    <cfset structDelete(form,"submitEdit")>
+    </cfif>--->
 
 
 <div class="container">
-  <cfquery name="retriveProduct">
-    select  Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.unitInStock ,ProductPhoto.largePhoto,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName ,SubCategory.subCategoryType,Category.categoryType,SubCategory.subCategoryID,Category.categoryID
-     from Products
-    inner join ProductPhoto
-    on
-    Products.photoID=ProductPhoto.photoID
-    inner join Brands
-    on
-    Products.brandID=Brands.brandID
-    inner join SubCategory
-    on
-    Products.subCategoryID=SubCategory.subCategoryID
-    inner join Category
-    on
-    Subcategory.categoryID=Category.categoryID
-    where Products.productID=<cfqueryparam value="#session.productID#" cfsqltype="cf_sql_integer">
-
-  </cfquery>
+  <cfinvoke component="adminData" method="getProductBasedOnID" productID=#session.productID# returnvariable="retriveProduct" >
   <cfset session.currentURL=#session.currentURL#&"?productID="&#retriveProduct.productID#>
 
 <!---<cfdump var="#session.productID#">--->
@@ -147,9 +130,14 @@
 
 <cfif  session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
 
+<!---<div class="col-md-3 col-sm-3 col-xm-3 col-lg-3">
+<input type="submit"  class="btn btn-success" value="Save" name="submitEdit" id="subitAlert">
+</div>--->
+
 <div class="col-md-3 col-sm-3 col-xm-3 col-lg-3">
-<input type="submit"  class="btn btn-success" value="Save" name="submitEdit">
+<input type="button"  class="btn btn-success" value="Save" name="submitEditProduct">
 </div>
+
 <div class="col-md-3 col-sm-3 col-xm-3 col-lg-3">
 <input type="reset" class="btn btn-danger" value="Reset" name="reset">
 </div>
@@ -158,11 +146,9 @@
 </form>
 
 <div class='row'>
-<cfif responseAfterSubmit EQ true>
-  <div class="col-md-12 col-sm-12 col-xm-12 col-lg-12 alert alert-success" id="infoAboutEdit">
-    Product Saved to database
+  <div class="col-md-12 col-sm-12 col-xm-12 col-lg-12" id="infoAboutEdit">
+
   </div>
-  </cfif>
 </div>
 
 </cfoutput>
@@ -192,5 +178,6 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
     <script src="./script/adminValidate.js"></script>
+    <script src="./script/adminSearchAndEditAjax.js"></script>
   </body>
 </html>

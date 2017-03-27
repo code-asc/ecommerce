@@ -120,6 +120,45 @@ set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="c
 </cfquery>
 </cffunction>
 
+<cffunction name="editProductRemote" output="false" access="remote" returnType="numeric" returnformat="JSON" >
+<cfargument name="productID" type="numeric" required="true">
+<cfargument name="productDesc" type="string" required="true">
+<cfargument name="unitPrice" type="numeric" required="true">
+<cfargument name="unitInStock" type="numeric" required="true">
+<cfargument name="discount" type="numeric" required="true">
+<cfargument name="thumbNailPhoto" type="string" required="true">
+<cfargument name="largePhoto" type="string" required="true">
+
+<cftry>
+<cfquery name="productupdatequery">
+update Products
+set productDesc=<cfqueryparam value="#arguments.productDesc#" cfsqltype="cf_sql_varchar">,
+unitPrice=<cfqueryparam value=#arguments.unitPrice# cfsqltype="cf_sql_decimal">,
+unitInStock=<cfqueryparam value=#arguments.unitInStock# cfsqltype="cf_sql_int">,
+discount=<cfqueryparam value=#arguments.discount# cfsqltype="cf_sql_int">
+where
+productID=<cfqueryparam value=#arguments.productID# cfsqltype="cf_sql_int">
+</cfquery>
+
+<cfquery name="photoupdatequery">
+update ProductPhoto
+set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="cf_sql_varchar">,
+   largePhoto=<cfqueryparam value="#arguments.largePhoto#" cfsqltype="cf_sql_varchar">
+  from ProductPhoto
+  inner join Products
+  on
+  Products.photoID=ProductPhoto.photoID
+  where
+  Products.productID=<cfqueryparam value=#arguments.productID# cfsqltype="cf_sql_int" >
+</cfquery>
+
+<cfcatch type="any">
+  <cfreturn 0>
+</cfcatch>
+</cftry>
+<cfreturn 1>
+</cffunction>
+
 <cffunction name="getSubCategory" output="false" access="remote" returntype="array" returnformat="JSON">
   <cfargument name="categoryID" required="true" cfsqltype="cf_sql_int">
     <cfquery name="subcategoryquery">
@@ -191,5 +230,29 @@ set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="c
     status=<cfqueryparam value="online" cfsqltype="cf_sql_varchar">
   </cfquery>
   <cfreturn onlinequery.totalUsers>
+</cffunction>
+
+
+<cffunction name="getProductBasedOnID" access="public" returntype="query" output="false">
+  <cfargument name="productID" required="true" type="numeric">
+    <cfquery name="retriveProduct">
+      select  Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.unitInStock ,ProductPhoto.largePhoto,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName ,SubCategory.subCategoryType,Category.categoryType,SubCategory.subCategoryID,Category.categoryID
+       from Products
+      inner join ProductPhoto
+      on
+      Products.photoID=ProductPhoto.photoID
+      inner join Brands
+      on
+      Products.brandID=Brands.brandID
+      inner join SubCategory
+      on
+      Products.subCategoryID=SubCategory.subCategoryID
+      inner join Category
+      on
+      Subcategory.categoryID=Category.categoryID
+      where Products.productID=<cfqueryparam value="#arguments.productID#" cfsqltype="cf_sql_integer">
+
+    </cfquery>
+    <cfreturn retriveProduct>
 </cffunction>
 </cfcomponent>

@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
 $.validator.setDefaults({
   errorClass:"help-block",
   highlight:function(element){
@@ -46,6 +47,14 @@ $("#formEdit , #formDelete").validate({
         required:true,
       },
       price:{
+        required:true,
+        number:true,
+      },
+      unitPrice:{
+        required:true,
+        number:true,
+      },
+      stock:{
         required:true,
         number:true,
       },
@@ -136,6 +145,7 @@ $("#formEdit , #formDelete").validate({
 $("input[name='submitEdit']").click(function(event){
   return $("#formEdit").valid();
 })
+
 
 $()
 

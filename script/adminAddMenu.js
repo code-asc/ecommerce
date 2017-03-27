@@ -26,12 +26,11 @@ function ajaxAddCall()
   var thumbNailType=$("#thumbNailType").val();
   var largePhotoType=$("#largePhotoType").val();
 
-alert(brandID);
 $.ajax({
   url:"adminData.cfc?method=addToDatabase",
   data:{productName:productName,productDesc:productDesc,supplierID:supplierID,subCategoryID:subcategoryID,unitPrice:price,thumbNail:thumbNail,thumbNailType:thumbNailType,largePhotoType:largePhotoType,largePhoto:largePhoto,quantity:quantity,discount:discount,rating:rating,brandID:brandID},
   success:function(responseText){
-    $("#formData").append("<div class='alert alert-success'>New Product added to Database</div>");
+    $("#formData").append("<div class='alert alert-success'>New Product added to Database</div>").delay(4000).fadeOut();
   },
   error:function(e)
   {
