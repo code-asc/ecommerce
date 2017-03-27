@@ -31,6 +31,7 @@
 
 <cfset session.currentURL=#cgi.SCRIPT_NAME#>
   <cfset session.currentURL=#replace(session.currentURL,"/project_ecommerce/","","All")#>
+<cfset session.allowPreviousURL=true>
 
 <cfif structKeyExists(url,"subCategoryID")>
 <cfset session.subCategoryID=#url.subCategoryID#>
@@ -90,7 +91,7 @@
 
 
 
-<div class="col-md-2 col-sm-2 col-xm-2 col-lg-2"  style="margin-bottom:10px">
+<div class="col-md-2 col-sm-2 col-xm-2 col-lg-2"  style="margin-bottom:80px">
   <div class="panel panel-primary behclick-panel">
     <div class="panel-heading">
       <h4 class="panel-title"><i class="fa fa-filter" aria-hidden="true"></i>&nbspFilter By</h4>
@@ -164,7 +165,7 @@
 <cfloop query="retriveProduct">
   <cfoutput>
 
-  <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left " >
+  <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px" >
 
       <a href="user_action_single.cfm?productID=#retriveProduct.productID#"><div class="itemthumb"> <img src="#retriveProduct.thumbNailPhoto#"  class="img-responsive"></div></a>
       <br/>

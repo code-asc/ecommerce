@@ -73,7 +73,11 @@
 <cfelse>
 <cfinclude template="header.cfm" />
 
+<cfif session.allowPreviousURL EQ true>
 <cfset session.previousURL=#session.currentURL#>
+<cfset session.allowPreviousURL=false>
+</cfif>
+
 <cfset session.currentURL=#cgi.SCRIPT_NAME#>
   <cfset session.currentURL=#replace(session.currentURL,"/project_ecommerce/","","All")#>
 
