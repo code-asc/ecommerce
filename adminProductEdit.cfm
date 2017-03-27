@@ -28,7 +28,6 @@
 
 <cfif structKeyExists(url,"productID")>
 <cfset session.productID=#url.productID#>
-  <cfdump var=#session.productID#>
 </cfif>
 
 <cfinclude template="header.cfm" />
@@ -145,11 +144,11 @@
 
 </form>
 
-<div class='row'>
+
   <div class="col-md-12 col-sm-12 col-xm-12 col-lg-12" id="infoAboutEdit">
 
   </div>
-</div>
+
 
 </cfoutput>
 </div>

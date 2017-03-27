@@ -97,4 +97,21 @@ values(<cfqueryparam value=#arguments.address# cfsqltype="cf_sql_varchar">,
 <cfreturn false>
 </cfif>
 </cffunction>
+
+<cffunction name="getAddressInProductPage" access="public" output="false" returntype="query">
+<cftry>
+  <cfquery name="addressquery">
+    select Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry from Address
+    where
+    userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqlType="cf_sql_int">
+    AND
+    addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
+  </cfquery>
+<cfcatch>
+  <cflog file="ecommerece" text="exception in addressEntry.cfc----getAddressInProductPage method" application="true" >
+</cfcatch>
+</cftry>
+<cfreturn addressquery>
+</cffunction>
+
 </cfcomponent>

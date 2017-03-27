@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<cfheader name="Expires" value="#Now()#">
+  <cfheader name="pragma" value="no-change"/>
+  <cfheader  name="cache-control" value="no-cache,no-store,must-revalidate"/>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -19,17 +23,14 @@
   </head>
   <body>
 
+<cfif structKeyExists(url,"photoID")>
+  <cfinvoke method="deleteFromDatabase" component="adminData" photoID=#url.photoID#/>
+  <cflocation url=#session.previousURL# />
+</cfif>
+
 <cfif structKeyExists(url,"buyNow")>
-<!---<cfoutput>
-  #url.productID#
-</cfoutput> --->
-<cfquery name="addressquery">
-  select Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry from Address
-  where
-  userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqlType="cf_sql_int">
-  AND
-  addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
-</cfquery>
+
+<cfinvoke method="getAddressInProductPage" component="addressEntry" returnvariable="addressquery" >
 
 <cfinclude template="header.cfm"/>
 <div class="container-fluid">
@@ -72,21 +73,19 @@
 <cfelse>
 <cfinclude template="header.cfm" />
 
+<cfset session.previousURL=#session.currentURL#>
 <cfset session.currentURL=#cgi.SCRIPT_NAME#>
   <cfset session.currentURL=#replace(session.currentURL,"/project_ecommerce/","","All")#>
 
 <div class="container">
-  <cfquery name="retriveProduct">
-    select  Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.unitInStock ,ProductPhoto.largePhoto ,Products.discount ,Brands.brandName from Products
-    inner join ProductPhoto
-    on
-    Products.photoID=ProductPhoto.photoID
-    inner join Brands
-    on
-    Products.brandID=Brands.brandID
-    where Products.productID=<cfqueryparam value="#url.productID#" cfsqltype="cf_sql_integer">
+  <cfinvoke method="getProducts" component="retriveProduct" productID=#url.productID# returnvariable="retriveProduct" >
 
-  </cfquery>
+
+    <cfif session.stLoggedInUser.userEmail EQ 'admin@admin.com' AND  NOT retriveProduct.recordCount EQ 1>
+      <cflocation url=#session.previousURL# />
+    </cfif>
+
+
   <cfset session.currentURL=#session.currentURL#&"?productID="&#retriveProduct.productID#>
 <cfset session.productID=#retriveProduct.productID#>
 <!---<cfdump var="#session.productID#">--->
@@ -137,7 +136,7 @@
 <cfelse>
 
   <a class="btn btn-primary" href="adminProductEdit.cfm?productID=#url.productID#"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
-  <a class="btn btn-danger" href=""><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
+  <a class="btn btn-danger" href="user_action_single.cfm?photoID=#retriveProduct.photoID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
     </cfif>
 </cfif>
 

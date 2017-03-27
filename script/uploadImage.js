@@ -4,6 +4,6 @@ $(document).on("click",".browse",function(){
 })
 
 $(document).on("change",".file",function(){
-  $(this).parent().find(".form-control").val($(this).val().replace(/C:\\fakepath\\/i,"./"));
+  $(this).parent().find(".form-control").val($(this).val().replace(/C:\\fakepath\\/i,"./images/"));
   var path=$(this).val().replace(/C:\\fakepath\\/i,"./images/");
 })

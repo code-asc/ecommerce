@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<cfheader name="Expires" value="#Now()#">
+  <cfheader name="pragma" value="no-change"/>
+  <cfheader  name="cache-control" value="no-cache,no-store,must-revalidate"/>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
