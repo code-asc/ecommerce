@@ -76,7 +76,7 @@
 
 <form>
 <div class="col-md-2 col-sm-2 col-xm-2 col-lg-2" style="margin-bottom:200px">
-  <div class="panel panel-primary behclick-panel">
+  <div class="panel panel-primary behclick-panel" style="margin-bottom:500px">
     <div class="panel-heading">
       <h4 class="panel-title"><i class="fa fa-filter" aria-hidden="true"></i>&nbspFilter By</h4>
     </div>
