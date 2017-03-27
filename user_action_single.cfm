@@ -124,12 +124,21 @@
 
     <button class="btn btn-info" id="onAddCart" disabled="true"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
     <cfelse>
+
+<!--- Condition for admin --->
+<cfif NOT session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
       <cfif retriveProduct.unitInStock GT 0>
       <a class="btn btn-success" href="user_action_single.cfm?buyNow"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</a>
       <cfelse>
         <button class="btn btn-warning" disabled="true">No Stock</button>
     </cfif>
       <button class="btn btn-info" id="onAddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
+
+<cfelse>
+
+  <a class="btn btn-primary" href="adminProductEdit.cfm?productID=#url.productID#"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
+  <a class="btn btn-danger" href=""><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
+    </cfif>
 </cfif>
 
   </div>

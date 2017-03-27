@@ -18,6 +18,10 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="./css/adminCSS.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
   </head>
   <body>
 
@@ -62,7 +66,7 @@
     <div class="col-sm-8 col-md-8">
   <cfoutput>
      <h3>#stData.customer#</h3>
-     <h4>Registered</h4>
+     <h4 class="adminHeaderInfo">Registered</h4>
    </div>
      <div class="col-md-3 col-sm-3" id="iTagDiv">
        <span class="fa-stack fa-2x">
@@ -79,7 +83,7 @@
   <div class="col-sm-8 cl-md-8">
 <cfoutput>
    <h3>#stData.product#</h3>
-   <h4>Products</h4>
+   <h4 class="adminHeaderInfo">Products</h4>
  </div>
    <div class="col-md-2 col-sm-2" id="iTagDiv">
      <span class="fa-stack fa-2x">
@@ -96,7 +100,7 @@
   <div class="col-sm-8 cl-md-8">
 <cfoutput>
    <h3>#stData.shipping#</h3>
-   <h4>shipping</h4>
+   <h4 class="adminHeaderInfo">shipping</h4>
  </div>
    <div class="col-md-2 col-sm-2" id="iTagDiv">
      <span class="fa-stack fa-2x">
@@ -110,25 +114,57 @@
 </div>
 
 
-<div class="col-md-4 col-sm-4">
+<div class="col-md-3 col-sm-3 text-center colorDarkGreen" id="customerInfo">
+  <div class="col-sm-8 cl-md-8">
 <cfoutput>
-  Total Category: #stData.category#<br/>
+   <h3><span id="getOnlineUserCount"></span></h3>
+   <h4 class="adminHeaderInfo">Online</h4>
+ </div>
+   <div class="col-md-2 col-sm-2" id="iTagDiv">
+     <span class="fa-stack fa-2x">
+<i class="fa fa-circle-thin fa-stack-2x setCircle"></i>
+
+<i class="fa fa-users fa-stack-1x setCircle"></i>
+</span>
+
+   </div>
 </cfoutput>
 </div>
 
-<div class="col-md-4 col-sm-4">
+
+<div class="col-md-3 col-sm-3 text-center colorRed" id="customerInfo">
+  <div class="col-sm-8 cl-md-8">
 <cfoutput>
-  Total SubCategory: #stData.subcategory#<br/>
+   <h3>#stData.category#</h3>
+   <h4 class="adminHeaderInfo">Category</h4>
+ </div>
+   <div class="col-md-2 col-sm-2" id="iTagDiv">
+     <span class="fa-stack fa-2x">
+<i class="fa fa-circle-thin fa-stack-2x setCircle"></i>
+
+<i class="fa fa-list fa-stack-1x setCircle"></i>
+</span>
+
+   </div>
 </cfoutput>
 </div>
 
-<div class="col-md-4 col-sm-4">
+<div class="col-md-3 col-sm-3 text-center colorLightBlue" id="customerInfo">
+  <div class="col-sm-8 cl-md-8">
 <cfoutput>
-  Total Supplier: #stData.supplier#<br/>
+   <h3>#stData.subcategory#</h3>
+   <h4 class="adminHeaderInfo">SubCategory</h4>
+ </div>
+   <div class="col-md-2 col-sm-2" id="iTagDiv">
+     <span class="fa-stack fa-2x">
+<i class="fa fa-circle-thin fa-stack-2x setCircle"></i>
+
+<i class="fa fa-list-ol fa-stack-1x setCircle"></i>
+</span>
+
+   </div>
 </cfoutput>
 </div>
-
-
 
 
 </div>
@@ -143,11 +179,12 @@
         <cfelse>
           <cflocation url="signin.cfm" />
     </cfif>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <script src="./script/adminEditAjax.js"></script>
+    <script src="./script/autoSuggestion.js"></script>
   </body>
 </html>

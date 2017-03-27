@@ -10,6 +10,36 @@
 
 }
 
+.colorDarkGreen
+{
+background-color:#00a78e;
+}
+
+.colorRed
+{
+  background-color: #d95459;
+}
+
+.colorLightBlue
+{
+  background-color: #55acee;
+}
+
+.fa-list-ol
+{
+  color: #55acee;
+}
+
+.fa-list
+{
+  color:#d95459;
+}
+
+.fa-users
+{
+  color:#00a78e;
+}
+
 .fa-file-text-o
 {
 color:#2eb82e;
@@ -17,7 +47,7 @@ color:#2eb82e;
 
 .fa-truck
 {
-  color:#FC8213
+  color:#FC8213;
 }
 
 
@@ -41,9 +71,10 @@ color:#2eb82e;
   color:#ffffff;
   font-family: 'Carrois Gothic', sans-serif;
   margin-left: 46px;
+  margin-bottom: 20px;
 }
 
-h4
+.adminHeaderInfo 
 {
   color:#ffffff;
   font-family: 'Carrois Gothic', sans-serif;

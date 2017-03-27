@@ -183,4 +183,13 @@ set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="c
     <cfreturn arrayToStoreQuery>
 </cffunction>
 
+
+<cffunction name="onlineUsers" output="false" returntype="numeric" access="remote" returnformat="JSON" >
+  <cfquery name="onlinequery">
+    select count(userID) as totalUsers from OnlineUser
+    where
+    status=<cfqueryparam value="online" cfsqltype="cf_sql_varchar">
+  </cfquery>
+  <cfreturn onlinequery.totalUsers>
+</cffunction>
 </cfcomponent>

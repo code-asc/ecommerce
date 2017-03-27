@@ -20,9 +20,11 @@
   <body>
 
     <cfquery name="addressquery">
-      select Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry from Address
+      select Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Address.addressType from Address
       where
       userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqlType="cf_sql_int">
+        AND
+      addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
     </cfquery>
 <cfinclude template="header.cfm" />
 
@@ -32,7 +34,7 @@
     <div class="col-md-offset-3 col-sm-4 col-lg-4 col-xm-6 jumbotron text-center">
       <div>
         <h4>Shipping Address:</h4>
-<cfif addressquery.recordCount GT 1>
+<cfif addressquery.recordCount GTE 1>
 
   #addressquery.customerAddress1#<br/>
   <cfif len(trim(addressquery.customerAddress2))>

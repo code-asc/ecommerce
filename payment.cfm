@@ -21,6 +21,10 @@
     <![endif]-->
   </head>
   <body>
+    <cfif StructKeyExists(session, "showDefaultButton")>
+    <cfset StructDelete(session,"showDefaultButton")>
+    </cfif>
+
     <cfparam name="addressVar" default=0>
 <cfif structKeyExists(url, "newAddress")>
   <cfset session.allowToBuySingle=true>
@@ -28,6 +32,7 @@
 
 <cfif structKeyExists(url,"linkAddress")>
   <cfset session.setDifferentAddress=true>
+    <cfset session.showDefaultButton=true>
 </cfif>
 
     <cfinclude template="header.cfm"/>
@@ -41,6 +46,18 @@
 <cfset structDelete(form,"submit")>
   <cfset session.repeat=false>
 </cfif>
+
+<!--- Allow user to set default address in other Address option --->
+<cfif structKeyExists(form, "setDefault")>
+  <cfset session.setDifferentAddress=false>
+<cfinvoke component = "addressEntry" method = "storeAddress"  argumentCollection = "#form#" returnvariable="checkValForAddress" >
+    <cfset structDelete(session,"setDifferentAddress")>
+    <cfset addressVar=#checkValForAddress#>
+<cfset structDelete(form,"setDefault")>
+  <cfset session.repeat=false>
+</cfif>
+
+<!--- --->
 
 <cfif NOT StructKeyExists(session, "stLoggedInUser")>
   <cflocation url="signup.cfm" addtoken="false" />
@@ -103,10 +120,19 @@
       <cfinput class="form-control" type="text" name="pincode" id="pincode" placeholder="pincode" required >
     </div>
 
-
+<div class="row">
+    <div class="col-md-1 col-sm-12" style="margin-right:40px ">
     <div class="form-group">
       <cfinput class="btn btn-success" type="submit" name="submit" value="Create">
     </div>
+    </div>
+
+<div class="col-md-1 col-sm-12">
+    <div class="form-group">
+      <cfinput  class="btn btn-primary" type="submit" name="setDefault" value="Set Default">
+    </div>
+  </div>
+</div>
   </cfform>
 
 

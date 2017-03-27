@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+var onlineUserCount=setInterval("ajaxCallForOnlineUser()",4000);
   $("select[name='products']").on("change",function()
 {
   if($("#formEdit").valid())
@@ -34,7 +35,7 @@ $.ajax({
 
       else if(index=="THUMBNAILPHOTO"){
         $("#formDataShow").append("<div class='col-sm-11 col-md-11'><div class='form-group'><label for='thumbNailPhoto'>ThumbNail Path</label><input class='form-control' form='formEdit' id='thumbNailPhoto' name='thumbNailPhoto' type='text' value="+value+"></div></div>");
-    
+
       }
 
       else if(index=="LARGEPHOTO"){
@@ -47,4 +48,19 @@ $.ajax({
     })
   }
 })
+}
+
+function ajaxCallForOnlineUser()
+{
+  $.ajax({
+    url:'adminData.cfc?method=onlineUsers',
+    success:function(responseText){
+      
+      $("#getOnlineUserCount").empty();
+      $("#getOnlineUserCount").append(responseText);
+    },
+    error:function(){
+      alert("canot get online userInfo");
+    }
+  });
 }
