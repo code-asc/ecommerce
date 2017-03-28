@@ -169,6 +169,43 @@
 
 </div>
 
+<!--- web sockets--->
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="well well-lg">
+      <cfwebsocket name="myworld" onmessage="msgHandler" onopen="openHandler" subscribeTo="world"/>
+
+    <script>
+    var msgHandler=function(message)
+    {
+
+    }
+
+    var openHandler=function()
+    {
+
+    }
+
+    var sendMessage=function()
+    {
+      message=document.getElementById("updateForAll").value;
+      alert(message);
+      myworld.authenticate("admin","admin");
+      myworld.publish("world",message);
+    }
+    </script>
+
+      <h3 style="margin-top:0px ; margin-bottom:20px">Post Notifications</h3>
+      <div class='form-group'>
+        <textarea class='form-control'  name='updateForAll' id='updateForAll' rows='5' cols='42'></textarea>
+      </div>
+
+    <input id="postForAll" class="btn btn-success" type="button" onclick="sendMessage()" value="Post It" >
+</div>
+  </div>
+</div>
+<!--- --->
+
                 </div>
               </div>
             </div>
@@ -186,5 +223,6 @@
 
     <script src="./script/adminEditAjax.js"></script>
     <script src="./script/autoSuggestion.js"></script>
+
   </body>
 </html>

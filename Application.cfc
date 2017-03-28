@@ -1,5 +1,6 @@
 <cfcomponent>
 <cfset this.name="application_2_1_1">
+<cfset this.wsChannels=[{name="world" ,cfcListener="myChannelListener"}]>
 <cfset this.datasource="ecommerece">
   <cfset this.sessionManagement=true>
    <!--- <cfset this.clientManagement=true> --->
@@ -11,6 +12,14 @@
 
 <cfset this.invokeimplicitaccessor=true>
 
+
+    <cffunction name="onWSAuthenticate" returntype="boolean" access="public" output="false">
+      <cfargument name="userName" required="true" type="string">
+        <cfargument name="password" required="true" type="string">
+          <cfargument name="connectionInfo" required="true" type="struct">
+            <cfset arguments.connectionInfo=#arguments.userName#>
+              <cfreturn true>
+    </cffunction>
 
 <cffunction name="onApplicationStart" returntype="boolean" output="false" access="public">
   <cfreturn true>

@@ -90,7 +90,7 @@
   <div class='col-sm-12 col-md-12'>
   <label for="labelForthumbNail">ThumNail Path</label>
   <div class="form-group" id="labelForthumbNail" name="labelForthumbNail">
-    <input type="file" name="thumbNail" id="thumbNail" class="file" style="visibility: hidden ; position:absolute" >
+    <input type="file" name="thumbNailFile" id="thumbNailFile" class="file" style="visibility: hidden ; position:absolute" >
       <div class="input-group col-sm-11 col-md-11" >
 
        <input type="text" id="thumbNailText" class="form-control input-md" disabled placeholder="Upload ThumbNail Image" value="#retriveProduct.thumbNailPhoto#">
@@ -113,7 +113,7 @@
 <div class='col-sm-12 col-md-12'>
 <label for="labelForlargePhoto">LargePhoto Path</label>
 <div class="form-group">
-  <input type="file" name="largePhoto" id="largePhoto" class="file" style="visibility: hidden ; position:absolute">
+  <input type="file" name="largePhotoFile" id="largePhotoFile" class="file" style="visibility: hidden ; position:absolute">
     <div class="input-group col-sm-11 col-md-11">
 
      <input type="text" id="largePhotoText" class="form-control input-md" disabled placeholder="Upload Large Image" value="#retriveProduct.largePhoto#">

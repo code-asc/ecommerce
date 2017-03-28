@@ -255,4 +255,35 @@ set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="c
     </cfquery>
     <cfreturn retriveProduct>
 </cffunction>
+
+<cffunction name="notificationData" output="false" access="remote" returntype="array" returnformat="JSON">
+<cfargument name="content" required="true" type="string">
+<cfquery name="notificationquery">
+  insert into Notification(content,postTime)
+  values(<cfqueryparam value="#arguments.content#" cfsqltype="varchar">,#now()#)
+</cfquery>
+
+<cfquery name="getquery">
+  select TOP 3 content ,postTime from Notification order by nid DESC
+</cfquery>
+
+<cfset var arrayToStoreQuery=arrayNew(1)>
+
+<cfloop query="getquery">
+  <cfset stData=structNew()>
+          <cfset stData.content="#getquery.content#">
+
+              <cfset stData.postTime="#getquery.postTime#">
+          <cfset arrayAppend(arrayToStoreQuery,stData)>
+</cfloop>
+<cfreturn arrayToStoreQuery>
+</cffunction>
+
+<cffunction name="getNotification" output="false" access="public" returntype="query">
+  <cfquery name="getquery">
+    select TOP 3 content ,postTime from Notification order by nid DESC
+  </cfquery>
+  <cfreturn getquery>  
+</cffunction>
+
 </cfcomponent>

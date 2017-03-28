@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/csstyle.css">
+  <link rel="stylesheet" href="./css/notification.css">
   <link rel="stylesheet" href="./css/signup.css">
   <!---<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--->
 
@@ -205,17 +206,48 @@
        </ul>
      </li>
 
-      <li><a href="userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
-     <cfif structKeyExists(session,"cartCount")>
-        <span class="badge" id="traceCount">
-        <cfoutput>
-          #session.cartCount#
-        </cfoutput>
-        </span>
+
+<!--- Notification --->
+<li>
+  <cfwebsocket name="world" onmessage="msgHandler" onopen="openHandler" subscribeTo="world"/>
+
+<cfinvoke method="getNotification" component="adminData" returnvariable="notificationquery">
+  <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">
+    <i  class="glyphicon glyphicon-bell"></i>
+  </a>
+
+  <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+
+    <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all</h4>
+    </div>
+    <li class="divider"></li>
+   <div class="notifications-wrapper">
+
+  <cfloop query="notificationquery">
+    <cfoutput>
+      <a class="content" href="##"><div class="notification-item"><h4 class="item-title">#notificationquery.postTime# ago</h4><p class="item-info">#notificationquery.content#</p></div></a>
+    </cfoutput>
+  </cfloop>
+   </div>
+    <li class="divider"></li>
+
+  </ul>
+
+</li>
+<!--- --->
+
+<li><a href="userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
+<cfif structKeyExists(session,"cartCount")>
+  <span class="badge" id="traceCount">
+  <cfoutput>
+    #session.cartCount#
+  </cfoutput>
+  </span>
 
 </cfif>
 </a>
 </li>
+
     </ul>
 
 </div>
@@ -228,6 +260,6 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="./script/autoSuggestion.js"></script>--->
-
+<script src="./script/userSocketAjax.js"></script>
 </body>
 </html>
