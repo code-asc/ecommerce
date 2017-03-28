@@ -17,8 +17,8 @@ function submitEditProductAJAXCall()
   var unitPrice=$("#unitPrice").val();
   var stock=$("#stock").val();
   var discount=$("#discount").val();
-  var thumbNail=$("#thumbNailPhoto").val();
-  var largePhoto=$("#largePhoto").val();
+  var thumbNail=$("#thumbNailText").val();
+  var largePhoto=$("#largePhotoText").val();
   var productDesc=$("#productDesc").val();
 
   $.ajax({

@@ -73,7 +73,7 @@
 <cfelse>
 <cfinclude template="header.cfm" />
 
-<cfif session.allowPreviousURL EQ true>
+<cfif structKeyExists(session,"allowPreviousURL") AND session.allowPreviousURL EQ true>
 <cfset session.previousURL=#session.currentURL#>
 <cfset session.allowPreviousURL=false>
 </cfif>

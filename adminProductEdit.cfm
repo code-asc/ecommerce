@@ -81,19 +81,49 @@
     </div>
     </div>
 
-    <div class='col-sm-12 col-md-12'>
+<!---    <div class='col-sm-12 col-md-12'>
       <div class='form-group'>
       <label for='thumbNailPhoto'>ThumbNail Path</label>
       <input class='form-control' form='editProductAdmin' id='thumbNailPhoto' name='thumbNailPhoto' type='text' value="#retriveProduct.thumbNailPhoto#">
     </div>
-  </div>
+  </div>--->
+  <div class='col-sm-12 col-md-12'>
+  <label for="labelForthumbNail">ThumNail Path</label>
+  <div class="form-group" id="labelForthumbNail" name="labelForthumbNail">
+    <input type="file" name="thumbNail" id="thumbNail" class="file" style="visibility: hidden ; position:absolute" >
+      <div class="input-group col-sm-11 col-md-11" >
 
+       <input type="text" id="thumbNailText" class="form-control input-md" disabled placeholder="Upload ThumbNail Image" value="#retriveProduct.thumbNailPhoto#">
+       <span class="input-group-btn">
+         <button class="browse btn btn-primary input-md" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+       </span>
+      </div>
+  </div>
+</div>
+
+<!---
   <div class='col-sm-12 col-md-12'>
     <div class='form-group'>
     <label for='largePhoto'>largePhoto Path</label>
     <input class='form-control' form='editProductAdmin' id='largePhoto' name='largePhoto' type='text' value="#retriveProduct.largePhoto#">
   </div>
 </div>
+--->
+
+<div class='col-sm-12 col-md-12'>
+<label for="labelForlargePhoto">LargePhoto Path</label>
+<div class="form-group">
+  <input type="file" name="largePhoto" id="largePhoto" class="file" style="visibility: hidden ; position:absolute">
+    <div class="input-group col-sm-11 col-md-11">
+
+     <input type="text" id="largePhotoText" class="form-control input-md" disabled placeholder="Upload Large Image" value="#retriveProduct.largePhoto#">
+     <span class="input-group-btn">
+       <button class="browse btn btn-primary input-md" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+     </span>
+    </div>
+</div>
+</div>
+
 
 <div class='col-sm-4 col-md-4'>
   <div class='form-group'>
@@ -176,7 +206,8 @@
     <script src="./script/singleBuyAjax.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-    <script src="./script/adminValidate.js"></script>
+    <script src="./script/uploadImage.js"></script>
+   <script src="./script/adminValidate.js"></script>
     <script src="./script/adminSearchAndEditAjax.js"></script>
   </body>
 </html>
