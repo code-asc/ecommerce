@@ -3,7 +3,7 @@ window.onbeforeunload = function (event) {
     if (typeof event == 'undefined') {
         event = window.event;
     }
-    if (event && window.event.clientX>=1300) {
+    if (event) {
       $.ajax({
         url:"removeSession.cfc?method=onWindowClose",
       })

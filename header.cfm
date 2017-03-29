@@ -19,6 +19,12 @@
   </head>
 <body>
 
+  <cfif StructKeyExists(session, "stLoggedInUser")>
+      <cfthread action="run" name="setOnlineThread">
+  <cfinvoke method="changeStatusToOnline" component="removeSession">
+  </cfthread>
+  </cfif>
+
 <cfif structKeyExists(form,"submit")>
   <cfif StructKeyExists(form, "searchVal")>
   <cfset session.searchVal="#form.searchVal#">

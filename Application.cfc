@@ -12,7 +12,6 @@
 
 <cfset this.invokeimplicitaccessor=true>
 
-
     <cffunction name="onWSAuthenticate" returntype="boolean" access="public" output="false">
       <cfargument name="userName" required="true" type="string">
         <cfargument name="password" required="true" type="string">
@@ -20,6 +19,14 @@
             <cfset arguments.connectionInfo=#arguments.userName#>
               <cfreturn true>
     </cffunction>
+
+<cffunction name="onSessionStart" output="false" access="public" returntype="void">
+  <cfcookie name="CFID" value="#SESSION.CFID#" />
+          <cfcookie name="CFTOKEN" value="#SESSION.CFTOKEN#" />
+
+          <!--- Store date the session was created. --->
+          <cfset SESSION.DateInitialized = Now() />
+</cffunction>
 
 <cffunction name="onApplicationStart" returntype="boolean" output="false" access="public">
   <cfreturn true>

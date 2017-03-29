@@ -26,10 +26,25 @@
 
 <cffunction name="onWindowClose" output="false" access="remote" returntype="void">
   <cfquery name="deletequery">
-    delete from OnlineUser
+    update OnlineUser
+    set status='offline'
     where
     userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
   </cfquery>
+</cffunction>
+
+
+<cffunction name="changeStatusToOnline" output="false" returntype="void" access="public">
+<cfif structKeyExists(session,"stLoggedInUser")>
+  <cfquery name="updatequery">
+    update  OnlineUser
+    set status='online'
+    where
+    userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+    AND
+    status=<cfqueryparam value="offline" cfsqltype="cf_sql_varchar" >
+  </cfquery>
+</cfif>
 </cffunction>
 
 </cfcomponent>
