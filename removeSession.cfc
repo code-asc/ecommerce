@@ -24,4 +24,12 @@
 
 </cffunction>
 
+<cffunction name="onWindowClose" output="false" access="remote" returntype="void">
+  <cfquery name="deletequery">
+    delete from OnlineUser
+    where
+    userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+  </cfquery>
+</cffunction>
+
 </cfcomponent>

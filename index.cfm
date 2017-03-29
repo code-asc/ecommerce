@@ -86,5 +86,6 @@
 <script src="./script/homeAjax.js"></script>
 <script src="./script/mainAjaxCallForHomePage.js"></script>
 <script src="./script/autoSuggestion.js"></script>
+
   </body>
 </html>
