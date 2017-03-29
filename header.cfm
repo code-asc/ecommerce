@@ -223,11 +223,16 @@
     <li class="divider"></li>
    <div class="notifications-wrapper">
 
+<cfif notificationquery.recordCount GT 0>
   <cfloop query="notificationquery">
     <cfoutput>
       <a class="content" href="##"><div class="notification-item"><h4 class="item-title">#notificationquery.postTime# ago</h4><p class="item-info">#notificationquery.content#</p></div></a>
     </cfoutput>
   </cfloop>
+
+  <cfelse>
+    <a class="content" href="##"><div class="notification-item"><h4 class="item-title"></h4><p class="item-info">No notifications</p></div></a>
+</cfif>
    </div>
     <li class="divider"></li>
 
