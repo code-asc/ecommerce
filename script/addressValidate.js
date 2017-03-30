@@ -39,6 +39,7 @@ $.validator.setDefaults({
       },
       pincode:{
         required:true,
+        maxlength:6,
       }
     },
     messages:{
@@ -54,7 +55,7 @@ $.validator.setDefaults({
       address:{
         required:"This field cannot be empty"
       },
-      address:{
+      pincode:{
         required:"This field cannot be empty",
       }
     }
