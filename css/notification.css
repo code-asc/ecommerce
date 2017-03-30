@@ -60,3 +60,12 @@
  background:#ccc;
  border-radius:4px;
  }
+
+.badge-notify
+{
+  background-color: rgb(238, 95, 115);
+  color:#ffffff;
+  position:relative;
+  top: -12px;
+  left: -8px;
+}

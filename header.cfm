@@ -219,7 +219,15 @@
 
 <cfinvoke method="getNotification" component="adminData" returnvariable="notificationquery">
   <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">
-    <i  class="glyphicon glyphicon-bell"></i>
+    <i class="glyphicon glyphicon-bell" ></i>&nbsp
+
+      <cfif notificationquery.totalRead GT 0>
+        <cfoutput>
+          <span class="badge badge-notify" id="notify">new</span>
+        </cfoutput>
+        <cfelse>
+            <span class="badge" id="notify"></span>
+      </cfif>
   </a>
 
   <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
@@ -232,7 +240,7 @@
 <cfif notificationquery.recordCount GT 0>
   <cfloop query="notificationquery">
     <cfoutput>
-      <a class="content" href="##"><div class="notification-item"><h4 class="item-title">#notificationquery.postTime# ago</h4><p class="item-info">#notificationquery.content#</p></div></a>
+      <a class="content" href="##"><div class="notification-item"><h4 class="item-title">on #notificationquery.postTime#</h4><p class="item-info">#notificationquery.content#</p></div></a>
     </cfoutput>
   </cfloop>
 
@@ -273,5 +281,6 @@
 <script src="./script/autoSuggestion.js"></script>--->
 <script src="./script/userSocketAjax.js"></script>
 <script src="./script/onWindowClose.js"></script>
+<script src="./script/onNotificationClick.js"></script>
 </body>
 </html>

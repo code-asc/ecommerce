@@ -85,7 +85,7 @@
   <cfinvoke method="getProducts" component="retriveProduct" productID=#url.productID# returnvariable="retriveProduct" >
 
 
-    <cfif session.stLoggedInUser.userEmail EQ 'admin@admin.com' AND  NOT retriveProduct.recordCount EQ 1>
+    <cfif (structKeyExists(session,"stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com') AND  NOT retriveProduct.recordCount EQ 1>
       <cflocation url=#session.previousURL# />
     </cfif>
 

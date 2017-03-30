@@ -259,12 +259,14 @@ set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="c
 <cffunction name="notificationData" output="false" access="remote" returntype="array" returnformat="JSON">
 <cfargument name="content" required="true" type="string">
 <cfquery name="notificationquery">
-  insert into Notification(content,postTime)
-  values(<cfqueryparam value="#arguments.content#" cfsqltype="varchar">,#now()#)
+  insert into Notification(content,postTime,markAs)
+  values(<cfqueryparam value="#arguments.content#" cfsqltype="varchar">
+    ,#now()#,
+    <cfqueryparam value="unread" cfsqltype="cf_sql_varchar">)
 </cfquery>
 
 <cfquery name="getquery">
-  select TOP 3 content ,postTime from Notification order by nid DESC
+  select TOP 3 content ,replace(convert(nvarchar,postTime,105),' ','/') as postTime from Notification order by nid DESC
 </cfquery>
 
 <cfset var arrayToStoreQuery=arrayNew(1)>
@@ -280,10 +282,29 @@ set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="c
 </cffunction>
 
 <cffunction name="getNotification" output="false" access="public" returntype="query">
-  <cfquery name="getquery">
-    select TOP 3 content ,postTime from Notification order by nid DESC
+<!---  <cfquery name="getquery">
+    select TOP 3 content, count(case when markAs='unread' then 1 else null end) as totalRead ,replace(convert(nvarchar,postTime,105),' ','/') as postTime from Notification order by nid DESC
   </cfquery>
-  <cfreturn getquery>  
+  --->
+  <cfquery name="getquery">
+    select TOP 3 content,
+    (select count(case when markAs='unread' then 1 else null end) from Notification l
+    where x.nid=l.nid) as totalRead ,
+    replace(convert(nvarchar,postTime,105),' ','/') as postTime
+    from
+    Notification x
+    order by nid DESC
+  </cfquery>
+  <cfreturn getquery>
+</cffunction>
+
+
+<cffunction name="markAsReadNotification" output="false" access="remote" returntype="void">
+  <cfquery name="updatequery">
+    update Notification
+    set markAs='read'
+    where nid in (select TOP 3 nid from Notification order by nid DESC)
+  </cfquery>
 </cffunction>
 
 </cfcomponent>

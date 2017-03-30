@@ -22,8 +22,9 @@ var msgHandler=function(message)
           }
           })
 
-  $(".notifications-wrapper").append(' <a class="content" href="#"><div class="notification-item"><h4 class="item-title">'+postTime+'ago</h4><p class="item-info">'+content+'</p></div></a>')
-
+  $(".notifications-wrapper").append(' <a class="content" href="#"><div class="notification-item"><h4 class="item-title">on '+postTime+'</h4><p class="item-info">'+content+'</p></div></a>');
+$("#notify").addClass("badge-notify");
+  $("#notify").text("new");
         })
       }
 
