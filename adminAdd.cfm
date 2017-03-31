@@ -26,7 +26,7 @@
     <![endif]-->
   </head>
 
-<cfif structKeyExists(session, "stLoggedInUser")>
+<cfif structKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
 
 
   <cfquery name="fieldquery">

@@ -11,7 +11,7 @@ $.validator.setDefaults({
   }
 })
 
-$("#formEdit , #formDelete").validate({
+$("#formEdit , #formDelete ,#formOtherBrand").validate({
   rules:{
     category:{
       required:true,
@@ -22,6 +22,9 @@ $("#formEdit , #formDelete").validate({
     products:{
       required:true,
     },
+    brandName:{
+      required:true,
+    }
   }
 })
 

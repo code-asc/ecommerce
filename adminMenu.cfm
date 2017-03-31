@@ -23,9 +23,10 @@
 <ul class="nav nav-pills nav-stacked" style="border: 1px solid #337ab7 ; border-radius:8px">
   <li class="active"><a href="admin.cfm">DashBoard</a></li>
   <li><a href="adminAdd.cfm">Add Item</a></li>
+  <li><a href="adminOther.cfm">Add Other</a></li>
   <li><a href="adminEdit.cfm">Edit Item</a></li>
   <li><a href="adminRemove.cfm">Remove Item</a></li>
-  
+
 </ul>
 </div>
 <cfelse>

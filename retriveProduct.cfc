@@ -4,7 +4,7 @@
 <cfargument name="productID" required="true" type="numeric">
 <cftry>
 <cfquery name="retriveProduct">
-  select  Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.unitInStock ,ProductPhoto.largePhoto,ProductPhoto.photoID ,Products.discount ,Brands.brandName from Products
+  select  Products.productID, Products.subCategoryID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.unitInStock ,ProductPhoto.largePhoto,ProductPhoto.photoID ,Products.discount ,Brands.brandName from Products
   inner join ProductPhoto
   on
   Products.photoID=ProductPhoto.photoID
@@ -22,4 +22,27 @@
 <cfreturn retriveProduct>
 </cffunction>
 
+
+<cffunction name="similarProducts" access="public" returntype="any" output="false">
+  <cfargument name="subCategoryID" required="true" type="numeric">
+
+    <cftry>
+    <cfquery name="retriveProduct">
+      select TOP 3 Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.discount ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products
+      inner join ProductPhoto
+      on
+      Products.photoID=ProductPhoto.photoID
+      inner join Brands
+      on
+      Products.brandID=Brands.brandID
+      where Products.subCategoryID=<cfqueryparam value=#arguments.subCategoryID# cfsqltype="cf_sql_integer">
+      order by NEWID()
+    </cfquery>
+
+   <cfcatch type="any">
+      <cfreturn javacast("null",0)>
+    </cfcatch>
+  </cftry>
+  <cfreturn retriveProduct>
+</cffunction>
 </cfcomponent>

@@ -13,7 +13,8 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/transformEffect.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -83,6 +84,8 @@
 
 <div class="container">
   <cfinvoke method="getProducts" component="retriveProduct" productID=#url.productID# returnvariable="retriveProduct" >
+  <cfinvoke method="similarProducts" component="retriveProduct" subCategoryID=#retriveProduct.subCategoryID# returnvariable="suggestProduct">
+
 
 
     <cfif (structKeyExists(session,"stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com') AND  NOT retriveProduct.recordCount EQ 1>
@@ -115,7 +118,7 @@
     </cfif></p>
     <strong class="label label-primary">Product Info</strong>
     <br/>
-    #retriveProduct.productDesc#
+    #retriveProduct.productDesc# <cfif StructKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com'><h4>(Left :#retriveProduct.unitInStock#)</h4></cfif>
     <br/>
   </div>
 
@@ -141,6 +144,8 @@
 
   <a class="btn btn-primary" href="adminProductEdit.cfm?productID=#url.productID#"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
   <a class="btn btn-danger" href="user_action_single.cfm?photoID=#retriveProduct.photoID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
+
+
     </cfif>
 </cfif>
 
@@ -152,6 +157,33 @@
 </cfoutput>
 </div>
 
+
+<!---Similar Products --->
+
+<div class="row" style="margin-top:35px;margin-bottom:40px;border-top:1px solid #eaeaec">
+<cfif NOT isNull(suggestProduct)>
+  <h4>Similar Products</h4>
+  <!---<cfdump var="#suggestProduct#">--->
+    <cfoutput query="suggestProduct">
+      <div class="col-sm-3 col-md-3 col-xs-2">
+<a href="user_action_single.cfm?productID=#suggestProduct.productID#"><div class="itemthumb"> <img src="#suggestProduct.thumbNailPhoto#"  class="img-responsive"></div></a>
+<br/>
+<strong style="color:black">#suggestProduct.brandName#</strong>
+<br/>
+<cfif retriveProduct.discount GT 0>
+  <strike>Rs.#retriveProduct.unitPrice#</strike>
+  <p><strong>Rs.#LsNumberFormat(precisionEvaluate(suggestProduct.unitPrice-(suggestProduct.unitPrice*(suggestProduct.discount/100))),"0.00")#</strong></p>
+  <h5>(#retriveProduct.discount#% <i>Off</i>)<h5>
+  <cfelse>
+    <strong>Rs.#suggestProduct.unitPrice#</strong>
+</cfif>
+</div>
+    </cfoutput>
+</cfif>
+</div>
+
+<!--- --->
+
 <div class="container-fluid">
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
@@ -161,7 +193,7 @@
 </div>
 </cfif>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-   
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>

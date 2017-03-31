@@ -12,18 +12,6 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
 
 <cfif myquery.recordCount EQ 0>
 
-<!---<cfquery name="insertQuery">
-insert into Customer(userFirstName,userMiddleName,userLastName,userEmail,userPassword,userPhone,userRegisteredDate)
-values(
-  <cfqueryparam value="#form.firstName#" cfsqltype="cf_sql_varchar">,
-  <cfqueryparam value="#form.middleName#" cfsqltype="cf_sql_varchar">,
-  <cfqueryparam value="#form.lastName#" cfsqltype="cf_sql_varchar">,
-  <cfqueryparam value="#form.email#" cfsqltype="cf_sql_varchar">,
-  <cfqueryparam value="#form.password#" cfsqltype="cf_sql_varchar">,
-  <cfqueryparam value="#form.mobile#" cfsqltype="cf_sql_varchar">,
-  getDate()
-  )
-</cfquery>--->
 <cfstoredproc procedure="hash_userDetails">
   <cfprocparam value="#form.firstName#" cfsqltype="cf_sql_varchar" />
   <cfprocparam value="#form.middleName#" cfsqltype="cf_sql_varchar" />
@@ -118,6 +106,7 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cffunction name="doLogout" returntype="void" output="false" access="public">
 
+<cfif StructKeyExists(session, "stLoggedInUser")>
   <cfquery name="deletequery">
     delete from OnlineUser
     where
@@ -138,6 +127,9 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
   <cfcookie name="CFTOKEN" value="#cookie.CFTOKEN#" expires="now"  />
   <cflogout />
   <cflocation url="index.cfm" addtoken="false" />
+  <cfelse>
+      <cflocation url="index.cfm" addtoken="false" />
+</cfif>
 </cffunction>
 
 <cffunction name="addToCart" returntype="void" output="false" access="remote">

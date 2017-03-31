@@ -307,4 +307,21 @@ set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="c
   </cfquery>
 </cffunction>
 
+
+<cffunction name="addBrand" output="false" access="remote" returntype="void">
+<cfargument name="brandName" required="true" type="string">
+  <cfquery name="addquery">
+    insert into Brands(brandName)
+    values(<cfqueryparam value="#arguments.brandName#" cfsqltype="cf_sql_varchar">)
+  </cfquery>
+</cffunction>
+
+<cffunction name="addCategory" output="false" access="remote" returntype="void">
+<cfargument name="categoryType" required="true" type="string">
+  <cfquery name="addquery">
+    insert into Category(categoryType)
+    values(<cfqueryparam value="#arguments.categoryType#" cfsqltype="cf_sql_varchar">)
+  </cfquery>
+</cffunction>
+
 </cfcomponent>

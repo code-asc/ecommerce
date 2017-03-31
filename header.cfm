@@ -254,7 +254,7 @@
 
 </li>
 <!--- --->
-
+<cfif structKeyExists(session,"stLoggedInUser") AND NOT session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
 <li><a href="userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
 <cfif structKeyExists(session,"cartCount")>
   <span class="badge" id="traceCount">
@@ -266,7 +266,7 @@
 </cfif>
 </a>
 </li>
-
+</cfif>
     </ul>
 
 </div>
