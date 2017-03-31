@@ -22,6 +22,21 @@
 <cfreturn retriveProduct>
 </cffunction>
 
+<cffunction name="getProductBrand" output="false" access="public" returntype="query">
+<cfargument name="subCategoryID" required="true" type="numeric">
+  <cfquery name="retriveBrand">
+    select DISTINCT Brands.brandName,Brands.brandID from Products
+    inner join ProductPhoto
+    on
+    Products.photoID=ProductPhoto.photoID
+    inner join Brands
+    on
+    Products.brandID=Brands.brandID
+    where Products.subCategoryID=<cfqueryparam value=#arguments.subCategoryID# cfsqltype="cf_sql_integer">
+      ORDER BY Brands.brandName ASC
+  </cfquery>
+  <cfreturn retriveBrand>
+</cffunction>
 
 <cffunction name="similarProducts" access="public" returntype="any" output="false">
   <cfargument name="subCategoryID" required="true" type="numeric">

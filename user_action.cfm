@@ -75,21 +75,8 @@
             </cfif>
   </cfquery>
 
-  <cfquery name="retriveBrand">
-    select DISTINCT Brands.brandName,Brands.brandID from Products
-    inner join ProductPhoto
-    on
-    Products.photoID=ProductPhoto.photoID
-    inner join Brands
-    on
-    Products.brandID=Brands.brandID
-    where Products.subCategoryID=<cfqueryparam value="#session.subCategoryID#" cfsqltype="cf_sql_integer">
-      ORDER BY Brands.brandName ASC
 
-  </cfquery>
-
-
-
+<cfinvoke method="getProductBrand" component="retriveProduct" subCategoryID=#session.subCategoryID# returnvariable="retriveBrand">
 
 <div class="col-md-2 col-sm-2 col-xm-2 col-lg-2"  style="margin-bottom:80px">
   <div class="panel panel-primary behclick-panel">
@@ -187,13 +174,13 @@
 </div>
 </div>
 
-<!---<div class="container-fluid">
+<div class="container-fluid">
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
 <cfinclude template="footer.cfm" />
 </div>
 </div>
-</div>--->
+</div>
 
 
 <!---<cfoutput>
