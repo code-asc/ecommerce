@@ -25,7 +25,7 @@
 
 <cffunction name="similarProducts" access="public" returntype="any" output="false">
   <cfargument name="subCategoryID" required="true" type="numeric">
-
+  <cfargument name="productID" required="true" type="numeric">
     <cftry>
     <cfquery name="retriveProduct">
       select TOP 3 Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.discount ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products
@@ -36,6 +36,8 @@
       on
       Products.brandID=Brands.brandID
       where Products.subCategoryID=<cfqueryparam value=#arguments.subCategoryID# cfsqltype="cf_sql_integer">
+        AND
+        NOT Products.productID=<cfqueryparam value=#arguments.productID# cfsqltype="cf_sql_int" >
       order by NEWID()
     </cfquery>
 

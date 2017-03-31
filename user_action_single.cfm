@@ -84,7 +84,7 @@
 
 <div class="container">
   <cfinvoke method="getProducts" component="retriveProduct" productID=#url.productID# returnvariable="retriveProduct" >
-  <cfinvoke method="similarProducts" component="retriveProduct" subCategoryID=#retriveProduct.subCategoryID# returnvariable="suggestProduct">
+  <cfinvoke method="similarProducts" component="retriveProduct" subCategoryID=#retriveProduct.subCategoryID# productID=#retriveProduct.productID# returnvariable="suggestProduct">
 
 
 
