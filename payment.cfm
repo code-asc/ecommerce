@@ -75,9 +75,12 @@
 
         <cfinvoke component="authentication" method="purchaseOrder" addressID=#addressVar#>
             <cfinvoke component="getProductIDList" method="decrementProduct">
+              <cfinvoke method="updateCartCount" component="authentication" >
+
 <!--- Need to add roll back based on above transaction --->
     </cfif>
-      Processing Payment gateway....
+      <cflocation url="paymentProcessing.cfm" />
+
       </cfoutput>
 <cfelse>
   <div class="row">

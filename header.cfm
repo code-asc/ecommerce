@@ -19,11 +19,14 @@
   </head>
 <body>
 
+
+
   <cfif StructKeyExists(session, "stLoggedInUser")>
       <cfthread action="run" name="setOnlineThread">
   <cfinvoke method="changeStatusToOnline" component="removeSession">
   </cfthread>
   </cfif>
+
 
 <cfif structKeyExists(form,"submit")>
   <cfif StructKeyExists(form, "searchVal")>
@@ -258,6 +261,7 @@
 <li><a href="userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
 <cfif structKeyExists(session,"cartCount")>
   <span class="badge" id="traceCount">
+  
   <cfoutput>
     #session.cartCount#
   </cfoutput>
