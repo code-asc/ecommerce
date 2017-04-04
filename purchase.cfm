@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,55 +18,51 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-  </head>
-  <body>
-    <cfinclude template="header.cfm" >
-<cfif NOT StructKeyExists(session,"stLoggedInUser")>
-<cflocation url="signin.cfm" />
-<cfelse>
-<!---<cftry>--->
-<cfquery name="checkaddressquery">
-  select addressID from Address
-  where
-  userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-</cfquery>
-<cfif checkaddressquery.recordCount EQ 1>
+</head>
 
-<cfoutput>
-Make default page
-</cfoutput>
+<body>
+    <cfinclude template="header.cfm">
+        <cfif NOT StructKeyExists(session, "stLoggedInUser")>
+            <cflocation url="signin.cfm" />
+            <cfelse>
 
-<cfelse>
-  <div class="col-md-offset-4 col-sm-offset-4 col-xm-offset-4 col-lg-4 ">
-  <cfform>
-    <div class="form-group">
-    <cfinput name="city" class="form-control" type="text" required >
-    </div>
+                <cfquery name="checkaddressquery">
+                    select addressID from Address where userID=
+                    <cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+                </cfquery>
+                <cfif checkaddressquery.recordCount EQ 1>
 
-    <div class="form-group">
-    <cfinput name="state" class="form-control" type="text" required >
-    </div>
+                    <cfoutput>
+                        Make default page
+                    </cfoutput>
 
-    <div class="form-group">
-    <cfinput name="zip" class="form-control" type=""  required >
-    </div>
-  </cfform>
-</div>
-</cfif>
+                    <cfelse>
+                        <div class="col-md-offset-4 col-sm-offset-4 col-xm-offset-4 col-lg-4 ">
+                            <cfform>
+                                <div class="form-group">
+                                    <cfinput name="city" class="form-control" type="text" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <cfinput name="state" class="form-control" type="text" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <cfinput name="zip" class="form-control" type="" required>
+                                </div>
+                            </cfform>
+                        </div>
+                </cfif>
 
 
+        </cfif>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script src="./script/autoSuggestion.js"></script>
+</body>
 
-<!---<cfcatch type="any">
-  <cfthrow detail="error in purchase.cfm" type="error" message="error during purchase">
-</cfcatch>
-</cftry>--->
-</cfif>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="./script/autoSuggestion.js"></script>
-  </body>
 </html>

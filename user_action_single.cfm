@@ -1,179 +1,178 @@
 <!DOCTYPE html>
 <cfheader name="Expires" value="#Now()#">
-  <cfheader name="pragma" value="no-change"/>
-  <cfheader  name="cache-control" value="no-cache,no-store,must-revalidate"/>
+    <cfheader name="pragma" value="no-change" />
+    <cfheader name="cache-control" value="no-cache,no-store,must-revalidate" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <html lang="en">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./css/transformEffect.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./css/transformEffect.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
+    </head>
 
-<cfif structKeyExists(url,"photoID")>
-  <cfinvoke method="deleteFromDatabase" component="adminData" photoID=#url.photoID#/>
-  <cflocation url=#session.previousURL# />
-</cfif>
+    <body>
 
-<cfif structKeyExists(url,"buyNow")>
-
-<cfinvoke method="getAddressInProductPage" component="addressEntry" returnvariable="addressquery" >
-
-<cfinclude template="header.cfm"/>
-<div class="container-fluid">
-  <div class="col-md-4 col-sm-offset-2 col-xs-offset-4 ">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h4 class="panel-title">Shipping Details</h4>
-      </div>
-      <div class="panel-body">
-        <cfoutput>
-        <cfif addressquery.recordCount GT 0>
-
-          #addressquery.customerAddress1#<br/>
-          <cfif len(trim(addressquery.customerAddress2))>
-          #addressquery.customerAddress2#<br/>
-        </cfif>
-          #addressquery.customerCity#<br/>
-          #addressquery.customerState#<br/>
-          #addressquery.customerCountry#<br/>
-          <cfelse>
-            No Address Exists. Need to edit Address field
+        <cfif structKeyExists(url, "photoID")>
+            <cfinvoke method="deleteFromDatabase" component="adminData" photoID=#url.photoID#/>
+            <cflocation url=#session.previousURL# />
         </cfif>
 
+        <cfif structKeyExists(url, "buyNow")>
 
+            <cfinvoke method="getAddressInProductPage" component="addressEntry" returnvariable="addressquery">
 
-      </div>
+                <cfinclude template="header.cfm" />
+                <div class="container-fluid">
+                    <div class="col-md-4 col-sm-offset-2 col-xs-offset-4 ">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Shipping Details</h4>
+                            </div>
+                            <div class="panel-body">
+                                <cfoutput>
+                                    <cfif addressquery.recordCount GT 0>
 
-<div class="text-center">
-      <a href="payment.cfm?newAddress" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp Edit</a>
-      <cfif addressquery.recordCount GT 0>
-        <a href="payment.cfm?newAddress&linkAddress" class="btn btn-primary">New Address</a>
-        <button  class="btn btn-success" id="onBuyNow">Proceed</button>
-      </cfif>
+                                        #addressquery.customerAddress1#
+                                        <br/>
+                                        <cfif len(trim(addressquery.customerAddress2))>
+                                            #addressquery.customerAddress2#
+                                            <br/>
+                                        </cfif>
+                                        #addressquery.customerCity#
+                                        <br/> #addressquery.customerState#
+                                        <br/> #addressquery.customerCountry#
+                                        <br/>
+                                        <cfelse>
+                                            No Address Exists. Need to edit Address field
+                                    </cfif>
 
-</div>
-    </div>
-  </div>
-</div>
-</cfoutput>
-<cfelse>
-<cfinclude template="header.cfm" />
+                            </div>
 
-<cfif structKeyExists(session,"allowPreviousURL") AND session.allowPreviousURL EQ true>
-<cfset session.previousURL=#session.currentURL#>
-<cfset session.allowPreviousURL=false>
-</cfif>
+                            <div class="text-center">
+                                <a href="payment.cfm?newAddress" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp Edit</a>
+                                <cfif addressquery.recordCount GT 0>
+                                    <a href="payment.cfm?newAddress&linkAddress" class="btn btn-primary">New Address</a>
+                                    <button class="btn btn-success" id="onBuyNow">Proceed</button>
+                                </cfif>
 
-<cfset session.currentURL=#cgi.SCRIPT_NAME#>
-  <cfset session.currentURL=#replace(session.currentURL,"/project_ecommerce/","","All")#>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </cfoutput>
+                <cfelse>
+                    <cfinclude template="header.cfm" />
 
-<div class="container">
-  <cfinvoke method="getProducts" component="retriveProduct" productID=#url.productID# returnvariable="retriveProduct" >
-  <cfinvoke method="similarProducts" component="retriveProduct" subCategoryID=#retriveProduct.subCategoryID# productID=#retriveProduct.productID# returnvariable="suggestProduct">
+                    <cfif structKeyExists(session, "allowPreviousURL") AND session.allowPreviousURL EQ true>
+                        <cfset session.previousURL=#session.currentURL#>
+                            <cfset session.allowPreviousURL=false>
+                    </cfif>
 
+                    <cfset session.currentURL=#cgi.SCRIPT_NAME#>
+                        <cfset session.currentURL=#replace(session.currentURL, "/project_ecommerce/", "", "All")#>
 
+                            <div class="container">
+                                <cfinvoke method="getProducts" component="retriveProduct" productID=#url.productID# returnvariable="retriveProduct">
+                                    <cfinvoke method="similarProducts" component="retriveProduct" subCategoryID=#retriveProduct.subCategoryID# productID=#retriveProduct.productID# returnvariable="suggestProduct">
 
-    <cfif (structKeyExists(session,"stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com') AND  NOT retriveProduct.recordCount EQ 1>
-      <cflocation url=#session.previousURL# />
-    </cfif>
+                                        <cfif (structKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com') AND NOT retriveProduct.recordCount EQ 1>
+                                            <cflocation url=#session.previousURL# />
+                                        </cfif>
 
+                                        <cfset session.currentURL=#session.currentURL#& "?productID="&#retriveProduct.productID#>
+                                            <cfset session.productID=#retriveProduct.productID#>
+                                                <!---<cfdump var="#session.productID#">--->
+                                                <cfoutput>
+                                                    <div class="row">
 
-  <cfset session.currentURL=#session.currentURL#&"?productID="&#retriveProduct.productID#>
-<cfset session.productID=#retriveProduct.productID#>
-<!---<cfdump var="#session.productID#">--->
-<cfoutput>
-  <div class="row">
+                                                        <div class="col-md-4 col-sm-4 col-xm-4 col-lg-6" style="float:left">
+                                                            <img src="#retriveProduct.largePhoto#" alt="image not found" class="img-responsive">
+                                                        </div>
 
-    <div class="col-md-4 col-sm-4 col-xm-4 col-lg-6" style="float:left">
-    <img src="#retriveProduct.largePhoto#" alt="image not found" class="img-responsive">
-  </div>
+                                                        <div class="col-md-4 col-sm-4 col-xm-4 col-lg-4">
+                                                            <h3>#retriveProduct.brandName# #retriveProduct.productName#</h3>
+                                                            <cfif retriveProduct.discount GT 0>
+                                                                <strike>Rs.#retriveProduct.unitPrice#</strike>
+                                                                <strong>Rs.#LsNumberFormat(precisionEvaluate(retriveProduct.unitPrice-(retriveProduct.unitPrice*(retriveProduct.discount/100))),"0.00")#</strong>
+                                                                <h4>(#retriveProduct.discount#% OFF)</h4> #retriveProduct.productName#
+                                                                <cfelse>
+                                                                    <strong>Rs.#retriveProduct.unitPrice#</strong>
+                                                                    <br/> #retriveProduct.productName#
+                                                            </cfif>
+                                                            </p>
+                                                            <strong class="label label-primary">Product Info</strong>
+                                                            <br/> #retriveProduct.productDesc#
+                                                            <cfif StructKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+                                                                <h4>(Left :#retriveProduct.unitInStock#)</h4></cfif>
+                                                            <br/>
+                                                        </div>
 
-  <div class="col-md-4 col-sm-4 col-xm-4 col-lg-4">
-    <h3>#retriveProduct.brandName# #retriveProduct.productName#</h3>
-    <cfif retriveProduct.discount GT 0>
-      <strike>Rs.#retriveProduct.unitPrice#</strike>
-      <strong>Rs.#LsNumberFormat(precisionEvaluate(retriveProduct.unitPrice-(retriveProduct.unitPrice*(retriveProduct.discount/100))),"0.00")#</strong>
-      <h4>(#retriveProduct.discount#% OFF)</h4>
+                                                        <div class="col-md-3 col-sm-3 col-xm-3 col-lg-3">
 
-      #retriveProduct.productName#
-      <cfelse>
-        <strong>Rs.#retriveProduct.unitPrice#</strong>
-        <br/>
-        #retriveProduct.productName#
-    </cfif></p>
-    <strong class="label label-primary">Product Info</strong>
-    <br/>
-    #retriveProduct.productDesc# <cfif StructKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com'><h4>(Left :#retriveProduct.unitInStock#)</h4></cfif>
-    <br/>
-  </div>
+                                                            <br/>
+                                                            <cfif NOT StructKeyExists(session, "stLoggedInUser")>
+                                                                <button class="btn btn-success" disabled="true"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</button>
 
-  <div class="col-md-3 col-sm-3 col-xm-3 col-lg-3">
+                                                                <button class="btn btn-info" id="onAddCart" disabled="true"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
+                                                                <cfelse>
 
-    <br/>
-    <cfif NOT StructKeyExists(session, "stLoggedInUser")>
-    <button class="btn btn-success" disabled="true"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</button>
+                                                                    <!--- Condition for admin --->
+                                                                    <cfif NOT session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+                                                                        <cfif retriveProduct.unitInStock GT 0>
+                                                                            <a class="btn btn-success" href="user_action_single.cfm?buyNow"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</a>
+                                                                            <cfelse>
+                                                                                <button class="btn btn-warning" disabled="true">No Stock</button>
+                                                                        </cfif>
+                                                                        <button class="btn btn-info" id="onAddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
 
-    <button class="btn btn-info" id="onAddCart" disabled="true"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
-    <cfelse>
+                                                                        <cfelse>
 
-<!--- Condition for admin --->
-<cfif NOT session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
-      <cfif retriveProduct.unitInStock GT 0>
-      <a class="btn btn-success" href="user_action_single.cfm?buyNow"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</a>
-      <cfelse>
-        <button class="btn btn-warning" disabled="true">No Stock</button>
-    </cfif>
-      <button class="btn btn-info" id="onAddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
+                                                                            <a class="btn btn-primary" href="adminProductEdit.cfm?productID=#url.productID#"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
+                                                                            <a class="btn btn-danger" href="user_action_single.cfm?photoID=#retriveProduct.photoID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
 
-<cfelse>
+                                                                    </cfif>
+                                                            </cfif>
 
-  <a class="btn btn-primary" href="adminProductEdit.cfm?productID=#url.productID#"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
-  <a class="btn btn-danger" href="user_action_single.cfm?photoID=#retriveProduct.photoID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
+                                                        </div>
 
+                                                        <div class="col-md-3 col-sm-3 col-xm-3 col-lg-4" id="infoAboutCart">
+                                                        </div>
 
-    </cfif>
-</cfif>
+                                                </cfoutput>
+                                                </div>
 
-  </div>
+                                                <!---Similar Products --->
 
-  <div class="col-md-3 col-sm-3 col-xm-3 col-lg-4" id="infoAboutCart">
-  </div>
+                                                <div class="row" style="margin-top:35px;margin-bottom:40px;border-top:1px solid #eaeaec">
+                                                    <cfif NOT isNull(suggestProduct)>
+                                                        <h4>Similar Products</h4>
 
-</cfoutput>
-</div>
-
-
-<!---Similar Products --->
-
-<div class="row" style="margin-top:35px;margin-bottom:40px;border-top:1px solid #eaeaec">
-<cfif NOT isNull(suggestProduct)>
-  <h4>Similar Products</h4>
-  <!---<cfdump var="#suggestProduct#">--->
-    <cfoutput query="suggestProduct">
-      <div class="col-sm-3 col-md-3 col-xs-2">
-<a href="user_action_single.cfm?productID=#suggestProduct.productID#"><div class="itemthumb"> <img src="#suggestProduct.thumbNailPhoto#"  class="img-responsive"></div></a>
-<br/>
-<strong style="color:black">#suggestProduct.brandName#</strong>
-<br/>
-<cfif retriveProduct.discount GT 0>
-  <strike>Rs.#retriveProduct.unitPrice#</strike>
-  <p><strong>Rs.#LsNumberFormat(precisionEvaluate(suggestProduct.unitPrice-(suggestProduct.unitPrice*(suggestProduct.discount/100))),"0.00")#</strong></p>
-  <h5>(#retriveProduct.discount#% <i>Off</i>)<h5>
+                                                        <cfoutput query="suggestProduct">
+                                                            <div class="col-sm-3 col-md-3 col-xs-2">
+                                                                <a href="user_action_single.cfm?productID=#suggestProduct.productID#">
+                                                                    <div class="itemthumb"> <img src="#suggestProduct.thumbNailPhoto#" class="img-responsive"></div>
+                                                                </a>
+                                                                <br/>
+                                                                <strong style="color:black">#suggestProduct.brandName#</strong>
+                                                                <br/>
+                                                                <cfif retriveProduct.discount GT 0>
+                                                                    <strike>Rs.#retriveProduct.unitPrice#</strike>
+                                                                    <p><strong>Rs.#LsNumberFormat(precisionEvaluate(suggestProduct.unitPrice-(suggestProduct.unitPrice*(suggestProduct.discount/100))),"0.00")#</strong></p>
+                                                                    <h5>(#retriveProduct.discount#% <i>Off</i>)<h5>
   <cfelse>
     <strong>Rs.#suggestProduct.unitPrice#</strong>
 </cfif>

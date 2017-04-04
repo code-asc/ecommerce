@@ -20,7 +20,7 @@ $.validator.setDefaults({
   }
 });
 
-  $("#cf_form").validate({
+  $("#cf_form , #userEditForm").validate({
     rules:{
       firstName:{
         required:true,

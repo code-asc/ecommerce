@@ -56,7 +56,7 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
 <cfargument name="userEmail" required="true" type="string">
   <cfargument name="userPassword" required="true" type="string">
      <cfquery name="loginUser">
-       select Customer.userID , Customer.userFirstName , Customer.userMiddleName , Customer.userLastName , Customer.userEmail , Customer.userPassword  from Customer
+       select Customer.userID , Customer.userFirstName , Customer.userMiddleName , Customer.userLastName , Customer.userEmail , Customer.userPassword, Customer.userProfilePhoto  from Customer
        where
        userEmail=<cfqueryparam value = "#arguments.userEmail#" CFSQLType = "cf_sql_varchar" >
          AND
@@ -79,7 +79,7 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
        <cflogin>
          <cfloginuser name="#loginUser.userFirstName# #loginUser.userMiddleName# #loginUser.userLastName#" password="#loginUser.userPassword#" roles="customer" />
        </cflogin>
-       <cfset session.stLoggedInUser={"userFirstName"=#loginUser.userFirstName# , "userMiddleName"=#loginUser.userMiddleName# , "userLastName"=#loginUser.userLastName# , "userID"=#loginUser.userID# ,"userEmail"=#loginUser.userEmail#}>
+       <cfset session.stLoggedInUser={"userFirstName"=#loginUser.userFirstName# , "userMiddleName"=#loginUser.userMiddleName# , "userLastName"=#loginUser.userLastName# , "userID"=#loginUser.userID# ,"userEmail"=#loginUser.userEmail# , "userProfilePhoto"=#loginUser.userProfilePhoto#}>
 
 <!---Update status --->
 <cfquery name="insertquery">
@@ -205,7 +205,7 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 
 <cffunction name="homePageContent" returnType="array" access="remote" output="false" returnformat="JSON" >
-  <cfquery name="homequery">
+  <cfquery name="homequery" cachedwithin="#createTimeSpan(0,0,1,0)#" >
     select largePhoto from ProductPhoto
     where largePhotoName=<cfqueryparam value="homepage" cfsqltype="varchar">
   </cfquery>
@@ -267,7 +267,7 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 </cffunction>
 
 <cffunction name="homePageThumbNailInfo" output="false" returntype="array" access="remote" returnformat="JSON" >
-  <cfquery name="thumbnailquery">
+  <cfquery name="thumbnailquery" cachedwithin="#createTimeSpan(0,0,1,0)#" >
     select thumbNailPhoto ,brandID,subCategoryID from ProductPhoto
     where thumbNailPhotoName=<cfqueryparam value="thumb" cfsqltype="varchar">
   </cfquery>
@@ -464,4 +464,6 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
   <cfreturn arrayToStoreQuery>
 
 </cffunction>
+
+
 </cfcomponent>
