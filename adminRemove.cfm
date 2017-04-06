@@ -20,7 +20,7 @@
 </head>
 <cfif structKeyExists(session, "stLoggedInUser")>
     <cfif structKeyExists(form, "submitDelete")>
-        <cfinvoke method="deleteFromDatabase" component="adminData" photoID=#form.products#/>
+        <cfinvoke method="deleteFromDatabase" component="Controller.adminData" photoID=#form.products#/>
 
     </cfif>
 

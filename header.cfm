@@ -23,7 +23,7 @@
 
         <cfif StructKeyExists(session, "stLoggedInUser")>
             <cfthread action="run" name="setOnlineThread">
-                <cfinvoke method="changeStatusToOnline" component="removeSession">
+                <cfinvoke method="changeStatusToOnline" component="Controller.removeSession">
             </cfthread>
         </cfif>
 
@@ -220,7 +220,7 @@
                         <li>
                             <cfwebsocket name="world" onmessage="msgHandler" onopen="openHandler" subscribeTo="world" />
 
-                            <cfinvoke method="getNotification" component="adminData" returnvariable="notificationquery">
+                            <cfinvoke method="getNotification" component="Controller.adminData" returnvariable="notificationquery">
                                 <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">
                                     <i class="glyphicon glyphicon-bell"></i>&nbsp
 

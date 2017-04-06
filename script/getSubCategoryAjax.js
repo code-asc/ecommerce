@@ -6,7 +6,7 @@ $(document).ready(function(){
     var subCategoryType;
     $("#subcategory").find("option").remove();
     $("#subcategory").append("<option selected disabled>SubCategory</option>");
-    $.ajax({url:'adminData.cfc?method=getSubCategory',
+    $.ajax({url:'/Controller/adminData.cfc?method=getSubCategory',
       data:{categoryID:$(this).val()},
       success:function(responseText){
         //alert(responseText);

@@ -41,7 +41,7 @@
             <div class="container">
 
                 <cfif structKeyExists(form, "submit")>
-                    <cfinvoke component="addressEntry" method="storeAddress" argumentCollection="#form#" returnvariable="checkValForAddress">
+                    <cfinvoke component="Controller.addressEntry" method="storeAddress" argumentCollection="#form#" returnvariable="checkValForAddress">
                         <cfset session.setDifferentAddress=false>
                             <cfset structDelete(session, "setDifferentAddress")>
                                 <cfset addressVar=#checkValForAddress#>
@@ -52,7 +52,7 @@
                 <!--- Allow user to set default address in other Address option --->
                 <cfif structKeyExists(form, "setDefault")>
                     <cfset session.setDifferentAddress=false>
-                        <cfinvoke component="addressEntry" method="storeAddress" argumentCollection="#form#" returnvariable="checkValForAddress">
+                        <cfinvoke component="Controller.addressEntry" method="storeAddress" argumentCollection="#form#" returnvariable="checkValForAddress">
                             <cfset structDelete(session, "setDifferentAddress")>
                                 <cfset addressVar=#checkValForAddress#>
                                     <cfset structDelete(form, "setDefault")>
@@ -64,19 +64,19 @@
                 <cfif NOT StructKeyExists(session, "stLoggedInUser")>
                     <cflocation url="signup.cfm" addtoken="false" />
                     <cfelse>
-                        <cfset getObject=createObject( "component", "addressEntry")>
+                        <cfset getObject=createObject( "component", "Controller.addressEntry")>
                             <cfset check=getObject.searchUserAddress()>
 
                                 <cfif check EQ true AND NOT StructKeyExists(url, "newAddress") AND NOT StructKeyExists(url, "addressAll")>
 
                                     <cfoutput>
                                         <cfif structKeyExists(session, "allowToBuySingle") AND session.allowToBuySingle EQ true>
-                                            <cfinvoke component="singleBuy" method="buyNow" addressID=#addressVar#>
+                                            <cfinvoke component="Controller.singleBuy" method="buyNow" addressID=#addressVar#>
                                                 <cfset structDelete(session, "allowToBuySingle")>
                                                     <cfelse>
 
-                                                        <cfinvoke component="authentication" method="purchaseOrder" addressID=#addressVar#>
-                                                            <cfinvoke component="getProductIDList" method="decrementProduct">
+                                                        <cfinvoke component="Controller.authentication" method="purchaseOrder" addressID=#addressVar#>
+                                                            <cfinvoke component="Controller.getProductIDList" method="decrementProduct">
 
                                                                 <!--- Need to add roll back based on above transaction --->
                                         </cfif>

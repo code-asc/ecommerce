@@ -63,7 +63,7 @@
                                     </cfif>
                             </cfquery>
 
-                            <cfinvoke method="getProductBrand" component="retriveProduct" subCategoryID=#session.subCategoryID# returnvariable="retriveBrand">
+                            <cfinvoke method="getProductBrand" component="Controller.retriveProduct" subCategoryID=#session.subCategoryID# returnvariable="retriveBrand">
 
                                 <div class="col-md-2 col-sm-2 col-xm-2 col-lg-2" style="margin-bottom:80px">
                                     <div class="panel panel-primary behclick-panel">

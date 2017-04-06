@@ -1,5 +1,4 @@
 <cfcomponent>
-
 <cffunction name="removeUserSession" output="false" access="public" returntype="void">
   <cfargument name="userEmail" required="true" type="string">
 <cfset app=application.ApplicationName>
@@ -16,34 +15,17 @@
         </cfif>
         </cfloop>
 
-        <cfquery name="deletequery">
-          delete from OnlineUser
-          where
-          email=<cfqueryparam value="#arguments.userEmail#" cfsqltype="cf_sql_varchar">
-        </cfquery>
-
+        <cfinvoke method="deleteOnlineUser" component="db.userComponent.userRemoveOnline" userEmail="#arguments.userEmail#" />
 </cffunction>
 
 <cffunction name="onWindowClose" output="false" access="remote" returntype="void">
-  <cfquery name="deletequery">
-    update OnlineUser
-    set status='offline'
-    where
-    userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-  </cfquery>
+  <cfinvoke method="updateUserToOffline" component="db.userComponent.userRemoveOnline" />
 </cffunction>
 
 
 <cffunction name="changeStatusToOnline" output="false" returntype="void" access="public">
 <cfif structKeyExists(session,"stLoggedInUser")>
-  <cfquery name="updatequery">
-    update  OnlineUser
-    set status='online'
-    where
-    userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-    AND
-    status=<cfqueryparam value="offline" cfsqltype="cf_sql_varchar" >
-  </cfquery>
+  <cfinvoke method="updateUserOnline" component="db.userComponent.countOnlineUsers" >
 </cfif>
 </cffunction>
 

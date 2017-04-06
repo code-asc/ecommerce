@@ -25,7 +25,7 @@ function ajaxAddCall() {
     var largePhotoType = $("#largePhotoType").val();
 
     $.ajax({
-        url: "adminData.cfc?method=addToDatabase",
+        url: "/Controller/adminData.cfc?method=addToDatabase",
         data: {
             productName: productName,
             productDesc: productDesc,

@@ -5,7 +5,7 @@ $(document).ready(function()
 
   $.ajax(
     {
-    url:'authentication.cfc?method=addToCart',
+    url:'/Controller/authentication.cfc?method=addToCart',
     success:function(responseText)
     {
 

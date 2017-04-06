@@ -2,7 +2,7 @@ $(document).ready(function(){
   $(".decrement").click(function(event){
     var detailID=$(this).attr("value");
     $.ajax({
-      url:'authentication.cfc?method=decrementQuantity',
+      url:'/Controller/authentication.cfc?method=decrementQuantity',
       data:{id:JSON.stringify(detailID) },
       success:function(responseText)
       {

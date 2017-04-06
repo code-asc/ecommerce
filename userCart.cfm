@@ -28,7 +28,7 @@
         <cfif StructKeyExists(session, "stLoggedInUser")>
 
             <cfif structKeyExists(url, "removeFromCart")>
-                <cfinvoke component="authentication" method="removeItemFromCart" cartID=#url.removeFromCart#>
+                <cfinvoke component="Controller.authentication" method="removeItemFromCart" cartID=#url.removeFromCart#>
                     <cfset structDelete(url, "removeFromCart")>
             </cfif>
 

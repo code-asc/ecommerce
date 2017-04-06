@@ -2,7 +2,7 @@ $(document).ready(function(){
   $("#submitUserEdit").click(function(event){
 
   $.ajax({
-    url:"userInfo.cfc?method=updateUserDetail",
+    url:"/Controller/userInfo.cfc?method=updateUserDetail",
     data:{firstName:$("input[name='firstName']").val(),
   middleName:$("input[name='middleName']").val(),
 lastName:$("input[name='lastName']").val(),

@@ -24,7 +24,7 @@ $.each($("input[name='checkBrand']:checked"),function(index,val)
 
 
 $.ajax({
-  url:"authentication.cfc?method=filterProduct",
+  url:"/Controller/authentication.cfc?method=filterProduct",
   data:{brand:JSON.stringify(brandArr) , discount:JSON.stringify(discountArr)},
   success:function(responseText){
     console.log(brandArr);

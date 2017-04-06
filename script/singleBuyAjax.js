@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $("#onBuyNow").click(function(event){
     $.ajax({
-      url:"singleBuy.cfc",
+      url:"/Controller/singleBuy.cfc",
       data:{method:"buyNow"},
       success:function(){
         alert("works");

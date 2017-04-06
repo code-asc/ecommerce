@@ -40,14 +40,14 @@
                         <cffile action="upload" filefield="profilePhoto" destination="D:\project_ecommerece\usersInfo\ProfileImage\#session.stLoggedInUser.userEmail#\" nameConflict="override" />
 
                         <!---<cffile action="rename" source="D:\project_ecommerece\usersInfo\ProfileImage\#session.stLoggedInUser.userEmail#\#cffile.ServerFileName#.#cffile.ServerFileExt#" destination="D:\project_ecommerece\usersInfo\ProfileImage\#session.stLoggedInUser.userEmail#\#session.stLoggedInUser.userID#_#session.stLoggedInUser.userEmail#.#cffile.ServerFileExt#">--->
-                        <cfinvoke method="uploadUserProfilePhoto" component="userInfo" path="./usersInfo/ProfileImage/#session.stLoggedInUser.userEmail#/#cffile.ServerFileName#.#cffile.ServerFileExt#" />
+                        <cfinvoke method="uploadUserProfilePhoto" component="Controller.userInfo" path="./usersInfo/ProfileImage/#session.stLoggedInUser.userEmail#/#cffile.ServerFileName#.#cffile.ServerFileExt#" />
                     </cfif>
                 </cfoutput>
 
                 <!---<cfinvoke component="userInfo" method="updateUserDetail" firstName="#form.firstName#" middleName="#form.middleName#" lastName="#form.lastName#" email="#form.email#" phone="#form.mobile#">--->
             </cfif>
 
-            <cfinvoke method="getUserDetail" component="userInfo" returnvariable="getquery">
+            <cfinvoke method="getUserDetail" component="Controller.userInfo" returnvariable="getquery">
                 <cfinclude template="header.cfm">
                     <cfoutput query="getquery">
                         <div class="container">

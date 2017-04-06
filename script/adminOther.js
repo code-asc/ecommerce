@@ -3,7 +3,7 @@ $(document).ready(function() {
 
         if ($("#formOtherBrand").valid()) {
             $.ajax({
-                url: "adminData.cfc?method=addBrand",
+                url: "/Controller/adminData.cfc?method=addBrand",
                 data: {
                     brandName: $("#brandName").val()
                 },
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
         if ($("#formOtherCategory").valid()) {
             $.ajax({
-                url: "adminData.cfc?method=addCategory",
+                url: "/Controller/adminData.cfc?method=addCategory",
                 data: {
                     categoryType: $("#category").val()
                 },

@@ -29,7 +29,7 @@ $.each($("input[name='checkCategory']:checked"),function(index,val)
 })
 
 $.ajax({
-  url:"viewFilterCategory.cfc?method=filterProduct",
+  url:"/Controller/viewFilterCategory.cfc?method=filterProduct",
   data:{brand:JSON.stringify(brandArr) , discount:JSON.stringify(discountArr) ,category:JSON.stringify(categoryArr)},
   success:function(responseText){
     console.log(brandArr);

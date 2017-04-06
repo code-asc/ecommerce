@@ -25,7 +25,7 @@
         <cflocation url="signin.cfm" />
         <cfelse>
             <cfinclude template="header.cfm" />
-            <cfinvoke component="orderDetails" method="showDetails" returnvariable="detailquery">
+            <cfinvoke component="Controller.orderDetails" method="showDetails" returnvariable="detailquery">
                 <!---<cfdump var="#detailquery#">--->
 
                 <cfif detailquery.recordCount EQ 0>
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
 
-  
+
                             </cfoutput>
                         </div>
                 </cfif>

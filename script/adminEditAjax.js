@@ -13,7 +13,7 @@ function ajaxCall()
   $("#formDataShow").empty();
   var productID=parseInt($("select[name='products']").val());
 $.ajax({
-  url:'adminData.cfc?method=getProductInfo',
+  url:'/Controller/adminData.cfc?method=getProductInfo',
   data:{productID:productID},
   success:function(responseText)
   {
@@ -53,9 +53,9 @@ $.ajax({
 function ajaxCallForOnlineUser()
 {
   $.ajax({
-    url:'adminData.cfc?method=onlineUsers',
+    url:'/Controller/adminData.cfc?method=onlineUsers',
     success:function(responseText){
-      
+
       $("#getOnlineUserCount").empty();
       $("#getOnlineUserCount").append(responseText);
     },

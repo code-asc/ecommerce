@@ -7,7 +7,7 @@ $(document).ready(function(){
 
   $("#products").find("option").remove();
   $("#products").append("<option selected disabled>Products</option>");
-  $.ajax({url:'adminData.cfc?method=getProductForEdit',
+  $.ajax({url:'/Controller/adminData.cfc?method=getProductForEdit',
 data:{subCategoryID:$(this).val()},
 success:function(responseText)
 {

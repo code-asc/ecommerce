@@ -7,7 +7,7 @@ var msgHandler=function(message)
   {
     $(".notifications-wrapper").empty();
     $.ajax({
-      url:"adminData.cfc?method=notificationData",
+      url:"/Controller/adminData.cfc?method=notificationData",
       data:{content:dataSocket},
       success:function(responseText){
         console.log(responseText);

@@ -22,11 +22,11 @@
 </head>
 
 <body>
-  
+
     <cfinclude template="header.cfm" />
 
     <cfif StructKeyExists(form, "submit")>
-        <cfset checkIfNewUserCreatedError=createObject( "component", "authentication").addNewUser()>
+        <cfset checkIfNewUserCreatedError=createObject( "component", "Controller.authentication").addNewUser()>
             <cfif ArrayLen(checkIfNewUserCreatedError) GT 0>
                 <cfset checkIfNewUserCreated=false>
                     <cfelse>

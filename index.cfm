@@ -38,7 +38,7 @@
             <cfset session.currentURL=#replace(session.currentURL, "/project_ecommerce/", "", "All")#>
 
                 <cfif structKeyExists(URL, "logout")>
-                    <cfset createObject( "component", "authentication").doLogout()>
+                    <cfset createObject( "component", "Controller.authentication").doLogout()>
 
                 </cfif>
 

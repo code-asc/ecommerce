@@ -27,13 +27,13 @@
     <body>
 
         <cfif structKeyExists(url, "photoID")>
-            <cfinvoke method="deleteFromDatabase" component="adminData" photoID=#url.photoID#/>
+            <cfinvoke method="deleteFromDatabase" component="Controller.adminData" photoID=#url.photoID#/>
             <cflocation url=#session.previousURL# />
         </cfif>
 
         <cfif structKeyExists(url, "buyNow")>
 
-            <cfinvoke method="getAddressInProductPage" component="addressEntry" returnvariable="addressquery">
+            <cfinvoke method="getAddressInProductPage" component="Controller.addressEntry" returnvariable="addressquery">
 
                 <cfinclude template="header.cfm" />
                 <div class="container-fluid">
@@ -86,8 +86,8 @@
                         <cfset session.currentURL=#replace(session.currentURL, "/project_ecommerce/", "", "All")#>
 
                             <div class="container">
-                                <cfinvoke method="getProducts" component="retriveProduct" productID=#url.productID# returnvariable="retriveProduct">
-                                    <cfinvoke method="similarProducts" component="retriveProduct" subCategoryID=#retriveProduct.subCategoryID# productID=#retriveProduct.productID# returnvariable="suggestProduct">
+                                <cfinvoke method="getProducts" component="Controller.retriveProduct" productID=#url.productID# returnvariable="retriveProduct">
+                                    <cfinvoke method="similarProducts" component="Controller.retriveProduct" subCategoryID=#retriveProduct.subCategoryID# productID=#retriveProduct.productID# returnvariable="suggestProduct">
 
                                         <cfif (structKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com') AND NOT retriveProduct.recordCount EQ 1>
                                             <cflocation url=#session.previousURL# />

@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 
     $.ajax({
-      url:'authentication.cfc?method=incrementQuantity',
+      url:'/Controller/authentication.cfc?method=incrementQuantity',
       data:{id:JSON.stringify(detailID) },
       success:function(responseText)
       {

@@ -4,10 +4,10 @@ $(document).ready(function(){
   var brandName;
   var photoID;
   var productName;
-  
+
   $("#products").find("option").remove();
   $("#products").append("<option selected disabled>Products</option>");
-  $.ajax({url:'adminData.cfc?method=getProduct',
+  $.ajax({url:'/Controller/adminData.cfc?method=getProduct',
 data:{subCategoryID:$(this).val()},
 success:function(responseText)
 {

@@ -25,7 +25,7 @@
     <cfinclude template="header.cfm" />
 
     <cfif StructKeyExists(form, "submit")>
-        <cfset authenticationService=createObject( "component", "authentication")>
+        <cfset authenticationService=createObject( "component", "Controller.authentication")>
             <cfset aErrorMessage=authenticationService.validateUser(form.email,form.password)>
                 <cfif arrayIsEmpty(aErrorMessage)>
                     <cfset isUserLoggedIn=authenticationService.doLogin(form.email,form.password)>

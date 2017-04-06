@@ -22,7 +22,7 @@ function submitEditProductAJAXCall()
   var productDesc=$("#productDesc").val();
 
   $.ajax({
-    url:"adminData.cfc?method=editProductRemote",
+    url:"/Controller/adminData.cfc?method=editProductRemote",
     data:{productID:productID,productDesc:productDesc,unitPrice:unitPrice,unitInStock:stock,discount:discount,thumbNailPhoto:thumbNail,largePhoto:largePhoto},
     success:function(responseText){
       if(responseText==1){

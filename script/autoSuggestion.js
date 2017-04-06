@@ -2,7 +2,7 @@ $(document).ready(function(){
   var brand=[];
   var i=0;
   $.ajax({
-    url:"authentication.cfc",
+    url:"/Controller/authentication.cfc",
     data:{method:"getAllBrand"},
     success:function(responseText){
     console.log(responseText);
@@ -18,5 +18,5 @@ $(document).ready(function(){
 
     }
   })
-  $("#getSuggestion").autocomplete({source:brand});  
+  $("#getSuggestion").autocomplete({source:brand});
 });

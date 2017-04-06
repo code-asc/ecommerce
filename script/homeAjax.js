@@ -2,6 +2,7 @@
 $(document).ready(function()
 {
 addImageToCarousel();
+
 addThumbNailImageToHome();
 });
 
@@ -9,7 +10,7 @@ addThumbNailImageToHome();
 var addImageToCarousel=function()
 {
   var i=0;
-  var data=$.xResponse("authentication.cfc","homePageContent");
+  var data=$.xResponse("/Controller/authentication.cfc","homePageContent");
   var JSONdata=JSON.parse(data);
   $.each(JSONdata,function(key,val)
 {
@@ -35,7 +36,7 @@ var addThumbNailImageToHome= function()
   var brandID=0;
   var path=null;
   var subCategoryID=0;
-  var data=$.xResponse("authentication.cfc","homePageThumbNailInfo");
+  var data=$.xResponse("/Controller/authentication.cfc","homePageThumbNailInfo");
   var JSONdata=JSON.parse(data);
   $.each(JSONdata,function(index,item)
 {

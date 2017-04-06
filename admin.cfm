@@ -36,9 +36,9 @@
       Brands.brandID=Products.brandID
     </cfquery>
 --->
-        <cfinvoke component="adminDashBoard" method="highestSaleProduct" returnvariable="highestPopular">
-            <cfinvoke component="adminDashBoard" method="countryStatus" returnvariable="countrySale">
-                <cfinvoke component="adminDashBoard" method="allDetails" returnvariable="stData">
+        <cfinvoke component="Controller.adminDashBoard" method="highestSaleProduct" returnvariable="highestPopular">
+            <cfinvoke component="Controller.adminDashBoard" method="countryStatus" returnvariable="countrySale">
+                <cfinvoke component="Controller.adminDashBoard" method="allDetails" returnvariable="stData">
 
                     <body>
                         <cfinclude template="header.cfm">
