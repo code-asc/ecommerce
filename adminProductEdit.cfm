@@ -181,5 +181,4 @@
     <script src="./script/adminValidate.js"></script>
     <script src="./script/adminSearchAndEditAjax.js"></script>
 </body>
-
 </html>

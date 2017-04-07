@@ -87,5 +87,4 @@
     <script src="./script/adminValidate.js"></script>
     <script src="./script/adminOther.js"></script>
 </body>
-
 </html>

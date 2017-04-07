@@ -26,10 +26,8 @@
             <cflocation url="signin.cfm" />
             <cfelse>
 
-                <cfquery name="checkaddressquery">
-                    select addressID from Address where userID=
-                    <cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-                </cfquery>
+                
+                <cfinvoke method="getAddressOfUser" component="Controller.addressEntry" returnvariable="checkaddressquery" />
                 <cfif checkaddressquery.recordCount EQ 1>
 
                     <cfoutput>

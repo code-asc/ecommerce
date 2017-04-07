@@ -41,12 +41,7 @@
                 <cfparam name="total" default=0>
                     <div class="container">
                         <cfif structKeyExists(session, "stLoggedInUser")>
-                            <cfquery name="retrivecart">
-                                select Brands.brandName,OrderDetails.detailProductID,OrderDetails.quantity,Products.supplierID,OrderDetails.detailID,ProductPhoto.thumbNailPhoto,Products.afterDiscount,Products.productName,OrderDetails.supplierID,Supplier.supplierName,OrderDetails.status from OrderDetails inner join Products on Products.productID=OrderDetails.detailProductID inner join ProductPhoto on Products.photoID=ProductPhoto.photoID inner join Supplier on Products.supplierID=Supplier.supplierID inner join Brands on Products.brandID=Brands.brandID where OrderDetails.userID=
-                                <cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-                                    AND OrderDetails.status=
-                                    <cfqueryparam value="addedToCart" cfsqltype="cf_sql_varchar">
-                            </cfquery>
+                          <cfinvoke method="cartDetails" component="Controller.orderDetails" status="addedToCart" returnvariable="retrivecart" >
 
                             <!---<cfdump var="#retrivecart#">--->
 

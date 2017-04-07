@@ -27,30 +27,15 @@
     <cfset session.currentURL=#cgi.SCRIPT_NAME#>
         <cfset session.currentURL=#replace(session.currentURL, "/project_ecommerce/", "", "All")#>
             <cfset session.currentURL=#session.currentURL#& "?brand="&#url.brand#>
-
-
-
+              <cfset LOCAL.searchProductInfo=createObject("component","Controller.retriveProduct")>
+                <cfif structKeyExists(url, "brand")>
+                <cfset LOCAL.retriveProduct=LOCAL.searchProductInfo.productsForSearchPage(url.brand)>
+                  <cfelse>
+                      <cfset LOCAL.retriveProduct=LOCAL.searchProductInfo.productsForSearchPage()>
+                </cfif>
+                <cfset LOCAL.retriveBrand=LOCAL.searchProductInfo.getProductBrand(LOCAL.retriveProduct.subCategoryID)>
                 <div class="container-fluid">
                     <div class="row">
-                        <cfquery name="retriveProduct">
-                            select Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products inner join ProductPhoto on Products.photoID=ProductPhoto.photoID inner join Brands on Products.brandID=Brands.brandID where Products.subCategoryID IN (
-                            <cfqueryparam value="1,2,3,11" cfsqltype="cf_sql_integer" list="true">)
-
-                                <cfif structKeyExists(url, "brand")>
-                                    <cfoutput>
-                                        AND Brands.brandName LIKE
-                                        <cfqueryparam value="%#url.brand#%" cfsqltype="cf_sql_varchar">
-                                    </cfoutput>
-                                </cfif>
-
-                        </cfquery>
-
-                        <cfquery name="retriveBrand">
-                            select DISTINCT Brands.brandName,Brands.brandID from Products inner join ProductPhoto on Products.photoID=ProductPhoto.photoID inner join Brands on Products.brandID=Brands.brandID where Products.subCategoryID IN (
-                            <cfqueryparam value="1,2,3,11" cfsqltype="cf_sql_integer" list="true">) ORDER BY Brands.brandName ASC
-
-                        </cfquery>
-
                         <form>
                             <div class="col-md-2 col-sm-2 col-xm-2 col-lg-2" style="margin-bottom:200px">
                                 <div class="panel panel-primary behclick-panel" style="margin-bottom:500px">
@@ -62,13 +47,13 @@
                                             <h4 class="panel-title"><a href="#collapse0" data-toggle="collapse"><i class="fa fa-caret-down" aria-hidden="true"></i>&nbsp Brand</a></h4>
                                         </div>
                                         <div id="collapse0" class="panel-collapse collapse in">
-                                            <cfoutput query="retriveBrand">
-                                                <cfset brand=#retriveBrand.brandID#>
+                                            <cfoutput query="LOCAL.retriveBrand">
+                                                <cfset brand=#LOCAL.retriveBrand.brandID#>
                                                     <ul class="list-group">
                                                         <li class="list-group-item">
                                                             <div class="checkbox">
                                                                 <label>
-                                                                    <input type="checkbox" value='#brand#' name="checkBrand" class="checkBrand"> #retriveBrand.brandName#
+                                                                    <input type="checkbox" value='#brand#' name="checkBrand" class="checkBrand"> #LOCAL.retriveBrand.brandName#
                                                                 </label>
                                                             </div>
                                                         </li>
@@ -106,45 +91,7 @@
                                             </ul>
                                         </div>
 
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title"><a href="#collapse2" data-toggle="collapse"><i class="fa fa-caret-down" aria-hidden="true"></i>&nbsp Category</a></h4>
-                                        </div>
-                                        <div id="collapse2" class="panel-collapse collapse in">
 
-                                            <ul class="list-group">
-                                                <li class="list-group-item">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="Men-TopWear" name="checkCategory" class="checkCategory"> Men-TopWear
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="Men-BottomWear" name="checkCategory" class="checkCategory"> Men-BottomWear
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="Women-IndianWear" name="checkCategory" class="checkCategory"> Women-IndianWear
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="Women-WesternWear" name="checkCategory" class="checkCategory"> Women-WesternWear
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                      
                                     </div>
                                 </div>
                             </div>
@@ -152,25 +99,25 @@
                         </form>
 
                         <div id="filterTarget">
-                            <cfloop query="retriveProduct">
+                            <cfloop query="LOCAL.retriveProduct">
                                 <cfoutput>
 
                                     <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left">
 
-                                        <a href="user_action_single.cfm?productID=#retriveProduct.productID#">
-                                            <div class="itemthumb"><img src="#retriveProduct.thumbNailPhoto#" class="img-responsive"></div>
+                                        <a href="user_action_single.cfm?productID=#LOCAL.retriveProduct.productID#">
+                                            <div class="itemthumb"><img src="#LOCAL.retriveProduct.thumbNailPhoto#" class="img-responsive"></div>
                                         </a>
                                         <br/>
-                                        <strong>#retriveProduct.brandName#</strong>
+                                        <strong>#LOCAL.retriveProduct.brandName#</strong>
                                         <p>
-                                            <cfif retriveProduct.discount GT 0>
-                                                <strike>Rs.#retriveProduct.unitPrice#</strike>
-                                                <strong>Rs.#LsNumberFormat(precisionEvaluate(retriveProduct.unitPrice-(retriveProduct.unitPrice*(retriveProduct.discount/100))),"0.00")#</strong>
-                                                <h5>(#retriveProduct.discount#% <i>Off</i>)<h5>
-        <span class="label label-info">#retriveProduct.productName#</span>
+                                            <cfif LOCAL.retriveProduct.discount GT 0>
+                                                <strike>Rs.#LOCAL.retriveProduct.unitPrice#</strike>
+                                                <strong>Rs.#LsNumberFormat(precisionEvaluate(LOCAL.retriveProduct.unitPrice-(LOCAL.retriveProduct.unitPrice*(LOCAL.retriveProduct.discount/100))),"0.00")#</strong>
+                                                <h5>(#LOCAL.retriveProduct.discount#% <i>Off</i>)<h5>
+        <span class="label label-info">#LOCAL.retriveProduct.productName#</span>
         <cfelse>
-          <strong>Rs.#retriveProduct.unitPrice#</strong>
-          <div class="label label-success">#retriveProduct.productName#</div>
+          <strong>Rs.#LOCAL.retriveProduct.unitPrice#</strong>
+          <div class="label label-success">#LOCAL.retriveProduct.productName#</div>
       </cfif></p>
 
   </div>

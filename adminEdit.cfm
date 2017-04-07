@@ -22,15 +22,12 @@
 </head>
 
 <body>
-
+  <cfset LOCAL.productAddOption=createObject("component","Controller.getProductIDList")>
     <cfif structKeyExists(session, "stLoggedInUser")>
         <cfif structKeyExists(form, "submitEdit") AND StructKeyExists(form, "products")>
             <cfinvoke component="Controller.adminData" method="editProduct" productID=#form.products# productDesc="#form.productDesc#" unitPrice=#form.unitPrice# unitInStock=#form.unitInStock# discount=#form.discount# thumbNailPhoto="#form.thumbNailPhoto#" largePhoto="#form.largePhoto#" />
         </cfif>
-
-        <cfquery name="categoryquery">
-            select categoryID , categoryType from Category
-        </cfquery>
+        <cfset LOCAL.categoryOption=LOCAL.productAddOption.getOnlyCategory()>
 
         <body>
             <cfinclude template="header.cfm">
@@ -50,8 +47,8 @@
                                             <div class="form-group">
                                                 <select name="category" id="category" class="form-control" form="formEdit">
                                                     <option selected disabled>select Category</option>
-                                                    <cfoutput query="categoryquery">
-                                                        <option value=#categoryquery.categoryID#>#categoryquery.categoryType#</option>
+                                                    <cfoutput query="LOCAL.categoryOption">
+                                                        <option value=#LOCAL.categoryOption.categoryID#>#LOCAL.categoryOption.categoryType#</option>
                                                     </cfoutput>
                                                 </select>
                                             </div>

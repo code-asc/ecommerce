@@ -24,7 +24,26 @@ set unitInStock=unitInStock-#arrayOfItems[i][2]#
 where productID=#arrayOfItems[i][1]#
 </cfquery>
 </cfloop>
+</cffunction>
 
+<cffunction name="getOnlyCategory" output="false" returntype="query" access="public">
+  <cfset LOCAL.categoryOption=variables.productDetail.retriveOnlyCategory()>
+    <cfreturn LOCAL.categoryOption/>
+</cffunction>
+
+<cffunction name="getOnlyBrand" output="false" returntype="query" access="public">
+  <cfset LOCAL.brandOption=variables.productDetail.retriveOnlyBrand()>
+    <cfreturn LOCAL.brandOption/>
+</cffunction>
+
+<cffunction name="getOnlyShipping" output="false" returntype="query" access="public">
+  <cfset LOCAL.shippingOption=variables.productDetail.retriveOnlyShipping()>
+    <cfreturn LOCAL.shippingOption/>
+</cffunction>
+
+<cffunction name="getOnlySupplier" output="false" returntype="query" access="public">
+  <cfset LOCAL.supplierOption=variables.productDetail.retriveOnlySupplier()>
+    <cfreturn LOCAL.supplierOption/>
 </cffunction>
 
 </cfcomponent>

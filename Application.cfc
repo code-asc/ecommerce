@@ -1,4 +1,5 @@
 <cfcomponent>
+  
 <cfset this.name="application_2_1_1">
 <cfset this.wsChannels=[{name="world" ,cfcListener="myChannelListener"}]>
 <cfset this.datasource="ecommerece">

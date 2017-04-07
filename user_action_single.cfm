@@ -26,7 +26,7 @@
 
     <body>
 
-        <cfif structKeyExists(url, "photoID")>
+        <cfif structKeyExists(url, "photoID") AND IsNumeric(#url.photoID#)>
             <cfinvoke method="deleteFromDatabase" component="Controller.adminData" photoID=#url.photoID#/>
             <cflocation url=#session.previousURL# />
         </cfif>
@@ -86,38 +86,39 @@
                         <cfset session.currentURL=#replace(session.currentURL, "/project_ecommerce/", "", "All")#>
 
                             <div class="container">
-                                <cfinvoke method="getProducts" component="Controller.retriveProduct" productID=#url.productID# returnvariable="retriveProduct">
-                                    <cfinvoke method="similarProducts" component="Controller.retriveProduct" subCategoryID=#retriveProduct.subCategoryID# productID=#retriveProduct.productID# returnvariable="suggestProduct">
-
-                                        <cfif (structKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com') AND NOT retriveProduct.recordCount EQ 1>
+                              <cfif StructKeyExists(url, "productID") AND IsNumeric(#url.productID#)>
+                                <cfset LOCAL.productQuery=createObject("component","Controller.retriveProduct")>
+                                  <cfset LOCAL.retriveProduct=LOCAL.productQuery.getProducts(url.productID)>
+                                    <cfif LOCAL.retriveProduct.recordCount GT 0>
+                                        <cfif (structKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com') AND NOT LOCAL.retriveProduct.recordCount EQ 1>
                                             <cflocation url=#session.previousURL# />
                                         </cfif>
 
-                                        <cfset session.currentURL=#session.currentURL#& "?productID="&#retriveProduct.productID#>
-                                            <cfset session.productID=#retriveProduct.productID#>
+                                        <cfset session.currentURL=#session.currentURL#& "?productID="&#LOCAL.retriveProduct.productID#>
+                                            <cfset session.productID=#LOCAL.retriveProduct.productID#>
                                                 <!---<cfdump var="#session.productID#">--->
                                                 <cfoutput>
                                                     <div class="row">
 
                                                         <div class="col-md-4 col-sm-4 col-xm-4 col-lg-6" style="float:left">
-                                                            <img src="#retriveProduct.largePhoto#" alt="image not found" class="img-responsive">
+                                                            <img src="#LOCAL.retriveProduct.largePhoto#" alt="image not found" class="img-responsive">
                                                         </div>
 
                                                         <div class="col-md-4 col-sm-4 col-xm-4 col-lg-4">
-                                                            <h3>#retriveProduct.brandName# #retriveProduct.productName#</h3>
-                                                            <cfif retriveProduct.discount GT 0>
-                                                                <strike>Rs.#retriveProduct.unitPrice#</strike>
-                                                                <strong>Rs.#LsNumberFormat(precisionEvaluate(retriveProduct.unitPrice-(retriveProduct.unitPrice*(retriveProduct.discount/100))),"0.00")#</strong>
-                                                                <h4>(#retriveProduct.discount#% OFF)</h4> #retriveProduct.productName#
+                                                            <h3>#LOCAL.retriveProduct.brandName# #LOCAL.retriveProduct.productName#</h3>
+                                                            <cfif LOCAL.retriveProduct.discount GT 0>
+                                                                <strike>Rs.#LOCAL.retriveProduct.unitPrice#</strike>
+                                                                <strong>Rs.#LsNumberFormat(precisionEvaluate(LOCAL.retriveProduct.unitPrice-(LOCAL.retriveProduct.unitPrice*(LOCAL.retriveProduct.discount/100))),"0.00")#</strong>
+                                                                <h4>(#LOCAL.retriveProduct.discount#% OFF)</h4> #LOCAL.retriveProduct.productName#
                                                                 <cfelse>
-                                                                    <strong>Rs.#retriveProduct.unitPrice#</strong>
-                                                                    <br/> #retriveProduct.productName#
+                                                                    <strong>Rs.#LOCAL.retriveProduct.unitPrice#</strong>
+                                                                    <br/> #LOCAL.retriveProduct.productName#
                                                             </cfif>
                                                             </p>
                                                             <strong class="label label-primary">Product Info</strong>
-                                                            <br/> #retriveProduct.productDesc#
+                                                            <br/> #LOCAL.retriveProduct.productDesc#
                                                             <cfif StructKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
-                                                                <h4>(Left :#retriveProduct.unitInStock#)</h4></cfif>
+                                                                <h4>(Left :#LOCAL.retriveProduct.unitInStock#)</h4></cfif>
                                                             <br/>
                                                         </div>
 
@@ -132,7 +133,7 @@
 
                                                                     <!--- Condition for admin --->
                                                                     <cfif NOT session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
-                                                                        <cfif retriveProduct.unitInStock GT 0>
+                                                                        <cfif LOCAL.retriveProduct.unitInStock GT 0>
                                                                             <a class="btn btn-success" href="user_action_single.cfm?buyNow"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</a>
                                                                             <cfelse>
                                                                                 <button class="btn btn-warning" disabled="true">No Stock</button>
@@ -142,7 +143,7 @@
                                                                         <cfelse>
 
                                                                             <a class="btn btn-primary" href="adminProductEdit.cfm?productID=#url.productID#"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
-                                                                            <a class="btn btn-danger" href="user_action_single.cfm?photoID=#retriveProduct.photoID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
+                                                                            <a class="btn btn-danger" href="user_action_single.cfm?photoID=#LOCAL.retriveProduct.photoID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
 
                                                                     </cfif>
                                                             </cfif>
@@ -158,26 +159,35 @@
                                                 <!---Similar Products --->
 
                                                 <div class="row" style="margin-top:35px;margin-bottom:40px;border-top:1px solid #eaeaec">
-                                                    <cfif NOT isNull(suggestProduct)>
+                                                  <cfif LOCAL.retriveProduct.recordCount GT 0>
+                                                    <cfset LOCAL.suggestProduct=LOCAL.productQuery.similarProducts(subCategoryID=#LOCAL.retriveProduct.subCategoryID#,productID=#LOCAL.retriveProduct.productID#)>
+
+                                                    <cfif NOT isNull(LOCAL.suggestProduct)>
                                                         <h4>Similar Products</h4>
 
-                                                        <cfoutput query="suggestProduct">
+                                                        <cfoutput query="LOCAL.suggestProduct">
                                                             <div class="col-sm-3 col-md-3 col-xs-2">
-                                                                <a href="user_action_single.cfm?productID=#suggestProduct.productID#">
-                                                                    <div class="itemthumb"> <img src="#suggestProduct.thumbNailPhoto#" class="img-responsive"></div>
+                                                                <a href="user_action_single.cfm?productID=#LOCAL.suggestProduct.productID#">
+                                                                    <div class="itemthumb"> <img src="#LOCAL.suggestProduct.thumbNailPhoto#" class="img-responsive"></div>
                                                                 </a>
                                                                 <br/>
-                                                                <strong style="color:black">#suggestProduct.brandName#</strong>
+                                                                <strong style="color:black">#LOCAL.suggestProduct.brandName#</strong>
                                                                 <br/>
-                                                                <cfif retriveProduct.discount GT 0>
-                                                                    <strike>Rs.#retriveProduct.unitPrice#</strike>
-                                                                    <p><strong>Rs.#LsNumberFormat(precisionEvaluate(suggestProduct.unitPrice-(suggestProduct.unitPrice*(suggestProduct.discount/100))),"0.00")#</strong></p>
-                                                                    <h5>(#retriveProduct.discount#% <i>Off</i>)<h5>
+                                                                <cfif LOCAL.retriveProduct.discount GT 0>
+                                                                    <strike>Rs.#LOCAL.retriveProduct.unitPrice#</strike>
+                                                                    <p><strong>Rs.#LsNumberFormat(precisionEvaluate(LOCAL.suggestProduct.unitPrice-(LOCAL.suggestProduct.unitPrice*(LOCAL.suggestProduct.discount/100))),"0.00")#</strong></p>
+                                                                    <h5>(#LOCAL.retriveProduct.discount#% <i>Off</i>)<h5>
   <cfelse>
-    <strong>Rs.#suggestProduct.unitPrice#</strong>
+    <strong>Rs.#LOCAL.suggestProduct.unitPrice#</strong>
 </cfif>
 </div>
     </cfoutput>
+</cfif>
+</cfif>
+</div>
+<cfelse>
+  <p>No product available</p>
+</cfif>
 </cfif>
 </div>
 

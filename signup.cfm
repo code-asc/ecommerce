@@ -105,5 +105,4 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
     <script src="./script/validateClientTest.js"></script>
 </body>
-
 </html>

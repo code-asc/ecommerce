@@ -43,6 +43,11 @@
 </cfif>
 </cffunction>
 
+<cffunction name="getAddressOfUser" returntype="query" output="false" access="public">
+<cfset LOCAL.addressResult=variables.addOrUpdateAddress.searchUserAddressQuery()>
+  <cfreturn LOCAL.addressResult>
+</cffunction>
+
 <cffunction name="getAddressInProductPage" access="public" output="false" returntype="query">
 <cftry>
   <cfset LOCAL.addressquery=variables.addOrUpdateAddress.getAddressQuery()>

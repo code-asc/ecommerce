@@ -28,22 +28,11 @@
     </head>
 
     <cfif structKeyExists(session, "stLoggedInUser") AND session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
-
-        <cfquery name="fieldquery">
-            select Category.categoryID , Category.categoryType from Category
-        </cfquery>
-
-        <cfquery name="brandquery">
-            select Brands.brandID , Brands.brandName from Brands
-        </cfquery>
-
-        <cfquery name="shippingquery">
-            select ShippingDetails.shippingID , ShippingDetails.companyName from ShippingDetails
-        </cfquery>
-
-        <cfquery name="supplierquery">
-            select Supplier.supplierID , Supplier.supplierName from Supplier
-        </cfquery>
+      <cfset LOCAL.productAddOption=createObject("component","Controller.getProductIDList")>
+        <cfset LOCAL.categoryOption=LOCAL.productAddOption.getOnlyCategory()>
+        <cfset LOCAL.brandOption=LOCAL.productAddOption.getOnlyBrand()>
+          <cfset LOCAL.shippingOption=LOCAL.productAddOption.getOnlyShipping()>
+            <cfset LOCAL.supplierOption=LOCAL.productAddOption.getOnlySupplier()>
 
         <body>
             <cfinclude template="header.cfm">
@@ -68,8 +57,8 @@
                                             <div class="form-group">
                                                 <select name="brand" id="brand" class="form-control" form="formOption">
                                                     <option selected disabled>Brand</option>
-                                                    <cfoutput query="brandquery">
-                                                        <option value=#brandquery.brandID#>#brandquery.BrandName#</option>
+                                                    <cfoutput query="LOCAL.brandOption">
+                                                        <option value=#LOCAL.brandOption.brandID#>#LOCAL.brandOption.BrandName#</option>
                                                     </cfoutput>
                                                 </select>
                                             </div>
@@ -79,8 +68,8 @@
                                             <div class="form-group">
                                                 <select name="category" id="category" class="form-control" form="formOption">
                                                     <option selected disabled>Category Type</option>
-                                                    <cfoutput query="fieldquery">
-                                                        <option value=#fieldquery.categoryID#>#fieldquery.categoryType#</option>
+                                                    <cfoutput query="LOCAL.categoryOption">
+                                                        <option value=#LOCAL.categoryOption.categoryID#>#LOCAL.categoryOption.categoryType#</option>
                                                     </cfoutput>
                                                 </select>
                                             </div>
@@ -90,8 +79,8 @@
                                             <div class="form-group">
                                                 <select name="shipping" id="shipping" class="form-control" form="formOption">
                                                     <option selected disabled>Shipping</option>
-                                                    <cfoutput query="shippingquery">
-                                                        <option value=#shippingquery.shippingID#>#shippingquery.companyName#</option>
+                                                    <cfoutput query="LOCAL.shippingOption">
+                                                        <option value=#LOCAL.shippingOption.shippingID#>#LOCAL.shippingOption.companyName#</option>
                                                     </cfoutput>
                                                 </select>
                                             </div>
@@ -101,8 +90,8 @@
                                             <div class="form-group">
                                                 <select name="supplier" id="supplier" class="form-control" form="formOption">
                                                     <option selected disabled>Supplier</option>
-                                                    <cfoutput query="supplierquery">
-                                                        <option value=#supplierquery.supplierID#>#supplierquery.supplierName#</option>
+                                                    <cfoutput query="LOCAL.supplierOption">
+                                                        <option value=#LOCAL.supplierOption.supplierID#>#LOCAL.supplierOption.supplierName#</option>
                                                     </cfoutput>
                                                 </select>
                                             </div>

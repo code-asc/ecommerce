@@ -23,11 +23,7 @@
         <cfinvoke method="deleteFromDatabase" component="Controller.adminData" photoID=#form.products#/>
 
     </cfif>
-
-    <cfquery name="categoryquery">
-        select categoryID , categoryType from Category
-
-    </cfquery>
+      <cfinvoke method="getOnlyCategory" component="Controller.getProductIDList" returnvariable="categoryquery" />
 
     <body>
         <cfinclude template="header.cfm">

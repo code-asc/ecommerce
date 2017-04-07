@@ -22,7 +22,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <cfinclude template="header.cfm" />
 <div class="container">
-  <p>Processing...</p>
+  <p>Processing....</p>
 </div>
 <cfelse>
   <cflocation url="index.cfm" />

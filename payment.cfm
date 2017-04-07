@@ -48,7 +48,6 @@
                                     <cfset structDelete(form, "submit")>
                                         <cfset session.repeat=false>
                 </cfif>
-
                 <!--- Allow user to set default address in other Address option --->
                 <cfif structKeyExists(form, "setDefault")>
                     <cfset session.setDifferentAddress=false>

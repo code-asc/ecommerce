@@ -36,6 +36,7 @@
       Brands.brandID=Products.brandID
     </cfquery>
 --->
+
   <cfset LOCAL.adminDashBoardInfo=createObject("component","Controller.adminDashBoard")>
   <cfset LOCAL.highestPopular=LOCAL.adminDashBoardInfo.highestSaleProduct()>
   <cfset LOCAL.countrySale=LOCAL.adminDashBoardInfo.countryStatus()>

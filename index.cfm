@@ -39,8 +39,7 @@
 
                 <cfif structKeyExists(URL, "logout")>
                     <cfset createObject( "component", "Controller.authentication").doLogout()>
-
-                </cfif>
+                    </cfif>
 
                 <div class="container-fluid" id="changeMargin">
                     <div class="row">
