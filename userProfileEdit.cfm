@@ -23,10 +23,11 @@
     </head>
 
     <body>
-
+<cfset LOCAL.userProfile=createObject("component","Controller.userInfo")>
         <cfif structKeyExists(session, "stLoggedInUser")>
 
             <cfif StructKeyExists(form, "submitUserEdit")>
+
                 <cfoutput>
                     <cfif structKeyExists(form, "profilePhoto") AND len(form.profilePhoto) GT 0>
                         <cfif directoryExists( "D:\project_ecommerece\usersInfo\ProfileImage\#session.stLoggedInUser.userEmail#")>
@@ -40,16 +41,18 @@
                         <cffile action="upload" filefield="profilePhoto" destination="D:\project_ecommerece\usersInfo\ProfileImage\#session.stLoggedInUser.userEmail#\" nameConflict="override" />
 
                         <!---<cffile action="rename" source="D:\project_ecommerece\usersInfo\ProfileImage\#session.stLoggedInUser.userEmail#\#cffile.ServerFileName#.#cffile.ServerFileExt#" destination="D:\project_ecommerece\usersInfo\ProfileImage\#session.stLoggedInUser.userEmail#\#session.stLoggedInUser.userID#_#session.stLoggedInUser.userEmail#.#cffile.ServerFileExt#">--->
-                        <cfinvoke method="uploadUserProfilePhoto" component="Controller.userInfo" path="./usersInfo/ProfileImage/#session.stLoggedInUser.userEmail#/#cffile.ServerFileName#.#cffile.ServerFileExt#" />
+
+                        <cfset LOCAL.userProfile.uploadUserProfilePhoto(path="./usersInfo/ProfileImage/#session.stLoggedInUser.userEmail#/#cffile.ServerFileName#.#cffile.ServerFileExt#")>
                     </cfif>
                 </cfoutput>
 
                 <!---<cfinvoke component="userInfo" method="updateUserDetail" firstName="#form.firstName#" middleName="#form.middleName#" lastName="#form.lastName#" email="#form.email#" phone="#form.mobile#">--->
             </cfif>
 
-            <cfinvoke method="getUserDetail" component="Controller.userInfo" returnvariable="getquery">
+
+              <cfset LOCAL.getquery=LOCAL.userProfile.getUserDetail()>
                 <cfinclude template="header.cfm">
-                    <cfoutput query="getquery">
+                    <cfoutput query="LOCAL.getquery">
                         <div class="container">
                             <cfform enctype="multipart/form-data" id="userEditForm" name="userEditForm">
                                 <div class="row" style="border-bottom:1px solid ##eaeaec ; margin-bottom:20px ; padding-bottom:15px">
@@ -61,7 +64,7 @@
                                         <cfif len(userProfilePhoto) GT 0>
                                             <div class="row">
                                                 <div style="height: 140px;width: 140px;overflow: hidden; overflow:hidden">
-                                                    <img class="img-circle img-responsive" src="#getquery.userProfilePhoto#" alt=" ">
+                                                    <img class="img-circle img-responsive" src="#LOCAL.getquery.userProfilePhoto#" alt=" ">
                                                 </div>
                                             </div>
                                         </cfif>
@@ -85,35 +88,35 @@
                                         <div class="col-sm-8 col-md-8 col-xs-8">
                                             <label for="firstName">First Name</label>
                                             <div class="form-group">
-                                                <cfinput type="text" name="firstName" id="firstName" placeholder="First Name" class="form-control" value="#getquery.userFirstName#">
+                                                <cfinput type="text" name="firstName" id="firstName" placeholder="First Name" class="form-control" value="#LOCAL.getquery.userFirstName#">
                                             </div>
                                         </div>
 
                                         <div class="col-sm-8 col-md-8 col-xs-8">
                                             <label for="middleName">Middle Name</label>
                                             <div class="form-group">
-                                                <cfinput type="text" name="middleName" id="middleName" placeholder="Middle Name" class="form-control" value="#getquery.userMiddleName#">
+                                                <cfinput type="text" name="middleName" id="middleName" placeholder="Middle Name" class="form-control" value="#LOCAL.getquery.userMiddleName#">
                                             </div>
                                         </div>
 
                                         <div class="col-sm-8 col-md-8 col-xs-8">
                                             <label for="lastName">Last Name</label>
                                             <div class="form-group">
-                                                <cfinput type="text" name="lastName" id="lastName" placeholder="Last Name" class="form-control" value="#getquery.userLastName#">
+                                                <cfinput type="text" name="lastName" id="lastName" placeholder="Last Name" class="form-control" value="#LOCAL.getquery.userLastName#">
                                             </div>
                                         </div>
 
                                         <div class="col-sm-8 col-md-8 col-xs-8">
                                             <label for="email">Email Address</label>
                                             <div class="form-group">
-                                                <cfinput type="text" id="email" name="email" placeholder="Email" class="form-control" value="#getquery.userEmail#">
+                                                <cfinput type="text" id="email" name="email" placeholder="Email" class="form-control" value="#LOCAL.getquery.userEmail#">
                                             </div>
                                         </div>
 
                                         <div class="col-sm-8 col-md-8 col-xs-8">
                                             <label for="mobile">Mobile</label>
                                             <div class="form-group">
-                                                <cfinput type="text" id="mobile" name="mobile" placeholder="mobile" class="form-control" value="#getquery.userPhone#">
+                                                <cfinput type="text" id="mobile" name="mobile" placeholder="mobile" class="form-control" value="#LOCAL.getquery.userPhone#">
                                             </div>
                                         </div>
 
