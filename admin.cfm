@@ -36,10 +36,10 @@
       Brands.brandID=Products.brandID
     </cfquery>
 --->
-        <cfinvoke component="Controller.adminDashBoard" method="highestSaleProduct" returnvariable="highestPopular">
-            <cfinvoke component="Controller.adminDashBoard" method="countryStatus" returnvariable="countrySale">
-                <cfinvoke component="Controller.adminDashBoard" method="allDetails" returnvariable="stData">
-
+  <cfset LOCAL.adminDashBoardInfo=createObject("component","Controller.adminDashBoard")>
+  <cfset LOCAL.highestPopular=LOCAL.adminDashBoardInfo.highestSaleProduct()>
+  <cfset LOCAL.countrySale=LOCAL.adminDashBoardInfo.countryStatus()>
+  <cfset LOCAL.stData=LOCAL.adminDashBoardInfo.allDetails()>
                     <body>
                         <cfinclude template="header.cfm">
                             <cfinclude template="adminMenu.cfm">
@@ -56,11 +56,11 @@
                                                 <div class="row">
 
                                                     <cfchart title="Most Purchased Brands" backgroundcolor="##FFFFFF" chartwidth="420">
-                                                        <cfchartseries type="pie" query="highestPopular" itemcolumn="brandName" valuecolumn="total" />
+                                                        <cfchartseries type="pie" query="LOCAL.highestPopular" itemcolumn="brandName" valuecolumn="total" />
                                                     </cfchart>
 
                                                     <cfchart title="Sale in Countries" backgroundcolor="##FFFFFF" chartwidth="421">
-                                                        <cfchartseries type="pie" query="countrySale" itemcolumn="customerCountry" valuecolumn="total" />
+                                                        <cfchartseries type="pie" query="LOCAL.countrySale" itemcolumn="customerCountry" valuecolumn="total" />
                                                     </cfchart>
                                                 </div>
 
@@ -68,7 +68,7 @@
                                                     <div class="col-md-3 col-sm-3 text-center colorBlue" id="customerInfo">
                                                         <div class="col-sm-8 col-md-8">
                                                             <cfoutput>
-                                                                <h3>#stData.customer#</h3>
+                                                                <h3>#LOCAL.stData.customer#</h3>
                                                                 <h4 class="adminHeaderInfo">Registered</h4>
                                                         </div>
                                                         <div class="col-md-3 col-sm-3" id="iTagDiv">
@@ -85,7 +85,7 @@
                                                     <div class="col-md-3 col-sm-3 text-center colorGreen" id="customerInfo">
                                                         <div class="col-sm-8 cl-md-8">
                                                             <cfoutput>
-                                                                <h3>#stData.product#</h3>
+                                                                <h3>#LOCAL.stData.product#</h3>
                                                                 <h4 class="adminHeaderInfo">Products</h4>
                                                         </div>
                                                         <div class="col-md-2 col-sm-2" id="iTagDiv">
@@ -102,7 +102,7 @@
                                                     <div class="col-md-3 col-sm-3 text-center colorShip" id="customerInfo">
                                                         <div class="col-sm-8 cl-md-8">
                                                             <cfoutput>
-                                                                <h3>#stData.shipping#</h3>
+                                                                <h3>#LOCAL.stData.shipping#</h3>
                                                                 <h4 class="adminHeaderInfo">shipping</h4>
                                                         </div>
                                                         <div class="col-md-2 col-sm-2" id="iTagDiv">
@@ -136,7 +136,7 @@
                                                     <div class="col-md-3 col-sm-3 text-center colorRed" id="customerInfo">
                                                         <div class="col-sm-8 cl-md-8">
                                                             <cfoutput>
-                                                                <h3>#stData.category#</h3>
+                                                                <h3>#LOCAL.stData.category#</h3>
                                                                 <h4 class="adminHeaderInfo">Category</h4>
                                                         </div>
                                                         <div class="col-md-2 col-sm-2" id="iTagDiv">
@@ -153,7 +153,7 @@
                                                     <div class="col-md-3 col-sm-3 text-center colorLightBlue" id="customerInfo">
                                                         <div class="col-sm-8 cl-md-8">
                                                             <cfoutput>
-                                                                <h3>#stData.subcategory#</h3>
+                                                                <h3>#LOCAL.stData.subcategory#</h3>
                                                                 <h4 class="adminHeaderInfo">SubCategory</h4>
                                                         </div>
                                                         <div class="col-md-2 col-sm-2" id="iTagDiv">

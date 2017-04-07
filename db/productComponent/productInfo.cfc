@@ -1,9 +1,10 @@
 <cfcomponent extends="db.productComponent.orderDetails" >
+
 <cffunction name="getProductInfo" output="false" access="public" returnType="query">
 <cfargument name="productID" type="numeric" required="true">
 <cftry>
   <cfquery name="productquery">
-    select  Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.unitInStock,ProductPhoto.photoID ,ProductPhoto.largePhoto,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName ,SubCategory.subCategoryType,Category.categoryType,SubCategory.subCategoryID,Category.categoryID
+    select  Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.unitInStock,ProductPhoto.photoID ,ProductPhoto.largePhoto,ProductPhoto.thumbNailPhoto ,Products.discount,Products.supplierID,Products.afterDiscount ,Brands.brandName ,SubCategory.subCategoryType,Category.categoryType,SubCategory.subCategoryID,Category.categoryID
      from Products
     inner join ProductPhoto
     on
@@ -196,4 +197,71 @@
     </cftry>
     <cfreturn retriveProduct/>
 </cffunction>
+
+<cffunction name="productInfoForFilters" returntype="query" access="public" output="false">
+  <cfargument name="brand" required="true" type="string">
+  <cfargument name="discount" required="true" type="string">
+  <cfargument name="category" required="true" type="string">
+    <cftry>
+      <cfquery name="filterquery">
+          select Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products
+          inner join ProductPhoto
+          on
+          Products.photoID=ProductPhoto.photoID
+          inner join Brands
+          on
+          Products.brandID=Brands.brandID
+          <!--- --->
+          inner join SubCategory
+          on
+          Products.subCategoryID=SubCategory.subCategoryID
+          inner join Category
+          on
+          Category.categoryID=SubCategory.categoryID
+          <!--- --->
+          where Products.subCategoryID IN (<cfqueryparam value="1,2,3,11" cfsqltype="cf_sql_integer" list="true">)
+      <cfif ArrayLen(deserializeJSON(arguments.brand)) GT 0>
+
+            AND
+            Brands.brandID IN (<cfqueryparam value=#arrayToList(deserializeJSON(arguments.brand))# list="true" cfsqltype="cf_sql_int">)
+
+            </cfif>
+
+    <cfif ArrayLen(deserializeJSON(arguments.discount)) GT 0>
+
+                  AND
+                  Products.discount IN (<cfqueryparam value=#arrayToList(deserializeJSON(arguments.discount))# list="true" cfsqltype="cf_sql_decimal">)
+            </cfif>
+
+    <cfif ArrayLen(deserializeJSON(arguments.category)) GT 0>
+
+      AND
+      Category.categoryType IN (<cfqueryparam value=#arrayToList(deserializeJSON(arguments.category))# list="true" cfsqltype="cf_sql_varchar">)
+    </cfif>
+
+        </cfquery>
+      <cfcatch type="any">
+        <cflog file="ecommerece" text="error occured in productInfo.cfc in productInfoForFilters function" application="true" >
+          <cfset emptyQuery=queryNew("productID ,productName ,productDesc ,unitPrice ,thumbNailPhoto ,discount ,brandName")>
+            <cfreturn emptyQuery>
+      </cfcatch>
+    </cftry>
+    <cfreturn filterquery/>
+</cffunction>
+
+<cffunction name="updateProductQtyOnOrder" returntype="void" output="false" access="public" >
+<cfargument name="productID" required="true" type="numeric"/>
+<cftry>
+  <cfquery name="updateproductquery">
+  update Products
+  set unitInStock=unitInStock-1
+  where
+  productID=<cfqueryparam value=#arguments.productID# cfsqltype="cf_sql_int">
+  </cfquery>
+  <cfcatch type="any">
+    <cflog file="ecommerece" text="error occured in productInfo.cfc in updateProductQtyOnOrder function" application="true" >
+   </cfcatch>
+</cftry>
+</cffunction>
+
 </cfcomponent>

@@ -21,12 +21,8 @@
 
 <body>
 
-    <cfquery name="addressquery">
-        select Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Address.addressType from Address where userID=
-        <cfqueryparam value=#session.stLoggedInUser.userID# cfsqlType="cf_sql_int">
-            AND addressType=
-            <cfqueryparam value="default" cfsqltype="cf_sql_varchar">
-    </cfquery>
+  
+    <cfinvoke method="getAddressInProductPage" component="Controller.addressEntry"  returnvariable="addressquery" />
     <cfinclude template="header.cfm" />
 
     <div class="container">

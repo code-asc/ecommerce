@@ -3,12 +3,13 @@
     <cfargument name="afterDiscount" required="true" type="numeric"/>
     <cfargument name="supplierID" required="true" type="numeric"/>
     <cfargument name="status" required="true" type="string"/>
+    <cfargument name="productID" required="false" default=#session.productID# type="numeric" />
 
 <cftry>
     <cfquery name="insertquery">
        insert into OrderDetails(detailProductID,detailPrice,supplierID,status,userID,quantity)
        values(
-       <cfqueryparam value=#session.productID# cfsqltype="cf_sql_int"> ,
+       <cfqueryparam value=#arguments.productID# cfsqltype="cf_sql_int"> ,
            <cfqueryparam value=#arguments.afterDiscount# cfsqltype="cf_sql_decimal">,
              <cfqueryparam value=#arguments.supplierID# cfsqltype="cf_sql_int">,
                <cfqueryparam value="#arguments.status#" cfsqltype="cf_sql_varchar">,

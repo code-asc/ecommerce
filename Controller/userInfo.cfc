@@ -1,22 +1,14 @@
 <cfcomponent>
+<cfset variables.userDetails=createObject("component","db.userLoginComponent.userUpdateAndGetInfo")>
 
   <cffunction name="getUserDetail" output="false" returntype="query"  access="public">
-  <cfquery name="getquery">
-    select userFirstName, userProfilePhoto,userMiddleName, userLastName, userEmail , userPhone from Customer
-    where
-    userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-  </cfquery>
-
-  <cfreturn getquery>
+<cfset LOCAL.getInfo=variables.userDetails.getUserInfo()>
+  <cfreturn LOCAL.getInfo>
   </cffunction>
 
 <cffunction name="uploadUserProfilePhoto" output="false" returntype="void" access="public">
   <cfargument name="path" required="true" type="string">
-    <cfquery name="updatequery">
-      update Customer
-      set userProfilePhoto=<cfqueryparam value="#arguments.path#" cfsqltype="cf_sql_varchar">
-      where userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-    </cfquery>
+    <cfset variables.userDetails.updateProfilePhoto(arguments.path)>
     <cfset session.stLoggedInUser.userProfilePhoto="#arguments.path#">
 </cffunction>
 
@@ -26,17 +18,8 @@
   <cfargument name="lastName" required="true" type="string">
   <cfargument name="email" required="true" type="string">
   <cfargument name="phone" required="true" type="string">
-    <cfquery name="updatequery">
-      update Customer
-      set userFirstName=<cfqueryparam value="#arguments.firstName#" cfsqltype="cf_sql_varchar">,
-        userMiddleName=<cfqueryparam value="#arguments.middleName#" cfsqltype="cf_sql_varchar">,
-        userLastName=<cfqueryparam value="#arguments.lastName#" cfsqltype="cf_sql_varchar">,
-        userEmail=<cfqueryparam value="#arguments.email#" cfsqltype="cf_sql_varchar">,
-        userPhone=<cfqueryparam value="#arguments.phone#" cfsqltype="cf_sql_varchar">
-        where
-       userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-    </cfquery>
 
+    <cfset variables.userDetails.updateUserInfo(firstName="#arguments.firstName#",middleName="#arguments.middleName#",lastName="#arguments.lastName#",email="#arguments.email#",phone="#arguments.phone#")>
     <cfset session.stLoggedInUser.userfirstName="#arguments.firstName#">
     <cfset session.stLoggedInUser.usermiddleName="#arguments.middleName#">
     <cfset session.stLoggedInUser.userlastName="#arguments.lastName#">

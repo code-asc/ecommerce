@@ -18,7 +18,7 @@
 <cffunction name="getAddressQuery" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="addressquery">
-    select Address.addressID,Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry from Address
+    select Address.addressID,Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Address.addressType from Address
     where
     userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqlType="cf_sql_int">
     AND

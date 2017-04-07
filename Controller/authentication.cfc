@@ -131,7 +131,7 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cfset LOCAL.status="addedToCart">
 
-      <cfset variables.productInfo.setOrderDetails(LOCAL.afterDiscount,LOCAL.supplierID,LOCAL.status)>
+      <cfset variables.productInfo.setOrderDetails(afterDiscount=#LOCAL.afterDiscount#,supplierID=#LOCAL.supplierID#,status=#LOCAL.status#)>
       <cfelse>
         <cfset variables.productInfo.updateOrderDetails()>
     </cfif>
