@@ -1,7 +1,7 @@
 <cfcomponent>
-<cfset variables.addBrandAndCategory=createObject("component","db.productComponent.addBrandAndCategory")>
-<cfset variables.productInfo=createObject("component","db.productComponent.productInfo")>
-<cfset variables.socketAndUserStatus=createObject("component","db.userComponent.socketNotification")>
+<cfset VARIABLES.addBrandAndCategory=createObject("component","db.productComponent.addBrandAndCategory")>
+<cfset VARIABLES.productInfo=createObject("component","db.productComponent.productInfo")>
+<cfset VARIABLES.socketAndUserStatus=createObject("component","db.userComponent.socketNotification")>
 
 <cffunction name="addToDatabase" access="remote" output="false" returnType="void">
 <cfargument name="productName" type="string" required="true">
@@ -17,19 +17,19 @@
 <cfargument name="discount" type="numeric" required="true">
 <cfargument name="rating" type="numeric" required="true">
 <cfargument name="brandID" type="numeric" required="true">
-<cfinvoke method="addProductInfoToDatabase" component="db.productComponent.productAdd" productName="#arguments.productName#" productDesc="#arguments.productDesc#" supplierID=#arguments.supplierID# subcategoryID=#arguments.subcategoryID# unitPrice=#arguments.unitPrice# thumbNail="#arguments.thumbNail#" thumbNailType="#arguments.thumbNailType#" largePhotoType="#arguments.largePhotoType#" largePhoto="#arguments.largePhoto#" quantity=#arguments.quantity# discount=#arguments.discount# rating=#arguments.rating# brandID=#arguments.brandID#/>
+<cfinvoke method="addProductInfoToDatabase" component="db.productComponent.productAdd" productName="#ARGUMENTS.productName#" productDesc="#ARGUMENTS.productDesc#" supplierID=#ARGUMENTS.supplierID# subcategoryID=#ARGUMENTS.subcategoryID# unitPrice=#ARGUMENTS.unitPrice# thumbNail="#ARGUMENTS.thumbNail#" thumbNailType="#ARGUMENTS.thumbNailType#" largePhotoType="#ARGUMENTS.largePhotoType#" largePhoto="#ARGUMENTS.largePhoto#" quantity=#ARGUMENTS.quantity# discount=#ARGUMENTS.discount# rating=#ARGUMENTS.rating# brandID=#ARGUMENTS.brandID#/>
 </cffunction>
 
 <cffunction name="deleteFromDatabase" access="public" output="false" returnType="void">
 <cfargument name="photoID" required="true" type="numeric">
-<cfinvoke method="deleteProduct" component="db.productComponent.productDelete" photoID=#arguments.photoID#>
+<cfinvoke method="deleteProduct" component="db.productComponent.productDelete" photoID=#ARGUMENTS.photoID#>
 </cffunction>
 
 
 <cffunction name="getProductInfo" output="false" access="remote" returnType="array" returnformat="JSON">
 <cfargument name="productID" type="numeric" required="true">
 
-<cfset LOCAL.productquery=variables.productInfo.getProductInfo(arguments.productID)>
+<cfset LOCAL.productquery=VARIABLES.productInfo.getProductInfo(ARGUMENTS.productID)>
 <cfset var arrayToStoreQuery=arrayNew(1)>
 
 <cfloop query="productquery">
@@ -53,7 +53,7 @@
 <cfargument name="discount" type="numeric" required="true">
 <cfargument name="thumbNailPhoto" type="string" required="true">
 <cfargument name="largePhoto" type="string" required="true">
-<cfinvoke method="productEdit" component="db.productComponent.productEdit" productID=#arguments.productID# productDesc="#arguments.productDesc#" unitPrice=#arguments.unitPrice# unitInStock=#arguments.unitInStock# discount=#arguments.discount# thumbNailPhoto="#arguments.thumbNailPhoto#" largePhoto="#arguments.largePhoto#"/>
+<cfinvoke method="productEdit" component="db.productComponent.productEdit" productID=#ARGUMENTS.productID# productDesc="#ARGUMENTS.productDesc#" unitPrice=#ARGUMENTS.unitPrice# unitInStock=#ARGUMENTS.unitInStock# discount=#ARGUMENTS.discount# thumbNailPhoto="#ARGUMENTS.thumbNailPhoto#" largePhoto="#ARGUMENTS.largePhoto#"/>
 </cffunction>
 
 <cffunction name="editProductRemote" output="false" access="remote" returnType="numeric" returnformat="JSON" >
@@ -66,7 +66,7 @@
 <cfargument name="largePhoto" type="string" required="true">
 
 <cftry>
-<cfinvoke method="productEdit" component="db.productComponent.productEdit" productID=#arguments.productID# productDesc="#arguments.productDesc#" unitPrice=#arguments.unitPrice# unitInStock=#arguments.unitInStock# discount=#arguments.discount# thumbNailPhoto="#arguments.thumbNailPhoto#" largePhoto="#arguments.largePhoto#"/>
+<cfinvoke method="productEdit" component="db.productComponent.productEdit" productID=#ARGUMENTS.productID# productDesc="#ARGUMENTS.productDesc#" unitPrice=#ARGUMENTS.unitPrice# unitInStock=#ARGUMENTS.unitInStock# discount=#ARGUMENTS.discount# thumbNailPhoto="#ARGUMENTS.thumbNailPhoto#" largePhoto="#ARGUMENTS.largePhoto#"/>
 <cfcatch type="any">
   <cfreturn 0>
 </cfcatch>
@@ -77,7 +77,7 @@
 <cffunction name="getSubCategory" output="false" access="remote" returntype="array" returnformat="JSON">
   <cfargument name="categoryID" required="true" cfsqltype="cf_sql_int">
 
-    <cfinvoke method="getSubCategoryQuery" component="db.productComponent.productSubCategoryAndBrandAndCategory" categoryID=#arguments.categoryID# returnvariable="subcategoryquery" />
+    <cfinvoke method="getSubCategoryQuery" component="db.productComponent.productSubCategoryAndBrandAndCategory" categoryID=#ARGUMENTS.categoryID# returnvariable="subcategoryquery" />
     <cfset var arrayToStoreQuery=arrayNew(1)>
 
     <cfloop query="subcategoryquery">
@@ -92,7 +92,7 @@
 <cffunction name="getProduct" output="false" access="remote" returntype="array" returnformat="JSON">
   <cfargument name="subCategoryID" required="true" type="numeric" >
 
-    <cfinvoke method="getProductQuery" component="db.productComponent.productSubCategoryAndBrandAndCategory" subCategoryID=#arguments.subCategoryID# returnvariable="productquery" />
+    <cfinvoke method="getProductQuery" component="db.productComponent.productSubCategoryAndBrandAndCategory" subCategoryID=#ARGUMENTS.subCategoryID# returnvariable="productquery" />
     <cfset var arrayToStoreQuery=arrayNew(1)>
 
     <cfloop query="productquery">
@@ -108,7 +108,7 @@
 
 <cffunction name="getProductForEdit"  output="false" access="remote" returntype="array" returnformat="JSON">
   <cfargument name="subCategoryID" required="true" type="numeric" >
-    <cfinvoke method="getProductQuery" component="db.productComponent.productSubCategoryAndBrandAndCategory" subCategoryID=#arguments.subCategoryID# returnvariable="productquery" />
+    <cfinvoke method="getProductQuery" component="db.productComponent.productSubCategoryAndBrandAndCategory" subCategoryID=#ARGUMENTS.subCategoryID# returnvariable="productquery" />
     <cfset var arrayToStoreQuery=arrayNew(1)>
 
     <cfloop query="productquery">
@@ -136,15 +136,15 @@
 
 <cffunction name="getProductBasedOnID" access="public" returntype="query" output="false">
   <cfargument name="productID" required="true" type="numeric">
-    <cfset LOCAL.retriveProduct=variables.productInfo.getProductInfo(arguments.productID)>
+    <cfset LOCAL.retriveProduct=VARIABLES.productInfo.getProductInfo(ARGUMENTS.productID)>
     <cfreturn LOCAL.retriveProduct>
 </cffunction>
 
 <cffunction name="notificationData" output="false" access="remote" returntype="array" returnformat="JSON">
 <cfargument name="content" required="true" type="string">
 
-<cfset variables.socketAndUserStatus.insertNotificationDataQuery(arguments.content)>
-  <cfset LOCAL.getquery=variables.socketAndUserStatus.getTopNotification()>
+<cfset VARIABLES.socketAndUserStatus.insertNotificationDataQuery(ARGUMENTS.content)>
+  <cfset LOCAL.getquery=VARIABLES.socketAndUserStatus.getTopNotification()>
 
 
 <cfset var arrayToStoreQuery=arrayNew(1)>
@@ -161,25 +161,25 @@
 
 <cffunction name="getNotification" output="false" access="public" returntype="query">
 
-  <cfset LOCAL.getquery=variables.socketAndUserStatus.getNotificationQuery()>
+  <cfset LOCAL.getquery=VARIABLES.socketAndUserStatus.getNotificationQuery()>
   <cfreturn LOCAL.getquery>
 </cffunction>
 
 
 <cffunction name="markAsReadNotification" output="false" access="remote" returntype="void">
 
-  <cfset variables.socketAndUserStatus.markAsReadNotificationQuery()>
+  <cfset VARIABLES.socketAndUserStatus.markAsReadNotificationQuery()>
 </cffunction>
 
 
 <cffunction name="addBrand" output="false" access="remote" returntype="void">
 <cfargument name="brandName" required="true" type="string">
-<cfset variables.addBrandAndCategory.addBrandToDatabase(arguments.brandName)>
+<cfset VARIABLES.addBrandAndCategory.addBrandToDatabase(ARGUMENTS.brandName)>
 </cffunction>
 
 <cffunction name="addCategory" output="false" access="remote" returntype="void">
 <cfargument name="categoryType" required="true" type="string">
-<cfset variables.addBrandAndCategory.addCategoryToDatabase(arguments.categoryType)>
+<cfset variables.addBrandAndCategory.addCategoryToDatabase(ARGUMENTS.categoryType)>
 </cffunction>
 
 </cfcomponent>

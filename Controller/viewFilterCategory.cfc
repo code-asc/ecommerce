@@ -1,12 +1,12 @@
 <cfcomponent>
-<cfset variables.getfilterProductInfo=createObject("component","db.productComponent.productInfo")>
+<cfset VARIABLES.getfilterProductInfo=createObject("component","db.productComponent.productInfo")>
 
 <cffunction name="filterProduct" returntype="array" output="false" access="remote" returnformat="JSON" >
 <cfargument name="brand" required="true" type="string">
 <cfargument name="discount" required="true" type="string">
 <cfargument name="category" required="true" type="string">
 
-<cfset LOCAL.filterquery=variables.getfilterProductInfo.productInfoForFilters(brand="#arguments.brand#",discount="#arguments.discount#",category="#arguments.category#")>
+<cfset LOCAL.filterquery=VARIABLES.getfilterProductInfo.productInfoForFilters(brand="#ARGUMENTS.brand#",discount="#ARGUMENTS.discount#",category="#ARGUMENTS.category#")>
     <cfset var arrayToStoreQuery=arrayNew(1)>
 
 

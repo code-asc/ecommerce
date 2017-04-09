@@ -2,8 +2,8 @@
   <cffunction name="getUserInfo" output="false" returntype="query" access="public">
     <cftry>
       <cfquery name="getquery">
-        select userFirstName, userProfilePhoto,userMiddleName, userLastName, userEmail , userPhone from Customer
-        where
+        SELECT userFirstName, userProfilePhoto,userMiddleName, userLastName, userEmail , userPhone FROM Customer
+        WHERE
         userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="any">
@@ -19,9 +19,9 @@
   <cfargument name="path" required="true" type="string">
     <cftry>
       <cfquery name="updatequery">
-        update Customer
-        set userProfilePhoto=<cfqueryparam value="#arguments.path#" cfsqltype="cf_sql_varchar">
-        where userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+        UPDATE Customer
+        SET userProfilePhoto=<cfqueryparam value="#ARGUMENTS.path#" cfsqltype="cf_sql_varchar">
+        WHERE userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="any">
         <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateProfilePhoto function" application="true" >
@@ -37,13 +37,13 @@
   <cfargument name="phone" required="true" type="string">
     <cftry>
       <cfquery name="updatequery">
-        update Customer
-        set userFirstName=<cfqueryparam value="#arguments.firstName#" cfsqltype="cf_sql_varchar">,
-          userMiddleName=<cfqueryparam value="#arguments.middleName#" cfsqltype="cf_sql_varchar">,
-          userLastName=<cfqueryparam value="#arguments.lastName#" cfsqltype="cf_sql_varchar">,
-          userEmail=<cfqueryparam value="#arguments.email#" cfsqltype="cf_sql_varchar">,
-          userPhone=<cfqueryparam value="#arguments.phone#" cfsqltype="cf_sql_varchar">
-          where
+        UPDATE Customer
+        SET userFirstName=<cfqueryparam value="#ARGUMENTS.firstName#" cfsqltype="cf_sql_varchar">,
+          userMiddleName=<cfqueryparam value="#ARGUMENTS.middleName#" cfsqltype="cf_sql_varchar">,
+          userLastName=<cfqueryparam value="#ARGUMENTS.lastName#" cfsqltype="cf_sql_varchar">,
+          userEmail=<cfqueryparam value="#ARGUMENTS.email#" cfsqltype="cf_sql_varchar">,
+          userPhone=<cfqueryparam value="#ARGUMENTS.phone#" cfsqltype="cf_sql_varchar">
+          WHERE
          userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="any">

@@ -2,8 +2,8 @@
   <cffunction name="getUsersOnline" output="false" returntype="query" access="public">
     <cftry>
       <cfquery name="onlinequery">
-        select count(userID) as totalUsers from OnlineUser
-        where
+        SELECT count(userID) AS totalUsers FROM OnlineUser
+        WHERE
         status=<cfqueryparam value="online" cfsqltype="cf_sql_varchar">
       </cfquery>
       <cfcatch type="any">
@@ -18,9 +18,9 @@
   <cffunction name="updateUserOnline" output="false" returntype="void" access="public">
   <cftry>
     <cfquery name="updatequery">
-      update  OnlineUser
-      set status='online'
-      where
+      UPDATE  OnlineUser
+      SET status='online'
+      WHERE
       userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       AND
       status=<cfqueryparam value="offline" cfsqltype="cf_sql_varchar" >

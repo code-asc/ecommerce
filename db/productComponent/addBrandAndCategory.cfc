@@ -4,8 +4,8 @@
 
 <cftry>
   <cfquery name="addquery">
-    insert into Brands(brandName)
-    values(<cfqueryparam value="#arguments.brandName#" cfsqltype="cf_sql_varchar">)
+    INSERT INTO Brands(brandName)
+    VALUES(<cfqueryparam value="#ARGUMENTS.brandName#" cfsqltype="cf_sql_varchar">)
   </cfquery>
   <cfcatch type="any">
       <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in addBrandToDatabase function" application="true" >
@@ -17,8 +17,8 @@
 <cfargument name="categoryType" required="true" type="string">
 <cftry>
   <cfquery name="addquery">
-    insert into Category(categoryType)
-    values(<cfqueryparam value="#arguments.categoryType#" cfsqltype="cf_sql_varchar">)
+    INSERT INTO Category(categoryType)
+    VALUES(<cfqueryparam value="#ARGUMENTS.categoryType#" cfsqltype="cf_sql_varchar">)
   </cfquery>
   <cfcatch type="any">
     <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in addcategoryToDatabase function" application="true" >
@@ -29,7 +29,7 @@
 <cffunction name="getBrand" returntype="query" access="public" output="false">
   <cftry>
     <cfquery name="brandquery">
-      select brandName from Brands
+      SELECT brandName FROM Brands
     </cfquery>
     <cfcatch type="any">
       <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in getBrand function" application="true" >

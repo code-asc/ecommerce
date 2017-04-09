@@ -7,7 +7,7 @@
 
 <cffunction name="cartDetails" output="false" access="public" returntype="query">
 <cfargument name="status" required="true" type="string"/>
-<cfinvoke method="productCartDetails" component="db.productComponent.productInfo" status="#arguments.status#" returnvariable="cartDetailQuery" />
+<cfinvoke method="productCartDetails" component="db.productComponent.productInfo" status="#ARGUMENTS.status#" returnvariable="cartDetailQuery" />
 <cfreturn cartDetailQuery/>
 </cffunction>
 </cfcomponent>

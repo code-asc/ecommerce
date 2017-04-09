@@ -10,25 +10,25 @@
 
 <cftry>
     <cfquery name="productupdatequery">
-    update Products
-    set productDesc=<cfqueryparam value="#arguments.productDesc#" cfsqltype="cf_sql_varchar">,
-    unitPrice=<cfqueryparam value=#arguments.unitPrice# cfsqltype="cf_sql_decimal">,
-    unitInStock=<cfqueryparam value=#arguments.unitInStock# cfsqltype="cf_sql_int">,
-    discount=<cfqueryparam value=#arguments.discount# cfsqltype="cf_sql_int">
-    where
-    productID=<cfqueryparam value=#arguments.productID# cfsqltype="cf_sql_int">
+    UPDATE Products
+    SET productDesc=<cfqueryparam value="#ARGUMENTS.productDesc#" cfsqltype="cf_sql_varchar">,
+    unitPrice=<cfqueryparam value=#ARGUMENTS.unitPrice# cfsqltype="cf_sql_decimal">,
+    unitInStock=<cfqueryparam value=#ARGUMENTS.unitInStock# cfsqltype="cf_sql_int">,
+    discount=<cfqueryparam value=#ARGUMENTS.discount# cfsqltype="cf_sql_int">
+    WHERE
+    productID=<cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int">
     </cfquery>
 
     <cfquery name="photoupdatequery">
-    update ProductPhoto
-    set thumbNailPhoto=<cfqueryparam value="#arguments.thumbNailPhoto#" cfsqltype="cf_sql_varchar">,
-       largePhoto=<cfqueryparam value="#arguments.largePhoto#" cfsqltype="cf_sql_varchar">
+    UPDATE ProductPhoto
+    SET thumbNailPhoto=<cfqueryparam value="#ARGUMENTS.thumbNailPhoto#" cfsqltype="cf_sql_varchar">,
+       largePhoto=<cfqueryparam value="#ARGUMENTS.largePhoto#" cfsqltype="cf_sql_varchar">
       from ProductPhoto
       inner join Products
       on
       Products.photoID=ProductPhoto.photoID
-      where
-      Products.productID=<cfqueryparam value=#arguments.productID# cfsqltype="cf_sql_int" >
+      WHERE
+      Products.productID=<cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int" >
     </cfquery>
 
 <cfcatch type="any">

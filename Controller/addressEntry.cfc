@@ -10,20 +10,20 @@
 <cfargument name="pincode" required="true" type="string">
 
 <cftry>
-<cfif session.repeat EQ true>
+<cfif SESSION.repeat EQ true>
 
   <cfset LOCAL.checkuserquery=variables.addOrUpdateAddress.checkUserAddress()>
 
-  <cfif LOCAL.checkuserquery.recordCount EQ 0 AND NOT structKeyExists(session,"setDifferentAddress")>
-<cfset LOCAL.returnVal=variables.addOrUpdateAddress.setAddressWithoutAddressType(arguments.country,arguments.state,arguments.city,arguments.address,arguments.address2,arguments.pincode)>
+  <cfif LOCAL.checkuserquery.recordCount EQ 0 AND NOT structKeyExists(SESSION,"setDifferentAddress")>
+<cfset LOCAL.returnVal=variables.addOrUpdateAddress.setAddressWithoutAddressType(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
 <cfreturn LOCAL.returnVal>
-  <cfelseif structKeyExists(session,"setDifferentAddress") AND session.setDifferentAddress EQ true>
-    <cfset LOCAL.returnVal=variables.addOrUpdateAddress.setAddressWithAddressType(arguments.country,arguments.state,arguments.city,arguments.address,arguments.address2,arguments.pincode)>
+  <cfelseif structKeyExists(SESSION,"setDifferentAddress") AND SESSION.setDifferentAddress EQ true>
+    <cfset LOCAL.returnVal=variables.addOrUpdateAddress.setAddressWithAddressType(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
     <cfreturn LOCAL.returnVal>
 <cfelse>
 
 <cfset variables.addOrUpdateAddress.updateAddressQuery()>
-<cfset LOCAL.returnVal=variables.addOrUpdateAddress.updateDefaultAdderssQuery(arguments.country,arguments.state,arguments.city,arguments.address,arguments.address2,arguments.pincode)>
+<cfset LOCAL.returnVal=variables.addOrUpdateAddress.updateDefaultAdderssQuery(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
 <cfreturn LOCAL.returnVal>
 </cfif>
 </cfif>

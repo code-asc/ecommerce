@@ -3,7 +3,7 @@
   <cffunction name="countCountry" output="false" returntype="query" access="public">
     <cftry>
       <cfquery name="countryquery">
-        select count(customerCountry) as total , customerCountry from Address group by customerCountry
+        SELECT count(customerCountry) AS total , customerCountry FROM Address GROUP BY customerCountry
       </cfquery>
       <cfcatch type="any">
         <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCountry function">
@@ -17,7 +17,7 @@
 <cffunction name="countCustomer" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="customerquery">
-    select count(userID) as total from Customer
+    SELECT count(userID) AS total FROM Customer
   </cfquery>
   <cfcatch type="any">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCustomer function">
@@ -31,7 +31,7 @@
 <cffunction name="countProduct" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="productquery">
-    select count(productID) as total from Products
+    SELECT count(productID) as total FROM Products
   </cfquery>
   <cfcatch type="any">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countProduct function">
@@ -45,7 +45,7 @@
 <cffunction name="countCategory" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="categoryquery">
-    select count(categoryID) as total from Category
+    SELECT count(categoryID) AS total FROM Category
   </cfquery>
   <cfcatch type="any">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCategory function">
@@ -59,7 +59,7 @@
 <cffunction name="countSubCategory" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="subcategoryquery">
-    select count(subCategoryID) as total from SubCategory
+    SELECT count(subCategoryID) as total FROM SubCategory
   </cfquery>
   <cfcatch type="any">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countSubCategory function">
@@ -73,7 +73,7 @@
 <cffunction name="countSupplier" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="supplierquery">
-    select count(supplierID) as total from Supplier
+    SELECT count(supplierID) AS total FROM Supplier
   </cfquery>
   <cfcatch type="any">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countSupplier function">
@@ -87,7 +87,7 @@
 <cffunction name="countShipping" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="shippingquery">
-    select count(shippingID) as total from ShippingDetails
+    SELECT count(shippingID) as total FROM ShippingDetails
   </cfquery>
   <cfcatch type="any">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countShipping function">

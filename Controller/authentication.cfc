@@ -1,7 +1,7 @@
 <cfcomponent>
-<cfset variables.userInfo=createObject("component","db.userLoginComponent.isUserOnline")>
-<cfset variables.productInfo=createObject("component","db.productComponent.productInfo")>
-<cfset variables.addressInfo=createObject("component","db.addressComponent.searchAndGetAddress")>
+<cfset VARIABLES.userInfo=createObject("component","db.userLoginComponent.isUserOnline")>
+<cfset VARIABLES.productInfo=createObject("component","db.productComponent.productInfo")>
+<cfset VARIABLES.addressInfo=createObject("component","db.addressComponent.searchAndGetAddress")>
 
 <cffunction name="addNewUser" output="false" access="public" returnType="array">
 
@@ -16,12 +16,12 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
 <cfif myquery.recordCount EQ 0>
 
 <cfstoredproc procedure="hash_userDetails">
-  <cfprocparam value="#form.firstName#" cfsqltype="cf_sql_varchar" />
-  <cfprocparam value="#form.middleName#" cfsqltype="cf_sql_varchar" />
-  <cfprocparam value="#form.lastName#" cfsqltype="cf_sql_varchar" />
-  <cfprocparam value="#form.email#" cfsqltype="cf_sql_varchar" />
-  <cfprocparam value="#form.password#" cfsqltype="cf_sql_varchar" />
-  <cfprocparam value="#form.mobile#" cfsqltype="cf_sql_varchar"/>
+  <cfprocparam value="#FORM.firstName#" cfsqltype="cf_sql_varchar" />
+  <cfprocparam value="#FORM.middleName#" cfsqltype="cf_sql_varchar" />
+  <cfprocparam value="#FORM.lastName#" cfsqltype="cf_sql_varchar" />
+  <cfprocparam value="#FORM.email#" cfsqltype="cf_sql_varchar" />
+  <cfprocparam value="#FORM.password#" cfsqltype="cf_sql_varchar" />
+  <cfprocparam value="#FORM.mobile#" cfsqltype="cf_sql_varchar"/>
 
 </cfstoredproc>
 
@@ -44,11 +44,11 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
 <cfargument name="userEmail" required="true" type="string">
 <cfargument name="userPassword" required="true" type="string">
   <cfset var aErrorMessage=arrayNew(1)>
-    <cfif NOT isValid("email",arguments.userEmail)>
+    <cfif NOT isValid("email",ARGUMENTS.userEmail)>
       <cfset arrayAppend(aErrorMessage,"invalid userEmail")>
     </cfif>
 
-    <cfif arguments.userPassword EQ "">
+    <cfif ARGUMENTS.userPassword EQ "">
       <cfset arrayAppend(aErrorMessage,"invalid password")>
     </cfif>
     <cfreturn aErrorMessage>
@@ -59,8 +59,8 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
 <cfargument name="userEmail" required="true" type="string">
   <cfargument name="userPassword" required="true" type="string">
 
-<cfset var loginUser=variables.userInfo.doUserLogin(arguments.userEmail,arguments.userPassword)>
-<cfset var checkStatus=variables.userInfo.checkUserOnline(loginUser.userID)>
+<cfset var loginUser=VARIABLES.userInfo.doUserLogin(ARGUMENTS.userEmail,ARGUMENTS.userPassword)>
+<cfset var checkStatus=VARIABLES.userInfo.checkUserOnline(loginUser.userID)>
 
 
      <cfif loginUser.recordCount EQ 1>
@@ -73,10 +73,10 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
        <cflogin>
          <cfloginuser name="#loginUser.userFirstName# #loginUser.userMiddleName# #loginUser.userLastName#" password="#loginUser.userPassword#" roles="customer" />
        </cflogin>
-       <cfset session.stLoggedInUser={"userFirstName"=#loginUser.userFirstName# , "userMiddleName"=#loginUser.userMiddleName# , "userLastName"=#loginUser.userLastName# , "userID"=#loginUser.userID# ,"userEmail"=#loginUser.userEmail# , "userProfilePhoto"=#loginUser.userProfilePhoto#}>
+       <cfset SESSION.stLoggedInUser={"userFirstName"=#loginUser.userFirstName# , "userMiddleName"=#loginUser.userMiddleName# , "userLastName"=#loginUser.userLastName# , "userID"=#loginUser.userID# ,"userEmail"=#loginUser.userEmail# , "userProfilePhoto"=#loginUser.userProfilePhoto#}>
 
 <!---Update status --->
-<cfset variables.userInfo.changeUserStatus()>
+<cfset VARIABLES.userInfo.changeUserStatus()>
 
 <!---to show number of items in  cart --->
 <!---<cfquery name="querycount">
@@ -95,21 +95,21 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cffunction name="doLogout" returntype="void" output="false" access="public">
 
-<cfif StructKeyExists(session, "stLoggedInUser")>
+<cfif StructKeyExists(SESSION, "stLoggedInUser")>
 <cfinvoke method="doLogoutOf" component="db.userLogoutComponent.doUserLogout">
 
-<cfset structDelete(session, "stLoggedInUser")>
-  <cfset structDelete(session,"currentURL")>
-    <cfset structDelete(session,"subCategoryID")>
-      <cfset structDelete(session,"cartCount")>
-    <cfset structClear(session)>
-<cfset structDelete(cookie,"CFID")>
-  <cfset structDelete(cookie, "CFTOKEN")>
-    <!---<cfloop collection="#cookie#" item="name">
-      <cfcookie name="#name#" value="" expires="now" />
+<cfset structDelete(SESSION, "stLoggedInUser")>
+  <cfset structDelete(SESSION,"currentURL")>
+    <cfset structDelete(SESSION,"subCategoryID")>
+      <cfset structDelete(SESSION,"cartCount")>
+    <cfset structClear(SESSION)>
+<cfset structDelete(COOKIE,"CFID")>
+  <cfset structDelete(COOKIE, "CFTOKEN")>
+    <!---<cfloop collection="#COOKIE#" item="name">
+      <cfCOOKIE name="#name#" value="" expires="now" />
     </cfloop>--->
-  <cfcookie name="CFID" value="#cookie.CFID#" expires="now"   />
-  <cfcookie name="CFTOKEN" value="#cookie.CFTOKEN#" expires="now"  />
+  <cfcookie name="CFID" value="#COOKIE.CFID#" expires="now"   />
+  <cfcookie name="CFTOKEN" value="#COOKIE.CFTOKEN#" expires="now"  />
   <cflogout />
   <cflocation url="index.cfm" addtoken="false" />
   <cfelse>
@@ -119,10 +119,10 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cffunction name="addToCart" returntype="void" output="false" access="remote">
 
-<cfset LOCAL.checkquery=variables.productInfo.getOrderDetailID("addedToCart")>
+<cfset LOCAL.checkquery=VARIABLES.productInfo.getOrderDetailID("addedToCart")>
 
   <cfif LOCAL.checkquery.recordCount EQ 0>
-      <cfset LOCAL.getproduct=variables.productInfo.getProductInfoByID()>
+      <cfset LOCAL.getproduct=VARIABLES.productInfo.getProductInfoByID()>
 
 <cfloop query="#LOCAL.getproduct#">
   <cfset LOCAL.afterDiscount=#LOCAL.getproduct.afterDiscount#>
@@ -131,20 +131,20 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cfset LOCAL.status="addedToCart">
 
-      <cfset variables.productInfo.setOrderDetails(afterDiscount=#LOCAL.afterDiscount#,supplierID=#LOCAL.supplierID#,status=#LOCAL.status#)>
+      <cfset VARIABLES.productInfo.setOrderDetails(afterDiscount=#LOCAL.afterDiscount#,supplierID=#LOCAL.supplierID#,status=#LOCAL.status#)>
       <cfelse>
-        <cfset variables.productInfo.updateOrderDetails()>
+        <cfset VARIABLES.productInfo.updateOrderDetails()>
     </cfif>
 <cfset updateCartCount()>
 </cffunction>
 
 <cffunction name="removeItemFromCart" access="public" output="false" returntype="any">
   <cfargument name="cartID" type="numeric" required="true">
-    <cfset variables.productInfo.deleteOrder(arguments.cartID)>
+    <cfset VARIABLES.productInfo.deleteOrder(ARGUMENTS.cartID)>
 <!---<cfquery name="countquery">
   select detailID from OrderDetails
   where
-  userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+  userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
     AND
     status=<cfqueryparam value="addedToCart" cfsqltype="cf_sql_varchar" >
 </cfquery>--->
@@ -155,7 +155,7 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cffunction name="homePageContent" returnType="array" access="remote" output="false" returnformat="JSON" >
 
-<cfset LOCAL.homequery=variables.productInfo.homePageLargePhoto()>
+<cfset LOCAL.homequery=VARIABLES.productInfo.homePageLargePhoto()>
 <cfset var arrayToStoreQuery=arrayNew(1)>
 
 <cfloop query="LOCAL.homequery">
@@ -170,7 +170,7 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 <cfargument name="brand" required="true" type="string">
 <cfargument name="discount" required="true" type="string">
 
-<cfset LOCAL.filterquery=variables.productInfo.getProductInfoBySubCategory(arguments.brand,arguments.discount)>
+<cfset LOCAL.filterquery=VARIABLES.productInfo.getProductInfoBySubCategory(ARGUMENTS.brand,ARGUMENTS.discount)>
     <cfset var arrayToStoreQuery=arrayNew(1)>
 
     <cfloop query="LOCAL.filterquery">
@@ -191,7 +191,7 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cffunction name="homePageThumbNailInfo" output="false" returntype="array" access="remote" returnformat="JSON" >
 
-  <cfset LOCAL.thumbnailquery=variables.productInfo.getThumbnail()>
+  <cfset LOCAL.thumbnailquery=VARIABLES.productInfo.getThumbnail()>
   <cfset var arrayToStoreQuery=arrayNew(1)>
   <cfloop query="LOCAL.thumbnailquery">
     <cfset stData=structNew()>
@@ -207,11 +207,11 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cffunction name="incrementQuantity" returntype="array" output="false" access="remote" returnformat="JSON" >
   <cfargument name="id" type="string" required="true">
-<cfset LOCAL.idValue=#deserializeJSON(arguments.id)#>
+<cfset LOCAL.idValue=#deserializeJSON(ARGUMENTS.id)#>
 
-    <cfset variables.productInfo.incrementQuantityInDatabase(LOCAL.idValue)>
+    <cfset VARIABLES.productInfo.incrementQuantityInDatabase(LOCAL.idValue)>
 
-<cfset LOCAL.getqueryof=variables.productInfo.getOrderDetailByOnlyID(LOCAL.idValue)>
+<cfset LOCAL.getqueryof=VARIABLES.productInfo.getOrderDetailByOnlyID(LOCAL.idValue)>
 <cfset var arrayToStoreQuery=arrayNew(1)>
 <cfset var arrayCall=totalPriceAndQty()>
 
@@ -229,7 +229,7 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 <cffunction name="totalPriceAndQty" returntype="array" output="false" access="public">
 
-  <cfset LOCAL.getquery=variables.productInfo.getOrderPriceAndQty()>
+  <cfset LOCAL.getquery=VARIABLES.productInfo.getOrderPriceAndQty()>
   <cfset arrayToStoreQuery=arrayNew(1)>
   <cfloop query="getquery">
         <cfset arrayAppend(arrayToStoreQuery,#LOCAL.getquery.totalCount#)>
@@ -241,10 +241,10 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 <cffunction name="decrementQuantity" returntype="array" output="false" access="remote" returnformat="JSON">
   <cfargument name="id" type="string" required="true">
 
-    <cfset LOCAL.idValue=#deserializeJSON(arguments.id)#>
-    <cfset variables.productInfo.decrementQuantityInDatabase(LOCAL.idValue)>
+    <cfset LOCAL.idValue=#deserializeJSON(ARGUMENTS.id)#>
+    <cfset VARIABLES.productInfo.decrementQuantityInDatabase(LOCAL.idValue)>
 
-    <cfset LOCAL.getqueryof=variables.productInfo.getOrderDetailByOnlyID(LOCAL.idValue)>
+    <cfset LOCAL.getqueryof=VARIABLES.productInfo.getOrderDetailByOnlyID(LOCAL.idValue)>
     <cfset var arrayToStoreQuery=arrayNew(1)>
       <cfset var arrayCall=totalPriceAndQty()>
         <cfloop query="LOCAL.getqueryof">
@@ -262,18 +262,18 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 <!--- Modifying prevoius function--->
 <cffunction name="purchaseOrder" output="false" returnType="void" access="public">
 <cfargument name="addressID" type="numeric" required="true">
-  <cfset variables.productInfo.updateOrderDetailsBasedOnStatus()>
+  <cfset VARIABLES.productInfo.updateOrderDetailsBasedOnStatus()>
 
 <!--- --->
 <cftransaction >
 
-  <cfif arguments.addressID GT 0>
-  <cfset LOCAL.identityReturnID=variables.productInfo.setOrder(arguments.addressID)>
+  <cfif ARGUMENTS.addressID GT 0>
+  <cfset LOCAL.identityReturnID=VARIABLES.productInfo.setOrder(ARGUMENTS.addressID)>
   <cfelse>
-<cfset LOCAL.addressquery=variables.addressInfo.getAddressQuery()>
-<cfset LOCAL.identityReturnID=variables.productInfo.setOrder(LOCAL.addressquery.addressID)>
+<cfset LOCAL.addressquery=VARIABLES.addressInfo.getAddressQuery()>
+<cfset LOCAL.identityReturnID=VARIABLES.productInfo.setOrder(LOCAL.addressquery.addressID)>
   </cfif>
-  <cfset session.identityID=#LOCAL.identityReturnID#>
+  <cfset SESSION.identityID=#LOCAL.identityReturnID#>
     </cftransaction>
 
 <cfset updateCartCount()>
@@ -282,11 +282,11 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 <cffunction name="updateCartCount" output="false" access="public" returntype="void">
   <cfparam name="initValue" default=0>
 
-<cfset LOCAL.countquery=variables.productInfo.countOrderDetails()>
+<cfset LOCAL.countquery=VARIABLES.productInfo.countOrderDetails()>
 <cfloop query="LOCAL.countquery">
   <cfset initValue=#initValue#+#LOCAL.countquery.quantity#>
 </cfloop>
-<cfset session.cartCount=initValue>
+<cfset SESSION.cartCount=initValue>
 </cffunction>
 
 

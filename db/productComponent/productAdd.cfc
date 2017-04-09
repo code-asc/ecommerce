@@ -17,13 +17,13 @@
 
 <cftry>
     <cfquery name="addphotoquery" result="getPhotoIdentity">
-    insert into ProductPhoto(thumbNailPhoto,thumbNailPhotoName,largePhoto,largePhotoName,brandID,subCategoryID)
-    values(<cfqueryparam value="#arguments.thumbNail#" cfsqltype="cf_sql_varchar">,
-    <cfqueryparam value="#arguments.thumbNailType#" cfsqltype="cf_sql_varchar">,
-    <cfqueryparam value="#arguments.largePhoto#" cfsqltype="cf_sql_varchar">,
-    <cfqueryparam value="#arguments.largePhotoType#" cfsqltype="cf_sql_varchar">,
-    <cfqueryparam value=#arguments.brandID# cfsqltype="cf_sql_int">,
-    <cfqueryparam value=#arguments.subcategoryID# cfsqltype="cf_sql_int">
+    INSERT INTO ProductPhoto(thumbNailPhoto,thumbNailPhotoName,largePhoto,largePhotoName,brandID,subCategoryID)
+    VALUES(<cfqueryparam value="#ARGUMENTS.thumbNail#" cfsqltype="cf_sql_varchar">,
+    <cfqueryparam value="#ARGUMENTS.thumbNailType#" cfsqltype="cf_sql_varchar">,
+    <cfqueryparam value="#ARGUMENTS.largePhoto#" cfsqltype="cf_sql_varchar">,
+    <cfqueryparam value="#ARGUMENTS.largePhotoType#" cfsqltype="cf_sql_varchar">,
+    <cfqueryparam value=#ARGUMENTS.brandID# cfsqltype="cf_sql_int">,
+    <cfqueryparam value=#ARGUMENTS.subcategoryID# cfsqltype="cf_sql_int">
     )
     </cfquery>
 
@@ -32,17 +32,17 @@
 
 
     <cfquery name="productquery">
-    insert into Products(productName,productDesc,supplierID,subcategoryID,unitPrice,photoID,unitInStock,discount,rating,brandID)
-    values(<cfqueryparam value="#arguments.productName#" cfsqltype="cf_sql_varchar">,
-      <cfqueryparam value="#arguments.productDesc#" cfsqltype="cf_sql_varchar">,
-      <cfqueryparam value="#arguments.supplierID#" cfsqltype="cf_sql_int">,
-      <cfqueryparam value="#arguments.subCategoryID#" cfsqltype="cf_sql_int">,
-      <cfqueryparam value="#arguments.unitPrice#" cfsqltype="cf_sql_decimal">,
+    INSERT INTO Products(productName,productDesc,supplierID,subcategoryID,unitPrice,photoID,unitInStock,discount,rating,brandID)
+    VALUES(<cfqueryparam value="#ARGUMENTS.productName#" cfsqltype="cf_sql_varchar">,
+      <cfqueryparam value="#ARGUMENTS.productDesc#" cfsqltype="cf_sql_varchar">,
+      <cfqueryparam value="#ARGUMENTS.supplierID#" cfsqltype="cf_sql_int">,
+      <cfqueryparam value="#ARGUMENTS.subCategoryID#" cfsqltype="cf_sql_int">,
+      <cfqueryparam value="#ARGUMENTS.unitPrice#" cfsqltype="cf_sql_decimal">,
       <cfqueryparam value="#photoID#" cfsqltype="cf_sql_int">,
-      <cfqueryparam value="#arguments.quantity#" cfsqltype="cf_sql_int">,
-      <cfqueryparam value="#arguments.discount#" cfsqltype="cf_sql_int">,
-      <cfqueryparam value="#arguments.rating#" cfsqltype="cf_sql_int">,
-      <cfqueryparam value="#arguments.brandID#" cfsqltype="cf_sql_int">
+      <cfqueryparam value="#ARGUMENTS.quantity#" cfsqltype="cf_sql_int">,
+      <cfqueryparam value="#ARGUMENTS.discount#" cfsqltype="cf_sql_int">,
+      <cfqueryparam value="#ARGUMENTS.rating#" cfsqltype="cf_sql_int">,
+      <cfqueryparam value="#ARGUMENTS.brandID#" cfsqltype="cf_sql_int">
     )
     </cfquery>
 

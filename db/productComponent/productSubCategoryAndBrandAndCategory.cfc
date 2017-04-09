@@ -4,8 +4,8 @@
 
 <cftry>
       <cfquery name="subcategoryquery">
-        select subCategoryType , subCategoryID from SubCategory
-        where categoryID=<cfqueryparam value=#arguments.categoryID# cfsqltype="cf_sql_int">
+        SELECT subCategoryType , subCategoryID FROM SubCategory
+        where categoryID=<cfqueryparam value=#ARGUMENTS.categoryID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="any">
         <cflog file="ecommerece" text="error occured in productSubCategoryAndBrandAndCategory.cfc" application="true">
@@ -20,12 +20,12 @@
 <cfargument name="subCategoryID" required="true" type="numeric">
 <cftry>
   <cfquery name="productquery">
-    select Brands.brandName ,Products.productID ,Products.photoID , Products.productName from Products
-    inner join Brands
+    SELECT Brands.brandName ,Products.productID ,Products.photoID , Products.productName FROM Products
+    INNER JOIN Brands
     on
     Brands.brandID=Products.brandID
-    where
-    subCategoryID=<cfqueryparam value=#arguments.subCategoryID# cfsqltype="cf_sql_int" >
+    WHERE
+    subCategoryID=<cfqueryparam value=#ARGUMENTS.subCategoryID# cfsqltype="cf_sql_int" >
   </cfquery>
   <cfcatch type="any">
     <cflog file="ecommerece" text="error occured in productSubCategoryAndBrandAndCategory.cfc" application="true">

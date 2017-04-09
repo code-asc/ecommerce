@@ -9,9 +9,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./css/csstyle.css">
-        <link rel="stylesheet" href="./css/notification.css">
-        <link rel="stylesheet" href="./css/signup.css">
+        <link rel="stylesheet" href="/assets/css/csstyle.css">
+        <link rel="stylesheet" href="/assets/css/notification.css">
+        <link rel="stylesheet" href="/assets/css/signup.css">
         <!---<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--->
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -20,7 +20,7 @@
     </head>
 
     <body>
-
+<cfset LOCAL.categoryInfoObject=createObject("component","Controller.retriveProduct")>
         <cfif StructKeyExists(session, "stLoggedInUser")>
             <cfthread action="run" name="setOnlineThread">
                 <cfinvoke method="changeStatusToOnline" component="Controller.removeSession">
@@ -28,9 +28,12 @@
         </cfif>
 
         <cfif structKeyExists(form, "submit")>
+          <cflog file="ecommerece" text="form submitted" application="true" >
             <cfif StructKeyExists(form, "searchVal")>
                 <cfset session.searchVal="#form.searchVal#">
-                    <cflocation url="searchPage.cfm?brand=#session.searchVal#" addtoken="false" />
+
+                    <cflocation url="/view/searchPage.cfm?brand=#session.searchVal#" addtoken="false" />
+
             </cfif>
         </cfif>
 
@@ -42,7 +45,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="index.cfm"><img class=" img-size" src="./images/logo.png"></a>
+                    <a href="/index.cfm"><img class=" img-size" src="/assets/images/logo.png"></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="myMenu">
@@ -58,16 +61,14 @@
 
                                         <div class="modal-body">
 
-                                            <cfquery name="subCategory" cachedwithin="#createTimeSpan(0,0,1,0)#" >
-                                                select Category.categoryType , SubCategory.subCategoryType , SubCategory.subCategoryID from Category inner join SubCategory on Category.categoryID=SubCategory.categoryID where Category.categoryID IN (2,3)
 
-                                            </cfquery>
+                                            <cfset subCategory=LOCAL.categoryInfoObject.getCategoryForHeader(arg1=2,arg2=3)>
                                             <div class="row">
                                                 <cfoutput query="subCategory" group="categoryType">
                                                     <div class="col-md-6 col-sm-6 col-xm-6 col-lg-6">
                                                         <h4>#subCategory.categoryType#</h4>
                                                         <cfoutput>
-                                                            <a href="user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
+                                                            <a href="/view/user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
                                                             <br/>
                                                         </cfoutput>
                                                     </div>
@@ -92,17 +93,14 @@
 
                                         <div class="modal-body">
 
-                                            <cfquery name="subCategory" cachedwithin="#createTimeSpan(0,0,1,0)#" >
-                                                select Category.categoryType , SubCategory.subCategoryType , SubCategory.subCategoryID from Category inner join SubCategory on Category.categoryID=SubCategory.categoryID where Category.categoryID IN (4,5)
-
-                                            </cfquery>
+                                            <cfset subCategory=LOCAL.categoryInfoObject.getCategoryForHeader(arg1=4,arg2=5)>
                                             <div class="row">
                                                 <cfoutput query="subCategory" group="categoryType">
                                                     <div class="col-md-6 col-sm-6 col-xm-6 col-lg-6">
                                                         <h4>#subCategory.categoryType#</h4>
                                                         <cfoutput>
                                                             <!---#subCategory.subCategoryType#--->
-                                                            <a href="user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
+                                                            <a href="/view/user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
                                                             <br/>
                                                         </cfoutput>
                                                     </div>
@@ -128,10 +126,8 @@
 
                                         <div class="modal-body">
 
-                                            <cfquery name="subCategory" cachedwithin="#createTimeSpan(0,0,1,0)#" >
-                                                select Category.categoryType , SubCategory.subCategoryType , SubCategory.subCategoryID from Category inner join SubCategory on Category.categoryID=SubCategory.categoryID where Category.categoryID IN (1)
 
-                                            </cfquery>
+                                            <cfset subCategory=LOCAL.categoryInfoObject.getCategoryForHeader(arg1=1)>
                                             <div class="row">
                                                 <cfoutput query="subCategory" group="categoryType">
                                                     <div class="col-md-4 col-sm-4 col-xm-4 col-lg-4">
@@ -199,19 +195,19 @@
                                     </li>
 
                                     <cfif session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
-                                        <li><a href="admin.cfm">Admin Edit</a></li>
+                                        <li><a href="/view/admin.cfm">Admin Edit</a></li>
                                         <cfelse>
                                             <li class="divider"></li>
-                                            <li><a href="userProfileEdit.cfm"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp Edit Profile</a></li>
+                                            <li><a href="/view/userProfileEdit.cfm"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp Edit Profile</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="OrderDetails.cfm"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp Purchases</a></li>
+                                            <li><a href="/view/OrderDetails.cfm"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp Purchases</a></li>
                                             <li class="divider"></li>
                                     </cfif>
 
-                                    <li><a href="index.cfm?logout"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp SignOut</a></li>
+                                    <li><a href="/index.cfm?logout"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp SignOut</a></li>
                                     <cfelse>
-                                        <li><a href="signin.cfm"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp SignIn</a></li>
-                                        <li><a href="signup.cfm"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp SignUp</a></li>
+                                        <li><a href="/view/signin.cfm"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp SignIn</a></li>
+                                        <li><a href="/view/signup.cfm"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp SignUp</a></li>
                                 </cfif>
                             </ul>
                         </li>
@@ -270,7 +266,7 @@
                         </li>
                         <!--- --->
                         <cfif structKeyExists(session, "stLoggedInUser") AND NOT session.stLoggedInUser.userEmail EQ 'admin@admin.com'>
-                            <li><a href="userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
+                            <li><a href="/view/userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
 <cfif structKeyExists(session,"cartCount")>
   <span class="badge" id="traceCount">
 
@@ -295,9 +291,9 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="./script/autoSuggestion.js"></script>--->
-        <script src="./script/userSocketAjax.js"></script>
-        <script src="./script/onWindowClose.js"></script>
-        <script src="./script/onNotificationClick.js"></script>
+        <script src="/assets/script/userSocketAjax.js"></script>
+        <script src="/assets/script/onWindowClose.js"></script>
+        <script src="/assets/script/onNotificationClick.js"></script>
     </body>
 
     </html>

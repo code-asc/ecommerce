@@ -3,11 +3,11 @@
 <cffunction name="highestSaleProductQuery" returntype="query" output="false" access="public">
   <cftry>
   <cfquery name="productinfoquery" cachedwithin="#createTimeSpan(0,0,1,0)#" >
-  select sum(OrderDetails.quantity) as total ,Brands.brandName  from OrderDetails
-  inner join Products
+  SELECT sum(OrderDetails.quantity) AS total ,Brands.brandName  from OrderDetails
+  INNER JOIN Products
   on
   Products.productID=OrderDetails.detailProductID
-  inner join Brands
+  INNER JOIN Brands
   on
   Products.brandID=Brands.brandID
   group by Brands.brandName

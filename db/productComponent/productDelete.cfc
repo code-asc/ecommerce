@@ -5,13 +5,13 @@
 
 <cftry>
   <cfquery name="productquery">
-  delete from Products where
-  photoID=<cfqueryparam value=#arguments.photoID# cfsqltype="cf_sql_int">
+  DELETE FROM Products WHERE
+  photoID=<cfqueryparam value=#ARGUMENTS.photoID# cfsqltype="cf_sql_int">
   </cfquery>
 
   <cfquery name="photoquery">
-  delete from ProductPhoto where
-  photoID=<cfqueryparam value=#arguments.photoID# cfsqltype="cf_sql_int">
+  DELETE FROM ProductPhoto WHERE
+  photoID=<cfqueryparam value=#ARGUMENTS.photoID# cfsqltype="cf_sql_int">
   </cfquery>
   <cfcatch type="any">
     <cflog file="ecommerece" text="error occured in productDelete.cfc" application="true" >

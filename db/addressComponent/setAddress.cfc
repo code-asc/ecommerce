@@ -2,8 +2,8 @@
   <cffunction name="checkUserAddress" output="false" returntype="query" access="public">
     <cftry>
       <cfquery name="checkuserquery">
-        select addressID from Address
-        where userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int" >
+        SELECT addressID FROM Address
+        where userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int" >
       </cfquery>
       <cfcatch type="any">
         <cflog file="ecommerece" text="error occured in setAddress.cfc in checkUserAddress function" application="true" >
@@ -24,14 +24,14 @@
 
       <cftry>
         <cfquery name="addressquery" result="result">
-        insert into Address(customerAddress1,customerAddress2,customerZip,customerCity,customerState,customerCountry,userID,addressType)
-        values(<cfqueryparam value=#arguments.address# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.address2# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.pincode# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.city# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.state# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.country# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">,
+        INSERT INTO Address(customerAddress1,customerAddress2,customerZip,customerCity,customerState,customerCountry,userID,addressType)
+        VALUES(<cfqueryparam value=#ARGUMENTS.address# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.address2# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.pincode# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.city# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.state# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.country# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">,
           <cfqueryparam value="default" cfsqltype="cf_sql_varchar">)
         </cfquery>
         <cfcatch type="any">
@@ -51,14 +51,14 @@
 
       <cftry>
         <cfquery name="addressquery" result="result">
-        insert into Address(customerAddress1,customerAddress2,customerZip,customerCity,customerState,customerCountry,userID)
-        values(<cfqueryparam value=#arguments.address# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.address2# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.pincode# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.city# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.state# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#arguments.country# cfsqltype="cf_sql_varchar">,
-          <cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
+        INSERT INTO Address(customerAddress1,customerAddress2,customerZip,customerCity,customerState,customerCountry,userID)
+        VALUES(<cfqueryparam value=#ARGUMENTS.address# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.address2# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.pincode# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.city# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.state# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#ARGUMENTS.country# cfsqltype="cf_sql_varchar">,
+          <cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
         </cfquery>
         <cfcatch type="any">
           <cflog file="ecommerece" text="error occured in setAddress.cfc in setAddressWithAddressType function" application="true" >

@@ -2,9 +2,9 @@
 <cffunction name="searchUserAddressQuery" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="searchquery">
-    select addressID from Address
-    where
-    userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+    SELECT addressID FROM Address
+    WHERE
+    userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
   </cfquery>
   <cfcatch type="any">
     <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in searchUserAddressQuery function" application="true" >
@@ -18,9 +18,9 @@
 <cffunction name="getAddressQuery" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="addressquery">
-    select Address.addressID,Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Address.addressType from Address
-    where
-    userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqlType="cf_sql_int">
+    SELECT Address.addressID,Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Address.addressType FROM Address
+    WHERE
+    userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqlType="cf_sql_int">
     AND
     addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
   </cfquery>
@@ -36,23 +36,23 @@
 <cffunction name="customerAddressDetail" returntype="query" output="false" access="public">
   <cftry>
     <cfquery name="detailquery">
-    select Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Orders.orderID,Orders.orderAmount,format(Orders.orderDate,'dd/MM/yyyy') as orderDate,Brands.brandName ,Products.productName,Products.afterDiscount , ProductPhoto.thumbNailPhoto , OrderDetails.status , OrderDetails.quantity from Products
-    inner join ProductPhoto
+    SELECT Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Orders.orderID,Orders.orderAmount,format(Orders.orderDate,'dd/MM/yyyy') as orderDate,Brands.brandName ,Products.productName,Products.afterDiscount , ProductPhoto.thumbNailPhoto , OrderDetails.status , OrderDetails.quantity FROM Products
+    INNER JOIN ProductPhoto
     on
     Products.photoID=ProductPhoto.photoID
-    inner join OrderDetails
+    INNER JOIN OrderDetails
     on
     OrderDetails.detailProductID=Products.productID
-    inner join Orders
+    INNER JOIN Orders
     on
     Orders.orderID=OrderDetails.orderID
-    inner join Brands
+    INNER JOIN Brands
     on
     Products.brandID=Brands.brandID
-    inner join Address
+    INNER JOIN Address
     on
     Address.userID=Orders.userID
-    where (Orders.userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int"> AND  Address.addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar"> AND Orders.addressID=Address.addressID) OR (Orders.addressID=Address.addressID AND Orders.userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
+    WHERE (Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int"> AND  Address.addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar"> AND Orders.addressID=Address.addressID) OR (Orders.addressID=Address.addressID AND Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
     order by Orders.orderID DESC
     </cfquery>
     <cfcatch type="any">

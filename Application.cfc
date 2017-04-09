@@ -1,5 +1,5 @@
 <cfcomponent>
-  
+
 <cfset this.name="application_2_1_1">
 <cfset this.wsChannels=[{name="world" ,cfcListener="myChannelListener"}]>
 <cfset this.datasource="ecommerece">
@@ -17,7 +17,7 @@
       <cfargument name="userName" required="true" type="string">
         <cfargument name="password" required="true" type="string">
           <cfargument name="connectionInfo" required="true" type="struct">
-            <cfset arguments.connectionInfo=#arguments.userName#>
+            <cfset ARGUMENTS.connectionInfo=#ARGUMENTS.userName#>
               <cfreturn true>
     </cffunction>
 
@@ -35,6 +35,7 @@
 
 <cffunction name="onMissingTemplate" output="false" access="public" returntype="boolean" >
   <cfargument name="targetPage" required="true" type="string"/>
+
 <cflocation url="missingPage.cfm" addtoken="false"  />
   <cfreturn true>
 </cffunction>
@@ -43,8 +44,8 @@
   <cfargument name="SessionScope" required="true">
     <cfargument name="ApplicationScope" required="false">
       <cfquery name="deletequery">
-        delete from OnlineUser
-        where
+        DELETE FROM OnlineUser
+        WHERE
         userID=<cfqueryparam value=#arguments.SessionScope.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
 </cffunction>

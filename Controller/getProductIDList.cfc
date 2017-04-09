@@ -19,9 +19,9 @@
 <cfloop from=1 to=#ArrayLen(arrayOfItems)# index="i">
 <cfset name1="updatequantityquery"&i>
 <cfquery name=#name1#>
-update Products
-set unitInStock=unitInStock-#arrayOfItems[i][2]#
-where productID=#arrayOfItems[i][1]#
+UPDATE Products
+SET unitInStock=unitInStock-#arrayOfItems[i][2]#
+WHERE productID=#arrayOfItems[i][1]#
 </cfquery>
 </cfloop>
 </cffunction>

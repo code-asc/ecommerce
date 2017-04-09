@@ -13,8 +13,8 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="./css/slideRender.css">
-        <link rel="stylesheet" href="./css/transformEffect.css">
+        <link rel="stylesheet" href="/assets/css/slideRender.css">
+        <link rel="stylesheet" href="/assets/css/transformEffect.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -32,10 +32,10 @@
     </div>
     --->
 
-        <cfinclude template="header.cfm" />
+        <cfinclude template="/header.cfm" />
 
-        <cfset session.currentURL=#cgi.SCRIPT_NAME#>
-            <cfset session.currentURL=#replace(session.currentURL, "/project_ecommerce/", "", "All")#>
+        <cfset SESSION.currentURL=#CGI.SCRIPT_NAME#>
+            <cfset SESSION.currentURL=#replace(SESSION.currentURL, "/project_ecommerce/", "", "All")#>
 
                 <cfif structKeyExists(URL, "logout")>
                     <cfset createObject( "component", "Controller.authentication").doLogout()>
@@ -70,7 +70,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                            <cfinclude template="footer.cfm" />
+                            <cfinclude template="/view/footer.cfm" />
                         </div>
                     </div>
                 </div>
@@ -80,9 +80,9 @@
                 <!-- Include all compiled plugins (below), or include individual files as needed -->
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-                <script src="./script/homeAjax.js"></script>
-                <script src="./script/mainAjaxCallForHomePage.js"></script>
-                <script src="./script/autoSuggestion.js"></script>
+                <script src="/assets/script/homeAjax.js"></script>
+                <script src="/assets/script/mainAjaxCallForHomePage.js"></script>
+                <script src="/assets/script/autoSuggestion.js"></script>
 
     </body>
 
