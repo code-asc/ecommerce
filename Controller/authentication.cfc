@@ -3,6 +3,12 @@
 <cfset VARIABLES.productInfo=createObject("component","db.productComponent.productInfo")>
 <cfset VARIABLES.addressInfo=createObject("component","db.addressComponent.searchAndGetAddress")>
 
+
+  <!---
+  function     :addNewUser
+  returnType   :array
+  hint         :It is used to add new user
+  --->
 <cffunction name="addNewUser" output="false" access="public" returnType="array">
 
 <cfset var errorArray=arrayNew(1)>
@@ -40,6 +46,11 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
 </cffunction>
 
 
+<!---
+function     :validateUser
+returnType   :array
+hint         :It is used to the user login details
+--->
 <cffunction name="validateUser" returnType="array" access="public" output="false">
 <cfargument name="userEmail" required="true" type="string">
 <cfargument name="userPassword" required="true" type="string">
@@ -55,6 +66,12 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
 </cffunction>
 
 
+
+<!---
+function     :doLogin
+returnType   :boolean
+hint         :It is used to perform login
+--->
 <cffunction name="doLogin" access="public" output="false" returntype="boolean">
 <cfargument name="userEmail" required="true" type="string">
   <cfargument name="userPassword" required="true" type="string">
@@ -77,14 +94,7 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
 
 <!---Update status --->
 <cfset VARIABLES.userInfo.changeUserStatus()>
-
-<!---to show number of items in  cart --->
-<!---<cfquery name="querycount">
-select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.userID# cfsqltype="cf_sql_int"> AND status=<cfqueryparam value="addedToCart" cfsqltype="cf_sql_varchar" />
-</cfquery>--->
-
 <cfset updateCartCount()>
-  <!--- --->
          <cfset var isUserLoggedIn=true>
 
            <cfelse>
@@ -93,8 +103,13 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 <cfreturn isUserLoggedIn>
 </cffunction>
 
-<cffunction name="doLogout" returntype="void" output="false" access="public">
 
+<!---
+function     :doLogout
+returnType   :void
+hint         :It is used to perform logout
+--->
+<cffunction name="doLogout" returntype="void" output="false" access="public">
 <cfif StructKeyExists(SESSION, "stLoggedInUser")>
 <cfinvoke method="doLogoutOf" component="db.userLogoutComponent.doUserLogout">
 
@@ -105,9 +120,6 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
     <cfset structClear(SESSION)>
 <cfset structDelete(COOKIE,"CFID")>
   <cfset structDelete(COOKIE, "CFTOKEN")>
-    <!---<cfloop collection="#COOKIE#" item="name">
-      <cfCOOKIE name="#name#" value="" expires="now" />
-    </cfloop>--->
   <cfcookie name="CFID" value="#COOKIE.CFID#" expires="now"   />
   <cfcookie name="CFTOKEN" value="#COOKIE.CFTOKEN#" expires="now"  />
   <cflogout />
@@ -117,8 +129,13 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 </cfif>
 </cffunction>
 
-<cffunction name="addToCart" returntype="void" output="false" access="remote">
 
+<!---
+function     :addToCart
+returnType   :void
+hint         :It is used to add an item to cart using AJAX call
+--->
+<cffunction name="addToCart" returntype="void" output="false" access="remote">
 <cfset LOCAL.checkquery=VARIABLES.productInfo.getOrderDetailID("addedToCart")>
 
   <cfif LOCAL.checkquery.recordCount EQ 0>
@@ -138,23 +155,26 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 <cfset updateCartCount()>
 </cffunction>
 
+
+
+<!---
+function     :removeItemFromCart
+returnType   :array
+hint         :It is used to remove an item from the cart
+--->
 <cffunction name="removeItemFromCart" access="public" output="false" returntype="any">
   <cfargument name="cartID" type="numeric" required="true">
     <cfset VARIABLES.productInfo.deleteOrder(ARGUMENTS.cartID)>
-<!---<cfquery name="countquery">
-  select detailID from OrderDetails
-  where
-  userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-    AND
-    status=<cfqueryparam value="addedToCart" cfsqltype="cf_sql_varchar" >
-</cfquery>--->
-
     <cfset updateCartCount()>
 </cffunction>
 
 
+<!---
+function     :homePageContent
+returnType   :array
+hint         :It is used to return home page content such as photo
+--->
 <cffunction name="homePageContent" returnType="array" access="remote" output="false" returnformat="JSON" >
-
 <cfset LOCAL.homequery=VARIABLES.productInfo.homePageLargePhoto()>
 <cfset var arrayToStoreQuery=arrayNew(1)>
 
@@ -166,6 +186,12 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 <cfreturn arrayToStoreQuery>
 </cffunction>
 
+
+<!---
+function     :filterProduct
+returnType   :array
+hint         :It is used to return the filtered products
+--->
 <cffunction name="filterProduct" returntype="array" output="false" access="remote" returnformat="JSON" >
 <cfargument name="brand" required="true" type="string">
 <cfargument name="discount" required="true" type="string">
@@ -189,6 +215,12 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 
 </cffunction>
 
+
+<!---
+function     :homePageThumbNailInfo
+returnType   :array
+hint         :It is used to return home page thumbnail photos
+--->
 <cffunction name="homePageThumbNailInfo" output="false" returntype="array" access="remote" returnformat="JSON" >
 
   <cfset LOCAL.thumbnailquery=VARIABLES.productInfo.getThumbnail()>
@@ -204,7 +236,11 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 </cffunction>
 
 
-
+<!---
+function     :incrementQuantity
+returnType   :array
+hint         :It is used to increment quantity in cart
+--->
 <cffunction name="incrementQuantity" returntype="array" output="false" access="remote" returnformat="JSON" >
   <cfargument name="id" type="string" required="true">
 <cfset LOCAL.idValue=#deserializeJSON(ARGUMENTS.id)#>
@@ -227,6 +263,12 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
   <cfreturn arrayToStoreQuery>
 </cffunction>
 
+
+<!---
+function     :totalPriceAndQty
+returnType   :array
+hint         :It is used to return the total price and quantity of all items in cart
+--->
 <cffunction name="totalPriceAndQty" returntype="array" output="false" access="public">
 
   <cfset LOCAL.getquery=VARIABLES.productInfo.getOrderPriceAndQty()>
@@ -238,6 +280,12 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
   <cfreturn arrayToStoreQuery>
 </cffunction>
 
+
+<!---
+function     :decrementQuantity
+returnType   :array
+hint         :It is used to decerment products in cart
+--->
 <cffunction name="decrementQuantity" returntype="array" output="false" access="remote" returnformat="JSON">
   <cfargument name="id" type="string" required="true">
 
@@ -259,6 +307,12 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
       <cfreturn arrayToStoreQuery>
     </cffunction>
 
+
+    <!---
+    function     :purchaseOrder
+    returnType   :void
+    hint         :It is used to update the purchaseOrder of the customer
+    --->
 <!--- Modifying prevoius function--->
 <cffunction name="purchaseOrder" output="false" returnType="void" access="public">
 <cfargument name="addressID" type="numeric" required="true">
@@ -279,6 +333,12 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 <cfset updateCartCount()>
 </cffunction>
 
+
+<!---
+function     :updateCartCount
+returnType   :void
+hint         :It is used to update the cart count
+--->
 <cffunction name="updateCartCount" output="false" access="public" returntype="void">
   <cfparam name="initValue" default=0>
 
@@ -290,6 +350,11 @@ select detailID from OrderDetails where userID=<cfqueryparam value=#loginUser.us
 </cffunction>
 
 
+<!---
+function     :getAllBrand
+returnType   :array
+hint         :It is used to return all the brands on AJAX call
+--->
 <cffunction name="getAllBrand" output="false" access="remote" returntype="array" returnformat="JSON">
   <cfset LOCAL.brandquery=variables.productInfo.getBrand()>
   <cfset var arrayToStoreQuery=arrayNew(1)>

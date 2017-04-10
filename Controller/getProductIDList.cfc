@@ -2,6 +2,11 @@
 <cfset variables.userInfo=createObject("component","db.userLoginComponent.isUserOnline")>
 <cfset variables.productDetail=createObject("component","db.productComponent.productInfo")>
 
+  <!---
+  function     :decrementProduct
+  returnType   :void
+  hint         :It is used to decrement product in databases on user action
+  --->
 <cffunction name="decrementProduct" returnType="void" access="public" output="false">
 <cfset var arrayOfIDList=arrayNew(2)>
 <cfset var i=1>
@@ -26,21 +31,44 @@ WHERE productID=#arrayOfItems[i][1]#
 </cfloop>
 </cffunction>
 
+
+<!---
+function     :getOnlyCategory
+returnType   :query
+hint         :It is used to retrive only category
+--->
 <cffunction name="getOnlyCategory" output="false" returntype="query" access="public">
   <cfset LOCAL.categoryOption=variables.productDetail.retriveOnlyCategory()>
     <cfreturn LOCAL.categoryOption/>
 </cffunction>
 
+
+<!---
+function     :getOnlyBrand
+returnType   :query
+hint         :It is used to return brands
+--->
 <cffunction name="getOnlyBrand" output="false" returntype="query" access="public">
   <cfset LOCAL.brandOption=variables.productDetail.retriveOnlyBrand()>
     <cfreturn LOCAL.brandOption/>
 </cffunction>
 
+
+<!---
+function     :getOnlyShipping
+returnType   :query
+hint         :It is used to return only shipping details
+--->
 <cffunction name="getOnlyShipping" output="false" returntype="query" access="public">
   <cfset LOCAL.shippingOption=variables.productDetail.retriveOnlyShipping()>
     <cfreturn LOCAL.shippingOption/>
 </cffunction>
 
+<!---
+function     :getOnlyCategory
+returnType   :query
+hint         :It is used to return only supplier details
+--->
 <cffunction name="getOnlySupplier" output="false" returntype="query" access="public">
   <cfset LOCAL.supplierOption=variables.productDetail.retriveOnlySupplier()>
     <cfreturn LOCAL.supplierOption/>

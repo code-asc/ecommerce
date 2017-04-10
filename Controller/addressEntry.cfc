@@ -1,6 +1,11 @@
 <cfcomponent>
 <cfset variables.addOrUpdateAddress=createObject("component","db.addressComponent.setAddress")>
 
+  <!---
+  function     :storeAddress
+  returnType   :numeric
+  hint         :It is used to store the address and return identitycol of inserted record
+  --->
 <cffunction name="storeAddress" output="false" returnType="numeric" access="public">
 <cfargument name="country" required="true" type="string">
 <cfargument name="state" required="true" type="string">
@@ -34,6 +39,11 @@
 </cffunction>
 
 
+<!---
+function     :searchUserAddress
+returnType   :boolean
+hint         :It is used to search the customer address and return boolean value
+--->
 <cffunction name="searchUserAddress" output="false" returnType="boolean" access="public">
 <cfset LOCAL.searchquery=variables.addOrUpdateAddress.searchUserAddressQuery()>
 <cfif NOT LOCAL.searchquery.recordCount EQ 0>
@@ -43,6 +53,12 @@
 </cfif>
 </cffunction>
 
+
+<!---
+function     :getAddressOfUser
+returnType   :query
+hint         :It is used to get address of the customer
+--->
 <cffunction name="getAddressOfUser" returntype="query" output="false" access="public">
 <cfset LOCAL.addressResult=variables.addOrUpdateAddress.searchUserAddressQuery()>
   <cfreturn LOCAL.addressResult>

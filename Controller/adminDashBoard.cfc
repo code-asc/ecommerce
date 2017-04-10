@@ -1,17 +1,33 @@
 <cfcomponent >
 <cfset VARIABLES.saleDetails=createObject("component","db.adminPageComponent.orderAndBrandDetail")>
 
+  <!---
+  function     :highestSaleProduct
+  returnType   :query
+  hint         :It is used to get the total sale of each product
+  --->
 <cffunction name="highestSaleProduct" output="false" returntype="query" access="public">
 <cfset LOCAL.productinfoquery=VARIABLES.saleDetails.highestSaleProductQuery()>
   <cfreturn LOCAL.productinfoquery>
 </cffunction>
 
 
+<!---
+function     :countryStatus
+returnType   :query
+hint         :It is to get the total number of different countries
+--->
 <cffunction name="countryStatus" output="false" returntype="query" access="public">
   <cfset LOCAL.countryquery=VARIABLES.saleDetails.countCountry()>
   <cfreturn LOCAL.countryquery>
 </cffunction>
 
+
+<!---
+function     :allDetails
+returnType   :struct
+hint         :It is used to return the structure of product information
+--->
 <cffunction name="allDetails" output="false" returntype="Struct" access="public">
 <cfset var stData=StructNew()>
 

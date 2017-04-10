@@ -1,4 +1,10 @@
 <cfcomponent>
+
+  <!---
+  function     :removeUserSession
+  returnType   :void
+  hint         :It is used to remove the user from onile
+  --->
 <cffunction name="removeUserSession" output="false" access="public" returntype="void">
   <cfargument name="userEmail" required="true" type="string">
 <cfset app=APPLICATION.ApplicationName>
@@ -18,11 +24,22 @@
         <cfinvoke method="deleteOnlineUser" component="db.userComponent.userRemoveOnline" userEmail="#ARGUMENTS.userEmail#" />
 </cffunction>
 
+
+<!---
+function     :onWindowClose
+returnType   :void
+hint         :It is used to make user offline on browser window close
+--->
 <cffunction name="onWindowClose" output="false" access="remote" returntype="void">
   <cfinvoke method="updateUserToOffline" component="db.userComponent.userRemoveOnline" />
 </cffunction>
 
 
+<!---
+function     :changeStatusToOnline
+returnType   :void
+hint         :It is used to change the user status to online
+--->
 <cffunction name="changeStatusToOnline" output="false" returntype="void" access="public">
 <cfif structKeyExists(COOKIE,"stLoggedInUser")>
   <cfinvoke method="updateUserOnline" component="db.userComponent.countOnlineUsers" >

@@ -1,6 +1,12 @@
 <cfcomponent>
 <cfset VARIABLES.getfilterProductInfo=createObject("component","db.productComponent.productInfo")>
 
+
+  <!---
+  function     :filterProduct
+  returnType   :array
+  hint         :It is used to filter the products based on brand and discount on AJAX call
+  --->
 <cffunction name="filterProduct" returntype="array" output="false" access="remote" returnformat="JSON" >
 <cfargument name="brand" required="true" type="string">
 <cfargument name="discount" required="true" type="string">
