@@ -1,7 +1,12 @@
 <cfcomponent>
+
+  <!---
+  function    :addBrandToDatabase
+  returnType  :void
+  hint        :It adds new bran to database
+  --->
 <cffunction name="addBrandToDatabase" output="false" access="public" returntype="void">
 <cfargument name="brandName" required="true" type="string">
-
 <cftry>
   <cfquery name="addquery">
     INSERT INTO Brands(brandName)
@@ -13,6 +18,12 @@
 </cftry>
 </cffunction>
 
+
+<!---
+function    :addCategoryToDatabase
+returnType  :void
+hint        :It adds new category to database
+--->
 <cffunction name="addCategoryToDatabase" output="false" access="remote" returntype="void">
 <cfargument name="categoryType" required="true" type="string">
 <cftry>
@@ -26,6 +37,12 @@
 </cftry>
 </cffunction>
 
+
+<!---
+function    :getBrand
+returnType  :query
+hint        :It return all the brand names available
+--->
 <cffunction name="getBrand" returntype="query" access="public" output="false">
   <cftry>
     <cfquery name="brandquery">

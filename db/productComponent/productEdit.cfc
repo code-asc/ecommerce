@@ -1,4 +1,10 @@
 <cfcomponent>
+
+  <!---
+  function    :productEdit
+  returnType  :void
+  hint        :It is used to edit the product details
+  --->
   <cffunction name="productEdit" output="false" access="public" returnType="void">
   <cfargument name="productID" type="numeric" required="true">
   <cfargument name="productDesc" type="string" required="true">

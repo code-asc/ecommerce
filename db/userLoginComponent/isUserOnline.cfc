@@ -1,4 +1,10 @@
 <cfcomponent extends="db.userLoginComponent.userLogin" >
+
+  <!---
+  function     :checkUserOnline
+  returnType   :query
+  hint         :It is used to return userID and email of the online user
+  --->
   <cffunction name="checkUserOnline" returntype="query" access="public" output="false">
     <cfargument name="userID" required="true" type="any"/>
     <cftry>
@@ -16,7 +22,11 @@
     <cfreturn checkStatus/>
   </cffunction>
 
-
+  <!---
+  function     :changeUserStatus
+  returnType   :void
+  hint         :It is used to insert the user into OnlineUser table
+  --->
   <cffunction name="changeUserStatus" output="false" returntype="void" access="public">
     <cftry>
       <cfquery name="insertquery">

@@ -1,4 +1,10 @@
 <cfcomponent>
+
+  <!---
+  function     :getUsersOnline
+  returnType   :query
+  hint         :It returns total number of online users
+  --->
   <cffunction name="getUsersOnline" output="false" returntype="query" access="public">
     <cftry>
       <cfquery name="onlinequery">
@@ -15,6 +21,12 @@
     <cfreturn onlinequery>
   </cffunction>
 
+
+  <!---
+  function     :updateUserOnline
+  returnType   :void
+  hint         :It is used to  change the status of the user to online
+  --->
   <cffunction name="updateUserOnline" output="false" returntype="void" access="public">
   <cftry>
     <cfquery name="updatequery">

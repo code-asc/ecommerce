@@ -1,4 +1,10 @@
 <cfcomponent>
+
+  <!---
+  function     :doUserLogin
+  returnType   :query
+  hint         :It is used to get user details
+  --->
   <cffunction name="doUserLogin" access="public" output="false" returntype="query">
     <cfargument name="userEmail" required="true" type="string">
     <cfargument name="userPassword" required="true" type="string">

@@ -1,4 +1,11 @@
 <cfcomponent extends="db.userComponent.updateSocketStatus" >
+
+
+  <!---
+  function     :getNotificationQuery
+  returnType   :query
+  hint         :It is used to return the top 3 notifications
+  --->
   <cffunction name="getNotificationQuery" output="false" access="public" returntype="query">
     <cftry>
     <cfquery name="getquery">

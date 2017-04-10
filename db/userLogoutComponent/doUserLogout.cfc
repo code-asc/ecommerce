@@ -1,5 +1,10 @@
 <cfcomponent>
 
+  <!---
+  function     :doLogOutOf
+  returnType   :void
+  hint         :It is used to logout the user
+  --->
 <cffunction name="doLogoutOf" output="false" returntype="void" access="public">
 <cftry>
   <cfquery name="deletequery">

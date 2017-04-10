@@ -1,5 +1,10 @@
 <cfcomponent extends="db.productComponent.orderDetails" >
 
+  <!---
+  function     :getProductInfo
+  returnType   :query
+  hint         :It is used to get complete product information using productID
+  --->
 <cffunction name="getProductInfo" output="false" access="public" returnType="query">
 <cfargument name="productID" type="numeric" required="true">
 <cftry>
@@ -29,6 +34,12 @@
 <cfreturn productquery>
 </cffunction>
 
+
+<!---
+function     :getProductInfoBySubCategory
+returnType   :query
+hint         :It is used to get product information based on subCategoryID
+--->
 <cffunction name="getProductInfoBySubCategory" output="false" access="public" returnType="query">
 <cfargument name="brand" required="true" type="string">
 <cfargument name="discount" required="true" type="string">
@@ -66,6 +77,12 @@
 </cffunction>
 
 
+
+<!---
+function     :getProductInfoByID
+returnType   :query
+hint         :It is used to return unitPrice , supplierID and afterDiscount based on productID
+--->
 <cffunction name="getProductInfoByID" returntype="query" access="public" output="false">
 <cftry>
   <cfquery name="getproduct">
@@ -83,6 +100,11 @@
 </cffunction>
 
 
+<!---
+function     :getThumbnail
+returnType   :query
+hint         :It is used to get all thumbNail information
+--->
 <cffunction name="getThumbnail" returntype="query" output="false" access="public">
   <cftry>
     <cfquery name="thumbnailquery" cachedwithin="#createTimeSpan(0,0,1,0)#" >
@@ -98,6 +120,12 @@
   <cfreturn thumbnailquery/>
 </cffunction>
 
+
+<!---
+function     :homePageLargePhoto
+returnType   :query
+hint         :It is used to get home page photos
+--->
 <cffunction name="homePageLargePhoto" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="homequery" cachedwithin="#createTimeSpan(0,0,1,0)#" >
@@ -113,6 +141,11 @@
 <cfreturn homequery/>
 </cffunction>
 
+<!---
+function     :incrementQuantityInDatabase
+returnType   :void
+hint         :It is used to incerment the ordered product of the customer
+--->
 <cffunction name="incrementQuantityInDatabase" output="false" returntype="void" access="public">
 <cfargument name="id" type="string" required="true">
   <cftry>
@@ -131,6 +164,12 @@
   </cftry>
 </cffunction>
 
+
+<!---
+function     :decrementQuantityInDatabase
+returnType   :void
+hint         :It is used to decrement the of ordered product of a Customer
+--->
 <cffunction name="decrementQuantityInDatabase" output="false" returntype="void" access="public">
 <cfargument name="id" type="string" required="true">
   <cftry>
@@ -149,6 +188,12 @@
   </cftry>
 </cffunction>
 
+
+<!---
+function     :productCartDetails
+returnType   :query
+hint         :It is used to return the cart details of the customer
+--->
 <cffunction name="productCartDetails" returntype="query" output="false" access="public">
   <cfargument name="status" required="true" type="string"/>
   <cftry>
@@ -181,6 +226,12 @@
   <cfreturn retrivecart/>
 </cffunction>
 
+
+<!---
+function     :getBrandBySubCategory
+returnType   :query
+hint         :It is used to return the brand based on subCategoryID
+--->
 <cffunction name="getBrandBySubCategory" output="false" returntype="query" access="public">
 <cfargument name="subCategoryID" required="true" type="numeric">
 <cftry>
@@ -209,6 +260,12 @@
 <cfreturn retriveBrand>
 </cffunction>
 
+
+<!---
+function     :suggestedProduct
+returnType   :query
+hint         :It is used to return products based on subcategoryID
+--->
 <cffunction name="suggestedProduct" output="false" returntype="query" access="public">
   <cfargument name="subCategoryID" required="true" type="numeric">
   <cfargument name="productID" required="true" type="numeric">
@@ -235,6 +292,12 @@
     <cfreturn retriveProduct/>
 </cffunction>
 
+
+<!---
+function     :productInfoForFilters
+returnType   :query
+hint         :It is used to return the products based on brand filter
+--->
 <cffunction name="productInfoForFilters" returntype="query" access="public" output="false">
   <cfargument name="brand" required="true" type="string">
   <cfargument name="discount" required="true" type="string">
@@ -286,6 +349,12 @@
     <cfreturn filterquery/>
 </cffunction>
 
+
+<!---
+function     :updateProductQtyOnOrder
+returnType   :void
+hint         :It is used to update the product quantity in the databases on any of the product ordered
+--->
 <cffunction name="updateProductQtyOnOrder" returntype="void" output="false" access="public" >
 <cfargument name="productID" required="true" type="numeric"/>
 <cftry>
@@ -301,6 +370,12 @@
 </cftry>
 </cffunction>
 
+
+<!---
+function     :productsDisplay
+returnType   :query
+hint         :It is used to return alll the  products based on subCategoryID
+--->
 <cffunction name="productsDisplay" returntype="query" output="false" access="public">
   <cftry>
     <cfquery name="retriveProduct" cachedwithin="#createTimeSpan(0,0,1,0)#" >
@@ -324,6 +399,12 @@
   <cfreturn retriveProduct/>
 </cffunction>
 
+
+<!---
+function     :retriveOnlyCategory
+returnType   :query
+hint         :It is used to return only categories
+--->
 <cffunction name="retriveOnlyCategory" output="false" returntype="query" access="public">
   <cftry>
     <cfquery name="categoryquery" cachedwithin="#createTimeSpan(0,0,1,0)#">
@@ -338,6 +419,12 @@
   <cfreturn categoryquery>
 </cffunction>
 
+
+<!---
+function     :retriveOnlyBrand
+returnType   :query
+hint         :It is used only to retirve brands
+--->
 <cffunction name="retriveOnlyBrand" output="false" returntype="query" access="public">
   <cftry>
     <cfquery name="brandquery" cachedwithin="#createTimeSpan(0,0,1,0)#">
@@ -352,6 +439,12 @@
   <cfreturn brandquery>
 </cffunction>
 
+
+<!---
+function     :retriveOnlyShipping
+returnType   :query
+hint         :It is used only to retirve shippingID
+--->
 <cffunction name="retriveOnlyShipping" output="false" returntype="query" access="public" >
   <cftry>
     <cfquery name="shippingquery" cachedwithin="#createTimeSpan(0,0,1,0)#">
@@ -366,6 +459,12 @@
   <cfreturn shippingquery>
 </cffunction>
 
+
+<!---
+function     :retriveOnlySupplier
+returnType   :query
+hint         :It is used only to retirve supplierID
+--->
 <cffunction name="retriveOnlySupplier" output="false" returntype="query" access="public">
   <cftry>
     <cfquery name="supplierquery" cachedwithin="#createTimeSpan(0,0,1,0)#">
@@ -381,6 +480,11 @@
   <cfreturn supplierquery>
 </cffunction>
 
+<!---
+function     :categoryOptionForHeader
+returnType   :query
+hint         :It is used to get categories for header
+--->
 <cffunction name="categoryOptionForHeader" output="false" returntype="query" access="public">
 <cfargument name="arg1" required="true" type="numeric"/>
 <cfargument name="arg2" required="false" type="numeric" default="0" />
@@ -417,6 +521,12 @@
   <cfreturn subCategory/>
 </cffunction>
 
+
+<!---
+function     :productInfoForSearchPage
+returnType   :query
+hint         :It is used to return product information for search page
+--->
 <cffunction name="productInfoForSearchPage" output="false" access="public" returntype="query">
   <cfargument name="brandName" required="false" default="noSearch"/>
   <cftry>

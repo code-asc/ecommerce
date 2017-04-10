@@ -1,4 +1,10 @@
 <cfcomponent>
+
+  <!---
+  function     :getSubCategoryQuery
+  returnType   :query
+  hint         :It is used to return subCategoryID
+  --->
   <cffunction name="getSubCategoryQuery" output="false" access="public" returntype="query">
     <cfargument name="categoryID" required="true" cfsqltype="cf_sql_int">
 
@@ -16,6 +22,12 @@
       <cfreturn subcategoryquery/>
   </cffunction>
 
+
+  <!---
+  function     :getProductQuery
+  returnType   :query
+  hint         :It is used to return product Information based on subCategoryID
+  --->
 <cffunction name="getProductQuery" output="false" access="public" returntype="query">
 <cfargument name="subCategoryID" required="true" type="numeric">
 <cftry>

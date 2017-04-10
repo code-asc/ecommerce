@@ -1,4 +1,10 @@
 <cfcomponent>
+
+  <!---
+  function     :getUserInfo
+  returnType   :query
+  hint         :It is used to get user profile info
+  --->
   <cffunction name="getUserInfo" output="false" returntype="query" access="public">
     <cftry>
       <cfquery name="getquery">
@@ -15,6 +21,12 @@
     <cfreturn getquery>
   </cffunction>
 
+
+  <!---
+  function     :updateProfilePhoto
+  returnType   :void
+  hint         :It is used to update user profile photo
+  --->
   <cffunction name="updateProfilePhoto" output="false" returntype="void" access="public">
   <cfargument name="path" required="true" type="string">
     <cftry>
@@ -29,6 +41,12 @@
     </cftry>
   </cffunction>
 
+
+  <!---
+  function     :updateUserInfo
+  returnType   :void
+  hint         :It is used to update profile
+  --->
 <cffunction name="updateUserInfo" returntype="void" output="false" access="public">
   <cfargument name="firstName" required="true" type="string">
   <cfargument name="middleName" required="true" type="string">

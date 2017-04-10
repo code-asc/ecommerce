@@ -1,4 +1,10 @@
 <cfcomponent>
+
+<!---
+Function     :searchUserAddressQuery
+returnType   :query
+hint         :get the addressID using userID
+--->
 <cffunction name="searchUserAddressQuery" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="searchquery">
@@ -15,6 +21,12 @@
 <cfreturn searchquery/>
 </cffunction>
 
+
+<!---
+Function     :getAddressQuery
+returnType   :query
+hint         :get address field using userID and addressTye
+--->
 <cffunction name="getAddressQuery" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="addressquery">
@@ -33,6 +45,12 @@
 <cfreturn addressquery/>
 </cffunction>
 
+
+<!---
+Function     :customerAddressDetail
+returnType   :query
+hint         :get all the details for customers purchaseOrder
+--->
 <cffunction name="customerAddressDetail" returntype="query" output="false" access="public">
   <cftry>
     <cfquery name="detailquery">

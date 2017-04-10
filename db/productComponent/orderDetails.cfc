@@ -1,4 +1,10 @@
 <cfcomponent extends="db.productComponent.addBrandAndCategory">
+
+  <!---
+  function    :setOrderDetails
+  returnType  :void
+  hint        :It is userd to add customer order details
+  --->
   <cffunction name="setOrderDetails" output="false" access="public" returntype="void" >
     <cfargument name="afterDiscount" required="true" type="numeric"/>
     <cfargument name="supplierID" required="true" type="numeric"/>
@@ -23,6 +29,12 @@
    </cftry>
   </cffunction>
 
+
+  <!---
+  function    :updateOrderDetails
+  returnType  :void
+  hint        :It is used to update the order details based on productID
+  --->
   <cffunction name="updateOrderDetails" returntype="void" output="false" access="public">
     <cftry>
       <cfquery name="updatequery">
@@ -39,6 +51,12 @@
     </cftry>
   </cffunction>
 
+
+  <!---
+  function    :updateOrderDetailsBasedOnStatus
+  returnType  :void
+  hint        :It updates the status of Order details to progress
+  --->
   <cffunction name="updateOrderDetailsBasedOnStatus" returntype="void" output="false" access="public">
     <cftry>
       <cfquery name="purchasequery">
@@ -61,6 +79,12 @@
     </cftry>
   </cffunction>
 
+
+  <!---
+  function    :countOrderDetails
+  returnType  :query
+  hint        :It will return total quantity of the order ddetails
+  --->
   <cffunction name="countOrderDetails" output="false" access="public" returntype="query">
     <cftry>
       <cfquery name="countquery">
@@ -79,6 +103,12 @@
     <cfreturn countquery/>
   </cffunction>
 
+
+  <!---
+  function    :setOrder
+  returnType  :numeric
+  hint        :It insert a new record with customer addressID and returns the identitycol
+  --->
   <cffunction name="setOrder" output="false" returntype="numeric" access="public">
     <cfargument name="addressID" required="true" type="numeric"/>
     <cftry>
@@ -95,6 +125,12 @@
     <cfreturn LOCAL.identityID/>
   </cffunction>
 
+
+  <!---
+  function    :getOrderDetailID
+  returnType  :query
+  hint        :It will return a detailID of the user based on the status such as addedToCart , progress , ordered
+  --->
 <cffunction name="getOrderDetailID" returntype="query" output="false" access="public">
 <cfargument name="status" required="true" type="string"/>
   <cftry>
@@ -116,6 +152,12 @@
   <cfreturn checkquery/>
 </cffunction>
 
+
+<!---
+function    :getDetailProductID
+returnType  :query
+hint        :It will return the productID and quantity of each product that is addedToCatr or ordered`
+--->
 <cffunction name="getDetailProductID" returntype="query" output="false" access="public">
 <cfargument name="status" required="true" type="string"/>
   <cftry>
@@ -136,6 +178,12 @@
   <cfreturn retriveInfo/>
 </cffunction>
 
+
+<!---
+function    :getOrderDetailByOnlyID
+returnType  :query
+hint        :It returns the orderDetails based on detailID
+--->
 <cffunction name="getOrderDetailByOnlyID" output="false" returntype="query" access="public">
   <cfargument name="id" required="true" type="numeric"/>
   <cftry>
@@ -153,6 +201,12 @@
   <cfreturn getqueryof/>
 </cffunction>
 
+
+<!---
+function    :getOrderPriceAndQty
+returnType  :query
+hint        :It returns total quantity and total price  of products that added to cart
+--->
 <cffunction name="getOrderPriceAndQty" output="false" returntype="query" access="public">
   <cftry>
     <cfquery name="getquery">
@@ -171,6 +225,12 @@
   <cfreturn getquery/>
 </cffunction>
 
+
+<!---
+function    :deleteOrder
+returnType  :void
+hint        :It is used to delete order
+--->
 <cffunction name="deleteOrder" returntype="void" output="false" access="public">
   <cfargument name="cartID" type="numeric" required="true">
     <cftry>

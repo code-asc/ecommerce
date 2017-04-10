@@ -1,5 +1,11 @@
 <cfcomponent extends="db.adminPageComponent.saleRecord">
 
+
+  <!---
+  function     :highestSaleProductQuery
+  returnType   :query
+  hint         :It will number of total quantity of the product sold
+  --->
 <cffunction name="highestSaleProductQuery" returntype="query" output="false" access="public">
   <cftry>
   <cfquery name="productinfoquery" cachedwithin="#createTimeSpan(0,0,1,0)#" >

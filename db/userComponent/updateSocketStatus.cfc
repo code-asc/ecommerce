@@ -1,4 +1,10 @@
 <cfcomponent>
+
+  <!---
+  function     :markAsReadNotificationQuery
+  returnType   :void
+  hint         :It is used to update the status of the notification
+  --->
   <cffunction name="markAsReadNotificationQuery" output="false" access="public" returntype="void">
     <cftry>
       <cfquery name="updatequery">
@@ -12,6 +18,12 @@
     </cftry>
   </cffunction>
 
+
+  <!---
+  function     :insertNotificationDataQuery
+  returnType   :void
+  hint         :It is used to insert notification in database
+  --->
   <cffunction name="insertNotificationDataQuery" output="false" access="public" returntype="void">
     <cfargument name="content" required="true" type="string">
       <cftry>
@@ -27,6 +39,12 @@
       </cftry>
   </cffunction>
 
+
+  <!---
+  function     :getTopNotification
+  returnType   :query
+  hint         :It is used to retrive top 3 notifications
+  --->
   <cffunction name="getTopNotification" returntype="query" access="public" output="false">
     <cftry>
       <cfquery name="getquery">

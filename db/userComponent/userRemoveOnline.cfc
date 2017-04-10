@@ -1,4 +1,10 @@
 <cfcomponent>
+
+  <!---
+  function     :deleteOnlineUser
+  returnType   :void
+  hint         :It is used to delete the online user
+  --->
   <cffunction name="deleteOnlineUser" returntype="void" output="false" access="public">
     <cfargument name="userEmail" required="true" type="string">
       <cftry>
@@ -13,6 +19,12 @@
       </cftry>
   </cffunction>
 
+
+  <!---
+  function     :updateUserToOffline
+  returnType   :void
+  hint         :It is used to change the user status to offline
+  --->
   <cffunction name="updateUserToOffline" output="false" returntype="void" access="public">
     <cftry>
       <cfquery name="changeStatusToOffline">

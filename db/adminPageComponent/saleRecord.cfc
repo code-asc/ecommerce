@@ -1,5 +1,11 @@
 <cfcomponent>
 
+
+  <!---
+  function     :countCountry
+  returnType   :query
+  hint         :It return number to different countries of the customers
+  --->
   <cffunction name="countCountry" output="false" returntype="query" access="public">
     <cftry>
       <cfquery name="countryquery">
@@ -14,6 +20,12 @@
     <cfreturn countryquery>
   </cffunction>
 
+
+  <!---
+  function      :countCustomer
+  returnType    :query
+  hint          :It returns total number of customers
+  --->
 <cffunction name="countCustomer" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="customerquery">
@@ -28,6 +40,12 @@
 <cfreturn customerquery/>
 </cffunction>
 
+
+<!---
+function     :countProduct
+returnType   :query
+hint         :It returns total number of products
+--->
 <cffunction name="countProduct" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="productquery">
@@ -42,6 +60,12 @@
 <cfreturn productquery/>
 </cffunction>
 
+
+<!---
+function    :countCategory
+returnType  :query
+hint        :It return number of Categories
+--->
 <cffunction name="countCategory" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="categoryquery">
@@ -56,6 +80,11 @@
 <cfreturn categoryquery/>
 </cffunction>
 
+<!---
+function     :countSubCategory
+returnType   :query
+hint         :It returns number of cubCategories
+--->
 <cffunction name="countSubCategory" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="subcategoryquery">
@@ -70,6 +99,12 @@
 <cfreturn subcategoryquery/>
 </cffunction>
 
+
+<!---
+function        :countSupplier
+returnType      :query
+hint            :It returns number of suppliers
+--->
 <cffunction name="countSupplier" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="supplierquery">
@@ -84,6 +119,12 @@
 <cfreturn supplierquery/>
 </cffunction>
 
+
+<!---
+function         :countShipping
+returnType       :query
+hint             :It returns number of shipping available
+--->
 <cffunction name="countShipping" output="false" returntype="query" access="public">
 <cftry>
   <cfquery name="shippingquery">

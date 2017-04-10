@@ -1,4 +1,10 @@
 <cfcomponent extends="db.addressComponent.updateAddress" >
+
+  <!---
+  function    :checkUserAddress
+  returnType  :query
+  hint        :check if user address already exists or not.
+  --->
   <cffunction name="checkUserAddress" output="false" returntype="query" access="public">
     <cftry>
       <cfquery name="checkuserquery">
@@ -14,6 +20,12 @@
     <cfreturn checkuserquery/>
   </cffunction>
 
+
+  <!---
+  function   :setAddressWithoutAddressType
+  returnType : numeric
+  hint       : It returns the identitycol of the newly inserted record
+  --->
   <cffunction name="setAddressWithoutAddressType" output="false" returntype="numeric" access="public">
     <cfargument name="country" required="true" type="string">
     <cfargument name="state" required="true" type="string">
@@ -41,6 +53,12 @@
       <cfreturn result.identitycol/>
   </cffunction>
 
+
+  <!---
+  function      :setAddressWithAddressType
+  returnType    :numeric
+  hint          :return the identitycol of the newlt inserted record
+  --->
   <cffunction name="setAddressWithAddressType" output="false" returntype="numeric" access="public">
     <cfargument name="country" required="true" type="string">
     <cfargument name="state" required="true" type="string">

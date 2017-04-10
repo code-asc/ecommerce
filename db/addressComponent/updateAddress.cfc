@@ -1,5 +1,11 @@
 <cfcomponent extends="db.addressComponent.searchAndGetAddress" >
 
+
+  <!---
+  function     : updateAddressQuery
+  returnType   : void
+  hint         : It will change the address type to NULL when the user want to set new default address.
+  --->
 <cffunction name="updateAddressQuery" output="false" returntype="void" access="public">
   <cftry>
     <cfquery name="updatedefaultquery">
@@ -15,6 +21,12 @@
   </cftry>
 </cffunction>
 
+
+<!---
+function      :updateDefaultAdderssQuery
+returnType    :numeric
+hint          :It will insert a new address for the user of type default
+--->
 <cffunction name="updateDefaultAdderssQuery" returntype="numeric" output="false" access="public">
   <cfargument name="country" required="true" type="string">
   <cfargument name="state" required="true" type="string">

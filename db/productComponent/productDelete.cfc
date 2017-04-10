@@ -1,5 +1,11 @@
 <cfcomponent>
 
+
+  <!---
+  function    :deleteProduct
+  returnType  :void
+  hint        :It is used to delete the product and the photo
+  --->
 <cffunction name="deleteProduct" access="public" output="false" returnType="void">
 <cfargument name="photoID" required="true" type="numeric">
 

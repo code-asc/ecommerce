@@ -1,5 +1,11 @@
 <cfcomponent>
 
+
+  <!---
+  function    :addProductInfoToDatabase
+  returnType  :void
+  hint        :It is used to insert a product along with photo in database
+  --->
 <cffunction name="addProductInfoToDatabase" access="public" output="false" returntype="void">
   <cfargument name="productName" type="string" required="true">
   <cfargument name="productDesc" type="string" required="true">
@@ -26,11 +32,7 @@
     <cfqueryparam value=#ARGUMENTS.subcategoryID# cfsqltype="cf_sql_int">
     )
     </cfquery>
-
-
     <cfset var photoID=#getPhotoIdentity.identitycol#>
-
-
     <cfquery name="productquery">
     INSERT INTO Products(productName,productDesc,supplierID,subcategoryID,unitPrice,photoID,unitInStock,discount,rating,brandID)
     VALUES(<cfqueryparam value="#ARGUMENTS.productName#" cfsqltype="cf_sql_varchar">,
