@@ -14,7 +14,7 @@
           email=<cfqueryparam value="#ARGUMENTS.userEmail#" cfsqltype="cf_sql_varchar">
         </cfquery>
         <cfcatch type="Database">
-          <cflog file="ecommerece" text="error occured in userRemoveOnline.cfc in deleteOnlineUser function .The SQL state : #cfcatch.SQLState#" application="true" >
+          <cflog file="ecommerece" text="error occured in userRemoveOnline.cfc in deleteOnlineUser function .The SQL state : #cfcatch.queryError#" application="true" >
         </cfcatch>
       </cftry>
   </cffunction>
@@ -34,7 +34,7 @@
         userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-          <cflog file="ecommerece" text="error occured in userRemoveOnline.cfc in updateUserToOffline function .The SQL state : #cfcatch.SQLState#" application="true" >
+          <cflog file="ecommerece" text="error occured in userRemoveOnline.cfc in updateUserToOffline function .The SQL state : #cfcatch.queryError#" application="true" >
       </cfcatch>
     </cftry>
   </cffunction>

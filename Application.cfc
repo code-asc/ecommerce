@@ -51,7 +51,7 @@
         userID=<cfqueryparam value=#arguments.SessionScope.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="#cfcatch.SQLState#" application="true">
+        <cflog file="ecommerece" text="#cfcatch.queryError#" application="true">
       </cfcatch>
     </cftry>
 </cffunction>

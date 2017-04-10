@@ -13,7 +13,7 @@
     VALUES(<cfqueryparam value="#ARGUMENTS.brandName#" cfsqltype="cf_sql_varchar">)
   </cfquery>
   <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in addBrandToDatabase function.The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in addBrandToDatabase function.The SQL state : #cfcatch.queryError#" application="true" >
   </cfcatch>
 </cftry>
 </cffunction>
@@ -32,7 +32,7 @@ hint        :It adds new category to database
     VALUES(<cfqueryparam value="#ARGUMENTS.categoryType#" cfsqltype="cf_sql_varchar">)
   </cfquery>
   <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in addcategoryToDatabase function .The SQL state : #cfcatch.SQLState#" application="true" >
+    <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in addcategoryToDatabase function .The SQL state : #cfcatch.queryError#" application="true" >
   </cfcatch>
 </cftry>
 </cffunction>
@@ -49,7 +49,7 @@ hint        :It return all the brand names available
       SELECT brandName FROM Brands
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in getBrand function . The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in getBrand function . The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("brandName")>
           <cfreturn emptyQuery>
     </cfcatch>

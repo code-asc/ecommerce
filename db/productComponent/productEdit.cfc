@@ -38,7 +38,7 @@
     </cfquery>
 
 <cfcatch type="Database">
-  <cflog file="ecommerece" text="error occured in productEdit.cfc .The SQL state : #cfcatch.SQLState#" application="true" >
+  <cflog file="ecommerece" text="error occured in productEdit.cfc .The SQL state : #cfcatch.queryError#" application="true" >
 </cfcatch>
 </cftry>
   </cffunction>

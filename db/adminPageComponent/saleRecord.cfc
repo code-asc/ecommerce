@@ -12,7 +12,7 @@
         SELECT count(customerCountry) AS total , customerCountry FROM Address GROUP BY customerCountry
       </cfquery>
       <cfcatch type="Database">
-        <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCountry function .The SQL state : #cfcatch.SQLState#">
+        <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCountry function .The SQL state : #cfcatch.queryError#">
           <cfset emptyQuery=queryNew("total,customerCountry")>
             <cfreturn emptyQuery>
       </cfcatch>

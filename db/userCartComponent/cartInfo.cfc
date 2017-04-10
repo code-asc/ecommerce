@@ -1,4 +1,0 @@
-<cfcomponent>
-  <cffunction>
-  </cffunction>
-</cfcomponent>

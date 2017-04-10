@@ -20,7 +20,7 @@
     </cfquery>
 
     <cfcatch type="Database">
-      <cflog application="true" file="ecommerece" text="error in orderAndBrandDetail.cfc in highestSaleProductQuery function.The SQL state : #cfcatch.SQLState#">
+      <cflog application="true" file="ecommerece" text="error in orderAndBrandDetail.cfc in highestSaleProductQuery function.The SQL state : #cfcatch.queryError#">
         <cfset emptyQuery=queryNew("total,brandName")>
           <cfreturn emptyQuery>
     </cfcatch>

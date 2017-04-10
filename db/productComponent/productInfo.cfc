@@ -26,7 +26,7 @@
     where Products.productID=<cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int">
   </cfquery>
   <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in productInfo.cfc .The SQL state : #cfcatch.SQLState#" application="true" >
+    <cflog file="ecommerece" text="error occured in productInfo.cfc .The SQL state : #cfcatch.queryError#" application="true" >
       <cfset emptyQuery=queryNew("productID,productName,productDesc,unitPrice,unitInStock,largePhoto,thumbNailPhoto,discount,brandName,subCategoryType,categoryType,subCategoryID,categoryID")>
         <cfreturn emptyQuery>
   </cfcatch>
@@ -68,7 +68,7 @@ hint         :It is used to get product information based on subCategoryID
               </cfif>
     </cfquery>
   <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in productInfo.cfc getProductInfoBySubCategory function .The SQL state : #cfcatch.SQLState#" application="true" >
+    <cflog file="ecommerece" text="error occured in productInfo.cfc getProductInfoBySubCategory function .The SQL state : #cfcatch.queryError#" application="true" >
       <cfset emptyQuery=queryNew("productID,productName,productDesc,unitPrice,unitPrice,thumbNailPhoto,discount,brandName")>
         <cfreturn emptyQuery>
   </cfcatch>
@@ -91,7 +91,7 @@ hint         :It is used to return unitPrice , supplierID and afterDiscount base
       productID=<cfqueryparam value=#SESSION.productID# cfsqltype="cf_sql_int">
     </cfquery>
   <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in productInfo.cfc in getProductInfoByID function. The SQL state : #cfcatch.SQLState#" application="true" >
+    <cflog file="ecommerece" text="error occured in productInfo.cfc in getProductInfoByID function. The SQL state : #cfcatch.queryError#" application="true" >
     <cfset emptyQuery=queryNew("unitPrice,supplierID,afterDiscount")>
       <cfreturn emptyQuery>
   </cfcatch>
@@ -112,7 +112,7 @@ hint         :It is used to get all thumbNail information
       where thumbNailPhotoName=<cfqueryparam value="thumb" cfsqltype="varchar">
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in getThumbnail function. The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in getThumbnail function. The SQL state : #cfcatch.queryError#" application="true" >
       <cfset emptyQuery=queryNew("thumbNailPhoto ,brandID,subCategoryID")>
         <cfreturn emptyQuery>
     </cfcatch>
@@ -133,7 +133,7 @@ hint         :It is used to get home page photos
     where largePhotoName=<cfqueryparam value="homepage" cfsqltype="varchar">
   </cfquery>
   <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in productInfo.cfc in homePageLargePhoto function. The SQL state : #cfcatch.SQLState#" application="true" >
+    <cflog file="ecommerece" text="error occured in productInfo.cfc in homePageLargePhoto function. The SQL state : #cfcatch.queryError#" application="true" >
     <cfset emptyQuery=queryNew("largePhoto")>
       <cfreturn emptyQuery>
   </cfcatch>
@@ -159,7 +159,7 @@ hint         :It is used to incerment the ordered product of the customer
         quantity <= <cfqueryparam value=10 cfsqltype="cf_sql_int" >
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in incrementQuantityInDatabase function. The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in incrementQuantityInDatabase function. The SQL state : #cfcatch.queryError#" application="true" >
     </cfcatch>
   </cftry>
 </cffunction>
@@ -183,7 +183,7 @@ hint         :It is used to decrement the of ordered product of a Customer
         quantity >= <cfqueryparam value=2 cfsqltype="cf_sql_int" >
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in decrementQuantityInDatabase function. The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in decrementQuantityInDatabase function. The SQL state : #cfcatch.queryError#" application="true" >
     </cfcatch>
   </cftry>
 </cffunction>
@@ -218,7 +218,7 @@ hint         :It is used to return the cart details of the customer
         <cfqueryparam value="#ARGUMENTS.status#" cfsqltype="cf_sql_varchar">
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in productCartDetails function. The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in productCartDetails function. The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("brandName,detailProductID,quantity,supplierID,detailID,thumbNailPhoto,afterDiscount,productName,supplierID,supplierName,status")>
           <cfreturn emptyQuery>
     </cfcatch>
@@ -252,7 +252,7 @@ hint         :It is used to return the brand based on subCategoryID
     <cfreturn emptyQuery>
 </cfif>
   <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in productInfo.cfc in getBrandBySubCategory function.The SQL state : #cfcatch.SQLState#" application="true" >
+    <cflog file="ecommerece" text="error occured in productInfo.cfc in getBrandBySubCategory function.The SQL state : #cfcatch.queryError#" application="true" >
       <cfset emptyQuery=queryNew("brandName,brandID")>
         <cfreturn emptyQuery>
   </cfcatch>
@@ -284,7 +284,7 @@ hint         :It is used to return products based on subcategoryID
         order by NEWID()
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in productInfo.cfc in suggestedProduct function.The SQL state : #cfcatch.SQLState#" application="true" >
+        <cflog file="ecommerece" text="error occured in productInfo.cfc in suggestedProduct function.The SQL state : #cfcatch.queryError#" application="true" >
           <cfset emptyQuery=queryNew("productID ,productName ,productDesc ,unitPrice,discount ,thumbNailPhoto,discount ,brandName")>
             <cfreturn emptyQuery>
       </cfcatch>
@@ -341,7 +341,7 @@ hint         :It is used to return the products based on brand filter
 
         </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in productInfo.cfc in productInfoForFilters function.The SQL state : #cfcatch.SQLState#" application="true" >
+        <cflog file="ecommerece" text="error occured in productInfo.cfc in productInfoForFilters function.The SQL state : #cfcatch.queryError#" application="true" >
           <cfset emptyQuery=queryNew("productID ,productName ,productDesc ,unitPrice ,thumbNailPhoto ,discount ,brandName")>
             <cfreturn emptyQuery>
       </cfcatch>
@@ -365,7 +365,7 @@ hint         :It is used to update the product quantity in the databases on any 
   productID=<cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int">
   </cfquery>
   <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in productInfo.cfc in updateProductQtyOnOrder function.The SQL state : #cfcatch.SQLState#" application="true" >
+    <cflog file="ecommerece" text="error occured in productInfo.cfc in updateProductQtyOnOrder function.The SQL state : #cfcatch.queryError#" application="true" >
    </cfcatch>
 </cftry>
 </cffunction>
@@ -391,7 +391,7 @@ hint         :It is used to return alll the  products based on subCategoryID
         <cfqueryparam value="#session.subCategoryID#" cfsqltype="cf_sql_integer">
         </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in productDisplay function.The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in productDisplay function.The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("productID ,productName ,productDesc ,unitPrice ,thumbNailPhoto ,discount ,brandName")>
           <cfreturn emptyQuery>
     </cfcatch>
@@ -411,7 +411,7 @@ hint         :It is used to return only categories
         SELECT Category.categoryID , Category.categoryType from Category
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlyCategory function.The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlyCategory function.The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("categoryID,categoryType")>
           <cfreturn emptyQuery>
     </cfcatch>
@@ -431,7 +431,7 @@ hint         :It is used only to retirve brands
         SELECT Brands.brandID , Brands.brandName from Brands
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlyBrand function.The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlyBrand function.The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("brandID,brandName")>
           <cfreturn emptyQuery>
     </cfcatch>
@@ -451,7 +451,7 @@ hint         :It is used only to retirve shippingID
         SELECT ShippingDetails.shippingID , ShippingDetails.companyName from ShippingDetails
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlyShipping function.The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlyShipping function.The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("shippingID ,compDatabaseName")>
           <cfreturn emptyQuery>
     </cfcatch>
@@ -472,7 +472,7 @@ hint         :It is used only to retirve supplierID
     </cfquery>
 
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlySupplier function.The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlySupplier function.The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("supplierID,supplierName")>
           <cfreturn emptyQuery>
     </cfcatch>
@@ -513,7 +513,7 @@ hint         :It is used to get categories for header
 
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlySupplier function.The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in retriveOnlySupplier function.The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("categoryType , subCategoryType ,subCategoryID")>
           <cfreturn emptyQuery/>
     </cfcatch>
@@ -548,7 +548,7 @@ hint         :It is used to return product information for search page
 
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in productInfo.cfc in productInfoForSearchPage function.The SQL state : #cfcatch.SQLState#" application="true" >
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in productInfoForSearchPage function.The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("productID ,productName,subCategoryID ,productDesc ,unitPrice ,thumbNailPhoto ,discount ,brandName")>
           <cfreturn emptyQuery>
     </cfcatch>

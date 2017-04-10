@@ -20,7 +20,7 @@
   photoID=<cfqueryparam value=#ARGUMENTS.photoID# cfsqltype="cf_sql_int">
   </cfquery>
   <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in productDelete.cfc .The SQL state : #cfcatch.SQLState#" application="true" >
+    <cflog file="ecommerece" text="error occured in productDelete.cfc .The SQL state : #cfcatch.queryError#" application="true" >
   </cfcatch>
 </cftry>
 </cffunction>

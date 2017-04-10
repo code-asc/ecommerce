@@ -13,7 +13,7 @@
         WHERE nid IN (SELECT TOP 3 nid FROM Notification ORDER BY nid DESC)
       </cfquery>
       <cfcatch>
-          <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in markAsReadNotificationQuery function .The SQL state : #cfcatch.SQLState#" application="true" >
+          <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in markAsReadNotificationQuery function .The SQL state : #cfcatch.queryError#" application="true" >
       </cfcatch>
     </cftry>
   </cffunction>
@@ -34,7 +34,7 @@
             <cfqueryparam value="unread" cfsqltype="cf_sql_varchar">)
         </cfquery>
         <cfcatch type="Database">
-          <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in insertNotificationDataQuery function. The SQL state : #cfcatch.SQLState#" application="true">
+          <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in insertNotificationDataQuery function. The SQL state : #cfcatch.queryError#" application="true">
         </cfcatch>
       </cftry>
   </cffunction>
@@ -51,7 +51,7 @@
         SELECT TOP 3 content ,replace(convert(nvarchar,postTime,105),' ','/') as postTime from Notification ORDER BY nid DESC
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in getTopNotification function .The SQL state : #cfcatch.SQLState#" application="true">
+        <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in getTopNotification function .The SQL state : #cfcatch.queryError#" application="true">
           <cfset emptyQuery=queryNew("content,postTime")>
             <cfreturn emptyQuery>
       </cfcatch>
