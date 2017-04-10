@@ -1,3 +1,7 @@
+<!---
+FileName      :adminProductEdit.cfm
+Functionality : It will allow the admin to edit the product directly
+--->
 <!DOCTYPE html>
 <html lang="en">
 

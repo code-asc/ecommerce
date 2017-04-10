@@ -1,3 +1,7 @@
+<!---
+FileName      :adminAdd.cfm
+Functionality : It will allow the admin to add item
+--->
 <!DOCTYPE html>
 <cfheader name="Expires" value="#Now()#">
     <cfheader name="pragma" value="no-change" />

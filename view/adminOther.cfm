@@ -1,3 +1,7 @@
+<!---
+FileName      :adminOther.cfm
+Functionality : It will allow admin to add new brands
+--->
 <!DOCTYPE html>
 <html lang="en">
 

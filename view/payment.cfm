@@ -1,3 +1,7 @@
+<!---
+FileName      :payment.cfm
+Functionality : It will process the payment details
+--->
 <!DOCTYPE html>
 <cfheader name="Expires" value="#Now()#">
     <cfheader name="pragma" value="no-change" />

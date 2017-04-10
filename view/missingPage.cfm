@@ -1,3 +1,7 @@
+<!---
+FileName      :missingPage.cfm
+Functionality : It will be shown when template is missing
+--->
 <!DOCTYPE html>
 <html lang="en">
   <head>

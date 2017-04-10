@@ -1,3 +1,7 @@
+<!---
+FileName      :adminRemove.cfm
+Functionality : It will allow the admin to remove the product
+--->
 <!DOCTYPE html>
 <html lang="en">
 

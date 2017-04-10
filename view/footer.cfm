@@ -1,3 +1,7 @@
+<!---
+FileName      :footer.cfm
+Functionality : It is the common footer for all pages
+--->
 <!DOCTYPE html>
 <html lang="en">
   <head>

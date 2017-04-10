@@ -1,3 +1,7 @@
+<!---
+FileName      :user_action.cfm
+Functionality : It will show the product details 
+--->
 <!DOCTYPE html>
 <cfheader name="Expires" value="#Now()#">
     <cfheader name="pragma" value="no-change" />
