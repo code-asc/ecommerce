@@ -14,11 +14,12 @@
 <cfset this.invokeimplicitaccessor=true>
 
     <cffunction name="onWSAuthenticate" returntype="boolean" access="public" output="false">
-      <cfargument name="userName" required="true" type="string">
+		<cfargument name="userName" required="true" type="string">
         <cfargument name="password" required="true" type="string">
-          <cfargument name="connectionInfo" required="true" type="struct">
-            <cfset ARGUMENTS.connectionInfo=#ARGUMENTS.userName#>
-              <cfreturn true>
+        <cfargument name="connectionInfo" required="true" type="struct">
+
+		<cfset ARGUMENTS.connectionInfo=#ARGUMENTS.userName#>
+        <cfreturn true>
     </cffunction>
 
 <cffunction name="onSessionStart" output="false" access="public" returntype="void">
@@ -43,14 +44,19 @@
 <cffunction name="onSessionEnd" returntype="void">
   <cfargument name="SessionScope" required="true">
     <cfargument name="ApplicationScope" required="false">
+      <cftry>
       <cfquery name="deletequery">
         DELETE FROM OnlineUser
         WHERE
         userID=<cfqueryparam value=#arguments.SessionScope.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
+      <cfcatch type="Database">
+        <cflog file="ecommerece" text="#cfcatch.SQLState#" application="true">
+      </cfcatch>
+    </cftry>
 </cffunction>
 
-<!---
+
 <cffunction name="onError" output="false" returntype="void" access="public" >
   <cfargument name="exception" type="any" required="true">
   <cfargument name="eventName" type="string" required="true">
@@ -60,6 +66,6 @@
       <cflocation url="signin.cfm" addtoken="false" >
     </cfif>
 </cffunction>
---->
+
 
 </cfcomponent>

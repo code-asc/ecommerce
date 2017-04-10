@@ -13,7 +13,7 @@
     userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
   </cfquery>
   <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in doUserLogout.cfc" application="true">
+      <cflog file="ecommerece" text="error occured in doUserLogout.cfc .The SQL state : #cfcatch.SQLState#" application="true">
   </cfcatch>
 </cftry>
 </cffunction>

@@ -13,7 +13,7 @@
         userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in getUserInfo function" application="true" >
+        <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in getUserInfo function .The SQL state : #cfcatch.SQLState#" application="true" >
           <cfset emptyQuery=queryNew("userFirstName, userProfilePhoto,userMiddleName, userLastName, userEmail , userPhone")>
             <cfreturn emptyQuery>
       </cfcatch>
@@ -36,7 +36,7 @@
         WHERE userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateProfilePhoto function" application="true" >
+        <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateProfilePhoto function .The SQL state : #cfcatch.SQLState#" application="true" >
       </cfcatch>
     </cftry>
   </cffunction>
@@ -65,7 +65,7 @@
          userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateUserInfo function" application="true" >
+        <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateUserInfo function .The SQL state : #cfcatch.SQLState#" application="true" >
       </cfcatch>
     </cftry>
 </cffunction>

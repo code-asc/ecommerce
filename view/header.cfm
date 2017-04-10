@@ -5,7 +5,7 @@
     <html lang="en">
 
     <head>
-        <title></title>
+        
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,9 +30,9 @@
         <cfif structKeyExists(form, "submit")>
           <cflog file="ecommerece" text="form submitted" application="true" >
             <cfif StructKeyExists(form, "searchVal")>
-                <cfset SESSION.searchVal="#form.searchVal#">
+              <!---  <cfset SESSION.searchVal="#form.searchVal#">--->
 
-                    <cflocation url="/view/searchPage.cfm?brand=#SESSION.searchVal#" addtoken="false" />
+                    <cflocation url="/view/searchPage.cfm?brand=#form.searchVal#" addtoken="false" />
 
             </cfif>
         </cfif>

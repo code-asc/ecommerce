@@ -1,3 +1,7 @@
+<!---
+FileName      :addressConfirm.cfm
+Functionality : It will show the address details to the customer if exists
+--->
 <!DOCTYPE html>
 <html lang="en">
 

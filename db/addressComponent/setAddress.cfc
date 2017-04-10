@@ -12,7 +12,7 @@
         where userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int" >
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in setAddress.cfc in checkUserAddress function" application="true" >
+        <cflog file="ecommerece" text="error occured in setAddress.cfc in checkUserAddress function.The SQL state : #cfcatch.SQLState#" application="true" >
           <cfset emptyQuery=queryNew("addressID")>
             <cfreturn emptyQuery>
       </cfcatch>
@@ -47,7 +47,7 @@
           <cfqueryparam value="default" cfsqltype="cf_sql_varchar">)
         </cfquery>
         <cfcatch type="Database">
-          <cflog file="ecommerece" text="error occured in setAddress.cfc in setAddressWithoutAddressType function" application="true" >
+          <cflog file="ecommerece" text="error occured in setAddress.cfc in setAddressWithoutAddressType function.The SQL state : #cfcatch.SQLState#" application="true" >
         </cfcatch>
       </cftry>
       <cfreturn result.identitycol/>
@@ -79,7 +79,7 @@
           <cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
         </cfquery>
         <cfcatch type="Database">
-          <cflog file="ecommerece" text="error occured in setAddress.cfc in setAddressWithAddressType function" application="true" >
+          <cflog file="ecommerece" text="error occured in setAddress.cfc in setAddressWithAddressType function. The SQL state : #cfcatch.SQLState#" application="true" >
         </cfcatch>
       </cftry>
       <cfreturn result.identitycol/>
