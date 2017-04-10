@@ -19,6 +19,8 @@ $(document).ready(function() {
 
     $("#addCategory").click(function(event) {
 
+      $("#formOtherData").empty();
+      $("#formOtherData").css({"display":"block"});
         if ($("#formOtherCategory").valid()) {
             $.ajax({
                 url: "/Controller/adminData.cfc?method=addCategory",
