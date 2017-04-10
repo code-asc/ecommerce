@@ -48,7 +48,7 @@
     )
     </cfquery>
 
-    <cfcatch type="any">
+    <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in productInfoAndEdit.cfc" application="true" >
     </cfcatch>
   </cftry>

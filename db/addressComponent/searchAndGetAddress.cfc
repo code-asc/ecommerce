@@ -12,7 +12,7 @@ hint         :get the addressID using userID
     WHERE
     userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in searchUserAddressQuery function" application="true" >
       <cfset emptyQuery=queryNew("addressID")>
         <cfreturn emptyQuery>
@@ -36,7 +36,7 @@ hint         :get address field using userID and addressTye
     AND
     addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in getAddressQuery function" application="true" >
       <cfset emptyQuery=queryNew("customerAddress1,customerAddress2,customerCity,customerState,customerCountry")>
         <cfreturn emptyQuery>
@@ -73,7 +73,7 @@ hint         :get all the details for customers purchaseOrder
     WHERE (Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int"> AND  Address.addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar"> AND Orders.addressID=Address.addressID) OR (Orders.addressID=Address.addressID AND Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
     order by Orders.orderID DESC
     </cfquery>
-    <cfcatch type="any">
+    <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in customerAddressDetail function" application="true" >
         <cfset emptyQuery=queryNew("customerAddress1,customerAddress2,customerCity,customerState,customerCountry,orderID,orderAmount,orderDate,brandName,productName,afterDiscount ,thumbNailPhoto ,status ,quantity")>
           <cfreturn emptyQuery>

@@ -8,6 +8,7 @@ $(document).ready(function() {
 
 function ajaxAddCall() {
     $("#formData").empty();
+    $("#formData").css({"display":"block"});
     var productName = $("#productName").val();
     var brandID = $("#brand").val();
     var categoryID = $("#category").val();

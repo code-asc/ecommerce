@@ -12,7 +12,7 @@
         WHERE
         userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in getUserInfo function" application="true" >
           <cfset emptyQuery=queryNew("userFirstName, userProfilePhoto,userMiddleName, userLastName, userEmail , userPhone")>
             <cfreturn emptyQuery>
@@ -35,7 +35,7 @@
         SET userProfilePhoto=<cfqueryparam value="#ARGUMENTS.path#" cfsqltype="cf_sql_varchar">
         WHERE userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateProfilePhoto function" application="true" >
       </cfcatch>
     </cftry>
@@ -64,7 +64,7 @@
           WHERE
          userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateUserInfo function" application="true" >
       </cfcatch>
     </cftry>

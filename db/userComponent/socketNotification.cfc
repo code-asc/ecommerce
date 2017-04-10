@@ -17,7 +17,7 @@
       Notification x
       ORDER BY nid DESC
     </cfquery>
-    <cfcatch type="any">
+    <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in socketNotification.cfc" application="true" >
           <cfset emptyQuery=queryNew("totalRead,postTime")>
             <cfreturn emptyQuery>

@@ -127,11 +127,13 @@
                                                                     </div>
                                                                 </div>
 
+                                                                <cfif StructKeyExists(URL,"addressAll") AND StructKeyExists(URL, "linkAddress")>
                                                                 <div class="col-md-1 col-sm-12">
                                                                     <div class="form-group">
                                                                         <cfinput class="btn btn-primary" type="submit" name="setDefault" value="Set Default">
                                                                     </div>
                                                                 </div>
+                                                              </cfif>
                                                             </div>
                                                     </cfform>
 

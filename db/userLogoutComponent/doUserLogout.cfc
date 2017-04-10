@@ -12,7 +12,7 @@
     WHERE
     userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in doUserLogout.cfc" application="true">
   </cfcatch>
 </cftry>

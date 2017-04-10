@@ -33,7 +33,7 @@
             ,#now()#,
             <cfqueryparam value="unread" cfsqltype="cf_sql_varchar">)
         </cfquery>
-        <cfcatch type="any">
+        <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in insertNotificationDataQuery function" application="true">
         </cfcatch>
       </cftry>
@@ -50,7 +50,7 @@
       <cfquery name="getquery">
         SELECT TOP 3 content ,replace(convert(nvarchar,postTime,105),' ','/') as postTime from Notification ORDER BY nid DESC
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in getTopNotification function" application="true">
           <cfset emptyQuery=queryNew("content,postTime")>
             <cfreturn emptyQuery>

@@ -15,7 +15,7 @@
         AND
         addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
     </cfquery>
-    <cfcatch>
+    <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in updateAddress.cfc in updateAddressQuery function" application="true" >
     </cfcatch>
   </cftry>
@@ -46,7 +46,7 @@ hint          :It will insert a new address for the user of type default
       <cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">,
       <cfqueryparam value="default" cfsqltype="cf_sql_varchar">)
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog file="ecommerece" text="error occured in updateAddress.cfc in updateDefaultAdderssQuery function" application="true" >
   </cfcatch>
 </cftry>

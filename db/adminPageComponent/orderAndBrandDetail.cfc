@@ -19,7 +19,7 @@
   group by Brands.brandName
     </cfquery>
 
-    <cfcatch type="any">
+    <cfcatch type="Database">
       <cflog application="true" file="ecommerece" text="error in orderAndBrandDetail.cfc in highestSaleProductQuery function">
         <cfset emptyQuery=queryNew("total,brandName")>
           <cfreturn emptyQuery>

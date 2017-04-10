@@ -1,5 +1,6 @@
 $(document).ready(function(){
   $("input[name='submitEditProduct']").click(function(event){
+    alert("wow");
     if($("#editProductAdmin").valid())
     {
       submitEditProductAJAXCall();
@@ -10,6 +11,8 @@ $(document).ready(function(){
 function submitEditProductAJAXCall()
 {
   $("#infoAboutEdit").empty();
+  $("#infoAboutEdit").css({"display":"block"});
+
 
   var productID=$("#productID").val();
   var categoryID=$("#category").val();
@@ -27,6 +30,7 @@ function submitEditProductAJAXCall()
     success:function(responseText){
       if(responseText==1){
       $("#infoAboutEdit").append("<div class='alert alert-success'>Change Saved</div>").delay(4000).fadeOut();
+
 
     }
 

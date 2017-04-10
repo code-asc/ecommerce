@@ -11,7 +11,7 @@
       <cfquery name="countryquery">
         SELECT count(customerCountry) AS total , customerCountry FROM Address GROUP BY customerCountry
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCountry function">
           <cfset emptyQuery=queryNew("total,customerCountry")>
             <cfreturn emptyQuery>
@@ -31,7 +31,7 @@
   <cfquery name="customerquery">
     SELECT count(userID) AS total FROM Customer
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCustomer function">
       <cfset emptyQuery=queryNew("total")>
         <cfreturn emptyQuery>
@@ -51,7 +51,7 @@ hint         :It returns total number of products
   <cfquery name="productquery">
     SELECT count(productID) as total FROM Products
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countProduct function">
       <cfset emptyQuery=queryNew("total")>
         <cfreturn emptyQuery>
@@ -71,7 +71,7 @@ hint        :It return number of Categories
   <cfquery name="categoryquery">
     SELECT count(categoryID) AS total FROM Category
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCategory function">
       <cfset emptyQuery=queryNew("total")>
         <cfreturn emptyQuery>
@@ -90,7 +90,7 @@ hint         :It returns number of cubCategories
   <cfquery name="subcategoryquery">
     SELECT count(subCategoryID) as total FROM SubCategory
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countSubCategory function">
       <cfset emptyQuery=queryNew("total")>
         <cfreturn emptyQuery>
@@ -110,7 +110,7 @@ hint            :It returns number of suppliers
   <cfquery name="supplierquery">
     SELECT count(supplierID) AS total FROM Supplier
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countSupplier function">
       <cfset emptyQuery=queryNew("total")>
         <cfreturn emptyQuery>
@@ -130,7 +130,7 @@ hint             :It returns number of shipping available
   <cfquery name="shippingquery">
     SELECT count(shippingID) as total FROM ShippingDetails
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countShipping function">
       <cfset emptyQuery=queryNew("total")>
         <cfreturn emptyQuery>

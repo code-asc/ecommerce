@@ -11,7 +11,7 @@
         SELECT addressID FROM Address
         where userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int" >
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in setAddress.cfc in checkUserAddress function" application="true" >
           <cfset emptyQuery=queryNew("addressID")>
             <cfreturn emptyQuery>
@@ -46,7 +46,7 @@
           <cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">,
           <cfqueryparam value="default" cfsqltype="cf_sql_varchar">)
         </cfquery>
-        <cfcatch type="any">
+        <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in setAddress.cfc in setAddressWithoutAddressType function" application="true" >
         </cfcatch>
       </cftry>
@@ -78,7 +78,7 @@
           <cfqueryparam value=#ARGUMENTS.country# cfsqltype="cf_sql_varchar">,
           <cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
         </cfquery>
-        <cfcatch type="any">
+        <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in setAddress.cfc in setAddressWithAddressType function" application="true" >
         </cfcatch>
       </cftry>

@@ -13,7 +13,7 @@
         WHERE
         userID=<cfqueryparam value=#ARGUMENTS.userID# cfsqltype="cf_sql_int">
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in isUserOnline.cfc in checkUserOnline function" application="true" >
           <cfset emptyQuery=queryNew("userID,userEmail")>
             <cfreturn emptyQuery>
@@ -36,7 +36,7 @@
           <cfqueryparam value="#session.stLoggedInUser.userEmail#" cfsqltype="cf_sql_varchar">)
       </cfquery>
 
-      <cfcatch type="any">
+      <cfcatch type="Database">
     <cflog file="ecommerece" text="error occured in isUserOnline.cfc in changeUserStatus function" application="true" >
       </cfcatch>
     </cftry>

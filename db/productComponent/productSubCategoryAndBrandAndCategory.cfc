@@ -13,7 +13,7 @@
         SELECT subCategoryType , subCategoryID FROM SubCategory
         where categoryID=<cfqueryparam value=#ARGUMENTS.categoryID# cfsqltype="cf_sql_int">
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in productSubCategoryAndBrandAndCategory.cfc" application="true">
           <cfset emptyQuery=queryNew("subCategoryType,subCategoryID")>
             <cfreturn emptyQuery>
@@ -39,7 +39,7 @@
     WHERE
     subCategoryID=<cfqueryparam value=#ARGUMENTS.subCategoryID# cfsqltype="cf_sql_int" >
   </cfquery>
-  <cfcatch type="any">
+  <cfcatch type="Database">
     <cflog file="ecommerece" text="error occured in productSubCategoryAndBrandAndCategory.cfc" application="true">
       <cfset emptyQuery=queryNew("brandName,productID,photoID,productName")>
         <cfreturn emptyQuery>

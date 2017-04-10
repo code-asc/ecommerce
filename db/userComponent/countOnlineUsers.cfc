@@ -12,7 +12,7 @@
         WHERE
         status=<cfqueryparam value="online" cfsqltype="cf_sql_varchar">
       </cfquery>
-      <cfcatch type="any">
+      <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in countOnlineUsers.cfc in getUsersOnline function" application="true" >
           <cfset emptyQuery=queryNew("totalUsers")>
             <cfreturn emptyQuery>
@@ -37,7 +37,7 @@
       AND
       status=<cfqueryparam value="offline" cfsqltype="cf_sql_varchar" >
     </cfquery>
-    <cfcatch type="any">
+    <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in countOnlineUsers.cfc in updateUserOnline function" application="true" >
     </cfcatch>
   </cftry>
