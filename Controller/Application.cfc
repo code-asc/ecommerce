@@ -2,10 +2,9 @@
 <cfset this.name="application_2_1_1">
 <cfset this.wsChannels=[{name="world" ,cfcListener="myChannelListener"}]>
 <cfset this.datasource="ecommerece">
-  <cfset this.sessionManagement=true>
-   <!--- <cfset this.clientManagement=true> --->
-    <cfset this.applicationTimeout=#createTimespan(0, 12, 0, 0)#>
-      <cfset this.sessionTimeout=#createTimespan(0, 4,0, 0)#>
+<cfset this.sessionManagement=true>
+<cfset this.applicationTimeout=#createTimespan(0, 12, 0, 0)#>
+<cfset this.sessionTimeout=#createTimespan(0, 4,0, 0)#>
 
 <cfset this.ormEnabled=true>
 <cfset this.ormSettings.dbcreate="update">
