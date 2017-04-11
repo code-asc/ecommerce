@@ -71,11 +71,19 @@ Functionality : It will show the order details of the customer
                                         <br/> Total : Rs.<strong>#LsNumberFormat(precisionEvaluate(detailquery.orderAmount),"0.00")#</strong>
                                     </div>
                                 </div>
-
-
                             </cfoutput>
                         </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                                  <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
+                                    <cfinclude template="/view/footer.cfm" />
+                                  </cfcache>
+                                </div>
+                            </div>
+                        </div>
                 </cfif>
+
     </cfif>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 

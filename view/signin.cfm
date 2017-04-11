@@ -92,6 +92,16 @@ Functionality : It is used for sign In purpose
         </div>
     </div>
 
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+              <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
+                <cfinclude template="/view/footer.cfm" />
+              </cfcache>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

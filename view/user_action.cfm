@@ -1,6 +1,6 @@
 <!---
 FileName      :user_action.cfm
-Functionality : It will show the product details 
+Functionality : It will show the product details
 --->
 <!DOCTYPE html>
 <cfheader name="Expires" value="#Now()#">
@@ -116,7 +116,7 @@ Functionality : It will show the product details
                                     <cfloop query="retriveProduct">
                                         <cfoutput>
 
-                                            <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px">
+                                            <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px ">
 
                                                 <a href="/view/user_action_single.cfm?productID=#retriveProduct.productID#">
                                                     <div class="itemthumb"> <img src="#retriveProduct.thumbNailPhoto#" class="img-responsive"></div>
@@ -142,11 +142,13 @@ Functionality : It will show the product details
 </div>
 
 <div class="container-fluid">
-<div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-<cfinclude template="/view/footer.cfm" />
-</div>
-</div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+          <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
+            <cfinclude template="/view/footer.cfm" />
+          </cfcache>
+        </div>
+    </div>
 </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

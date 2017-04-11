@@ -49,7 +49,9 @@ Functionality : It is the common header for all the pages
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <cfcache action="cache" timespan="#createTimespan(0,12,0,0)#">
                     <a href="/index.cfm"><img class=" img-size" src="/assets/images/logo.png"></a>
+                  </cfcache>
                 </div>
 
                 <div class="collapse navbar-collapse" id="myMenu">
