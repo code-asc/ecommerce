@@ -5,7 +5,7 @@
     <html lang="en">
 
     <head>
-        
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -134,7 +134,8 @@
                                                     <div class="col-md-4 col-sm-4 col-xm-4 col-lg-4">
                                                         <h4>#subCategory.categoryType#</h4>
                                                         <cfoutput>
-                                                            #subCategory.subCategoryType#
+                                                          <a href="/view/user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
+
                                                             <br/>
                                                         </cfoutput>
                                                     </div>

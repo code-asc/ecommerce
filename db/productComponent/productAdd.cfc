@@ -21,6 +21,7 @@
   <cfargument name="rating" type="numeric" required="true">
   <cfargument name="brandID" type="numeric" required="true">
 
+<cftransaction action="begin" >
 <cftry>
     <cfquery name="addphotoquery" result="getPhotoIdentity">
     INSERT INTO ProductPhoto(thumbNailPhoto,thumbNailPhotoName,largePhoto,largePhotoName,brandID,subCategoryID)
@@ -47,11 +48,13 @@
       <cfqueryparam value="#ARGUMENTS.brandID#" cfsqltype="cf_sql_int">
     )
     </cfquery>
-
+<cftransaction action="commit"/>
     <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in productInfoAndEdit.cfc . The SQL state : #cfcatch.queryError#" application="true" >
+        <cftransaction action="rollback"/>
     </cfcatch>
   </cftry>
+  </cftransaction>
   </cffunction>
 
 

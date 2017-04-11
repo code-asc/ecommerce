@@ -11,25 +11,7 @@ $.validator.setDefaults({
   }
 })
 
-$("#formEdit , #formDelete ,#formOtherBrand").validate({
-  rules:{
-    category:{
-      required:true,
-    },
-    subcategory:{
-      required:true,
-    },
-    products:{
-      required:true,
-    },
-    brandName:{
-      required:true,
-    }
-  }
-})
-
-
-  $("#formOption , #editProductAdmin").validate({
+  $("#formOption , #editProductAdmin , #formEdit ,#formDelete ,#formOtherBrand").validate({
     rules:{
       productName:{
         required:true,
@@ -52,22 +34,27 @@ $("#formEdit , #formDelete ,#formOtherBrand").validate({
       price:{
         required:true,
         number:true,
+        min:0,
       },
       unitPrice:{
         required:true,
         number:true,
+        min:0,
       },
       stock:{
         required:true,
         number:true,
+        min:0,
       },
       quantity:{
         required:true,
         number:true,
+        min:0,
       },
       discount:{
         required:true,
         number:true,
+        range:[0,100],
       },
       rating:{
         required:true,
@@ -87,6 +74,12 @@ $("#formEdit , #formDelete ,#formOtherBrand").validate({
         required:true,
       },
       productDesc:{
+        required:true,
+      },
+      products:{
+        required:true,
+      },
+      brandName:{
         required:true,
       }
     },
@@ -148,9 +141,5 @@ $("#formEdit , #formDelete ,#formOtherBrand").validate({
 $("input[name='submitEdit']").click(function(event){
   return $("#formEdit").valid();
 })
-
-
-$()
-
 
 })

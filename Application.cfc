@@ -57,6 +57,8 @@
 </cffunction>
 
 
+
+
 <cffunction name="onError" output="false" returntype="void" access="public" >
   <cfargument name="exception" type="any" required="true">
   <cfargument name="eventName" type="string" required="true">

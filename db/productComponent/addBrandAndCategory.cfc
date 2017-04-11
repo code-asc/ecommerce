@@ -8,13 +8,16 @@
 <cffunction name="addBrandToDatabase" output="false" access="public" returntype="void">
 <cfargument name="brandName" required="true" type="string">
 <cftry>
+
+    <cfset LOCAL.checkQueryStatus=true>
   <cfquery name="addquery">
     INSERT INTO Brands(brandName)
     VALUES(<cfqueryparam value="#ARGUMENTS.brandName#" cfsqltype="cf_sql_varchar">)
   </cfquery>
   <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in addBrandToDatabase function.The SQL state : #cfcatch.queryError#" application="true" >
+    <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in addBrandToDatabase function.The SQL state : #cfcatch.queryError#" application="true" >
   </cfcatch>
+
 </cftry>
 </cffunction>
 

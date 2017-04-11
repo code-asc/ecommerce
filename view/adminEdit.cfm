@@ -74,6 +74,9 @@ Functionality : It will allow the admin to edit the products
                                             </div>
                                         </div>
 
+                                        <div id="formDataShow">
+                                        </div>
+                                        
                                         <div class="col-sm-6 col-md-6">
                                             <div class="form-group">
                                                 <input class="btn btn-primary" type="submit" name="submitEdit" value="Edit Product">
@@ -81,8 +84,7 @@ Functionality : It will allow the admin to edit the products
                                         </div>
                                     </form>
 
-                                    <div id="formDataShow">
-                                    </div>
+
 
                                 </div>
                             </div>

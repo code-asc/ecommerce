@@ -33,14 +33,6 @@ Functionality :It will show all the information regarding the total products sol
 
     <cfif structKeyExists(SESSION, "stLoggedInUser")>
 
-        <!---  <cfquery name="productquery">
-      select Brands.brandName , Products.productID , Products.productName from Products
-      inner join Brands
-      on
-      Brands.brandID=Products.brandID
-    </cfquery>
---->
-
   <cfset LOCAL.adminDashBoardInfo=createObject("component","Controller.adminDashBoard")>
   <cfset LOCAL.highestPopular=LOCAL.adminDashBoardInfo.highestSaleProduct()>
   <cfset LOCAL.countrySale=LOCAL.adminDashBoardInfo.countryStatus()>
