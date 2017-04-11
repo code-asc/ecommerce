@@ -44,16 +44,7 @@
 <cffunction name="onSessionEnd" returntype="void">
   <cfargument name="SessionScope" required="true">
     <cfargument name="ApplicationScope" required="false">
-      <cftry>
-      <cfquery name="deletequery">
-        DELETE FROM OnlineUser
-        WHERE
-        userID=<cfqueryparam value=#arguments.SessionScope.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-      </cfquery>
-      <cfcatch type="Database">
-        <cflog file="ecommerece" text="#cfcatch.queryError#" application="true">
-      </cfcatch>
-    </cftry>
+  <cfinvoke method="doLogoutOf" component="db.userLogoutComponent.doUserLogout" />
 </cffunction>
 
 

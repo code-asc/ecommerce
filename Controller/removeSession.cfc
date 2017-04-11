@@ -41,7 +41,7 @@ returnType   :void
 hint         :It is used to change the user status to online
 --->
 <cffunction name="changeStatusToOnline" output="false" returntype="void" access="public">
-<cfif structKeyExists(COOKIE,"stLoggedInUser")>
+<cfif structKeyExists(SESSION,"stLoggedInUser")>
   <cfinvoke method="updateUserOnline" component="db.userComponent.countOnlineUsers" >
 </cfif>
 </cffunction>
