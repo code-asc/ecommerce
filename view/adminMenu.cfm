@@ -23,7 +23,7 @@ Functionality : It is the admin menu list
 </head>
 
 <body>
-    <cfif structKeyExists(session, "stLoggedInUser")>
+    <cfif structKeyExists(session, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ "admin">
         <div class="col-md-2 col-sm-2 sidebar">
             <ul class="nav nav-pills nav-stacked" style="border: 1px solid #337ab7 ; border-radius:8px">
                 <li class="active"><a href="/view/admin.cfm">DashBoard</a></li>

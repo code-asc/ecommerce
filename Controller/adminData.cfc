@@ -8,7 +8,7 @@
   returnType   :void
   hint         :It is used to add products and its related photos to the database
   --->
-<cffunction name="addToDatabase" access="remote" output="false" returnType="void">
+<cffunction name="addToDatabase" access="remote" output="false" returnType="string" returnformat="JSON" >
 <cfargument name="productName" type="string" required="true">
 <cfargument name="productDesc" type="string" required="true">
 <cfargument name="supplierID" type="numeric" required="true">
@@ -22,7 +22,8 @@
 <cfargument name="discount" type="numeric" required="true">
 <cfargument name="rating" type="numeric" required="true">
 <cfargument name="brandID" type="numeric" required="true">
-<cfinvoke method="addProductInfoToDatabase" component="db.productComponent.productAdd" productName="#ARGUMENTS.productName#" productDesc="#ARGUMENTS.productDesc#" supplierID=#ARGUMENTS.supplierID# subcategoryID=#ARGUMENTS.subcategoryID# unitPrice=#ARGUMENTS.unitPrice# thumbNail="#ARGUMENTS.thumbNail#" thumbNailType="#ARGUMENTS.thumbNailType#" largePhotoType="#ARGUMENTS.largePhotoType#" largePhoto="#ARGUMENTS.largePhoto#" quantity=#ARGUMENTS.quantity# discount=#ARGUMENTS.discount# rating=#ARGUMENTS.rating# brandID=#ARGUMENTS.brandID#/>
+<cfinvoke method="addProductInfoToDatabase" component="db.productComponent.productAdd" productName="#ARGUMENTS.productName#" productDesc="#ARGUMENTS.productDesc#" supplierID=#ARGUMENTS.supplierID# subcategoryID=#ARGUMENTS.subcategoryID# unitPrice=#ARGUMENTS.unitPrice# thumbNail="#ARGUMENTS.thumbNail#" thumbNailType="#ARGUMENTS.thumbNailType#" largePhotoType="#ARGUMENTS.largePhotoType#" largePhoto="#ARGUMENTS.largePhoto#" quantity=#ARGUMENTS.quantity# discount=#ARGUMENTS.discount# rating=#ARGUMENTS.rating# brandID=#ARGUMENTS.brandID# returnvariable="returnVal" />
+<cfreturn returnVal/>
 </cffunction>
 
 

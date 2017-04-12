@@ -5,7 +5,7 @@ $(document).ready(function(){
     url:"/Controller/authentication.cfc",
     data:{method:"getAllBrand"},
     success:function(responseText){
-    console.log(responseText);
+  //  console.log(responseText);
     $.each(JSON.parse(responseText),function(index,val)
   {
     $.each(val,function(index,value)

@@ -31,7 +31,7 @@ Functionality :It will show all the information regarding the total products sol
 
 <body>
 
-    <cfif structKeyExists(SESSION, "stLoggedInUser")>
+    <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ "admin">
 
   <cfset LOCAL.adminDashBoardInfo=createObject("component","Controller.adminDashBoard")>
   <cfset LOCAL.highestPopular=LOCAL.adminDashBoardInfo.highestSaleProduct()>
@@ -171,23 +171,22 @@ Functionality :It will show all the information regarding the total products sol
                                                     <div class="col-md-12 col-sm-12">
                                                         <div class="well well-lg">
                                                             <cfwebsocket name="myworld" onmessage="msgHandler" onopen="openHandler" subscribeTo="world" />
-
                                                             <script>
-                                                                var msgHandler = function(message) {
+                                                              var msgHandler = function(message) {
 
-                                                                }
+                                                              }
 
-                                                                var openHandler = function() {
+                                                              var openHandler = function() {
 
-                                                                }
+                                                              }
 
-                                                                var sendMessage = function() {
-                                                                    message = document.getElementById("updateForAll").value;
-                                                                    alert(message);
-                                                                    myworld.authenticate("admin", "admin");
-                                                                    myworld.publish("world", message);
-                                                                }
-                                                            </script>
+                                                              var sendMessage = function() {
+                                                                  message = document.getElementById("updateForAll").value;
+                                                                  alert(message);
+                                                                  myworld.authenticate("admin", "admin");
+                                                                  myworld.publish("world", message);
+                                                              }
+                                                          </script>
 
                                                             <h3 style="margin-top:0px ; margin-bottom:20px">Post Notifications</h3>
                                                             <div class='form-group'>

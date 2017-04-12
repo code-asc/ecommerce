@@ -1,7 +1,3 @@
-<!---
-FileName      :header.cfm
-Functionality : It is the common header for all the pages
---->
 <!DOCTYPE html>
 <cfheader name="Expires" value="#Now()#">
     <cfheader name="pragma" value="no-change" />
@@ -24,6 +20,7 @@ Functionality : It is the common header for all the pages
     </head>
 
     <body>
+
 <cfset LOCAL.categoryInfoObject=createObject("component","Controller.retriveProduct")>
         <cfif StructKeyExists(session, "stLoggedInUser")>
             <cfthread action="run" name="setOnlineThread">
@@ -34,7 +31,7 @@ Functionality : It is the common header for all the pages
         <cfif structKeyExists(form, "submit")>
           <cflog file="ecommerece" text="form submitted" application="true" >
             <cfif StructKeyExists(form, "searchVal")>
-              <!---  <cfset SESSION.searchVal="#form.searchVal#">--->
+                <!---<cfset session.searchVal="#form.searchVal#">--->
 
                     <cflocation url="/view/searchPage.cfm?brand=#form.searchVal#" addtoken="false" />
 
@@ -49,9 +46,7 @@ Functionality : It is the common header for all the pages
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <cfcache action="cache" timespan="#createTimespan(0,12,0,0)#">
                     <a href="/index.cfm"><img class=" img-size" src="/assets/images/logo.png"></a>
-                  </cfcache>
                 </div>
 
                 <div class="collapse navbar-collapse" id="myMenu">
@@ -139,7 +134,8 @@ Functionality : It is the common header for all the pages
                                                     <div class="col-md-4 col-sm-4 col-xm-4 col-lg-4">
                                                         <h4>#subCategory.categoryType#</h4>
                                                         <cfoutput>
-                                                            #subCategory.subCategoryType#
+                                                          <a href="/view/user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
+
                                                             <br/>
                                                         </cfoutput>
                                                     </div>
@@ -168,16 +164,16 @@ Functionality : It is the common header for all the pages
                         <li>
 
                             <a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" data-target="loginButton" style="padding-top:10px">
-                                <cfif structKeyExists(SESSION,"stLoggedInUser") AND len(SESSION.stLoggedInUser.userProfilePhoto) GT 0>
-                                    <cfoutput><span style="float:left"><img width="30" height="30" class="img-circle img-responsive" src="#SESSION.stLoggedInUser.userProfilePhoto#" alt=" "></span></cfoutput>
+                                <cfif structKeyExists(session,"stLoggedInUser") AND len(session.stLoggedInUser.userProfilePhoto) GT 0>
+                                    <cfoutput><span style="float:left"><img width="30" height="30" class="img-circle img-responsive" src="#session.stLoggedInUser.userProfilePhoto#" alt=" "></span></cfoutput>
                                     <cfelse>
                                 <i class="fa fa-user" aria-hidden="true"></i>&nbsp
                               </cfif>
                                 <cfoutput>
 
-                                    <cfif structKeyExists(SESSION, "stLoggedInUser")>
+                                    <cfif structKeyExists(session, "stLoggedInUser")>
 
-                                      <cfif NOT len(SESSION.stLoggedInUser.userProfilePhoto) GT 0>
+                                      <cfif NOT len(session.stLoggedInUser.userProfilePhoto) GT 0>
                                         <i class="fa fa-caret-down" aria-hidden="true"></i>
                                       </cfif>
 
@@ -191,16 +187,16 @@ Functionality : It is the common header for all the pages
                             <ul class="dropdown-menu" id="loginButton">
 
                                 <!---if user exists , we hide SignIn and SignUp options--->
-                                <cfif structKeyExists(SESSION, "stLoggedInUser")>
+                                <cfif structKeyExists(session, "stLoggedInUser")>
                                     <li class="dropdown-header">
                                         <span id="fullName">
                <cfoutput>
-               #SESSION.stLoggedInUser.userFirstName# #SESSION.stLoggedInUser.userMiddleName# #SESSION.stLoggedInUser.userLastName#
+               #session.stLoggedInUser.userFirstName# #session.stLoggedInUser.userMiddleName# #session.stLoggedInUser.userLastName#
                </cfoutput>
              </span>
                                     </li>
 
-                                    <cfif SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+                                    <cfif session.stLoggedInUser.userRole EQ 'admin'>
                                         <li><a href="/view/admin.cfm">Admin Edit</a></li>
                                         <cfelse>
                                             <li class="divider"></li>
@@ -271,13 +267,13 @@ Functionality : It is the common header for all the pages
 
                         </li>
                         <!--- --->
-                        <cfif structKeyExists(SESSION, "stLoggedInUser") AND NOT SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+                        <cfif structKeyExists(session, "stLoggedInUser") AND NOT session.stLoggedInUser.userRole EQ 'admin'>
                             <li><a href="/view/userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
-<cfif structKeyExists(SESSION,"cartCount")>
+<cfif structKeyExists(session,"cartCount")>
   <span class="badge" id="traceCount">
 
   <cfoutput>
-    #SESSION.cartCount#
+    #session.cartCount#
   </cfoutput>
   </span>
 
@@ -297,7 +293,7 @@ Functionality : It is the common header for all the pages
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="./script/autoSuggestion.js"></script>--->
-        <script src="/assets/script/userSocketAjax.js"></script>
+      <script src="/assets/script/userSocketAjax.js"></script>
         <script src="/assets/script/onWindowClose.js"></script>
         <script src="/assets/script/onNotificationClick.js"></script>
     </body>

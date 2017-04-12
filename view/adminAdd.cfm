@@ -30,7 +30,7 @@ Functionality : It will allow the admin to add item
     <![endif]-->
     </head>
 
-    <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+    <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ 'admin'>
       <cfset LOCAL.productAddOption=createObject("component","Controller.getProductIDList")>
         <cfset LOCAL.categoryOption=LOCAL.productAddOption.getOnlyCategory()>
         <cfset LOCAL.brandOption=LOCAL.productAddOption.getOnlyBrand()>

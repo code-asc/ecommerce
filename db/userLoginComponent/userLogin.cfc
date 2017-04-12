@@ -10,7 +10,7 @@
     <cfargument name="userPassword" required="true" type="string">
       <cftry>
         <cfquery name="loginUser">
-          SELECT Customer.userID , Customer.userFirstName , Customer.userMiddleName , Customer.userLastName , Customer.userEmail , Customer.userPassword, Customer.userProfilePhoto  from Customer
+          SELECT Customer.userID , Customer.userFirstName , Customer.userMiddleName , Customer.userLastName , Customer.userEmail , Customer.userPassword, Customer.userProfilePhoto , Customer.roles  from Customer
           WHERE
           userEmail=<cfqueryparam value = "#ARGUMENTS.userEmail#" CFSQLType = "cf_sql_varchar" >
             AND

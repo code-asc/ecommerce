@@ -42,11 +42,18 @@ function ajaxAddCall() {
             rating: rating,
             brandID: brandID
         },
-        success: function(responseText) {
-            $("#formData").append("<div class='alert alert-success'>New Product added to Database</div>").delay(4000).fadeOut();
-        },
-        error: function(e) {
-            $("#formData").append("<div class='alert alert-success'>Error</div>")
-        }
+    }).done(function(responseText,textStatus,jsXHR){
+      if(JSON.parse(responseText)=="success")
+      {
+      alert(responseText);
+      $("#formData").append("<div class='alert alert-success'>New Product added to Database</div>").delay(4000).fadeOut();
+    }
+      else {
+        alert(responseText)
+        $("#formData").append("<div class='alert alert-success'>Something went wrong :-(</div>").delay(4000).fadeOut();
+      }
+    }).fail(function(jsXHR,textStatus,errorThrown){
+      $("#formData").append("<div class='alert alert-success'>Error</div>")
+
     });
 }

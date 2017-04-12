@@ -25,7 +25,7 @@ Functionality : It will allow the admin to edit the product directly
 
 <body>
 
-    <cfif StructKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+    <cfif StructKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ 'admin'>
 
         <cfif structKeyExists(URL, "productID")>
             <cfset SESSION.productID=#URL.productID#>
@@ -136,7 +136,7 @@ Functionality : It will allow the admin to edit the product directly
 
                                             <!--- Condition for admin --->
 
-                                            <cfif SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+                                            <cfif SESSION.stLoggedInUser.userRole EQ 'admin'>
 
 
 

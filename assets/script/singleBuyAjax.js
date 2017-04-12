@@ -4,7 +4,6 @@ $(document).ready(function(){
       url:"/Controller/singleBuy.cfc",
       data:{method:"buyNow"},
       success:function(){
-        alert("works");
         $(location).attr('href','payment.cfm');
       }
     });

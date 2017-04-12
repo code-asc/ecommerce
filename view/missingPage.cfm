@@ -21,6 +21,7 @@ Functionality : It will be shown when template is missing
     <![endif]-->
   </head>
   <body>
+
 <cfset currentURL = CGI.SERVER_NAME & CGI.PATH_INFO>
     <cfoutput>
       <h2>Page not found</h2>

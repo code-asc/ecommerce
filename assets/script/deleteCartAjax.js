@@ -4,7 +4,8 @@ function deleteFromCart(l)
     type:"POST",
     url:"/Controller/authentication.cfc?deleteCart",
     data:{val:33},
-    success:function(responseText){
-      alert(responseText);
-    }
-  })}
+
+  }).fail(function(jqXHR,textStatus,errorThrown){
+    console.log(jqXHR.responseText);
+  })
+}

@@ -28,7 +28,7 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
   <cfprocparam value="#FORM.email#" cfsqltype="cf_sql_varchar" />
   <cfprocparam value="#FORM.password#" cfsqltype="cf_sql_varchar" />
   <cfprocparam value="#FORM.mobile#" cfsqltype="cf_sql_varchar"/>
-
+  <cfprocparam  value="customer" cfsqltype="cf_sql_varchar" />
 </cfstoredproc>
 
 <cfreturn errorArray>
@@ -88,9 +88,9 @@ hint         :It is used to perform login
        </cfif>
        <!--- --->
        <cflogin>
-         <cfloginuser name="#loginUser.userFirstName# #loginUser.userMiddleName# #loginUser.userLastName#" password="#loginUser.userPassword#" roles="customer" />
+         <cfloginuser name="#loginUser.userFirstName# #loginUser.userMiddleName# #loginUser.userLastName#" password="#loginUser.userPassword#" roles="#loginUser.roles#" />
        </cflogin>
-       <cfset SESSION.stLoggedInUser={"userFirstName"=#loginUser.userFirstName# , "userMiddleName"=#loginUser.userMiddleName# , "userLastName"=#loginUser.userLastName# , "userID"=#loginUser.userID# ,"userEmail"=#loginUser.userEmail# , "userProfilePhoto"=#loginUser.userProfilePhoto#}>
+       <cfset SESSION.stLoggedInUser={"userFirstName"=#loginUser.userFirstName# , "userMiddleName"=#loginUser.userMiddleName# , "userLastName"=#loginUser.userLastName# , "userID"=#loginUser.userID# ,"userEmail"=#loginUser.userEmail# , "userProfilePhoto"=#loginUser.userProfilePhoto# ,"userRole"="#loginUser.roles#"}>
 
 <!---Update status --->
 <cfset VARIABLES.userInfo.changeUserStatus()>

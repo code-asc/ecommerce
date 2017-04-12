@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $("input[name='submitEditProduct']").click(function(event){
-    alert("wow");
+  
     if($("#editProductAdmin").valid())
     {
       submitEditProductAJAXCall();
@@ -27,20 +27,15 @@ function submitEditProductAJAXCall()
   $.ajax({
     url:"/Controller/adminData.cfc?method=editProductRemote",
     data:{productID:productID,productDesc:productDesc,unitPrice:unitPrice,unitInStock:stock,discount:discount,thumbNailPhoto:thumbNail,largePhoto:largePhoto},
-    success:function(responseText){
-      if(responseText==1){
-      $("#infoAboutEdit").append("<div class='alert alert-success'>Change Saved</div>").delay(4000).fadeOut();
+  }).done(function(responseText,textStatus,jsXHR){
+    if(responseText==1){
+    $("#infoAboutEdit").append("<div class='alert alert-success'>Change Saved</div>").delay(4000).fadeOut();
+  }
 
-
+    else {
+      $("#infoAboutEdit").append("<div class='alert alert-success'>Something went wrong</div>");
     }
-
-      else {
-        $("#infoAboutEdit").append("<div class='alert alert-success'>Something went wrong</div>");
-      }
-    },
-    error:function(e)
-    {
-        $("#infoAboutEdit").append("<div class='alert alert-success'>Error</div>")
-    }
+  }).fail(function(jsXHR,textStatus,errorThrown){
+    $("#infoAboutEdit").append("<div class='alert alert-success'>Error</div>");
   });
 }

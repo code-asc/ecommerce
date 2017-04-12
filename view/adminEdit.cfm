@@ -25,8 +25,9 @@ Functionality : It will allow the admin to edit the products
 </head>
 
 <body>
-  <cfset LOCAL.productAddOption=createObject("component","Controller.getProductIDList")>
-    <cfif structKeyExists(SESSION, "stLoggedInUser")>
+
+    <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ "admin">
+      <cfset LOCAL.productAddOption=createObject("component","Controller.getProductIDList")>
         <cfif structKeyExists(form, "submitEdit") AND StructKeyExists(form, "products")>
             <cfinvoke component="Controller.adminData" method="editProduct" productID=#form.products# productDesc="#form.productDesc#" unitPrice=#form.unitPrice# unitInStock=#form.unitInStock# discount=#form.discount# thumbNailPhoto="#form.thumbNailPhoto#" largePhoto="#form.largePhoto#" />
         </cfif>
@@ -76,7 +77,7 @@ Functionality : It will allow the admin to edit the products
 
                                         <div id="formDataShow">
                                         </div>
-                                        
+
                                         <div class="col-sm-6 col-md-6">
                                             <div class="form-group">
                                                 <input class="btn btn-primary" type="submit" name="submitEdit" value="Edit Product">

@@ -25,7 +25,7 @@ Functionality : It will allow admin to add new brands
 
 <body>
 
-    <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+    <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ 'admin'>
 
         <cfinclude template="/view/header.cfm">
             <div class="container-fluid">

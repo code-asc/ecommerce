@@ -1,7 +1,7 @@
 <cfcomponent>
 
 <cfset this.name="application_2_1_1">
-<cfset this.wsChannels=[{name="world" ,cfcListener="myChannelListener"}]>
+<cfset this.wsChannels=[{name="world",cfcListener="myChannelListener"}]>
 <cfset this.datasource="ecommerece">
   <cfset this.sessionManagement=true>
    <!--- <cfset this.clientManagement=true> --->
@@ -29,6 +29,7 @@
           <!--- Store date the session was created. --->
           <cfset SESSION.DateInitialized = Now() />
 </cffunction>
+
 
 <cffunction name="onApplicationStart" returntype="boolean" output="false" access="public">
   <cfreturn true>

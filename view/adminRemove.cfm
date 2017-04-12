@@ -22,7 +22,7 @@ Functionality : It will allow the admin to remove the product
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<cfif structKeyExists(SESSION, "stLoggedInUser")>
+<cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ "admin">
     <cfif structKeyExists(FORM, "submitDelete")>
         <cfinvoke method="deleteFromDatabase" component="Controller.adminData" photoID=#form.products#/>
 

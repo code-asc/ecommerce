@@ -18,7 +18,7 @@
     <![endif]-->
   </head>
   <body>
-<cfif structKeyExists(SESSION,"stLoggedInUser") AND NOT SESSION.stLoggedInUser.userEmail EQ 'admim@admin.com'>
+<cfif structKeyExists(SESSION,"stLoggedInUser") AND NOT SESSION.stLoggedInUser.userRole EQ 'admin'>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <cfinclude template="/view/header.cfm" />
 <div class="container">

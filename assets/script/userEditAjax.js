@@ -8,14 +8,11 @@ $(document).ready(function(){
 lastName:$("input[name='lastName']").val(),
 email:$("input[name='email']").val(),
 phone:$("input[name='mobile']").val()},
+  }).done(function(responseText,textStatus,jqXHR){
+    $("#showMessage").append("<div class='alert alert-success'>Changes Saved</div>").delay(4000).fadeOut();
 
-success:function(responseText){
-  alert("wow");
-$("#showMessage").append("<div class='alert alert-success'>Changes Saved</div>").delay(4000).fadeOut();
-},
-error:function(err){
-  $("#showMessage").append("<div class='alert alert-success'>Something went wrong :-( )</div>").delay(4000).fadeOut();
-}
+  }).fail(function(jsXHR,textStatus,errorThrown){
+    $("#showMessage").append("<div class='alert alert-success'>Something went wrong :-( )</div>").delay(4000).fadeOut();
   })
   })
 })

@@ -1,24 +1,23 @@
 $(document).ready(function() {
     $("#addBrand").click(function(event) {
 
+            $("#formOtherData").empty();
+            $("#formOtherData").css({"display":"block"});
         if ($("#formOtherBrand").valid()) {
             $.ajax({
                 url: "/Controller/adminData.cfc?method=addBrand",
                 data: {
                     brandName: $("#brandName").val()
                 },
-                success: function(responseText) {
-                    $("#formOtherData").append("<div class='alert alert-success'>New Brand added to Database</div>").delay(4000).fadeOut();
-                },
-                error: function(err) {
-                    $("#formOtherData").append("<div class='alert alert-success'>Something went wrong :( </div>").delay(4000).fadeOut();
-                }
+            }).done(function(responseText,textStatus,jqXHR){
+              $("#formOtherData").append("<div class='alert alert-success'>New Brand added to Database</div>").delay(4000).fadeOut();
+            }).fail(function(jqXHR,textStatus,errorThrown){
+              $("#formOtherData").append("<div class='alert alert-success'>Something went wrong :( </div>").delay(4000).fadeOut();
             })
         }
     });
 
     $("#addCategory").click(function(event) {
-
       $("#formOtherData").empty();
       $("#formOtherData").css({"display":"block"});
         if ($("#formOtherCategory").valid()) {
@@ -27,12 +26,10 @@ $(document).ready(function() {
                 data: {
                     categoryType: $("#category").val()
                 },
-                success: function(responseText) {
-                    $("#formOtherData").append("<div class='alert alert-success'>New Category added to Database</div>").delay(4000).fadeOut();
-                },
-                error: function(err) {
-                    $("#formOtherData").append("<div class='alert alert-success'>Something went wrong :( </div>").delay(4000).fadeOut();
-                }
+            }).done(function(responseText,textStatus,jqXHR){
+              $("#formOtherData").append("<div class='alert alert-success'>New Category added to Database</div>").delay(4000).fadeOut();
+            }).fail(function(jqXHR,textStatus,errorThrown){
+              $("#formOtherData").append("<div class='alert alert-success'>Something went wrong :( </div>").delay(4000).fadeOut();
             })
         }
     })

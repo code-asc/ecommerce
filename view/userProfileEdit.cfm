@@ -55,7 +55,7 @@ Functionality : It will show the profile details of the customer
 
 
               <cfset LOCAL.getquery=LOCAL.userProfile.getUserDetail()>
-                <cfinclude template="header.cfm">
+                <cfinclude template="/view/header.cfm">
                     <cfoutput query="LOCAL.getquery">
                         <div class="container">
                             <cfform enctype="multipart/form-data" id="userEditForm" name="userEditForm">

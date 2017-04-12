@@ -82,7 +82,7 @@ Functionality : It will show the product details of single product
                 </div>
                 </cfoutput>
                 <cfelse>
-                    <cfinclude template="/view/header.cfm" />
+                    <cfinclude template="/header.cfm" />
 
                     <cfif structKeyExists(SESSION, "allowPreviousURL") AND SESSION.allowPreviousURL EQ true>
                         <cfset SESSION.previousURL=#SESSION.currentURL#>
@@ -97,7 +97,7 @@ Functionality : It will show the product details of single product
                                 <cfset LOCAL.productQuery=createObject("component","Controller.retriveProduct")>
                                   <cfset LOCAL.retriveProduct=LOCAL.productQuery.getProducts(url.productID)>
                                     <cfif LOCAL.retriveProduct.recordCount GT 0>
-                                        <cfif (structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com') AND NOT LOCAL.retriveProduct.recordCount EQ 1>
+                                        <cfif (structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ 'admin') AND NOT LOCAL.retriveProduct.recordCount EQ 1>
                                             <cflocation url=#SESSION.previousURL# />
                                         </cfif>
 
@@ -124,7 +124,7 @@ Functionality : It will show the product details of single product
                                                             </p>
                                                             <strong class="label label-primary">Product Info</strong>
                                                             <br/> #LOCAL.retriveProduct.productDesc#
-                                                            <cfif StructKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+                                                            <cfif StructKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ 'admin'>
                                                                 <h4>(Left :#LOCAL.retriveProduct.unitInStock#)</h4></cfif>
                                                             <br/>
                                                         </div>
@@ -139,7 +139,7 @@ Functionality : It will show the product details of single product
                                                                 <cfelse>
 
                                                                     <!--- Condition for admin --->
-                                                                    <cfif NOT SESSION.stLoggedInUser.userEmail EQ 'admin@admin.com'>
+                                                                    <cfif NOT SESSION.stLoggedInUser.userRole EQ 'admin'>
                                                                         <cfif LOCAL.retriveProduct.unitInStock GT 0>
                                                                             <a class="btn btn-success" href="/view/user_action_single.cfm?buyNow"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</a>
                                                                               <button class="btn btn-info" id="onAddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>

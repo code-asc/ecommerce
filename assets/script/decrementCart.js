@@ -4,15 +4,13 @@ $(document).ready(function(){
     $.ajax({
       url:'/Controller/authentication.cfc?method=decrementQuantity',
       data:{id:JSON.stringify(detailID) },
-      success:function(responseText)
-      {
-      //  alert(responseText);
-        var eachPrice=parseInt($("#"+detailID+"eachPrice").html());
+    }).done(function(responseText,textStatus,jsXHR){
+      var eachPrice=parseInt($("#"+detailID+"eachPrice").html());
 
-        $.each(JSON.parse(responseText),function(index,val){
-          $.each(val,function(index,key)
-        {
-          if(index=="QUANTITY"){
+      $.each(JSON.parse(responseText),function(index,val){
+        $.each(val,function(index,key)
+      {
+        if(index=="QUANTITY"){
 $("#"+detailID).html(key);
 }
 else if (index=="SUM") {
@@ -20,15 +18,14 @@ $("#totalPriceAll").text(key);
 }
 else if(index=="TOTALCART")
 {
-  $("#traceCount").text(key);
+$("#traceCount").text(key);
 }
 else{
-  $("#"+detailID+"paraID").html("Total:Rs.<strong><span id="+detailID+"SingleProduct"+">"+key+"</span></strong>");
+$("#"+detailID+"paraID").html("Total:Rs.<strong><span id="+detailID+"SingleProduct"+">"+key+"</span></strong>");
 
 }
-        })
       })
-      }
+    })
     })
   });
 })
