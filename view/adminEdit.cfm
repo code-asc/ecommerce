@@ -34,7 +34,7 @@ Functionality : It will allow the admin to edit the products
         <cfset LOCAL.categoryOption=LOCAL.productAddOption.getOnlyCategory()>
 
         <body>
-            <cfinclude template="/view/header.cfm">
+            <cfinclude template="/common/header.cfm">
                 <div class="container-fluid">
                     <cfinclude template="/view/adminMenu.cfm">
 

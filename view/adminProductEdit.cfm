@@ -31,7 +31,7 @@ Functionality : It will allow the admin to edit the product directly
             <cfset SESSION.productID=#URL.productID#>
         </cfif>
 
-        <cfinclude template="/view/header.cfm" />
+        <cfinclude template="/common/header.cfm" />
 
         <cfset SESSION.currentURL=#cgi.SCRIPT_NAME#>
             <cfset SESSION.currentURL=#replace(SESSION.currentURL, "/project_ecommerce/", "", "All")#>
@@ -161,7 +161,7 @@ Functionality : It will allow the admin to edit the product directly
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                                        <cfinclude template="/view/footer.cfm" />
+                                        <cfinclude template="/common/footer.cfm" />
                                     </div>
                                 </div>
                             </div>

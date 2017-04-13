@@ -27,16 +27,17 @@ Functionality : It will show sign up page
 
 <body>
 
-    <cfinclude template="/view/header.cfm" />
+    <cfinclude template="/common/header.cfm" />
 
     <cfif StructKeyExists(FORM, "submit")>
-        <cfset checkIfNewUserCreatedError=createObject( "component", "Controller.authentication").addNewUser()>
-            <cfif ArrayLen(checkIfNewUserCreatedError) GT 0>
-                <cfset checkIfNewUserCreated=false>
+        <cfset LOCAL.checkIfNewUserCreatedError=createObject( "component", "Controller.authentication").addNewUser()>
+
+            <cfif ArrayLen(LOCAL.checkIfNewUserCreatedError) GT 0>
+                <cfset LOCAL.checkIfNewUserCreated=false>
                     <cfelse>
-                        <cfset checkIfNewUserCreated=true>
+                        <cfset LOCAL.checkIfNewUserCreated=true>
             </cfif>
-            <cfif checkIfNewUserCreated EQ true>
+            <cfif LOCAL.checkIfNewUserCreated EQ true>
                 <div class="alert alert-success">
                     <strong>Success....Registered</strong>
                     <br/>
@@ -46,7 +47,7 @@ Functionality : It will show sign up page
                 <cfelse>
                     <div class="alert alert-warning">
                         <strong>
-      <cfloop array="#checkIfNewUserCreatedError#" index="item">
+      <cfloop array="#LOCAL.checkIfNewUserCreatedError#" index="item">
         <cfoutput>
           #item#
         </cfoutput>
@@ -103,7 +104,7 @@ Functionality : It will show sign up page
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
               <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-                <cfinclude template="/view/footer.cfm" />
+                <cfinclude template="/common/footer.cfm" />
               </cfcache>
             </div>
         </div>

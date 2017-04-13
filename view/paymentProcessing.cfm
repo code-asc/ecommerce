@@ -20,7 +20,7 @@
   <body>
 <cfif structKeyExists(SESSION,"stLoggedInUser") AND NOT SESSION.stLoggedInUser.userRole EQ 'admin'>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<cfinclude template="/view/header.cfm" />
+<cfinclude template="/common/header.cfm" />
 <div class="container">
   <p>Processing....</p>
 </div>
@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
           <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-            <cfinclude template="/view/footer.cfm" />
+            <cfinclude template="/common/footer.cfm" />
           </cfcache>
         </div>
     </div>

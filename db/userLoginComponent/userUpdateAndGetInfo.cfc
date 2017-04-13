@@ -1,5 +1,25 @@
 <cfcomponent>
 
+<!---
+function    :checkUserAlreadyRegistered
+returnType  :query
+hint        :It is used to check userEmail is already registered or not.
+--->
+<cffunction name="checkUserAlreadyRegistered" output="false" returntype="query" access="public">
+  <cfargument name="email" required="true" type="string"/>
+  <cftry>
+    <cfquery name="checkquery">
+    SELECT userEmail FROM Customer WHERE
+    userEmail=<cfqueryparam value=#email#  cfsqltype="cf_sql_varchar">
+    </cfquery>
+    <cfcatch type="database">
+      <cflog text="error in userUpdateAndGetInfo.cfc in checkUserAlreadyRegistered . The SQL error : #cfcatch.queryError#" application="true" />
+    </cfcatch>
+  </cftry>
+  <cfreturn checkquery/>
+</cffunction>
+
+
   <!---
   function     :getUserInfo
   returnType   :query

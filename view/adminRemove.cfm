@@ -30,7 +30,7 @@ Functionality : It will allow the admin to remove the product
       <cfinvoke method="getOnlyCategory" component="Controller.getProductIDList" returnvariable="categoryquery" />
 
     <body>
-        <cfinclude template="/view/header.cfm">
+        <cfinclude template="/common/header.cfm">
             <div class="container-fluid">
                 <cfinclude template="/view/adminMenu.cfm">
 

@@ -28,7 +28,7 @@ Functionality : It will show the order details of the customer
     <cfif NOT StructKeyExists(SESSION, "stLoggedInUser")>
         <cflocation url="/view/signin.cfm" />
         <cfelse>
-            <cfinclude template="/view/header.cfm" />
+            <cfinclude template="/common/header.cfm" />
             <cfinvoke component="Controller.orderDetails" method="showDetails" returnvariable="detailquery">
                 <!---<cfdump var="#detailquery#">--->
 
@@ -77,7 +77,7 @@ Functionality : It will show the order details of the customer
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                                   <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-                                    <cfinclude template="/view/footer.cfm" />
+                                    <cfinclude template="/common/footer.cfm" />
                                   </cfcache>
                                 </div>
                             </div>

@@ -42,7 +42,7 @@ Functionality : It will show the product details of single product
 
             <cfinvoke method="getAddressInProductPage" component="Controller.addressEntry" returnvariable="addressquery">
 
-                <cfinclude template="/view/header.cfm" />
+                <cfinclude template="/common/header.cfm" />
                 <div class="container-fluid">
                     <div class="col-md-4 col-sm-offset-2 col-xs-offset-4 ">
                         <div class="panel panel-info">
@@ -82,7 +82,7 @@ Functionality : It will show the product details of single product
                 </div>
                 </cfoutput>
                 <cfelse>
-                    <cfinclude template="/header.cfm" />
+                    <cfinclude template="/common/header.cfm" />
 
                     <cfif structKeyExists(SESSION, "allowPreviousURL") AND SESSION.allowPreviousURL EQ true>
                         <cfset SESSION.previousURL=#SESSION.currentURL#>
@@ -206,7 +206,7 @@ Functionality : It will show the product details of single product
 <div class="container-fluid">
 <div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-<cfinclude template="/view/footer.cfm" />
+<cfinclude template="/common/footer.cfm" />
 </div>
 </div>
 </div>
@@ -215,7 +215,7 @@ Functionality : It will show the product details of single product
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
           <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-            <cfinclude template="/view/footer.cfm" />
+            <cfinclude template="/common/footer.cfm" />
           </cfcache>
         </div>
     </div>

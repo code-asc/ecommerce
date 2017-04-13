@@ -27,15 +27,18 @@
   --->
   <cffunction name="updateUserToOffline" output="false" returntype="void" access="public">
     <cftry>
+      <cfif StructKeyExists(SESSION, "stLoggedInUser")>
       <cfquery name="changeStatusToOffline">
         UPDATE OnlineUser
         SET status='offline'
         WHERE
-        userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+        userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
+    </cfif>
       <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in userRemoveOnline.cfc in updateUserToOffline function .The SQL state : #cfcatch.queryError#" application="true" >
       </cfcatch>
+
     </cftry>
   </cffunction>
 

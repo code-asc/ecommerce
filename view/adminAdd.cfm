@@ -38,7 +38,7 @@ Functionality : It will allow the admin to add item
             <cfset LOCAL.supplierOption=LOCAL.productAddOption.getOnlySupplier()>
 
         <body>
-            <cfinclude template="/view/header.cfm">
+            <cfinclude template="/common/header.cfm">
                 <div class="container-fluid">
                     <cfinclude template="/view/adminMenu.cfm">
 

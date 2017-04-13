@@ -27,7 +27,7 @@ Functionality : It will show the address details to the customer if exists
 
 
     <cfinvoke method="getAddressInProductPage" component="Controller.addressEntry"  returnvariable="addressquery" />
-    <cfinclude template="/view/header.cfm" />
+    <cfinclude template="/common/header.cfm" />
 
     <div class="container">
         <div class="row">
@@ -67,7 +67,7 @@ Functionality : It will show the address details to the customer if exists
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                   <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-                    <cfinclude template="/view/footer.cfm" />
+                    <cfinclude template="/common/footer.cfm" />
                   </cfcache>
                 </div>
             </div>

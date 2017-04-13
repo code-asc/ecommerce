@@ -41,7 +41,7 @@ Functionality : It will show the order details of the customer
                 <cflocation url="/view/addressConfirm.cfm" addtoken="false" />
             </cfif>
 
-            <cfinclude template="/view/header.cfm">
+            <cfinclude template="/common/header.cfm">
                 <cfparam name="total" default=0>
                     <div class="container">
                         <cfif structKeyExists(SESSION, "stLoggedInUser")>
@@ -122,7 +122,7 @@ Functionality : It will show the order details of the customer
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
                                   <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-                                    <cfinclude template="/view/footer.cfm" />
+                                    <cfinclude template="/common/footer.cfm" />
                                   </cfcache>
                                 </div>
                             </div>

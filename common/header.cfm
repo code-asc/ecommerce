@@ -28,8 +28,8 @@
             </cfthread>
         </cfif>
 
-        <cfif structKeyExists(form, "submit")>
-          <cflog file="ecommerece" text="form submitted" application="true" >
+        <cfif structKeyExists(form, "searchSubmit")>
+          <cflog file="ecommerece" text="search value submitted" application="true" >
             <cfif StructKeyExists(form, "searchVal")>
                 <!---<cfset session.searchVal="#form.searchVal#">--->
 
@@ -149,11 +149,11 @@
                             </div>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-left" action="header.cfm" method="post">
+                    <form class="navbar-form navbar-left" action="/common/header.cfm" method="post">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search" name="searchVal" id="getSuggestion">
                             <div class="input-group-btn">
-                                <button class="btn btn-default btn-search-color" name="submit" type="submit">
+                                <button class="btn btn-default btn-search-color" name="searchSubmit" type="submit">
                                     <i class="glyphicon glyphicon-search"></i>
                                 </button>
                             </div>

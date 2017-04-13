@@ -27,7 +27,7 @@ Functionality : It will allow admin to add new brands
 
     <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ 'admin'>
 
-        <cfinclude template="/view/header.cfm">
+        <cfinclude template="/common/header.cfm">
             <div class="container-fluid">
                 <cfinclude template="/view/adminMenu.cfm">
 

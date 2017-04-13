@@ -32,7 +32,7 @@
     </div>
     --->
 
-        <cfinclude template="/view/header.cfm" />
+        <cfinclude template="/common/header.cfm" />
         <cfset SESSION.currentURL=#CGI.SCRIPT_NAME#>
             <cfset SESSION.currentURL=#replace(SESSION.currentURL, "/project_ecommerce/", "", "All")#>
 

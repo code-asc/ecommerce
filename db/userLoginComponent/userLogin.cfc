@@ -1,4 +1,4 @@
-<cfcomponent>
+<cfcomponent extends="db.userLoginComponent.userUpdateAndGetInfo" >
 
   <!---
   function     :doUserLogin

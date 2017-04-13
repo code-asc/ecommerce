@@ -1,4 +1,5 @@
 <cfcomponent>
+
 <cfset VARIABLES.userInfo=createObject("component","db.userLoginComponent.isUserOnline")>
 <cfset VARIABLES.productInfo=createObject("component","db.productComponent.productInfo")>
 <cfset VARIABLES.addressInfo=createObject("component","db.addressComponent.searchAndGetAddress")>
@@ -11,13 +12,9 @@
   --->
 <cffunction name="addNewUser" output="false" access="public" returnType="array">
 
-<cfset var errorArray=arrayNew(1)>
+<cfset  LOCAL.errorArray=arrayNew(1)>
   <cfif IsValid("email", form.email)>
-<cfset var registerEmail=#form.email#>
-<cfquery name="myquery">
-select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmail#  cfsqltype="cf_sql_varchar">
-</cfquery>
-
+<cfset myquery=VARIABLES.userInfo.checkUserAlreadyRegistered(email=#form.email#)>
 
 <cfif myquery.recordCount EQ 0>
 
@@ -31,16 +28,16 @@ select userEmail from Customer where userEmail=<cfqueryparam value=#registerEmai
   <cfprocparam  value="customer" cfsqltype="cf_sql_varchar" />
 </cfstoredproc>
 
-<cfreturn errorArray>
+<cfreturn LOCAL.errorArray>
 <cfelse>
-  <cfset arrayAppend(errorArray, "This email is already registered")>
-<cfreturn errorArray>
+  <cfset arrayAppend(LOCAL.errorArray, "This email is already registered")>
+<cfreturn LOCAL.errorArray>
 </cfif>
 
 
 <cfelse>
-  <cfset arrayAppend(errorArray,"Invalid Email Id")>
-  <cfreturn errorArray>
+  <cfset arrayAppend(LOCAL.errorArray,"Invalid Email Id")>
+  <cfreturn LOCAL.errorArray>
 </cfif>
 
 </cffunction>

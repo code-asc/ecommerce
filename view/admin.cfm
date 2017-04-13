@@ -38,7 +38,7 @@ Functionality :It will show all the information regarding the total products sol
   <cfset LOCAL.countrySale=LOCAL.adminDashBoardInfo.countryStatus()>
   <cfset LOCAL.stData=LOCAL.adminDashBoardInfo.allDetails()>
                     <body>
-                        <cfinclude template="/view/header.cfm">
+                        <cfinclude template="/common/header.cfm">
                             <cfinclude template="/view/adminMenu.cfm">
                                 <div class="container-fluid">
 

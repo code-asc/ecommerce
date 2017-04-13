@@ -26,7 +26,8 @@ Functionality : It will retrive the product based on brand search
 </head>
 
 <body>
-    <cfinclude template="/view/header.cfm" />
+
+    <cfinclude template="/common/header.cfm" />
 
     <cfset SESSION.currentURL=#CGI.SCRIPT_NAME#>
         <cfset SESSION.currentURL=#replace(SESSION.currentURL, "/project_ecommerce/", "", "All")#>
@@ -139,7 +140,7 @@ Functionality : It will retrive the product based on brand search
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
           <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-            <cfinclude template="/view/footer.cfm" />
+            <cfinclude template="/common/footer.cfm" />
           </cfcache>
         </div>
     </div>
