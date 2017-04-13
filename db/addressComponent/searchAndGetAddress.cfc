@@ -6,18 +6,18 @@ returnType   :query
 hint         :get the addressID using userID
 --->
 <cffunction name="searchUserAddressQuery" output="false" returntype="query" access="public">
-<cftry>
-  <cfquery name="searchquery">
-    SELECT addressID FROM Address
-    WHERE
-    userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-  </cfquery>
-  <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in searchUserAddressQuery function . The SQL state : #cfcatch.queryError#" application="true" >
-      <cfset emptyQuery=queryNew("addressID")>
-        <cfreturn emptyQuery>
-  </cfcatch>
-</cftry>
+    <cftry>
+        <cfquery name="searchquery">
+            SELECT addressID FROM Address
+            WHERE
+            userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+        </cfquery>
+      <cfcatch type="Database">
+          <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in searchUserAddressQuery function . The SQL state : #cfcatch.queryError#" application="true" >
+          <cfset emptyQuery=queryNew("addressID")>
+          <cfreturn emptyQuery>
+      </cfcatch>
+    </cftry>
 <cfreturn searchquery/>
 </cffunction>
 
@@ -28,20 +28,20 @@ returnType   :query
 hint         :get address field using userID and addressTye
 --->
 <cffunction name="getAddressQuery" output="false" returntype="query" access="public">
-<cftry>
-  <cfquery name="addressquery">
-    SELECT Address.addressID,Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Address.addressType FROM Address
-    WHERE
-    userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqlType="cf_sql_int">
-    AND
-    addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
-  </cfquery>
-  <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in getAddressQuery function .The SQL state : #cfcatch.queryError#" application="true" >
-      <cfset emptyQuery=queryNew("customerAddress1,customerAddress2,customerCity,customerState,customerCountry")>
-        <cfreturn emptyQuery>
-  </cfcatch>
-</cftry>
+        <cftry>
+          <cfquery name="addressquery">
+            SELECT Address.addressID,Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Address.addressType FROM Address
+            WHERE
+            userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqlType="cf_sql_int">
+            AND
+            addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
+          </cfquery>
+          <cfcatch type="Database">
+              <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in getAddressQuery function .The SQL state : #cfcatch.queryError#" application="true" >
+              <cfset emptyQuery=queryNew("customerAddress1,customerAddress2,customerCity,customerState,customerCountry")>
+              <cfreturn emptyQuery>
+          </cfcatch>
+        </cftry>
 <cfreturn addressquery/>
 </cffunction>
 
@@ -74,9 +74,9 @@ hint         :get all the details for customers purchaseOrder
     order by Orders.orderID DESC
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in customerAddressDetail function .The SQL state : #cfcatch.queryError#" application="true" >
+        <cflog file="ecommerece" text="error occured in searchAndGetAddress.cfc in customerAddressDetail function .The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("customerAddress1,customerAddress2,customerCity,customerState,customerCountry,orderID,orderAmount,orderDate,brandName,productName,afterDiscount ,thumbNailPhoto ,status ,quantity")>
-          <cfreturn emptyQuery>
+        <cfreturn emptyQuery>
     </cfcatch>
   </cftry>
   <cfreturn detailquery/>

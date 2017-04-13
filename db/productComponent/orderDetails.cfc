@@ -11,22 +11,22 @@
     <cfargument name="status" required="true" type="string"/>
     <cfargument name="productID" required="false" default=#SESSION.productID# type="numeric" />
 
-<cftry>
-    <cfquery name="insertquery">
-       INSERT INTO OrderDetails(detailProductID,detailPrice,supplierID,status,userID,quantity)
-       VALUES(
-       <cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int"> ,
-           <cfqueryparam value=#ARGUMENTS.afterDiscount# cfsqltype="cf_sql_decimal">,
-             <cfqueryparam value=#ARGUMENTS.supplierID# cfsqltype="cf_sql_int">,
+        <cftry>
+            <cfquery name="insertquery">
+               INSERT INTO OrderDetails(detailProductID,detailPrice,supplierID,status,userID,quantity)
+               VALUES(
+               <cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int"> ,
+               <cfqueryparam value=#ARGUMENTS.afterDiscount# cfsqltype="cf_sql_decimal">,
+               <cfqueryparam value=#ARGUMENTS.supplierID# cfsqltype="cf_sql_int">,
                <cfqueryparam value="#ARGUMENTS.status#" cfsqltype="cf_sql_varchar">,
-                 <cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">,
-                   <cfqueryparam value=#1# cfsqltype="cf_sql_int">
-                     )
-     </cfquery>
-     <cfcatch type="Database">
-       <cflog file="ecommerece" text="error occured in orderDetails.cfc .The SQL state : #cfcatch.queryError#" application="true" >
-     </cfcatch>
-   </cftry>
+               <cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">,
+               <cfqueryparam value=#1# cfsqltype="cf_sql_int">
+               )
+             </cfquery>
+             <cfcatch type="Database">
+               <cflog file="ecommerece" text="error occured in orderDetails.cfc .The SQL state : #cfcatch.queryError#" application="true" >
+             </cfcatch>
+           </cftry>
   </cffunction>
 
 
@@ -38,15 +38,15 @@
   <cffunction name="updateOrderDetails" returntype="void" output="false" access="public">
     <cftry>
       <cfquery name="updatequery">
-        UPDATE OrderDetails
-        SET quantity=quantity+1
-        WHERE
-        detailProductID=<cfqueryparam value=#SESSION.productID# cfsqltype="cf_sql_int">
-          AND
-          userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+            UPDATE OrderDetails
+            SET quantity=quantity+1
+            WHERE
+            detailProductID=<cfqueryparam value=#SESSION.productID# cfsqltype="cf_sql_int">
+            AND
+            userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in orderDetails.cfc .The SQL state : #cfcatch.queryError#" application="true" >
+            <cflog file="ecommerece" text="error occured in orderDetails.cfc .The SQL state : #cfcatch.queryError#" application="true" >
       </cfcatch>
     </cftry>
   </cffunction>
@@ -68,10 +68,10 @@
         Products.productID=OrderDetails.detailProductID
         WHERE
         OrderDetails.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqlType="cf_sql_int">
-          AND
-          OrderDetails.status=<cfqueryparam value="addedToCart" cfsqltype="cf_sql_varchar">
-            AND
-            Products.unitInStock >= OrderDetails.quantity
+        AND
+        OrderDetails.status=<cfqueryparam value="addedToCart" cfsqltype="cf_sql_varchar">
+        AND
+        Products.unitInStock >= OrderDetails.quantity
       </cfquery>
       <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in orderDetails.cfc .The SQL state : #cfcatch.queryError#" application="true" >
@@ -95,9 +95,9 @@
         status=<cfqueryparam value="addedToCart" cfsqltype="cf_sql_varchar" >
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in orderDetails.cfc in countOrderDetails function .The SQL state : #cfcatch.queryError#" application="true" >
+          <cflog file="ecommerece" text="error occured in orderDetails.cfc in countOrderDetails function .The SQL state : #cfcatch.queryError#" application="true" >
           <cfset emptyQuery=queryNew("quantity")>
-            <cfreturn emptyQuery>
+          <cfreturn emptyQuery>
       </cfcatch>
     </cftry>
     <cfreturn countquery/>
@@ -113,12 +113,12 @@
     <cfargument name="addressID" required="true" type="numeric"/>
     <cftry>
       <cfquery name="insertquery" result="result">
-      INSERT INTO Orders(userID,addressID)
-        VALUES(<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">,
-            <cfqueryparam value=#ARGUMENTS.addressID# cfsqltype="cf_sql_int">)
+          INSERT INTO Orders(userID,addressID)
+          VALUES(<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">,
+                <cfqueryparam value=#ARGUMENTS.addressID# cfsqltype="cf_sql_int">)
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in orderDetails.cfc in setOrder function .The SQL state : #cfcatch.queryError#" application="true" >
+          <cflog file="ecommerece" text="error occured in orderDetails.cfc in setOrder function .The SQL state : #cfcatch.queryError#" application="true" >
       </cfcatch>
     </cftry>
     <cfset LOCAL.identityID=#result.identitycol#>
@@ -133,22 +133,22 @@
   --->
 <cffunction name="getOrderDetailID" returntype="query" output="false" access="public">
 <cfargument name="status" required="true" type="string"/>
-  <cftry>
-    <cfquery name="checkquery">
-      SELECT detailID FROM OrderDetails
-      WHERE
-      userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
-        AND
-        detailProductID=<cfqueryparam value=#SESSION.productID# cfsqltype="cf_sql_int">
-          AND
-          status=<cfqueryparam value="#ARGUMENTS.status#" cfsqltype="cf_sql_varchar" >
-    </cfquery>
-    <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderDetailID function .The SQL state : #cfcatch.queryError#" application="true" >
-        <cfset emptyQuery=queryNew("detailID")>
-          <cfreturn emptyQuery>
-    </cfcatch>
-  </cftry>
+      <cftry>
+        <cfquery name="checkquery">
+              SELECT detailID FROM OrderDetails
+              WHERE
+              userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+              AND
+             detailProductID=<cfqueryparam value=#SESSION.productID# cfsqltype="cf_sql_int">
+             AND
+            status=<cfqueryparam value="#ARGUMENTS.status#" cfsqltype="cf_sql_varchar" >
+        </cfquery>
+        <cfcatch type="Database">
+            <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderDetailID function .The SQL state : #cfcatch.queryError#" application="true" >
+            <cfset emptyQuery=queryNew("detailID")>
+            <cfreturn emptyQuery>
+        </cfcatch>
+      </cftry>
   <cfreturn checkquery/>
 </cffunction>
 
@@ -162,17 +162,17 @@ hint        :It will return the productID and quantity of each product that is a
 <cfargument name="status" required="true" type="string"/>
   <cftry>
     <cfquery name="retriveInfo">
-    SELECT detailProductID , quantity  FROM OrderDetails
-    WHERE userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqlType="cf_sql_int">
-    AND
-    status=<cfqueryparam value="#ARGUMENTS.status#" cfsqlType="cf_sql_varchar">
-      AND
-      orderID=<cfqueryparam value=#SESSION.identityID# cfsqltype="cf_sql_int" >
+            SELECT detailProductID , quantity  FROM OrderDetails
+            WHERE userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqlType="cf_sql_int">
+            AND
+            status=<cfqueryparam value="#ARGUMENTS.status#" cfsqlType="cf_sql_varchar">
+            AND
+            orderID=<cfqueryparam value=#SESSION.identityID# cfsqltype="cf_sql_int" >
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in orderDetails.cfc in getDetailProductID function .The SQL state : #cfcatch.queryError#" application="true" >
+        <cflog file="ecommerece" text="error occured in orderDetails.cfc in getDetailProductID function .The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew("detailProductID , quantity ")>
-          <cfreturn emptyQuery>
+        <cfreturn emptyQuery>
     </cfcatch>
   </cftry>
   <cfreturn retriveInfo/>
@@ -193,9 +193,9 @@ hint        :It returns the orderDetails based on detailID
       detailID=<cfqueryparam value=#ARGUMENTS.id# cfsqltype="cf_sql_int">
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderDetailByOnlyID function. The SQL state : #cfcatch.queryError#" application="true" >
+        <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderDetailByOnlyID function. The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew(" detailPrice, quantity")>
-          <cfreturn emptyQuery>
+        <cfreturn emptyQuery>
     </cfcatch>
   </cftry>
   <cfreturn getqueryof/>
@@ -217,9 +217,9 @@ hint        :It returns total quantity and total price  of products that added t
       status=<cfqueryparam value="addedToCart" cfsqlType="cf_sql_varchar">
     </cfquery>
     <cfcatch type="Database">
-      <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderPriceAndQty function. The SQL state : #cfcatch.queryError#" application="true" >
+        <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderPriceAndQty function. The SQL state : #cfcatch.queryError#" application="true" >
         <cfset emptyQuery=queryNew(" totalCount,sum")>
-          <cfreturn emptyQuery>
+        <cfreturn emptyQuery>
     </cfcatch>
   </cftry>
   <cfreturn getquery/>

@@ -37,7 +37,6 @@ hint         :It is used to return the structure of product information
   <cfset LOCAL.subcategoryquery=VARIABLES.saleDetails.countSubCategory()>
   <cfset LOCAL.supplierquery=VARIABLES.saleDetails.countSupplier()>
   <cfset LOCAL.shippingquery=VARIABLES.saleDetails.countShipping()>
-
   <cfset stData.customer=#LOCAL.customerquery.total#>
   <cfset stData.product=#LOCAL.productquery.total#>
   <cfset stData.category=#LOCAL.categoryquery.total#>

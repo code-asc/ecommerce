@@ -14,9 +14,9 @@
         userID=<cfqueryparam value=#ARGUMENTS.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in isUserOnline.cfc in checkUserOnline function .The SQL state : #cfcatch.queryError#" application="true" >
+          <cflog file="ecommerece" text="error occured in isUserOnline.cfc in checkUserOnline function .The SQL state : #cfcatch.queryError#" application="true" >
           <cfset emptyQuery=queryNew("userID,userEmail")>
-            <cfreturn emptyQuery>
+          <cfreturn emptyQuery>
       </cfcatch>
     </cftry>
     <cfreturn checkStatus/>
@@ -37,7 +37,7 @@
       </cfquery>
 
       <cfcatch type="Database">
-    <cflog file="ecommerece" text="error occured in isUserOnline.cfc in changeUserStatus function .The SQL state : #cfcatch.queryError#" application="true" >
+            <cflog file="ecommerece" text="error occured in isUserOnline.cfc in changeUserStatus function .The SQL state : #cfcatch.queryError#" application="true" >
       </cfcatch>
     </cftry>
   </cffunction>

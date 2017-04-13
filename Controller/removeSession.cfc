@@ -6,22 +6,21 @@
   hint         :It is used to remove the user from onile
   --->
 <cffunction name="removeUserSession" output="false" access="public" returntype="void">
-  <cfargument name="userEmail" required="true" type="string">
-<cfset app=APPLICATION.ApplicationName>
+<cfargument name="userEmail" required="true" type="string">
+    <cfset app=APPLICATION.ApplicationName>
     <cfset getAllUserSession=createObject("java","coldfusion.runtime.SessionTracker")>
-      <cfset getAllUserCollection=getAllUserSession.getSessionCollection("application_2_1_1")>
+    <cfset getAllUserCollection=getAllUserSession.getSessionCollection("application_2_1_1")>
 
         <cfloop collection="#getAllUserCollection#" item="keyValue">
-        <cfif StructKeyExists(getAllUserCollection[keyValue], "stLoggedInUser")>
-          <cfif getAllUserCollection[keyValue]["stLoggedInUser"]["userEmail"] EQ ARGUMENTS.userEmail>
-
-            <cfset structDelete(getAllUserCollection[keyValue], "stloggedInUser")>
-                <cfbreak>
-          </cfif>
-        </cfif>
+            <cfif StructKeyExists(getAllUserCollection[keyValue], "stLoggedInUser")>
+                  <cfif getAllUserCollection[keyValue]["stLoggedInUser"]["userEmail"] EQ ARGUMENTS.userEmail>
+                      <cfset structDelete(getAllUserCollection[keyValue], "stloggedInUser")>
+                      <cfbreak>
+                  </cfif>
+            </cfif>
         </cfloop>
 
-        <cfinvoke method="deleteOnlineUser" component="db.userComponent.userRemoveOnline" userEmail="#ARGUMENTS.userEmail#" />
+<cfinvoke method="deleteOnlineUser" component="db.userComponent.userRemoveOnline" userEmail="#ARGUMENTS.userEmail#" />
 </cffunction>
 
 
@@ -41,9 +40,9 @@ returnType   :void
 hint         :It is used to change the user status to online
 --->
 <cffunction name="changeStatusToOnline" output="false" returntype="void" access="public">
-<cfif structKeyExists(SESSION,"stLoggedInUser")>
-  <cfinvoke method="updateUserOnline" component="db.userComponent.countOnlineUsers" >
-</cfif>
+    <cfif structKeyExists(SESSION,"stLoggedInUser")>
+      <cfinvoke method="updateUserOnline" component="db.userComponent.countOnlineUsers" >
+    </cfif>
 </cffunction>
 
 </cfcomponent>

@@ -12,6 +12,7 @@ hint        :It is used to check userEmail is already registered or not.
     SELECT userEmail FROM Customer WHERE
     userEmail=<cfqueryparam value=#email#  cfsqltype="cf_sql_varchar">
     </cfquery>
+
     <cfcatch type="database">
       <cflog text="error in userUpdateAndGetInfo.cfc in checkUserAlreadyRegistered . The SQL error : #cfcatch.queryError#" application="true" />
     </cfcatch>
@@ -33,9 +34,9 @@ hint        :It is used to check userEmail is already registered or not.
         userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in getUserInfo function .The SQL state : #cfcatch.queryError#" application="true" >
+          <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in getUserInfo function .The SQL state : #cfcatch.queryError#" application="true" >
           <cfset emptyQuery=queryNew("userFirstName, userProfilePhoto,userMiddleName, userLastName, userEmail , userPhone")>
-            <cfreturn emptyQuery>
+          <cfreturn emptyQuery>
       </cfcatch>
     </cftry>
     <cfreturn getquery>
@@ -56,7 +57,7 @@ hint        :It is used to check userEmail is already registered or not.
         WHERE userID=<cfqueryparam value=#session.stLoggedInUser.userID# cfsqltype="cf_sql_int">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateProfilePhoto function .The SQL state : #cfcatch.queryError#" application="true" >
+          <cflog file="ecommerece" text="error occured in userUpdateAndGetInfo.cfc in updateProfilePhoto function .The SQL state : #cfcatch.queryError#" application="true" >
       </cfcatch>
     </cftry>
   </cffunction>

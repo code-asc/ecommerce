@@ -15,23 +15,20 @@
 <cfargument name="pincode" required="true" type="string">
 
 <cftry>
-<cfif SESSION.repeat EQ true>
-
-  <cfset LOCAL.checkuserquery=variables.addOrUpdateAddress.checkUserAddress()>
-
-  <cfif LOCAL.checkuserquery.recordCount EQ 0 AND NOT structKeyExists(SESSION,"setDifferentAddress")>
-<cfset LOCAL.returnVal=variables.addOrUpdateAddress.setAddressWithoutAddressType(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
-<cfreturn LOCAL.returnVal>
-  <cfelseif structKeyExists(SESSION,"setDifferentAddress") AND SESSION.setDifferentAddress EQ true>
-    <cfset LOCAL.returnVal=variables.addOrUpdateAddress.setAddressWithAddressType(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
-    <cfreturn LOCAL.returnVal>
-<cfelse>
-
-<cfset variables.addOrUpdateAddress.updateAddressQuery()>
-<cfset LOCAL.returnVal=variables.addOrUpdateAddress.updateDefaultAdderssQuery(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
-<cfreturn LOCAL.returnVal>
-</cfif>
-</cfif>
+    <cfif SESSION.repeat EQ true>
+          <cfset LOCAL.checkuserquery=variables.addOrUpdateAddress.checkUserAddress()>
+            <cfif LOCAL.checkuserquery.recordCount EQ 0 AND NOT structKeyExists(SESSION,"setDifferentAddress")>
+                  <cfset LOCAL.returnVal=variables.addOrUpdateAddress.setAddressWithoutAddressType(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
+                  <cfreturn LOCAL.returnVal>
+                  <cfelseif structKeyExists(SESSION,"setDifferentAddress") AND SESSION.setDifferentAddress EQ true>
+                  <cfset LOCAL.returnVal=variables.addOrUpdateAddress.setAddressWithAddressType(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
+                  <cfreturn LOCAL.returnVal>
+                    <cfelse>
+                       <cfset variables.addOrUpdateAddress.updateAddressQuery()>
+                       <cfset LOCAL.returnVal=variables.addOrUpdateAddress.updateDefaultAdderssQuery(ARGUMENTS.country,ARGUMENTS.state,ARGUMENTS.city,ARGUMENTS.address,ARGUMENTS.address2,ARGUMENTS.pincode)>
+                       <cfreturn LOCAL.returnVal>
+          </cfif>
+    </cfif>
 <cfcatch>
   <cflog file="ecommerece" text="trying to access payment page directly" application="true" >
 </cfcatch>
@@ -46,11 +43,11 @@ hint         :It is used to search the customer address and return boolean value
 --->
 <cffunction name="searchUserAddress" output="false" returnType="boolean" access="public">
 <cfset LOCAL.searchquery=variables.addOrUpdateAddress.searchUserAddressQuery()>
-<cfif NOT LOCAL.searchquery.recordCount EQ 0>
-<cfreturn true>
-<cfelse>
-<cfreturn false>
-</cfif>
+    <cfif NOT LOCAL.searchquery.recordCount EQ 0>
+        <cfreturn true>
+    <cfelse>
+        <cfreturn false>
+    </cfif>
 </cffunction>
 
 
@@ -60,17 +57,17 @@ returnType   :query
 hint         :It is used to get address of the customer
 --->
 <cffunction name="getAddressOfUser" returntype="query" output="false" access="public">
-<cfset LOCAL.addressResult=variables.addOrUpdateAddress.searchUserAddressQuery()>
+  <cfset LOCAL.addressResult=variables.addOrUpdateAddress.searchUserAddressQuery()>
   <cfreturn LOCAL.addressResult>
 </cffunction>
 
 <cffunction name="getAddressInProductPage" access="public" output="false" returntype="query">
-<cftry>
-  <cfset LOCAL.addressquery=variables.addOrUpdateAddress.getAddressQuery()>
-<cfcatch>
-  <cflog file="ecommerece" text="exception in addressEntry.cfc----getAddressInProductPage method" application="true" >
-</cfcatch>
-</cftry>
+    <cftry>
+      <cfset LOCAL.addressquery=variables.addOrUpdateAddress.getAddressQuery()>
+    <cfcatch>
+      <cflog file="ecommerece" text="exception in addressEntry.cfc----getAddressInProductPage method" application="true" >
+    </cfcatch>
+    </cftry>
 <cfreturn LOCAL.addressquery>
 </cffunction>
 

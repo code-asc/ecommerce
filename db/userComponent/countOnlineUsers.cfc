@@ -13,9 +13,9 @@
         status=<cfqueryparam value="online" cfsqltype="cf_sql_varchar">
       </cfquery>
       <cfcatch type="Database">
-        <cflog file="ecommerece" text="error occured in countOnlineUsers.cfc in getUsersOnline function.The SQL state : #cfcatch.queryError#" application="true" >
+          <cflog file="ecommerece" text="error occured in countOnlineUsers.cfc in getUsersOnline function.The SQL state : #cfcatch.queryError#" application="true" >
           <cfset emptyQuery=queryNew("totalUsers")>
-            <cfreturn emptyQuery>
+          <cfreturn emptyQuery>
       </cfcatch>
     </cftry>
     <cfreturn onlinequery>

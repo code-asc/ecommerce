@@ -17,8 +17,8 @@
             userPassword=hashbytes('sha2_512',<cfqueryparam value = "#ARGUMENTS.userPassword#" CFSQLType = "cf_sql_varchar">)
         </cfquery>
         <cfcatch type="Database">
-          <cflog file="ecommerece" text="error occured in userLogin.cfc in doUserLogin function .The SQL state : #cfcatch.queryError#" application="true" >
-            <cfset emptyQuery=queryNew("userID,userFirstName,userMiddleName,userLastName,userEmail,userPassword,userProfilePhoto")>
+              <cflog file="ecommerece" text="error occured in userLogin.cfc in doUserLogin function .The SQL state : #cfcatch.queryError#" application="true" >
+              <cfset emptyQuery=queryNew("userID,userFirstName,userMiddleName,userLastName,userEmail,userPassword,userProfilePhoto")>
               <cfreturn emptyQuery>
         </cfcatch>
       </cftry>
