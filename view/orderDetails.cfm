@@ -33,11 +33,13 @@ Functionality : It will show the order details of the customer
                 <!---<cfdump var="#detailquery#">--->
 
                 <cfif detailquery.recordCount EQ 0>
-                    <div class="row">
-                        <div class="col-sm-8 col-md-8 col-lg-12">
-                            No previous purchases....
-                        </div>
-                    </div>
+
+                                          <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="alert alert-info text-center">
+                                              No previous purchases....
+
+                                          </div>
+                                      </div>
                     <cfelse>
                         <div class="container" style="margin-left:80px">
                             <cfoutput query="detailquery" group="orderID">

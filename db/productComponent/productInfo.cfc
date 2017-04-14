@@ -385,7 +385,8 @@ hint         :It is used to return alll the  products based on subCategoryID
 --->
 <cffunction name="productsDisplay" returntype="query" output="false" access="public">
   <cftry>
-    <cfquery name="retriveProduct">
+    <cfset LOCAL.retriveProduct=queryNew("productID ,productName ,productDesc ,unitPrice ,thumbNailPhoto ,discount ,brandName")>
+    <cfquery name="LOCAL.retriveProduct">
         SELECT Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products
         INNER JOIN ProductPhoto
         on
@@ -400,11 +401,12 @@ hint         :It is used to return alll the  products based on subCategoryID
         </cfquery>
     <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in productInfo.cfc in productDisplay function.The SQL state : #cfcatch.queryError#" application="true" >
-          <cfset emptyQuery=queryNew("productID ,productName ,productDesc ,unitPrice ,thumbNailPhoto ,discount ,brandName")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("productID ,productName ,productDesc ,unitPrice ,thumbNailPhoto ,discount ,brandName")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.retriveProduct/>
     </cfcatch>
   </cftry>
-  <cfreturn retriveProduct/>
+  <cfreturn LOCAL.retriveProduct/>
 </cffunction>
 
 

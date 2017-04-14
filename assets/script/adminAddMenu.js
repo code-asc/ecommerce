@@ -45,7 +45,7 @@ function ajaxAddCall() {
     }).done(function(responseText,textStatus,jsXHR){
       if(JSON.parse(responseText)=="success")
       {
-      alert(responseText);
+    //  alert(responseText);
       $("#formData").append("<div class='alert alert-success'>New Product added to Database</div>").delay(4000).fadeOut();
     }
       else {

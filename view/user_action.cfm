@@ -50,8 +50,7 @@ Functionality : It will show the product details
                           <cfset retriveProduct = LOCAL.getDetails.displayProductBasedOnCategory()>
                            <cfset retriveBrand = LOCAL.getDetails.getProductBrand(subCategoryID=#SESSION.subCategoryID#)>
 
-
-
+                             <cfif retriveProduct.recordCount GT 0>
                                 <div class="col-md-2 col-sm-2 col-xm-2 col-lg-2" style="margin-bottom:80px">
                                     <div class="panel panel-primary behclick-panel">
                                         <div class="panel-heading">
@@ -138,6 +137,9 @@ Functionality : It will show the product details
 </cfoutput>
 </cfloop>
 </div>
+<cfelse>
+  <cfinclude template="/common/productNotFound.cfm" />
+</cfif>
 </div>
 </div>
 

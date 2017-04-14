@@ -235,7 +235,7 @@
 
                                     <div class="notification-heading">
                                         <h4 class="menu-title">Notifications</h4>
-                                        <h4 class="menu-title pull-right">View all</h4>
+                                        
                                     </div>
                                     <li class="divider"></li>
                                     <div class="notifications-wrapper">

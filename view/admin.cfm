@@ -181,10 +181,18 @@ Functionality :It will show all the information regarding the total products sol
                                                               }
 
                                                               var sendMessage = function() {
+                                                                $("#postedDetail").empty();
+                                                                $("#postedDetail").css({"display":"block"});
                                                                   message = document.getElementById("updateForAll").value;
-                                                                  alert(message);
+                                                                  $("#updateForAll").val(" ");
+                                                                  if(message.trim())
+                                                                  {
                                                                   myworld.authenticate("admin", "admin");
-                                                                  myworld.publish("world", message);
+                                                                  if(myworld.publish("world", message))
+                                                                  {
+                                                                    $("#postedDetail").append("<div class='alert alert-success'>Posted....</div>").delay(3000).fadeOut();
+                                                                  }
+                                                                }
                                                               }
                                                           </script>
 
@@ -203,6 +211,11 @@ Functionality :It will show all the information regarding the total products sol
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                      <div id="postedDetail">
+
+                                      </div>
+                                    </div>
                                 </div>
                                 <cfelse>
                                     <cflocation url="/view/signin.cfm" />

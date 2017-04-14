@@ -138,7 +138,7 @@ Functionality : It will retrive the product based on brand search
 </div>
 </div>
 <cfelse>
-<cfinclude template="/common/productNotFound.cfm" />
+<cfinclude template="/common/productNotFound.cfm"/>
 </cfif>
 </div>
 
