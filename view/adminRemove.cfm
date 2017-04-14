@@ -24,9 +24,9 @@ Functionality : It will allow the admin to remove the product
 </head>
 <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ "admin">
     <cfif structKeyExists(FORM, "submitDelete")>
-        <cfinvoke method="deleteFromDatabase" component="Controller.adminData" photoID=#form.products#/>
-
+        <cfinvoke method="deleteFromDatabase" component="Controller.adminData" productID=#form.products#/>
     </cfif>
+
       <cfinvoke method="getOnlyCategory" component="Controller.getProductIDList" returnvariable="categoryquery" />
 
     <body>

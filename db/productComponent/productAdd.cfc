@@ -41,7 +41,7 @@
                   where
                   productName=<cfqueryparam value="#ARGUMENTS.productName#" cfsqltype="cf_sql_varchar">)
                     BEGIN
-                INSERT INTO Products(productName,productDesc,supplierID,subcategoryID,unitPrice,photoID,unitInStock,discount,rating,brandID)
+                INSERT INTO Products(productName,productDesc,supplierID,subcategoryID,unitPrice,photoID,unitInStock,discount,rating,brandID,status)
                 VALUES(<cfqueryparam value="#ARGUMENTS.productName#" cfsqltype="cf_sql_varchar">,
                   <cfqueryparam value="#ARGUMENTS.productDesc#" cfsqltype="cf_sql_varchar">,
                   <cfqueryparam value="#ARGUMENTS.supplierID#" cfsqltype="cf_sql_int">,
@@ -51,7 +51,8 @@
                   <cfqueryparam value="#ARGUMENTS.quantity#" cfsqltype="cf_sql_int">,
                   <cfqueryparam value="#ARGUMENTS.discount#" cfsqltype="cf_sql_int">,
                   <cfqueryparam value="#ARGUMENTS.rating#" cfsqltype="cf_sql_int">,
-                  <cfqueryparam value="#ARGUMENTS.brandID#" cfsqltype="cf_sql_int">
+                  <cfqueryparam value="#ARGUMENTS.brandID#" cfsqltype="cf_sql_int">,
+                  <cfqueryparam value="available" cfsqltype="cf_sql_varchar" >
                 )
                 END
                 ELSE

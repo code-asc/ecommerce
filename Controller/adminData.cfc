@@ -35,8 +35,8 @@ returnType   :void
 hint         :It is used to delete the product and its photo from the database
 --->
 <cffunction name="deleteFromDatabase" access="public" output="false" returnType="void">
-<cfargument name="photoID" required="true" type="numeric">
-    <cfinvoke method="deleteProduct" component="db.productComponent.productDelete" photoID=#ARGUMENTS.photoID#>
+<cfargument name="productID" required="true" type="numeric">
+    <cfinvoke method="deleteProduct" component="db.productComponent.productDelete" productID=#ARGUMENTS.productID#>
 </cffunction>
 
 
@@ -138,6 +138,7 @@ hint         :It is used to return the product details using AJAX call
               <cfset stData.brandName="#productquery.brandName#">
               <cfset stData.photoID=#productquery.photoID#>
               <cfset stData.productName="#productquery.productName#">
+              <cfset stData.productID=#productquery.productID#>
               <cfset arrayAppend(arrayToStoreQuery,stData)>
     </cfloop>
 <cfreturn arrayToStoreQuery>

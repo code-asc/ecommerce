@@ -70,10 +70,11 @@ hint         :It is used to perform login
        <cfif loginUser.recordCount EQ 1>
 
            <!--- logout other browser user --->
-           <cfif NOT checkStatus.recordCount EQ 0>
+           <cfif  checkStatus.recordCount>
              <cfinvoke component="removeSession" method="removeUserSession" userEmail=#checkStatus.email#>
            </cfif>
            <!--- --->
+
            <cflogin>
              <cfloginuser name="#loginUser.userFirstName# #loginUser.userMiddleName# #loginUser.userLastName#" password="#loginUser.userPassword#" roles="#loginUser.roles#" />
            </cflogin>
@@ -104,10 +105,12 @@ hint         :It is used to perform logout
           <cfset structDelete(SESSION,"subCategoryID")>
           <cfset structDelete(SESSION,"cartCount")>
           <cfset structClear(SESSION)>
-          <cfset structDelete(COOKIE,"CFID")>
+          <cfset sessioninvalidate()>
+          <cfset sessionRotate()>
+          <!---<cfset structDelete(COOKIE,"CFID")>
           <cfset structDelete(COOKIE, "CFTOKEN")>
           <cfcookie name="CFID" value="#COOKIE.CFID#" expires="now"   />
-          <cfcookie name="CFTOKEN" value="#COOKIE.CFTOKEN#" expires="now"  />
+          <cfcookie name="CFTOKEN" value="#COOKIE.CFTOKEN#" expires="now"  />--->
           <cflogout />
           <cflocation url="index.cfm" addtoken="false" />
     <cfelse>
@@ -124,17 +127,16 @@ hint         :It is used to add an item to cart using AJAX call
 <cffunction name="addToCart" returntype="void" output="false" access="remote">
 <cfset LOCAL.checkquery=VARIABLES.productInfo.getOrderDetailID("addedToCart")>
         <cfif LOCAL.checkquery.recordCount EQ 0>
-            <cfset LOCAL.getproduct=VARIABLES.productInfo.getProductInfoByID()>
-
-            <cfloop query="#LOCAL.getproduct#">
-              <cfset LOCAL.afterDiscount=#LOCAL.getproduct.afterDiscount#>
-              <cfset LOCAL.supplierID=#LOCAL.getproduct.supplierID#>
-            </cfloop>
-
-            <cfset LOCAL.status="addedToCart">
-            <cfset VARIABLES.productInfo.setOrderDetails(afterDiscount=#LOCAL.afterDiscount#,supplierID=#LOCAL.supplierID#,status=#LOCAL.status#)>
+              <cfset LOCAL.getproduct=VARIABLES.productInfo.getProductInfoByID()>
+                  <cfloop query="#LOCAL.getproduct#">
+                    <cfset LOCAL.afterDiscount=#LOCAL.getproduct.afterDiscount#>
+                    <cfset LOCAL.supplierID=#LOCAL.getproduct.supplierID#>
+                      
+                  </cfloop>
+              <cfset LOCAL.status="addedToCart">
+              <cfset VARIABLES.productInfo.setOrderDetails(afterDiscount=#LOCAL.afterDiscount#,supplierID=#LOCAL.supplierID#,status=#LOCAL.status#)>
         <cfelse>
-            <cfset VARIABLES.productInfo.updateOrderDetails()>
+              <cfset VARIABLES.productInfo.updateOrderDetails()>
         </cfif>
 <cfset updateCartCount()>
 </cffunction>

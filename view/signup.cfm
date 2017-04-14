@@ -28,7 +28,6 @@ Functionality : It will show sign up page
 <body>
 
     <cfinclude template="/common/header.cfm" />
-
     <cfif StructKeyExists(FORM, "submit")>
         <cfset LOCAL.checkIfNewUserCreatedError=createObject( "component", "Controller.authentication").addNewUser()>
 

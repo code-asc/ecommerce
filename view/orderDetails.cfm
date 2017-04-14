@@ -51,9 +51,9 @@ Functionality : It will show the order details of the customer
                                             </div>
                                             <div class="col-sm-5 col-md-5 col-lg-6">
                                                 <h4>#detailquery.brandName# #detailquery.productName#</h4>
-                                                <p>Price:#detailquery.afterDiscount#</p>
+                                                <p>Price:#detailquery.detailPrice#</p>
                                                 <p>Qty:#detailquery.quantity#</p>
-                                            </div>
+                                          </div>
                                         </div>
                                         <br/>
                                     </cfoutput>

@@ -27,7 +27,6 @@ Functionality : It is used for sign In purpose
 <body>
 
     <cfinclude template="/common/header.cfm" />
-
     <cfif StructKeyExists(form, "submit")>
         <cfset authenticationService=createObject( "component", "Controller.authentication")>
             <cfset aErrorMessage=authenticationService.validateUser(form.email,form.password)>
@@ -46,6 +45,7 @@ Functionality : It is used for sign In purpose
                 <cfif StructKeyExists(SESSION, "stLoggedInUser")>
 
                     <cfif structKeyExists(SESSION, "currentURL")>
+                      
                         <cflocation url="#SESSION.currentURL#" addtoken="false" />
 
                         <cfelse>

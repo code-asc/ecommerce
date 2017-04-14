@@ -23,7 +23,10 @@
             INNER JOIN Category
             on
             Subcategory.categoryID=Category.categoryID
-            where Products.productID=<cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int">
+            where
+            Products.productID=<cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int">
+            AND
+            Products.status=<cfqueryparam value="available" cfsqltype="cf_sql_varchar">
       </cfquery>
       <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in productInfo.cfc .The SQL state : #cfcatch.queryError#" application="true" >
@@ -53,6 +56,8 @@ hint         :It is used to get product information based on subCategoryID
                   on
                   Products.brandID=Brands.brandID
                   where Products.subCategoryID=<cfqueryparam value=#session.subCategoryID# cfsqltype="cf_sql_integer">
+                  AND
+                  Products.status=<cfqueryparam value="available" cfsqltype="cf_sql_varchar">
           <cfif ArrayLen(deserializeJSON(ARGUMENTS.brand)) GT 0>
 
                 AND
@@ -280,6 +285,8 @@ hint         :It is used to return products based on subcategoryID
         Products.brandID=Brands.brandID
         where Products.subCategoryID=<cfqueryparam value=#ARGUMENTS.subCategoryID# cfsqltype="cf_sql_integer">
           AND
+          Products.status=<cfqueryparam value="available" cfsqltype="cf_sql_varchar">
+          AND
           NOT Products.productID=<cfqueryparam value=#ARGUMENTS.productID# cfsqltype="cf_sql_int" >
         order by NEWID()
       </cfquery>
@@ -378,7 +385,7 @@ hint         :It is used to return alll the  products based on subCategoryID
 --->
 <cffunction name="productsDisplay" returntype="query" output="false" access="public">
   <cftry>
-    <cfquery name="retriveProduct" cachedwithin="#createTimeSpan(0,0,1,0)#" >
+    <cfquery name="retriveProduct">
         SELECT Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products
         INNER JOIN ProductPhoto
         on
@@ -387,8 +394,9 @@ hint         :It is used to return alll the  products based on subCategoryID
         on
         Products.brandID=Brands.brandID
         where
-        Products.subCategoryID=
-        <cfqueryparam value="#session.subCategoryID#" cfsqltype="cf_sql_integer">
+        Products.subCategoryID=<cfqueryparam value="#session.subCategoryID#" cfsqltype="cf_sql_integer">
+        AND
+        Products.status=<cfqueryparam value="available" cfsqltype="cf_sql_varchar">
         </cfquery>
     <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in productInfo.cfc in productDisplay function.The SQL state : #cfcatch.queryError#" application="true" >
@@ -538,10 +546,11 @@ hint         :It is used to return product information for search page
         INNER JOIN Brands
         on
         Products.brandID=Brands.brandID
-
+        WHERE
+        Products.status=<cfqueryparam value="available" cfsqltype="cf_sql_varchar">
             <cfif NOT ARGUMENTS.brandName EQ "noSearch">
 
-                    WHERE Brands.brandName LIKE
+                    AND Brands.brandName LIKE
                     <cfqueryparam value="%#ARGUMENTS.brandName#%" cfsqltype="cf_sql_varchar">
 
             </cfif>

@@ -54,7 +54,7 @@ hint         :get all the details for customers purchaseOrder
 <cffunction name="customerAddressDetail" returntype="query" output="false" access="public">
   <cftry>
     <cfquery name="detailquery">
-    SELECT Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Orders.orderID,Orders.orderAmount,format(Orders.orderDate,'dd/MM/yyyy') as orderDate,Brands.brandName ,Products.productName,Products.afterDiscount , ProductPhoto.thumbNailPhoto , OrderDetails.status , OrderDetails.quantity FROM Products
+    SELECT Address.customerAddress1,Address.customerAddress2,Address.customerCity,Address.customerState,Address.customerCountry,Orders.orderID,Orders.orderAmount,format(Orders.orderDate,'dd/MM/yyyy') as orderDate,OrderDetails.detailPrice,Brands.brandName ,Products.productName,Products.afterDiscount , ProductPhoto.thumbNailPhoto , OrderDetails.status , OrderDetails.quantity FROM Products
     INNER JOIN ProductPhoto
     on
     Products.photoID=ProductPhoto.photoID

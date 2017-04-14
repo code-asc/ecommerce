@@ -4,6 +4,7 @@ $(document).ready(function(){
   var brandName;
   var photoID;
   var productName;
+  var productID;
 
   $("#products").find("option").remove();
   $("#products").append("<option selected disabled>Products</option>");
@@ -20,12 +21,15 @@ success:function(responseText)
       else if (index=="PHOTOID") {
         photoID=value;
       }
+      else if (index=="PRODUCTID") {
+        productID=value;
+      }
       else if(index=="PRODUCTNAME")
       {
         productName=value;
       }
     })
-    $("#products").append("<option value="+photoID+">"+brandName+" "+productName+"</option>")
+    $("#products").append("<option value="+productID+">"+brandName+" "+productName+"</option>")
   })
 }
 }

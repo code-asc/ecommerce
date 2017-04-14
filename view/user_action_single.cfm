@@ -33,9 +33,9 @@ Functionality : It will show the product details of single product
 
     <body>
 
-        <cfif structKeyExists(url, "photoID") AND IsNumeric(#url.photoID#)>
-            <cfinvoke method="deleteFromDatabase" component="Controller.adminData" photoID=#url.photoID#/>
-            <cflocation url=#SESSION.previousURL# />
+        <cfif structKeyExists(url, "removeProduct") AND IsNumeric(#url.removeProduct#)>
+            <cfinvoke method="deleteFromDatabase" component="Controller.adminData" productID=#url.removeProduct#/>
+            <cflocation url=#SESSION.previousURL# addtoken="false" />
         </cfif>
 
         <cfif structKeyExists(url, "buyNow")>
@@ -153,7 +153,7 @@ Functionality : It will show the product details of single product
                                                                         <cfelse>
 
                                                                             <a class="btn btn-primary" href="/view/adminProductEdit.cfm?productID=#url.productID#"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
-                                                                            <a class="btn btn-danger" href="/view/user_action_single.cfm?photoID=#LOCAL.retriveProduct.photoID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
+                                                                            <a class="btn btn-danger" href="/view/user_action_single.cfm?removeProduct=#LOCAL.retriveProduct.productID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
 
                                                                     </cfif>
                                                             </cfif>
@@ -196,20 +196,15 @@ Functionality : It will show the product details of single product
 </cfif>
 </div>
 <cfelse>
-  <p>No product available</p>
-</cfif>
-</cfif>
+<div class="row">
+  <cfinclude template="/common/productNotFound.cfm" />
 </div>
+</cfif>
+</cfif>
+
 
 <!--- --->
 
-<div class="container-fluid">
-<div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-<cfinclude template="/common/footer.cfm" />
-</div>
-</div>
-</div>
 </cfif>
 <div class="container-fluid">
     <div class="row">

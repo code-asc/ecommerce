@@ -30,21 +30,24 @@ Functionality : It will retrive the product based on brand search
     <cfinclude template="/common/header.cfm" />
 
     <cfset SESSION.currentURL=#CGI.SCRIPT_NAME#>
-        <cfset SESSION.currentURL=#replace(SESSION.currentURL, "/project_ecommerce/", "", "All")#>
-            <cfset SESSION.currentURL=#SESSION.currentURL#& "?brand="&#URL.brand#>
-              <cfset LOCAL.searchProductInfo=createObject("component","Controller.retriveProduct")>
-                <cfif structKeyExists(URL, "brand")>
-                <cfset LOCAL.retriveProduct=LOCAL.searchProductInfo.productsForSearchPage(URL.brand)>
-                  <cfelse>
-                      <cfset LOCAL.retriveProduct=LOCAL.searchProductInfo.productsForSearchPage()>
-                </cfif>
-                <cfif LOCAL.retriveProduct.recordCount GT 0>
-                <cfset LOCAL.retriveBrand=LOCAL.searchProductInfo.getProductBrand(LOCAL.retriveProduct.subCategoryID)>
-                  <cfelse>
-                    <cfset LOCAL.retriveBrand=LOCAL.searchProductInfo.getProductBrand(0)>
-                </cfif>
+    <cfset SESSION.currentURL=#replace(SESSION.currentURL, "/project_ecommerce/", "", "All")#>
+    <cfset SESSION.currentURL=#SESSION.currentURL#& "?brand="&#URL.brand#>
+    <cfset LOCAL.searchProductInfo=createObject("component","Controller.retriveProduct")>
+        <cfif structKeyExists(URL, "brand")>
+           <cfset LOCAL.retriveProduct=LOCAL.searchProductInfo.productsForSearchPage(URL.brand)>
+        <cfelse>
+          <cfset LOCAL.retriveProduct=LOCAL.searchProductInfo.productsForSearchPage()>
+        </cfif>
+
+      <cfif LOCAL.retriveProduct.recordCount GT 0>
+         <cfset LOCAL.retriveBrand=LOCAL.searchProductInfo.getProductBrand(LOCAL.retriveProduct.subCategoryID)>
+      <cfelse>
+        <cfset LOCAL.retriveBrand=LOCAL.searchProductInfo.getProductBrand(0)>
+      </cfif>
+
                 <div class="container-fluid">
                     <div class="row">
+                      <cfif LOCAL.retriveProduct.recordCount GT 0>
                         <form>
                             <div class="col-md-2 col-sm-2 col-xm-2 col-lg-2" style="margin-bottom:200px">
                                 <div class="panel panel-primary behclick-panel" style="margin-bottom:500px">
@@ -134,6 +137,9 @@ Functionality : It will retrive the product based on brand search
 </cfloop>
 </div>
 </div>
+<cfelse>
+<cfinclude template="/common/productNotFound.cfm" />
+</cfif>
 </div>
 
 <div class="container-fluid">
