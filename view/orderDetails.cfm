@@ -28,8 +28,19 @@ Functionality : It will show the order details of the customer
     <cfif NOT StructKeyExists(SESSION, "stLoggedInUser")>
         <cflocation url="/view/signin.cfm" />
         <cfelse>
+          <cfparam name="URL.start" default="0" />
+          <cfparam name="totalPerPage" default="3"/>
+          <cfparam name="URL.page" default="1" />
+
             <cfinclude template="/common/header.cfm" />
-            <cfinvoke component="Controller.orderDetails" method="showDetails" returnvariable="detailquery">
+            <cfinvoke component="Controller.orderDetails" method="showDetails" returnvariable="getAll">
+              <cfset limitTo=#URL.start#+#totalPerPage#>
+
+            <cfinvoke component="Controller.orderDetails" method="showDetailsUsingPagenation" returnvariable="detailquery" start=#URL.start# limit=#limitTo#>
+
+              <cfset onThisPage=#detailquery.recordCount#>
+              <cfset totalPage=ceiling(getAll.recordCount/totalPerPage)>
+
                 <!---<cfdump var="#detailquery#">--->
 
                 <cfif detailquery.recordCount EQ 0>
@@ -75,6 +86,30 @@ Functionality : It will show the order details of the customer
                                 </div>
                             </cfoutput>
                         </div>
+
+                        <cfoutput>
+                                                <cfif totalPage GT 1>
+                                                  <div class="container-fluid">
+                                                      <div class="row text-center">
+                                                		<div id="paging" class="col-sm-12 col-md-12 col-xm-12 col-lg-12">
+                                                		<cfset URL.start = 0>
+                                                		<cfloop index="page" from="1" to="#totalPage#" step="1">
+                                                			<cfif page EQ URL.page>
+                                                				#page#
+                                                			<cfelse>
+                                                				<a href="/view/orderDetails.cfm?&start=#URL.start#&page=#page#">#page#</a>
+                                                			</cfif>
+                                                			<cfif page NEQ totalPage>|</cfif>
+                                                			<cfset URL.start = (URL.start+totalPerPage)>
+
+                                                		</cfloop>
+
+                                                		</div>
+                                                  </div>
+                                                </div><br>
+                                                	</cfif>
+                        </cfoutput>
+
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">

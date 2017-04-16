@@ -45,11 +45,11 @@ Functionality : It is used for sign In purpose
                 <cfif StructKeyExists(SESSION, "stLoggedInUser")>
 
                     <cfif structKeyExists(SESSION, "currentURL")>
-                      
+
                         <cflocation url="#SESSION.currentURL#" addtoken="false" />
 
                         <cfelse>
-                            <cflocation url="/view/index.cfm" addtoken="false" />
+                            <cflocation url="/index.cfm" addtoken="false" />
                     </cfif>
                     <cfelse>
 

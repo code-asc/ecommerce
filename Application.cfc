@@ -38,7 +38,7 @@
 <cffunction name="onMissingTemplate" output="false" access="public" returntype="boolean" >
   <cfargument name="targetPage" required="true" type="string"/>
 
-<cflocation url="missingPage.cfm" addtoken="false"  />
+<cflocation url="/common/pageNotFound.cfm" addtoken="false"  />
   <cfreturn true>
 </cffunction>
 

@@ -46,15 +46,17 @@ hint        :It return all the brand names available
 --->
 <cffunction name="getBrand" returntype="query" access="public" output="false">
     <cftry>
-      <cfquery name="brandquery">
+      <cfset LOCAL.brandquery=queryNew("brandName")>
+      <cfquery name="LOCAL.brandquery">
         SELECT brandName FROM Brands
       </cfquery>
       <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in addBrandAndCategory.cfc in getBrand function . The SQL state : #cfcatch.queryError#" application="true" >
-          <cfset emptyQuery=queryNew("brandName")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("brandName")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.brandquery/>
       </cfcatch>
     </cftry>
-  <cfreturn brandquery/>
+  <cfreturn LOCAL.brandquery/>
 </cffunction>
 </cfcomponent>

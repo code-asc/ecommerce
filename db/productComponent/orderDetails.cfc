@@ -87,7 +87,8 @@
   --->
   <cffunction name="countOrderDetails" output="false" access="public" returntype="query">
     <cftry>
-      <cfquery name="countquery">
+      <cfset LOCAL.countquery=queryNew("quantity")>
+      <cfquery name="LOCAL.countquery">
         SELECT quantity from OrderDetails
         WHERE
         userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqlType="cf_sql_int">
@@ -96,11 +97,12 @@
       </cfquery>
       <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in orderDetails.cfc in countOrderDetails function .The SQL state : #cfcatch.queryError#" application="true" >
-          <cfset emptyQuery=queryNew("quantity")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("quantity")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.countquery/>
       </cfcatch>
     </cftry>
-    <cfreturn countquery/>
+    <cfreturn LOCAL.countquery/>
   </cffunction>
 
 
@@ -134,7 +136,8 @@
 <cffunction name="getOrderDetailID" returntype="query" output="false" access="public">
 <cfargument name="status" required="true" type="string"/>
       <cftry>
-        <cfquery name="checkquery">
+        <cfset LOCAL.checkquery=queryNew("detailID")>
+        <cfquery name="LOCAL.checkquery">
               SELECT detailID FROM OrderDetails
               WHERE
               userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
@@ -145,11 +148,12 @@
         </cfquery>
         <cfcatch type="Database">
             <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderDetailID function .The SQL state : #cfcatch.queryError#" application="true" >
-            <cfset emptyQuery=queryNew("detailID")>
-            <cfreturn emptyQuery>
+            <!---<cfset emptyQuery=queryNew("detailID")>
+            <cfreturn emptyQuery>--->
+            <cfreturn LOCAL.checkquery/>
         </cfcatch>
       </cftry>
-  <cfreturn checkquery/>
+  <cfreturn LOCAL.checkquery/>
 </cffunction>
 
 
@@ -161,7 +165,8 @@ hint        :It will return the productID and quantity of each product that is a
 <cffunction name="getDetailProductID" returntype="query" output="false" access="public">
 <cfargument name="status" required="true" type="string"/>
   <cftry>
-    <cfquery name="retriveInfo">
+    <cfset LOCAL.retriveInfo=queryNew("detailProductID , quantity ")>
+    <cfquery name="LOCAL.retriveInfo">
             SELECT detailProductID , quantity  FROM OrderDetails
             WHERE userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqlType="cf_sql_int">
             AND
@@ -171,11 +176,12 @@ hint        :It will return the productID and quantity of each product that is a
     </cfquery>
     <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in orderDetails.cfc in getDetailProductID function .The SQL state : #cfcatch.queryError#" application="true" >
-        <cfset emptyQuery=queryNew("detailProductID , quantity ")>
-        <cfreturn emptyQuery>
+        <!---<cfset emptyQuery=queryNew("detailProductID , quantity ")>
+        <cfreturn emptyQuery>--->
+        <cfreturn LOCAL.retriveInfo/>
     </cfcatch>
   </cftry>
-  <cfreturn retriveInfo/>
+  <cfreturn LOCAL.retriveInfo/>
 </cffunction>
 
 
@@ -187,18 +193,20 @@ hint        :It returns the orderDetails based on detailID
 <cffunction name="getOrderDetailByOnlyID" output="false" returntype="query" access="public">
   <cfargument name="id" required="true" type="numeric"/>
   <cftry>
-    <cfquery name="getqueryof">
+    <cfset LOCAL.getqueryof=queryNew(" detailPrice, quantity")>
+    <cfquery name="LOCAL.getqueryof">
       SELECT detailPrice, quantity FROM OrderDetails
       WHERE
       detailID=<cfqueryparam value=#ARGUMENTS.id# cfsqltype="cf_sql_int">
     </cfquery>
     <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderDetailByOnlyID function. The SQL state : #cfcatch.queryError#" application="true" >
-        <cfset emptyQuery=queryNew(" detailPrice, quantity")>
-        <cfreturn emptyQuery>
+        <!---<cfset emptyQuery=queryNew(" detailPrice, quantity")>
+        <cfreturn emptyQuery>--->
+        <cfreturn LOCAL.getqueryof/>
     </cfcatch>
   </cftry>
-  <cfreturn getqueryof/>
+  <cfreturn LOCAL.getqueryof/>
 </cffunction>
 
 
@@ -209,7 +217,8 @@ hint        :It returns total quantity and total price  of products that added t
 --->
 <cffunction name="getOrderPriceAndQty" output="false" returntype="query" access="public">
   <cftry>
-    <cfquery name="getquery">
+    <cfset LOCAL.getquery=queryNew("totalCount,sum")>
+    <cfquery name="LOCAL.getquery">
       SELECT sum(quantity) AS totalCount, sum(detailPrice*quantity) AS sum FROM OrderDetails
       WHERE
       userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
@@ -218,11 +227,12 @@ hint        :It returns total quantity and total price  of products that added t
     </cfquery>
     <cfcatch type="Database">
         <cflog file="ecommerece" text="error occured in orderDetails.cfc in getOrderPriceAndQty function. The SQL state : #cfcatch.queryError#" application="true" >
-        <cfset emptyQuery=queryNew(" totalCount,sum")>
-        <cfreturn emptyQuery>
+      <!---  <cfset emptyQuery=queryNew("totalCount,sum")>
+        <cfreturn emptyQuery>--->
+        <cfreturn LOCAL.getquery/>
     </cfcatch>
   </cftry>
-  <cfreturn getquery/>
+  <cfreturn LOCAL.getquery/>
 </cffunction>
 
 

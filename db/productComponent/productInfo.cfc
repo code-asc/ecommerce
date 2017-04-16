@@ -8,7 +8,8 @@
 <cffunction name="getProductInfo" output="false" access="public" returnType="query">
 <cfargument name="productID" type="numeric" required="true">
     <cftry>
-      <cfquery name="productquery">
+      <cfset LOCAL.productquery=queryNew("productID,productName,productDesc,unitPrice,unitInStock,largePhoto,thumbNailPhoto,discount,brandName,subCategoryType,categoryType,subCategoryID,categoryID")>
+      <cfquery name="LOCAL.productquery">
             SELECT  Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice,Products.unitInStock,ProductPhoto.photoID ,ProductPhoto.largePhoto,ProductPhoto.thumbNailPhoto ,Products.discount,Products.supplierID,Products.afterDiscount ,Brands.brandName ,SubCategory.subCategoryType,Category.categoryType,SubCategory.subCategoryID,Category.categoryID
              from Products
             INNER JOIN ProductPhoto
@@ -30,11 +31,12 @@
       </cfquery>
       <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in productInfo.cfc .The SQL state : #cfcatch.queryError#" application="true" >
-          <cfset emptyQuery=queryNew("productID,productName,productDesc,unitPrice,unitInStock,largePhoto,thumbNailPhoto,discount,brandName,subCategoryType,categoryType,subCategoryID,categoryID")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("productID,productName,productDesc,unitPrice,unitInStock,largePhoto,thumbNailPhoto,discount,brandName,subCategoryType,categoryType,subCategoryID,categoryID")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.productquery>
       </cfcatch>
     </cftry>
-<cfreturn productquery>
+<cfreturn LOCAL.productquery>
 </cffunction>
 
 
@@ -47,7 +49,8 @@ hint         :It is used to get product information based on subCategoryID
 <cfargument name="brand" required="true" type="string">
 <cfargument name="discount" required="true" type="string">
         <cftry>
-          <cfquery name="filterquery">
+          <cfset LOCAL.filterquery=queryNew("productID,productName,productDesc,unitPrice,unitPrice,thumbNailPhoto,discount,brandName")>
+          <cfquery name="LOCAL.filterquery">
                   SELECT Products.productID , Products.productName ,Products.productDesc ,Products.unitPrice ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products
                   INNER JOIN ProductPhoto
                   on
@@ -74,11 +77,12 @@ hint         :It is used to get product information based on subCategoryID
             </cfquery>
           <cfcatch type="Database">
                 <cflog file="ecommerece" text="error occured in productInfo.cfc getProductInfoBySubCategory function .The SQL state : #cfcatch.queryError#" application="true" >
-                <cfset emptyQuery=queryNew("productID,productName,productDesc,unitPrice,unitPrice,thumbNailPhoto,discount,brandName")>
-                <cfreturn emptyQuery>
+                <!---<cfset emptyQuery=queryNew("productID,productName,productDesc,unitPrice,unitPrice,thumbNailPhoto,discount,brandName")>
+                <cfreturn emptyQuery>--->
+                <cfreturn LOCAL.filterquery>
           </cfcatch>
         </cftry>
-<cfreturn filterquery>
+<cfreturn LOCAL.filterquery>
 </cffunction>
 
 
@@ -90,18 +94,20 @@ hint         :It is used to return unitPrice , supplierID and afterDiscount base
 --->
 <cffunction name="getProductInfoByID" returntype="query" access="public" output="false">
     <cftry>
-      <cfquery name="getproduct">
+      <cfset LOCAL.getproduct=queryNew("unitPrice,supplierID,afterDiscount")>
+      <cfquery name="LOCAL.getproduct">
           SELECT unitPrice,supplierID ,afterDiscount from Products
           where
           productID=<cfqueryparam value=#SESSION.productID# cfsqltype="cf_sql_int">
         </cfquery>
       <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in productInfo.cfc in getProductInfoByID function. The SQL state : #cfcatch.queryError#" application="true" >
-          <cfset emptyQuery=queryNew("unitPrice,supplierID,afterDiscount")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("unitPrice,supplierID,afterDiscount")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.getproduct/>
       </cfcatch>
     </cftry>
-<cfreturn getproduct/>
+<cfreturn LOCAL.getproduct/>
 </cffunction>
 
 
@@ -112,17 +118,19 @@ hint         :It is used to get all thumbNail information
 --->
 <cffunction name="getThumbnail" returntype="query" output="false" access="public">
     <cftry>
+      <cfset LOCAL.thumbnailquery=queryNew("thumbNailPhoto ,brandID,subCategoryID")>
         <cfquery name="thumbnailquery" cachedwithin="#createTimeSpan(0,0,1,0)#" >
           SELECT thumbNailPhoto ,brandID,subCategoryID from ProductPhoto
           where thumbNailPhotoName=<cfqueryparam value="thumb" cfsqltype="varchar">
         </cfquery>
       <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in productInfo.cfc in getThumbnail function. The SQL state : #cfcatch.queryError#" application="true" >
-          <cfset emptyQuery=queryNew("thumbNailPhoto ,brandID,subCategoryID")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("thumbNailPhoto ,brandID,subCategoryID")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.thumbnailquery/>
       </cfcatch>
     </cftry>
-  <cfreturn thumbnailquery/>
+  <cfreturn LOCAL.thumbnailquery/>
 </cffunction>
 
 

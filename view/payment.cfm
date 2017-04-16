@@ -127,11 +127,12 @@ Functionality : It will process the payment details
                                                             <div class="row">
                                                                 <div class="col-md-1 col-sm-12" style="margin-right:40px ">
                                                                     <div class="form-group">
-                                                                        <cfinput class="btn btn-success" type="submit" name="submit" value="Create">
+                                                                        <cfinput class="btn btn-success" type="submit" name="submit" value="Done">
                                                                     </div>
                                                                 </div>
 
-                                                                <cfif StructKeyExists(URL,"addressAll") AND StructKeyExists(URL, "linkAddress")>
+                                                                <!---<cfif StructKeyExists(URL,"addressAll") AND StructKeyExists(URL, "linkAddress")>--->
+                                                                <cfif StructKeyExists(URL, "linkAddress")>
                                                                 <div class="col-md-1 col-sm-12">
                                                                     <div class="form-group">
                                                                         <cfinput class="btn btn-primary" type="submit" name="setDefault" value="Set Default">

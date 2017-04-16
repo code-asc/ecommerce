@@ -7,17 +7,19 @@
   --->
   <cffunction name="checkUserAddress" output="false" returntype="query" access="public">
     <cftry>
+      <cfset LOCAL.checkuserquery=queryNew("addressID")>
       <cfquery name="checkuserquery">
         SELECT addressID FROM Address
         where userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int" >
       </cfquery>
       <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in setAddress.cfc in checkUserAddress function.The SQL state : #cfcatch.queryError#" application="true" >
-          <cfset emptyQuery=queryNew("addressID")>
-          <cfreturn emptyQuery>
+        <!---  <cfset emptyQuery=queryNew("addressID")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.checkuserquery/>
       </cfcatch>
     </cftry>
-    <cfreturn checkuserquery/>
+    <cfreturn LOCAL.checkuserquery/>
   </cffunction>
 
 

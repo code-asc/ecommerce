@@ -8,16 +8,18 @@
   --->
   <cffunction name="countCountry" output="false" returntype="query" access="public">
         <cftry>
-            <cfquery name="countryquery">
+          <cfset LOCAL.countryquery=queryNew("total,customerCountry")>
+            <cfquery name="LOCAL.countryquery">
               SELECT count(customerCountry) AS total , customerCountry FROM Address GROUP BY customerCountry
             </cfquery>
           <cfcatch type="Database">
               <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCountry function .The SQL state : #cfcatch.queryError#">
-              <cfset emptyQuery=queryNew("total,customerCountry")>
-              <cfreturn emptyQuery>
+            <!---  <cfset emptyQuery=queryNew("total,customerCountry")>
+              <cfreturn emptyQuery>--->
+              <cfreturn LOCAL.countryquery>
           </cfcatch>
         </cftry>
-  <cfreturn countryquery>
+  <cfreturn LOCAL.countryquery>
   </cffunction>
 
 
@@ -28,16 +30,18 @@
   --->
 <cffunction name="countCustomer" output="false" returntype="query" access="public">
     <cftry>
-        <cfquery name="customerquery">
+      <cfset LOCAL.customerquery=queryNew("total")>
+        <cfquery name="LOCAL.customerquery">
           SELECT count(userID) AS total FROM Customer
         </cfquery>
       <cfcatch type="Database">
           <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCustomer function">
-          <cfset emptyQuery=queryNew("total")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("total")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.customerquery/>
       </cfcatch>
     </cftry>
-<cfreturn customerquery/>
+<cfreturn LOCAL.customerquery/>
 </cffunction>
 
 
@@ -48,16 +52,18 @@ hint         :It returns total number of products
 --->
 <cffunction name="countProduct" output="false" returntype="query" access="public">
     <cftry>
-      <cfquery name="productquery">
+      <cfset LOCAL.productquery=queryNew("total")>
+      <cfquery name="LOCAL.productquery">
         SELECT count(productID) as total FROM Products
       </cfquery>
       <cfcatch type="Database">
           <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countProduct function">
-          <cfset emptyQuery=queryNew("total")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("total")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.productquery/>
       </cfcatch>
     </cftry>
-<cfreturn productquery/>
+<cfreturn LOCAL.productquery/>
 </cffunction>
 
 
@@ -68,16 +74,18 @@ hint        :It return number of Categories
 --->
 <cffunction name="countCategory" output="false" returntype="query" access="public">
     <cftry>
-      <cfquery name="categoryquery">
+      <cfset LOCAL.categoryquery=queryNew("total")>
+      <cfquery name="LOCAL.categoryquery">
         SELECT count(categoryID) AS total FROM Category
       </cfquery>
       <cfcatch type="Database">
           <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countCategory function">
-          <cfset emptyQuery=queryNew("total")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("total")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.categoryquery/>
       </cfcatch>
     </cftry>
-<cfreturn categoryquery/>
+<cfreturn LOCAL.categoryquery/>
 </cffunction>
 
 <!---
@@ -87,16 +95,18 @@ hint         :It returns number of cubCategories
 --->
 <cffunction name="countSubCategory" output="false" returntype="query" access="public">
     <cftry>
-      <cfquery name="subcategoryquery">
+      <cfset LOCAL.subcategoryquery=queryNew("total")>
+      <cfquery name="LOCAL.subcategoryquery">
         SELECT count(subCategoryID) as total FROM SubCategory
       </cfquery>
       <cfcatch type="Database">
           <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countSubCategory function">
-          <cfset emptyQuery=queryNew("total")>
-          <cfreturn emptyQuery>
+        <!---  <cfset emptyQuery=queryNew("total")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.subcategoryquery/>
       </cfcatch>
     </cftry>
-<cfreturn subcategoryquery/>
+<cfreturn LOCAL.subcategoryquery/>
 </cffunction>
 
 
@@ -107,16 +117,18 @@ hint            :It returns number of suppliers
 --->
 <cffunction name="countSupplier" output="false" returntype="query" access="public">
     <cftry>
-      <cfquery name="supplierquery">
+      <cfset LOCAL.supplierquery=queryNew("total")>
+      <cfquery name="LOCAL.supplierquery">
         SELECT count(supplierID) AS total FROM Supplier
       </cfquery>
       <cfcatch type="Database">
           <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countSupplier function">
-          <cfset emptyQuery=queryNew("total")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("total")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.supplierquery/>
       </cfcatch>
     </cftry>
-<cfreturn supplierquery/>
+<cfreturn LOCAL.supplierquery/>
 </cffunction>
 
 
@@ -127,16 +139,18 @@ hint             :It returns number of shipping available
 --->
 <cffunction name="countShipping" output="false" returntype="query" access="public">
     <cftry>
-      <cfquery name="shippingquery">
+      <cfset LOCAL.shippingquery=queryNew("total")>
+      <cfquery name="LOCAL.shippingquery">
         SELECT count(shippingID) as total FROM ShippingDetails
       </cfquery>
       <cfcatch type="Database">
           <cflog application="true" file="ecommerece" text="error in saleRecord.cfc in countShipping function">
-          <cfset emptyQuery=queryNew("total")>
-          <cfreturn emptyQuery>
+          <!---<cfset emptyQuery=queryNew("total")>
+          <cfreturn emptyQuery>--->
+          <cfreturn LOCAL.shippingquery/>
       </cfcatch>
     </cftry>
-<cfreturn shippingquery/>
+<cfreturn LOCAL.shippingquery/>
 </cffunction>
 
 </cfcomponent>
