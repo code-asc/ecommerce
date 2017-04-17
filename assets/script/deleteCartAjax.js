@@ -6,6 +6,6 @@ function deleteFromCart(l)
     data:{val:33},
 
   }).fail(function(jqXHR,textStatus,errorThrown){
-    console.log(jqXHR.responseText);
+    alert("something went wrong :-( ");
   })
 }

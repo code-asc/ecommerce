@@ -70,7 +70,7 @@ $("#filterTarget").append('<div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" styl
 });
 }).fail(function(jsXHR,textStatus,errorThrown){
   $("#filterTarget").append('<div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px" >'+'<a href='+productID+'><div class="itemthumb"><img src='+thumbNailPhoto+' class="img-responsive"></div></a><br/><strong>'+brandName+'</strong><p>Rs.'+unitPrice+'<br/><span class="label label-info">'+productName+'</span>');
-console.log(jsXHR.responseText);
+
 })
 });
 });

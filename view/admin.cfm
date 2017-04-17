@@ -172,7 +172,7 @@ Functionality :It will show all the information regarding the total products sol
                                                         <div class="well well-lg">
                                                             <cfwebsocket name="myworld" onmessage="msgHandler" onopen="openHandler" subscribeTo="world" />
                                                             <script>
-                                                            
+
 
                                                               var sendMessage = function() {
                                                                 $("#postedDetail").empty();
@@ -184,7 +184,7 @@ Functionality :It will show all the information regarding the total products sol
                                                                   myworld.authenticate("admin", "admin");
                                                                   if(myworld.publish("world", message))
                                                                   {
-                                                                    $("#postedDetail").append("<div class='alert alert-success'>Posted....</div>").delay(3000).fadeOut();
+                                                                    $("#postedDetail").append("<div class='alert alert-success'>Posted....</div>").delay(5000).fadeOut();
                                                                   }
                                                                 }
                                                               }

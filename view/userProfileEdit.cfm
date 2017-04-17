@@ -34,19 +34,19 @@ Functionality : It will show the profile details of the customer
 
                 <cfoutput>
                     <cfif structKeyExists(FORM, "profilePhoto") AND len(FORM.profilePhoto) GT 0>
-                        <cfif directoryExists( "D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userEmail#")>
-                            <cfdirectory action="delete" directory="D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userEmail#" recurse="true">
+                        <cfif directoryExists( "D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userID#")>
+                            <cfdirectory action="delete" directory="D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userID#" recurse="true">
                         </cfif>
 
-                        <cfif NOT directoryExists( "D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userEmail#")>
-                            <cfdirectory action="create" directory="D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userEmail#" />
+                        <cfif NOT directoryExists( "D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userID#")>
+                            <cfdirectory action="create" directory="D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userID#" />
                         </cfif>
 
-                        <cffile action="upload" filefield="profilePhoto" destination="D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userEmail#\" nameConflict="override" />
+                        <cffile action="upload" filefield="profilePhoto" destination="D:\project_ecommerece\assets\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userID#\" nameConflict="override" />
 
                         <!---<cffile action="rename" source="D:\project_ecommerece\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userEmail#\#cffile.ServerFileName#.#cffile.ServerFileExt#" destination="D:\project_ecommerece\usersInfo\ProfileImage\#SESSION.stLoggedInUser.userEmail#\#SESSION.stLoggedInUser.userID#_#SESSION.stLoggedInUser.userEmail#.#cffile.ServerFileExt#">--->
 
-                        <cfset LOCAL.userProfile.uploadUserProfilePhoto(path="/assets/usersInfo/ProfileImage/#SESSION.stLoggedInUser.userEmail#/#cffile.ServerFileName#.#cffile.ServerFileExt#")>
+                        <cfset LOCAL.userProfile.uploadUserProfilePhoto(path="/assets/usersInfo/ProfileImage/#SESSION.stLoggedInUser.userID#/#cffile.ServerFileName#.#cffile.ServerFileExt#")>
                     </cfif>
                 </cfoutput>
 

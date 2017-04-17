@@ -14,6 +14,6 @@ function deleteOnAJAXCall(orderID)
   }).done(function(responseText,textStatus,jqXHR){
     console.log(textStatus);
   }).fail(function(jqXHR,textStatus,errorThrown){
-    console.log(errorThrown);
+    alert("something went wrong :-( ");
   })
 }

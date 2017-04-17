@@ -13,7 +13,7 @@ $(document).ready(function()
    val=parseInt($("#traceCount").html())+1;
     $("#traceCount").html(val);})
     .fail(function(jqXHR,textStatus,errorThrown){
-      console.log(jqXHR.responseText);
+      alert("something went wrong :-( ");
     });
 
   $(this).attr("disabled",true).text("addedToCart");
