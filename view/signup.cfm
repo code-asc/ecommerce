@@ -60,34 +60,52 @@ Functionality : It will show sign up page
                 <div class="container">
                     <div class="row" id="row_show_error">
                     </div>
-                    <div class="row">
-                        <div class="col-md-4" id="form-border">
+                    <div class="row text-center">
+                        <div class="col-md-4" id="form-border" style="margin:auto ; left:0 ; right:0  ; position : absolute">
                             <h2>SignUp Here</h2>
                             <cfform name="cf_form" id="cf_form">
 
                                 <div class="form-group input-field">
+                                  <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                     <cfinput name="firstName" id="firstName" type="text" class="form-control" placeholder="Your FirstName">
                                 </div>
+                              </div>
 
                                 <div class="form-group input-field">
+                                  <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                     <cfinput class="form-control" type="text" name="middleName" placeholder="Your MiddleName (Optional)">
                                 </div>
+                              </div>
 
                                 <div class="form-group input-field">
+                                  <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                     <cfinput class="form-control" type="text" name="lastName" placeholder="Your LastName (Optional)">
                                 </div>
+                              </div>
 
                                 <div class="form-group input-field">
+                                  <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>
                                     <cfinput class="form-control" type="email" name="email" placeholder="Email id" required="true">
                                 </div>
+                              </div>
 
                                 <div class="form-group input-field">
+                                  <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                     <cfinput class="form-control" type="password" name="password" placeholder="Password" required="true">
                                 </div>
+                              </div>
 
                                 <div class="form-group input-field">
+                                  <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
                                     <cfinput class="form-control" type="text" name="mobile" placeholder="Mobile" maxlength="10" minlength="10" required="true">
                                 </div>
+                              </div>
 
                                 <div class="form-group">
                                     <cfinput class="btn btn-success" type="submit" name="submit" value="Register">

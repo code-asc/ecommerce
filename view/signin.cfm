@@ -39,7 +39,7 @@ Functionality : It is used for sign In purpose
     <div class="container">
 
         <div class="row">
-            <div class="col-md-3" id="form-border">
+            <div class="col-md-3" id="form-border" style="margin:auto ; left:0 ; right:0  ; position : absolute">
 
                 <!---this is success and errohandling--->
                 <cfif StructKeyExists(SESSION, "stLoggedInUser")>
@@ -75,11 +75,17 @@ Functionality : It is used for sign In purpose
                         <cfform name="cf_form_signin" id="cf_form_signin">
 
                             <div class="form-group">
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
                                 <cfinput class="form-control" name="email" id="email" type="email" required placeholder="Email id">
+                              </div>
                             </div>
 
                             <div class="form-group">
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
                                 <cfinput class="form-control" type="password" name="password" id="password" placeholder="Password" required>
+                                </div>
                             </div>
 
                             <div class="form-group">
