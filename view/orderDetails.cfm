@@ -66,7 +66,7 @@ Functionality : It will show the order details of the customer
                                                 <img src=#detailquery.thumbNailPhoto# alt="not found" class="img-responsive">
                                             </div>
                                             <div class="col-sm-5 col-md-5 col-lg-6">
-                                              <h2>#detailquery.orderID#</h2>
+                                              <h2>Order ID :#detailquery.orderID#</h2>
                                                 <h4>#detailquery.brandName# #detailquery.productName#</h4>
                                                 <p>Price:#detailquery.detailPrice#</p>
                                                 <p>Qty:#detailquery.quantity#</p>
