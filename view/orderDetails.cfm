@@ -29,7 +29,7 @@ Functionality : It will show the order details of the customer
         <cflocation url="/view/signin.cfm" />
         <cfelse>
           <cfparam name="URL.start" default="0" />
-          <cfparam name="totalPerPage" default="3"/>
+          <cfparam name="totalPerPage" default="4"/>
           <cfparam name="URL.page" default="1" />
 
             <cfinclude template="/common/header.cfm" />
@@ -42,7 +42,6 @@ Functionality : It will show the order details of the customer
               <cfset totalPage=ceiling(getAll.recordCount/totalPerPage)>
 
                 <!---<cfdump var="#detailquery#">--->
-
                 <cfif detailquery.recordCount EQ 0>
 
                                           <div class="col-sm-12 col-md-12 col-lg-12">
@@ -54,7 +53,11 @@ Functionality : It will show the order details of the customer
                     <cfelse>
                         <div class="container" style="margin-left:80px">
                             <cfoutput query="detailquery" group="orderID">
+                            <!---  <div class="row well well-sm alert well-dismissible">--->
                                 <div class="row well well-sm">
+                                <form>
+                                <input type="submit" class="close deleteFromHistory" arial-label="close" id="#detailquery.orderID#" value="X">
+                              </form>
 
                                     <cfoutput>
 
@@ -63,6 +66,7 @@ Functionality : It will show the order details of the customer
                                                 <img src=#detailquery.thumbNailPhoto# alt="not found" class="img-responsive">
                                             </div>
                                             <div class="col-sm-5 col-md-5 col-lg-6">
+                                              <h2>#detailquery.orderID#</h2>
                                                 <h4>#detailquery.brandName# #detailquery.productName#</h4>
                                                 <p>Price:#detailquery.detailPrice#</p>
                                                 <p>Qty:#detailquery.quantity#</p>
@@ -126,5 +130,6 @@ Functionality : It will show the order details of the customer
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/assets/script/deleteFromOrderHistory.js"></script>
 </body>
 </html>

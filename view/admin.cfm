@@ -172,13 +172,7 @@ Functionality :It will show all the information regarding the total products sol
                                                         <div class="well well-lg">
                                                             <cfwebsocket name="myworld" onmessage="msgHandler" onopen="openHandler" subscribeTo="world" />
                                                             <script>
-                                                              var msgHandler = function(message) {
-
-                                                              }
-
-                                                              var openHandler = function() {
-
-                                                              }
+                                                            
 
                                                               var sendMessage = function() {
                                                                 $("#postedDetail").empty();

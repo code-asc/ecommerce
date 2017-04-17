@@ -34,4 +34,15 @@ hint         :It is used to return cartDetails
   <cfinvoke method="productCartDetails" component="db.productComponent.productInfo" status="#ARGUMENTS.status#" returnvariable="cartDetailQuery" />
   <cfreturn cartDetailQuery/>
 </cffunction>
+
+<!---
+function    :deleteOrderHistory
+returnType  :void
+hint        :It is used to delete the purchased history
+--->
+<cffunction name="deleteOrderHistory" output="false" access="remote" returntype="numeric" returnformat="JSON" >
+<cfargument name="orderID" required="true" type="numeric">
+  <cfinvoke method="ondeleteOrderHistory" component="db.userComponent.userDeleteHistory" orderID=#ARGUMENTS.orderID#>
+<cfreturn ARGUMENTS.orderID/>
+</cffunction>
 </cfcomponent>

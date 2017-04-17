@@ -75,7 +75,24 @@ hint         :get all the details for customers purchaseOrder
     INNER JOIN Address
     on
     Address.userID=Orders.userID
-    WHERE (Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int"> AND  Address.addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar"> AND Orders.addressID=Address.addressID) OR (Orders.addressID=Address.addressID AND Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
+    WHERE
+    (
+    Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+      AND
+      Address.addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
+        AND
+        Orders.addressID=Address.addressID
+         AND
+         OrderDetails.displayStatus=<cfqueryparam value="available" cfsqltype="cf_sql_type">
+           )
+           OR
+           (
+           Orders.addressID=Address.addressID
+           AND
+           OrderDetails.displayStatus=<cfqueryparam value="available" cfsqltype="cf_sql_type">
+             AND
+           Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+             )
     order by Orders.orderID DESC
     </cfquery>
     <cfcatch type="Database">
@@ -122,7 +139,22 @@ hint         :get all the details for customers purchaseOrder
       INNER JOIN Address
       on
       Address.userID=Orders.userID
-      WHERE (Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int"> AND  Address.addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar"> AND Orders.addressID=Address.addressID) OR (Orders.addressID=Address.addressID AND Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">)
+      WHERE (Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+        AND
+     Address.addressType=<cfqueryparam value="default" cfsqltype="cf_sql_varchar">
+        AND
+    Orders.addressID=Address.addressID
+        AND
+    OrderDetails.displayStatus=<cfqueryparam value="available" cfsqltype="cf_sql_type">
+     )
+       OR
+    (
+   Orders.addressID=Address.addressID
+       AND
+  Orders.userID=<cfqueryparam value=#SESSION.stLoggedInUser.userID# cfsqltype="cf_sql_int">
+       AND
+  OrderDetails.displayStatus=<cfqueryparam value="available" cfsqltype="cf_sql_type">
+          )
 
       )
       SELECT * FROM Result_CTE
