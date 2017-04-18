@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  
+
 $.validator.setDefaults({
   errorClass:"help-block",
   highlight:function(element){
@@ -10,7 +10,7 @@ $.validator.setDefaults({
   }
 })
 
-  $("#formOption , #editProductAdmin , #formEdit ,#formDelete ,#formOtherBrand").validate({
+  $("#formOption , #formAddSubCategory ,#editProductAdmin , #formEdit ,#formDelete ,#formOtherBrand").validate({
     rules:{
       productName:{
         required:true,

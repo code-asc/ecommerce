@@ -28,7 +28,8 @@ Functionality : It is the admin menu list
             <ul class="nav nav-pills nav-stacked" style="border: 1px solid #337ab7 ; border-radius:8px">
                 <li class="active"><a href="/view/admin.cfm">DashBoard</a></li>
                 <li><a href="/view/adminAdd.cfm">Add Item</a></li>
-                <li><a href="/view/adminOther.cfm">Add Other</a></li>
+                <li><a href="/view/adminOther.cfm">Add Brand And Category</a></li>
+                <li><a href="/view/adminSubCategory.cfm">Add SubCategory</a></li>
                 <li><a href="/view/adminEdit.cfm">Edit Item</a></li>
                 <li><a href="/view/adminRemove.cfm">Remove Item</a></li>
 

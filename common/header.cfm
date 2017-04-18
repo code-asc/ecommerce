@@ -235,7 +235,7 @@
 
                                     <div class="notification-heading">
                                         <h4 class="menu-title">Notifications</h4>
-                                        
+
                                     </div>
                                     <li class="divider"></li>
                                     <div class="notifications-wrapper">
@@ -245,7 +245,7 @@
                                                 <cfoutput>
                                                     <a class="content" href="##">
                                                         <div class="notification-item">
-                                                            <h4 class="item-title">on #notificationquery.postTime#</h4>
+                                                            <h4 class="item-title"><span><i class="fa fa-calendar" aria-hidden="true"></i></span> #notificationquery.postTime#</h4>
                                                             <p class="item-info">#notificationquery.content#</p>
                                                         </div>
                                                     </a>

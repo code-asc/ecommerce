@@ -115,10 +115,10 @@ Functionality : It will show the product details
                                     <cfloop query="retriveProduct">
                                         <cfoutput>
 
-                                            <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px ">
+                                            <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px">
 
                                                 <a href="/view/user_action_single.cfm?productID=#retriveProduct.productID#">
-                                                    <div class="itemthumb"> <img src="#retriveProduct.thumbNailPhoto#" class="img-responsive"></div>
+                                                    <div class="itemthumb"> <img src="#retriveProduct.thumbNailPhoto#" class="img-responsive img-rounded"></div>
                                                 </a>
                                                 <br/>
                                                 <strong>#retriveProduct.brandName#</strong>

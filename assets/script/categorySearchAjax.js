@@ -32,8 +32,9 @@ $.ajax({
   url:"/Controller/viewFilterCategory.cfc?method=filterProduct",
   data:{brand:JSON.stringify(brandArr) , discount:JSON.stringify(discountArr) ,category:JSON.stringify(categoryArr)},
 }).done(function(responseText,textStatus,jqXHR){
+  //alert(categoryArr[1]);
   if(JSON.parse(responseText).length)
-  {alert(responseText)
+  {//alert(responseText)
   $.each(JSON.parse(responseText),function(index, val)
 {
   $.each(val,function(index,value)

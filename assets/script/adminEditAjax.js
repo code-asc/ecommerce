@@ -46,7 +46,10 @@ $.ajax({
     }
   })
   })
-}).fail(function(jqXHR,textStatus,erroThrown){console.log(jqXHR.responseText)})
+}).fail(function(jqXHR,textStatus,erroThrown){
+  $("#formDataShow").append("<div class='col-sm-2 col-md-2'>Something went wrong . Please try later</div>")
+
+})
 }
 
 function ajaxCallForOnlineUser()

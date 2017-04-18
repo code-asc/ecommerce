@@ -244,9 +244,9 @@ function     :addBrand
 returnType   :void
 hint         :It is used to add new brand
 --->
-<cffunction name="addBrand" output="false" access="remote" returntype="void">
+<cffunction name="addBrand" output="false" access="remote" returntype="numeric" returnformat="JSON" >
 <cfargument name="brandName" required="true" type="string">
-<cfset VARIABLES.addBrandAndCategory.addBrandToDatabase(ARGUMENTS.brandName)>
+<cfreturn VARIABLES.addBrandAndCategory.addBrandToDatabase(ARGUMENTS.brandName)>
 </cffunction>
 
 
@@ -255,9 +255,15 @@ function     :addCategory
 returnType   :void
 hint         :It is used to add new category
 --->
-<cffunction name="addCategory" output="false" access="remote" returntype="void">
+<cffunction name="addCategory" output="false" access="remote" returntype="numeric" returnformat="JSON" >
 <cfargument name="categoryType" required="true" type="string">
-<cfset variables.addBrandAndCategory.addCategoryToDatabase(ARGUMENTS.categoryType)>
+<cfreturn VARIABLES.addBrandAndCategory.addCategoryToDatabase(ARGUMENTS.categoryType)>
 </cffunction>
 
+
+<cffunction name="addSubCategoryToDatabase" returntype="numeric" access="remote" output="false" returnformat="JSON">
+<cfargument name="categoryID" required="true" type="numeric">
+<cfargument name="subCategory" required="true" type="string">
+  <cfreturn VARIABLES.addBrandAndCategory.addSubCategory(categoryID=#ARGUMENTS.categoryID# , subCategory="#ARGUMENTS.subCategory#")>
+</cffunction>
 </cfcomponent>

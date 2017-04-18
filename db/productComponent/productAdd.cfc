@@ -37,7 +37,7 @@
 
             <cfquery name="productquery">
                   BEGIN
-                  IF NOT EXISTS(SELECT productID from Products
+                  IF NOT EXISTS(SELECT productID FROM Products
                   where
                   productName=<cfqueryparam value="#ARGUMENTS.productName#" cfsqltype="cf_sql_varchar">)
                     BEGIN

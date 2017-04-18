@@ -31,6 +31,7 @@ Functionality : It will retrive the product based on brand search
 
     <cfset SESSION.currentURL=#CGI.SCRIPT_NAME#>
     <cfset SESSION.currentURL=#replace(SESSION.currentURL, "/project_ecommerce/", "", "All")#>
+      <cfif structKeyExists(URL,"brand")>
     <cfset SESSION.currentURL=#SESSION.currentURL#& "?brand="&#URL.brand#>
     <cfset LOCAL.searchProductInfo=createObject("component","Controller.retriveProduct")>
         <cfif structKeyExists(URL, "brand")>
@@ -142,6 +143,9 @@ Functionality : It will retrive the product based on brand search
 </cfif>
 </div>
 
+<cfelse>
+  <cfinclude template="/common/productNotFound.cfm"/>
+</cfif>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
