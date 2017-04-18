@@ -392,6 +392,7 @@ returnType   :query
 hint         :It is used to return alll the  products based on subCategoryID
 --->
 <cffunction name="productsDisplay" returntype="query" output="false" access="public">
+<cfargument name="brand" required="false" default=0 />
   <cftry>
     <cfset LOCAL.retriveProduct=queryNew("productID ,productName ,productDesc ,unitPrice ,thumbNailPhoto ,discount ,brandName")>
     <cfquery name="LOCAL.retriveProduct">
@@ -406,6 +407,10 @@ hint         :It is used to return alll the  products based on subCategoryID
         Products.subCategoryID=<cfqueryparam value="#session.subCategoryID#" cfsqltype="cf_sql_integer">
         AND
         Products.status=<cfqueryparam value="available" cfsqltype="cf_sql_varchar">
+          <cfif ARGUMENTS.brand GT 0>
+            AND
+            Products.brandID=<cfqueryparam value=#ARGUMENTS.brand# cfsqltype="cf_sql_int" >
+          </cfif>
         </cfquery>
     <cfcatch type="Database">
       <cflog file="ecommerece" text="error occured in productInfo.cfc in productDisplay function.The SQL state : #cfcatch.queryError#" application="true" >

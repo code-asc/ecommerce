@@ -32,7 +32,8 @@ returnType   :query
 hint         :It is used to return a selected product information
 --->
 <cffunction name="displayProductBasedOnCategory" returntype="query" output="false" access="public">
-    <cfset LOCAL.retriveProduct=variables.getProductDetails.productsDisplay()>
+  <cfargument name="brand" required="false" default=0 />
+    <cfset LOCAL.retriveProduct=variables.getProductDetails.productsDisplay(brand="#ARGUMENTS.brand#")>
     <cfreturn LOCAL.retriveProduct/>
 </cffunction>
 

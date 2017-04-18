@@ -68,8 +68,8 @@
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                          <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" style="padding:0px">
+                          <cfcache action="cache" timespan="#createTimespan(0,0,0,0)#" >
                             <cfinclude template="/common/footer.cfm" />
                           </cfcache>
                         </div>

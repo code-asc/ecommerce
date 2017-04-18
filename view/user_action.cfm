@@ -47,7 +47,11 @@ Functionality : It will show the product details
                     <div class="container-fluid">
                         <div class="row">
                           <cfset LOCAL.getDetails=createObject("component","Controller.retriveProduct")>
-                          <cfset retriveProduct = LOCAL.getDetails.displayProductBasedOnCategory()>
+                            <cfif structKeyExists(URL,"checkBrand")>
+                          <cfset retriveProduct = LOCAL.getDetails.displayProductBasedOnCategory(brand=#URL.checkBrand#)>
+                            <cfelse>
+                              <cfset retriveProduct = LOCAL.getDetails.displayProductBasedOnCategory()>
+                          </cfif>
                            <cfset retriveBrand = LOCAL.getDetails.getProductBrand(subCategoryID=#SESSION.subCategoryID#)>
 
                              <cfif retriveProduct.recordCount GT 0>
