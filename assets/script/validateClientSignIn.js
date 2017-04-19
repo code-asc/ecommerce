@@ -10,6 +10,14 @@ $(document).ready(function(){
 
   $.validator.setDefaults({
     errorClass:"help-block",
+    errorElement:"span",
+    errorPlacement: function(error, element) {
+       if(element.parent('.input-group').length) {
+           error.insertAfter(element.parent());
+       } else {
+           error.insertAfter(element);
+       }
+   },
     highlight:function(element){
       $(element).closest(".form-group").addClass("has-error");
     },

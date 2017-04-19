@@ -185,8 +185,10 @@ Functionality :It will show all the information regarding the total products sol
                                                                   if(myworld.publish("world", message))
                                                                   {
                                                                     $("#postedDetail").append("<div class='alert alert-success'>Posted....</div>").delay(5000).fadeOut();
+
                                                                   }
                                                                 }
+                                                                $(this).unbind("click");
                                                               }
                                                           </script>
 
