@@ -59,7 +59,7 @@ Functionality : It will show the order details of the customer
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-5 col-md-5 col-xs-5 col-lg-5">
+                                    <div class="col-sm-8 col-md-8 col-xs-12 col-lg-5">
                                         <cfoutput query="retrivecart">
                                             <!---Calucating price --->
                                             <cfset total=#total#+(#retrivecart.afterDiscount# * #retrivecart.quantity# )>
@@ -92,13 +92,15 @@ Functionality : It will show the order details of the customer
                                         </cfoutput>
                                     </div>
 
-                                    <cfoutput>
-                                        <div class="col-md-4 col-sm-4 col-xm-12 col-lg-4 alert alert-info">
+
+                                        <div class="col-md-4 col-sm-4 col-xs-12 col-lg-4 alert alert-info">
+                                            <cfoutput>
                                             <h5 class="text-muted"> PRICE DETAILS:</h5>
                                             <h6 class="text-success">Bag Total : Rs.<span id="totalPriceAll">#total#</span></h6>
                                             <a class="btn btn-success" href="/view/userCart.cfm?buyAll">Place Order</a>
+                                              </cfoutput>
                                         </div>
-                                    </cfoutput>
+
 
                                 </div>
                                 <cfelse>
