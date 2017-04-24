@@ -42,24 +42,30 @@
   <cfreturn true>
 </cffunction>
 
+
 <cffunction name="onSessionEnd" returntype="void">
   <cfargument name="SessionScope" required="true">
-    <cfargument name="ApplicationScope" required="false">
-  <cfinvoke method="doLogoutOf" component="db.userLogoutComponent.doUserLogout" />
+  <cfargument name="ApplicationScope" required="false">
+  <cfinvoke method="doLogOutOfSession" component="db.userLogoutComponent.doUserLogout" userID=#ARGUMENTS.SessionScope.stLoggedInUser.userID#/>
+<!---<cfquery name="deletequery">
+  delete from OnlineUser
+  WHERE
+  userID=<cfqueryparam value=#ARGUMENTS.SessionScope.stLoggedInUser.userID# cfsqltype="cf_sql_int" >
+</cfquery>--->
 </cffunction>
 
 
 
-<!---
 <cffunction name="onError" output="false" returntype="void" access="public" >
   <cfargument name="exception" type="any" required="true">
   <cfargument name="eventName" type="string" required="true">
     <cfset errorDetails="Details :" & #exception.detail# & " Type :" & #exception.type# & "Message :" & #exception.Message#>
-  <cflog file="ecommerece" text="#arguments.exception#" application="true" >
+  <cflog file="ecommerece" text="#errorDetails#" application="true" >
     <cfif arguments.exception EQ "coldfusion.runtime.UndefinedElementException: Element STLOGGEDINUSER.USERID is undefined in SESSION.">
-      <cflocation url="signin.cfm" addtoken="false" >
+      <cflocation url="/view/signin.cfm" addtoken="false" >
+
     </cfif>
 </cffunction>
---->
+
 
 </cfcomponent>

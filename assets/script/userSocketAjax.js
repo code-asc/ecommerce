@@ -5,7 +5,6 @@ var msgHandler=function(message)
   var content;
   if(dataSocket)
   {
-    
     $(".notifications-wrapper").empty();
     $.ajax({
       url:"/Controller/adminData.cfc?method=notificationData",
@@ -23,7 +22,7 @@ var msgHandler=function(message)
         }
         })
 
-$(".notifications-wrapper").append(' <a class="content" href="#"><div class="notification-item"><h4 class="item-title">on'+postTime+'</h4><p class="item-info">'+content+'</p></div></a>');
+$(".notifications-wrapper").append(' <a class="content" href="#"><div class="notification-item"><h4 class="item-title"><span><i class="fa fa-calendar" aria-hidden="true"></i></span>'+postTime+'</h4><p class="item-info">'+content+'</p></div></a>');
 $("#notify").addClass("badge-notify");
 $("#notify").text("new");
       })

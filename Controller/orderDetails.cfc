@@ -19,7 +19,7 @@ hint        :It is used to return customer address details
 <cffunction name="showDetailsUsingPagenation" output="false" access="public" returnType="query">
 <cfargument name="start" required="true" type="numeric"/>
 <cfargument name="limit" required="true" type="numeric">
-  <cfinvoke method="customerAddressDetailForPagenation" component="db.addressComponent.searchAndGetAddress" returnvariable="detailquery" start=#ARGUMENTS.start# limitTo=#ARGUMENTS.limit#/>
+  <cfinvoke method="customerAddressDetailForPage" component="db.addressComponent.searchAndGetAddress" returnvariable="detailquery" start=#ARGUMENTS.start# limitTo=#ARGUMENTS.limit#/>
   <cfreturn detailquery>
 </cffunction>
 

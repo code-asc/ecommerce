@@ -19,6 +19,7 @@ $(document).ready(function() {
               $("#formDataStatusShow").append("<div class='alert alert-success'>Something went wrong :( </div>").delay(4000).fadeOut();
 
             }
+            subCategoryList();
             }).fail(function(jqXHR,textStatus,errorThrown){
               $("#formDataStatusShow").append("<div class='alert alert-success'>Something went wrong :( </div>").delay(4000).fadeOut();
             })

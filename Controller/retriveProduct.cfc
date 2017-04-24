@@ -64,6 +64,53 @@ hint         :It is used to get all category information for header
     <cfreturn LOCAL.retriveCategory>
 </cffunction>
 
+<!---
+function    :getAllBrand
+returnType  :array
+hint        :It return array of all the brands for AJAX call
+--->
+<cffunction name="getAllBrand" output="false" returntype="array" returnformat="JSON" access="remote">
+<cfset LOCAL.returnedVal=VARIABLES.getProductDetails.getOnlyBrand()>
+  <cfset var arrayToStoreQuery=arrayNew(1)>
+      <cfloop query="LOCAL.returnedVal">
+        <cfset stData=structNew()>
+        <cfset stData.brand=#LOCAL.returnedVal.brandName#>
+        <cfset arrayAppend(arrayToStoreQuery,stData)>
+      </cfloop>
+  <cfreturn arrayToStoreQuery>
+</cffunction>
+
+<!---
+function    :getAllCategory
+returnType  :array
+hint        :It return array of all the brands for AJAX call
+--->
+<cffunction name="getAllCategory" output="false" returntype="array" returnformat="JSON" access="remote">
+  <cfset LOCAL.returnedVal=VARIABLES.getProductDetails.getOnlyCategory()>
+    <cfset var arrayToStoreQuery=arrayNew(1)>
+        <cfloop query="LOCAL.returnedVal">
+          <cfset stData=structNew()>
+          <cfset stData.category=#LOCAL.returnedVal.categoryType#>
+          <cfset arrayAppend(arrayToStoreQuery,stData)>
+        </cfloop>
+    <cfreturn arrayToStoreQuery>
+</cffunction>
+
+<!---
+function    :getAllSubCategory
+returnType  :array
+hint        :It return array of all the brands for AJAX call
+--->
+<cffunction name="getAllSubCategory" output="false" returntype="array" returnformat="JSON" access="remote">
+  <cfset LOCAL.returnedVal=VARIABLES.getProductDetails.getOnlySubCategory()>
+    <cfset var arrayToStoreQuery=arrayNew(1)>
+        <cfloop query="LOCAL.returnedVal">
+          <cfset stData=structNew()>
+          <cfset stData.subCategory=#LOCAL.returnedVal.subCategoryType#>
+          <cfset arrayAppend(arrayToStoreQuery,stData)>
+        </cfloop>
+    <cfreturn arrayToStoreQuery>
+</cffunction>
 
 <!---
 function     :productsForSearchPage

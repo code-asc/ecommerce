@@ -70,8 +70,28 @@ Functionality : It will allow admin to add new brands
                                     </form>
                                 </div>
 
+                                <div class="row">
                                 <div id="formOtherData">
                                 </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-sm-12 col-md-6 col-xm-6 col-lg-6">
+                                  <div id="brandList">
+                                  <table class="table-bordered table-condensed table-responsive col-md-6 col-lg-6 col-sm-12 col-xs-12" id="brandListTable">
+
+                                  </table>
+                                  </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6 col-xm-6 col-lg-6">
+                                  <div id="categoryList">
+                                  <table class="table-bordered table-condensed table-responsive col-md-6 col-lg-6 col-sm-12 col-xs-12" id="categoryListTable">
+
+                                  </table>
+                                  </div>
+                                </div>
+                              </div>
 
                             </div>
                         </div>
@@ -89,6 +109,7 @@ Functionality : It will allow admin to add new brands
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
     <script src="/assets/script/adminValidate.js"></script>
+    <script src="/assets/script/brandAndCategoryList.js"></script>
     <script src="/assets/script/adminOther.js"></script>
 </body>
 </html>

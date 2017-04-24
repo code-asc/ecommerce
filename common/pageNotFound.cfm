@@ -7,7 +7,9 @@
 <link rel="stylesheet" href="/assets/css/pageNotFound.css">
 </head>
 <body>
-<div class="container">
+
+  <cfinclude template="/common/header.cfm" >
+<div class="container-fluid">
     <div class="row">
     <div class="error-template">
 	    <h1>Oops!</h1>

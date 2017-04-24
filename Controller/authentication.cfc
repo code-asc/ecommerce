@@ -131,7 +131,7 @@ hint         :It is used to add an item to cart using AJAX call
                   <cfloop query="#LOCAL.getproduct#">
                     <cfset LOCAL.afterDiscount=#LOCAL.getproduct.afterDiscount#>
                     <cfset LOCAL.supplierID=#LOCAL.getproduct.supplierID#>
-                      
+
                   </cfloop>
               <cfset LOCAL.status="addedToCart">
               <cfset VARIABLES.productInfo.setOrderDetails(afterDiscount=#LOCAL.afterDiscount#,supplierID=#LOCAL.supplierID#,status=#LOCAL.status#)>

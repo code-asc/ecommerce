@@ -19,7 +19,7 @@
 
     </head>
 
-    <body>
+    <body style="margin-top:110px">
 
 <cfset LOCAL.categoryInfoObject=createObject("component","Controller.retriveProduct")>
         <cfif StructKeyExists(session, "stLoggedInUser")>
@@ -38,7 +38,8 @@
             </cfif>
         </cfif>
 
-        <nav class="navbar navbar-default">
+
+        <nav class="navbar navbar-default navbar-fixed-top navbar-static-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button class="btn btn-default navbar-toggle" data-toggle="collapse" data-target="#myMenu">
@@ -165,7 +166,7 @@
 
                             <a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" data-target="loginButton" style="padding-top:10px">
                                 <cfif structKeyExists(session,"stLoggedInUser") AND len(session.stLoggedInUser.userProfilePhoto) GT 0>
-                                    <cfoutput><span style="float:left"><img width="30" height="30" class="img-circle img-responsive" src="#session.stLoggedInUser.userProfilePhoto#" alt=" "></span></cfoutput>
+                                    <cfoutput><span style="float:left"><img class="img-circle img-responsive" src="#session.stLoggedInUser.userProfilePhoto#" alt=" "></span></cfoutput>
                                     <cfelse>
                                 <i class="fa fa-user" aria-hidden="true"></i>&nbsp
                               </cfif>
@@ -296,6 +297,7 @@
       <script src="/assets/script/userSocketAjax.js"></script>
         <script src="/assets/script/onWindowClose.js"></script>
         <script src="/assets/script/onNotificationClick.js"></script>
+
     </body>
 
     </html>

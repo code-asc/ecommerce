@@ -52,9 +52,9 @@ Functionality : It will show the order details of the customer
                             <cfif retrivecart.recordCount GT 0>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xm-12 col-lg-12">
-                                        <h3 class="text-muted">My Shopping bag
+                                        <h3 class="text-muted">My Shopping bag</h3>
         <!---(<cfoutput>#session.cartCount#</cfoutput> items)--->
-      </h3>
+
                                     </div>
                                 </div>
 
@@ -117,7 +117,7 @@ Functionality : It will show the order details of the customer
 
                         </cfif>
                         </div>
-
+                      </div>
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">

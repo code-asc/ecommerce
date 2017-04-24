@@ -75,13 +75,23 @@ Functionality : It will allow the admin to add the new subcategory
                                         </div>
                                     </form>
 
+                                    <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                                    <div id="formDataStatusShow">
+                                    </div>
+                                  </div>
 
+                                  <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                                  <div id="subCategoryList">
+                                    <table class="table-bordered table-condensed table-responsive col-md-6 col-lg-6 col-sm-12 col-xs-12" id="subCategoryListTable">
+
+                                    </table>
+                                  </div>
+                                </div>
 
                                 </div>
                             </div>
                         </div>
-                        <div id="formDataStatusShow">
-                        </div>
+
 
                 </div>
                 <cfelse>
@@ -94,6 +104,7 @@ Functionality : It will allow the admin to add the new subcategory
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
     <script src="/assets/script/adminValidate.js"></script>
+    <script src="/assets/script/subCategoryList.js"></script>
     <script src="/assets/script/adminAddSubcategoryAJAX.js"></script>
 
     </body>

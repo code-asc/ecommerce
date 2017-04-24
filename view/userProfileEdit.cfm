@@ -68,7 +68,7 @@ Functionality : It will show the profile details of the customer
                                         <cfif len(userProfilePhoto) GT 0>
                                             <div class="row">
                                                 <div style="height: 140px;width: 140px;overflow: hidden; overflow:hidden">
-                                                    <img class="img-circle img-responsive" src="#LOCAL.getquery.userProfilePhoto#" alt=" ">
+                                                    <img class="img-rounded img-responsive" src="#LOCAL.getquery.userProfilePhoto#" alt=" ">
                                                 </div>
                                             </div>
                                         </cfif>

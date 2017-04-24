@@ -424,6 +424,63 @@ hint         :It is used to return alll the  products based on subCategoryID
 
 
 <!---
+function    :getOnlyBrand
+returnType  :query
+hint        :It is used to return only Brands
+--->
+<cffunction name="getOnlyBrand" returntype="query"  output="false" access="public">
+  <cftry>
+    <cfquery name="getBrandQuery">
+      SELECT brandName FROM Brands ORDER BY brandID DESC
+    </cfquery>
+    <cfcatch type="database">
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in getOnlyBrand function.The SQL state : #cfcatch.queryError#" application="true" >
+        <cfset emptyQuery=queryNew(brandName)>
+          <cfreturn emptyQuery/>
+    </cfcatch>
+  </cftry>
+  <cfreturn getBrandQuery>
+</cffunction>
+
+<!---
+function    :getOnlyCategory
+returnType  :query
+hint        :It is used to return only category
+--->
+<cffunction name="getOnlyCategory" returntype="query" output="false" access="public">
+  <cftry>
+    <cfquery name="getCategoryQuery">
+      SELECT categoryType FROM Category ORDER BY categoryID DESC
+    </cfquery>
+    <cfcatch type="database">
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in getOnlyCategory function.The SQL state : #cfcatch.queryError#" application="true" >
+        <cfset emptyQuery=queryNew(categoryType)>
+          <cfreturn emptyQuery/>
+    </cfcatch>
+  </cftry>
+  <cfreturn getCategoryQuery>
+</cffunction>
+
+<!---
+function    :getOnlySubCategory
+returnType  :query
+hint        :It is used to return only subCategory
+--->
+<cffunction name="getOnlySubCategory" returntype="query" output="false" access="public">
+  <cftry>
+    <cfquery name="getSubCategoryQuery">
+      SELECT subCategoryType FROM SubCategory ORDER BY subCategoryID DESC
+    </cfquery>
+    <cfcatch type="database">
+      <cflog file="ecommerece" text="error occured in productInfo.cfc in getOnlyCategory function.The SQL state : #cfcatch.queryError#" application="true" >
+        <cfset emptyQuery=queryNew(subCategoryType)>
+          <cfreturn emptyQuery/>
+    </cfcatch>
+  </cftry>
+  <cfreturn getSubCategoryQuery>
+</cffunction>
+
+<!---
 function     :retriveOnlyCategory
 returnType   :query
 hint         :It is used to return only categories

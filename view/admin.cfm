@@ -172,12 +172,14 @@ Functionality :It will show all the information regarding the total products sol
                                                         <div class="well well-lg">
                                                             <cfwebsocket name="myworld" onmessage="msgHandler" onopen="openHandler" subscribeTo="world" />
                                                             <script>
-
-
-                                                              var sendMessage = function() {
+                                                            var msgHandler=function(message)
+                                                            {
+                                                              
+                                                            }
+                                                              var sendMessageTo = function() {
                                                                 $("#postedDetail").empty();
                                                                 $("#postedDetail").css({"display":"block"});
-                                                                  message = document.getElementById("updateForAll").value;
+                                                                  var message = document.getElementById("updateForAll").value;
                                                                   $("#updateForAll").val(" ");
                                                                   if(message.trim())
                                                                   {
@@ -185,10 +187,9 @@ Functionality :It will show all the information regarding the total products sol
                                                                   if(myworld.publish("world", message))
                                                                   {
                                                                     $("#postedDetail").append("<div class='alert alert-success'>Posted....</div>").delay(5000).fadeOut();
-
                                                                   }
                                                                 }
-                                                                $(this).unbind("click");
+
                                                               }
                                                           </script>
 
@@ -197,7 +198,7 @@ Functionality :It will show all the information regarding the total products sol
                                                                 <textarea class='form-control' name='updateForAll' id='updateForAll' rows='5' cols='42'></textarea>
                                                             </div>
 
-                                                            <input id="postForAll" class="btn btn-success" type="button" onclick="sendMessage()" value="Post It">
+                                                            <input id="postForAll" class="btn btn-success" type="button" onclick="sendMessageTo()" value="Post It">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -205,10 +206,11 @@ Functionality :It will show all the information regarding the total products sol
 
                                             </div>
                                         </div>
+                                        <div class="row">
+                                          <div id="postedDetail">
                                     </div>
 
-                                    <div class="row">
-                                      <div id="postedDetail">
+
 
                                       </div>
                                     </div>

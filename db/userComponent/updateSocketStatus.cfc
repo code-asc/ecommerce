@@ -28,10 +28,18 @@
     <cfargument name="content" required="true" type="string">
       <cftry>
         <cfquery name="notificationquery">
+        <!---  BEGIN
+          IF NOT EXISTS(SELECT nid FROM Notification
+          WHERE
+          content=<cfqueryparam value="#ARGUMENTS.content#" cfsqltype="cf_sql_varchar">
+            )
+            BEGIN--->
           INSERT INTO Notification(content,postTime,markAs)
           VALUES(<cfqueryparam value="#ARGUMENTS.content#" cfsqltype="varchar">
             ,#now()#,
             <cfqueryparam value="unread" cfsqltype="cf_sql_varchar">)
+          <!---    END
+              END--->
         </cfquery>
         <cfcatch type="Database">
           <cflog file="ecommerece" text="error occured in updateUserStatus.cfc in insertNotificationDataQuery function. The SQL state : #cfcatch.queryError#" application="true">
